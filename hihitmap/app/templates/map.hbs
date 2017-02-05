@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <nav id="mapNav">
+    <div class="app-sign">
+      <span class="size-xl">HiHitMap</span>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <div id="mapWrapper">
+      <!-- <div id="map" class=""> -->
+        {{#leaflet-map lat=lat lng=lng zoom=zoom id="map"}}
+          {{!-- Specify child layer components here --}}
+          {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+        {{/leaflet-map}}
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+{{outlet}}
