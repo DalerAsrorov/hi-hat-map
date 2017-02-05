@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const zoomDefaultVal = 10;
+const zoomDefaultVal = 3;
 
 export default Ember.Controller.extend({
   lat: 45.519743,
