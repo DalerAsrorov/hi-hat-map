@@ -42,11 +42,25 @@ html, body, .wrapper {
 
 #controlPanelWrapper {
    background: #fff;
-   height: 63%;
+   height: 75%;
    bottom: 0;
    width: 100%;
    padding: 0;
    margin: 0 auto;
+
+   /* Flex! Cool stuff. */
+   display: flex;
+   flex-flow: column;
+}
+
+#arrowPointerWrapper {
+  flex: 0 1 33px;
+  background: orange;
+}
+
+#controlPanel {
+  background: lightblue;
+  flex: 1 1 auto;
 }
 
 .size-xl {
