@@ -1,7 +1,8 @@
 'use strict';
 var express = require('express');
 var app = express();
-
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
 var twitter = require('ntwitter');
 var t = new twitter({
     consumer_key: 'okJxfpUfRePVfu8ju8for0rhM',
@@ -10,6 +11,13 @@ var t = new twitter({
     access_token_secret: 'LBBWzPGlXUsdEAaOH9YW6B6503iHim1jmWcyhkIuVUsIq'
 });
 
+io.on('connection', function (socket) {
+    console.log('%%Client connected. Socket id %s', socket.id);
+
+    socket.on('disconnect', function () {
+        console.log('User disconnected. %s. Socket id %s', socket.id);
+    });
+});
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -28,9 +36,12 @@ app.get("/api/twitstream", (req, res) => {
   try {
     t.stream('statuses/filter', {'locations': sanFrancisco },
         function(stream) {
-          stream.on('data', function(tweet) {
-            var coordinates = tweet.place.bounding_box.coordinates;
-            console.log(coordinates);
+          stream.on('data', function(data) {
+            // var coordinates = tweet.place.bounding_box.coordinates;
+            // console.log(coordinates);
+            io.sockets.emit('tweet', data);
+            console.log(data.text);
+
           });
 
             stream.on('destroy', function() {
