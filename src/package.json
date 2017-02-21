@@ -1,0 +1,15 @@
+{
+  "name": "hihitmap",
+  "version": "1.0.0",
+  "description": "Map of emotional changes and patterns. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daler Asrorov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1"
+  }
+}
