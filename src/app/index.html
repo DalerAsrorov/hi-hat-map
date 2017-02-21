@@ -9,14 +9,46 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
+
+    <div class="wrapper">
+      <nav id="mapNav">
+        <div class="app-sign">
+          <span class="size-xl">HiHitMap</span>
+        </div>
+      </nav>
+
+      <div id="mapWrapper">
+
+      </div>
+      <!-- {{#leaflet-map lat=lat lng=lng zoom=zoom id="mapWrapper" onMoveend=(action "updateCenter")}}
+        {{!-- Specify child layer components here --}}
+        {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+      {{/leaflet-map}} -->
+
+      <div id="controlPanelWrapper">
+        <div id="arrowPointerWrapper">
+          <button class="btn btn-default cp">
+            <span id="openControlPanelSpan" class="glyphicon glyphicon-menu-up"></span>
+            <span class="control-panel-caption">Control Panel</span>
+          </button>
+        </div>
+        <div id="controlPanel">
+
+        </div>
+      </div>
+
+    </div>
+
 
 
     <script src="https://code.jquery.com/jquery-2.2.4.js"
           integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
           crossorigin="anonymous">
     </script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="/js/app.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
