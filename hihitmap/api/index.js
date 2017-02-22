@@ -50,7 +50,8 @@ app.get("/api/twitstream", (req, res) => {
 
         }
     );
-  } catch(err) {
+  }
+  catch(err) {
     console.log("Couldn't stream yet...");
   }
 })
