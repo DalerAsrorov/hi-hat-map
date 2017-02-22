@@ -3,6 +3,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
+let randa = require('ramda');
 
 // custom modules
 let Twitter = require('./api/twitter');
