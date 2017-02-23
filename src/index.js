@@ -70,12 +70,33 @@ app.get('/api/:topic?', function(req, res) {
 **/
 
 io.on('connection', (socket) => {
-    socket.on('bog', (bog) => {
-        console.log(`BOG = ${bog}`);
-        socket.broadcast.emit('changeBog', bog);
-        socket.emit('changeBog', bog);
+    socket.on('topic', (topic) => {
+        console.log("\nTOPIC: ", topic, "\n");
+        let topic = topic.toString();
+
+        const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+
+        Twitter.module.stream('statuses/filter', {'locations': sanFrancisco },
+            function(stream) {
+                stream.on('data', function(data) {
+                  // let coordinates = tweet.place.bounding_box.coordinates;
+                  // stream.on('data', function(data) {
+                  // io.sockets.emit('tweet', data);
+                    // console.log(data);
+                    socket.broadcast.emit('tweet', data);
+                    socket.emit('tweet', data);
+                  // });
+
+                  // stream.on('destroy', function() {
+                  //     console.log("Disconnected from Twitter.");
+                  // });
+
+                });
+
+        });
+
     });
-})
+});
 
 
 
