@@ -4,6 +4,8 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
 let randa = require('ramda');
+let httpServer = require('http').createServer(app);
+let io = require('socket.io')(httpServer);
 
 // custom modules
 let Twitter = require('./api/twitter');
@@ -16,8 +18,11 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-// open the app
 app.use(express.static(__dirname + '/app'));
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/app/index.html')
+});
 
 app.get('/api', function(req, res) {
     Twitter.stream("Daler");
@@ -58,6 +63,6 @@ app.get('/api/:topic?', function(req, res) {
     console.log(tweet);
 });
 
-app.listen(port, function() {
+httpServer.listen(port, function() {
   console.log('Listenning on port ' + port);
 });
