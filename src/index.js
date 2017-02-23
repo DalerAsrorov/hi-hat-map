@@ -63,6 +63,22 @@ app.get('/api/:topic?', function(req, res) {
     console.log(tweet);
 });
 
+
+/**
+*   socket.io stuff
+*
+**/
+
+io.on('connection', (socket) => {
+    socket.on('bog', (bog) => {
+        console.log(`BOG = ${bog}`);
+        socket.broadcast.emit('changeBog', bog);
+        socket.emit('changeBog', bog);
+    });
+})
+
+
+
 httpServer.listen(port, function() {
   console.log('Listenning on port ' + port);
 });
