@@ -72,7 +72,7 @@ app.get('/api/:topic?', function(req, res) {
 io.on('connection', (socket) => {
     socket.on('topic', (topic) => {
         console.log("\nTOPIC: ", topic, "\n");
-        let topic = topic.toString();
+        let topicStr = topic.toString();
 
         const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
 
