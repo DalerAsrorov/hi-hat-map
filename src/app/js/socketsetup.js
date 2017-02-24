@@ -11,8 +11,20 @@ const getTweets = (event) => {
 window.onload = (e) => {
   e.preventDefault();
 
+  // let input = document.getElementById('pac-input')
+
+  new L.Control.GPlaceAutocomplete({
+    position: "topright",
+    callback: (location) => {
+        // object of google place is given
+        console.log('Location given:', location);
+        mainMap.panTo(location);
+
+    }
+  }).addTo(mainMap);
+
   socket.on('tweet', (tweet) => {
-    console.log("The value of bog is", tweet);
+    console.log("Tweet: ", tweet);
   });
 }
 

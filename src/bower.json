@@ -1,0 +1,26 @@
+{
+  "name": "hihitmap",
+  "description": "Map of emotional changes and patterns.",
+  "main": "index.js",
+  "authors": [
+    "Daler Asrorov"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "maps",
+    "emotions",
+    "app"
+  ],
+  "homepage": "https://github.com/DalerAsrorov/hi-hit-map",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet-google-places-autocomplete": "^0.0.8"
+  }
+}

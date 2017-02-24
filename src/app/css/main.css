@@ -91,18 +91,9 @@ html, body, .wrapper {
   background: #f5f4ff;
 }
 
-.pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
-}
+/** Search input **/
 
-.pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-#pac-input {
+.leaflet-gac-control {
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
@@ -118,20 +109,8 @@ html, body, .wrapper {
   font-family: 'Arimo', sans-serif;
 }
 
-#pac-input:focus {
+.leaflet-gac-control:focus {
   font-family: 'Arimo', sans-serif;
   border-color: #2F4070;
 }
-
-#pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
-  position: absolute;
-  background: white;
-  right: 0px;
-  z-index: 999;
-  padding: 0;
-  margin: 0;
-}
-
 

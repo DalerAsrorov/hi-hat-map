@@ -8,10 +8,10 @@
     <title>Hihat Map</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arimo">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
 </head>
 <body>
 
@@ -23,12 +23,6 @@
       </nav>
 
       <div id="mapWrapper">
-
-        <div id="pac-container">
-          <input id="pac-input" type="text"
-              placeholder="Enter a location">
-        </div>
-
       </div>
       <!-- {{#leaflet-map lat=lat lng=lng zoom=zoom id="mapWrapper" onMoveend=(action "updateCenter")}}
         {{!-- Specify child layer components here --}}
@@ -44,7 +38,6 @@
         </div>
 
         <div id="controlPanel">
-
         </div>
       </div>
 
@@ -56,6 +49,8 @@
           integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
           crossorigin="anonymous">
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9NIHo_U6UI33yNUyTykkn7YoMau22hJs&libraries=places"></script>
+    <script src="/bower_components/leaflet-google-places-autocomplete/src/js/leaflet-gplaces-autocomplete.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>

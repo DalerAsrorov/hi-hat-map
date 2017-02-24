@@ -19,6 +19,7 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.use(express.static(__dirname + '/app'));
+// app.use(express.static(__dirname + '/bower_components'));
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/app/index.html')
