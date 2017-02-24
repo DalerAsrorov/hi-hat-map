@@ -30,39 +30,39 @@ app.get('/api', function(req, res) {
     res.send({"Message": "You reached the API base."})
 });
 
-app.get('/api/:topic?', function(req, res) {
-    let tweet = req.params.topic;
+// app.get('/api/:topic?', function(req, res) {
+//     let tweet = req.params.topic;
 
-    let sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8'];
+//     let sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8'];
 
-    try
-    {
-        Twitter.module.stream('statuses/filter', {'locations': sanFrancisco },
-            function(stream) {
-                stream.on('data', function(data) {
-                  // let coordinates = tweet.place.bounding_box.coordinates;
-                  // stream.on('data', function(data) {
-                  // io.sockets.emit('tweet', data);
-                    console.log(data);
+//     try
+//     {
+//         Twitter.module.stream('statuses/filter', {'locations': sanFrancisco },
+//             function(stream) {
+//                 stream.on('data', function(data) {
+//                   // let coordinates = tweet.place.bounding_box.coordinates;
+//                   // stream.on('data', function(data) {
+//                   // io.sockets.emit('tweet', data);
+//                     console.log(data);
 
-                  // });
+//                   // });
 
-                  // stream.on('destroy', function() {
-                  //     console.log("Disconnected from Twitter.");
-                  // });
+//                   // stream.on('destroy', function() {
+//                   //     console.log("Disconnected from Twitter.");
+//                   // });
 
-                });
+//                 });
 
-            }
-        );
-    }
-    catch(err)
-    {
-        console.log("Couldn't stream yet...", err);
-    }
+//             }
+//         );
+//     }
+//     catch(err)
+//     {
+//         console.log("Couldn't stream yet...", err);
+//     }
 
-    console.log(tweet);
-});
+//     console.log(tweet);
+// });
 
 
 /**
@@ -71,6 +71,7 @@ app.get('/api/:topic?', function(req, res) {
 **/
 
 io.on('connection', (socket) => {
+
     socket.on('topic', (topic) => {
         console.log("\nTOPIC: ", topic, "\n");
         let topicStr = topic.toString();
@@ -93,10 +94,9 @@ io.on('connection', (socket) => {
                   // });
 
                 });
-
         });
-
     });
+
 });
 
 
