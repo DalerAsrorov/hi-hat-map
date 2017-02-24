@@ -23,6 +23,11 @@
 
       <div id="mapWrapper">
 
+        <div id="pac-container">
+          <input id="pac-input" type="text"
+              placeholder="Enter a location">
+        </div>
+
       </div>
       <!-- {{#leaflet-map lat=lat lng=lng zoom=zoom id="mapWrapper" onMoveend=(action "updateCenter")}}
         {{!-- Specify child layer components here --}}
@@ -36,6 +41,7 @@
             <span class="control-panel-caption">Control Panel</span>
           </button>
         </div>
+
         <div id="controlPanel">
 
         </div>
