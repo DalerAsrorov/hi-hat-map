@@ -7,6 +7,10 @@ html, body, .wrapper {
   font-family: 'Raleway', sans-serif !important;
 }
 
+body > * {
+  font-family: 'Raleway', sans-serif;
+}
+
 .wrapper {
   display: flex;
   flex-flow: column;
@@ -129,6 +133,24 @@ html, body, .wrapper {
   background: orange;
 }
 
+#querySearchForm {
+  text-align: center;
+  /* width: 50%; */
+  margin: 0 auto;
+  position: relative;
+  top: -15px;
+}
+
+#querySearch {
+  width: 65%;
+  padding: 5px;
+  color: #2f4070;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  /* border: 1px solid grey; */
+}
 
 
 
