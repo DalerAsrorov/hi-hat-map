@@ -127,10 +127,13 @@ body > * {
 
 #panelCompMiddle {
   /*background: green;*/
+  border-left: 1px solid rgba(47, 64, 112, 0.22);
+  border-right: 1px solid rgba(47, 64, 112, 0.22);
 }
 
 #panelCompRight {
   /*background: orange;*/
+
 }
 
 #querySearchForm {
