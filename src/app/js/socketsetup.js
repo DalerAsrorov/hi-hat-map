@@ -5,7 +5,11 @@ let socket = io.connect('http://localhost:8000/');
 const getTweets = (event) => {
     // console.log(`Ready: ${event}`);
     socket.emit('topic', "trump");
-}
+};
+
+const slideDown = (event) => {
+
+};
 
 // Action
 window.onload = (e) => {
@@ -26,7 +30,7 @@ window.onload = (e) => {
   socket.on('tweet', (tweet) => {
     console.log("Tweet: ", tweet);
   });
-}
+};
 
 
 

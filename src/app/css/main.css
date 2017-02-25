@@ -46,7 +46,6 @@ html, body, .wrapper {
    bottom: 0;
    width: 100%;
    padding: 0;
-   margin: 0 auto;
 
    /* Flex! Cool stuff. */
    display: flex;
@@ -60,12 +59,10 @@ html, body, .wrapper {
 
 #controlPanel {
   color: #f4deff;
+  height: 100%;
+  display: flex;
   flex: 1 1 auto;
   background: #fff;
-}
-
-.size-xl {
-  font-size: 22px;
 }
 
 #openControlPanelSpan {
@@ -73,6 +70,10 @@ html, body, .wrapper {
     font-weight: 700;
     position: relative;
     top: 2px;
+}
+
+.size-xl {
+  font-size: 22px;
 }
 
 .control-panel-caption {
@@ -111,4 +112,28 @@ html, body, .wrapper {
 .leaflet-gac-control:focus {
   border-color: #2F4070;
 }
+
+.panel-comp {
+
+}
+
+#panelCompLeft {
+  background: lightblue;
+}
+
+#panelCompMiddle {
+  background: green;
+}
+
+#panelCompRight {
+  background: orange;
+}
+
+
+
+
+
+
+
+
 
