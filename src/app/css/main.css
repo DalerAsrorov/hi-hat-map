@@ -122,15 +122,15 @@ body > * {
 }
 
 #panelCompLeft {
-  background: lightblue;
+  /*background: lightblue;*/
 }
 
 #panelCompMiddle {
-  background: green;
+  /*background: green;*/
 }
 
 #panelCompRight {
-  background: orange;
+  /*background: orange;*/
 }
 
 #querySearchForm {
@@ -149,7 +149,7 @@ body > * {
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  /* border: 1px solid grey; */
+  border: 1px solid rgba(47, 64, 112, 0.31);
 }
 
 
