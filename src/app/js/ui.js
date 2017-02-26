@@ -1,6 +1,6 @@
 // UI Utils set
 
-export function slideToggleCp(targetID, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
+export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();
     const slidingTime = 300;
@@ -16,6 +16,7 @@ export function slideToggleCp(targetID, heightSetterID = 'arrowPointerWrapper', 
         $querySearchForm.animate({
             top: "-15px"
         }, slidingTime);
+        // map.invalidateSize();
     }
     else {
         $body.css({"overflowY": "hidden"});
@@ -23,5 +24,6 @@ export function slideToggleCp(targetID, heightSetterID = 'arrowPointerWrapper', 
         $querySearchForm.animate({
             top: "-34px"
         }, slidingTime);
+        map.invalidateSize();
     }
 };

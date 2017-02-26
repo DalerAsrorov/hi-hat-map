@@ -14,7 +14,7 @@ window.onload = (e) => {
 
     $(`#toggleSliderBtn`).on('click', (event) => {
         console.log('CLICKED');
-        ui.slideToggleCp('controlPanelWrapper');
+        ui.slideToggleCp('controlPanelWrapper', Map);
     });
 
     // let input = document.getElementById('pac-input')
