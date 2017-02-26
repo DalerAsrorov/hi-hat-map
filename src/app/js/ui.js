@@ -9,6 +9,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
     const $querySearchForm = $('#querySearchForm');
     const $target = $(`#${targetID}`);
     const $body = $('body');
+    const $slideSwitchIcon = $('#slideSwitchIcon');
 
     if(cpWrapperHeight === cpNavHeight) {
         $body.css({"overflowY": "auto"});
@@ -16,7 +17,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
         $querySearchForm.animate({
             top: "-15px"
         }, slidingTime);
-        // map.invalidateSize();
+        $slideSwitchIcon.addClass('glyphicon-menu-down').removeClass('glyphicon-menu-up');
     }
     else {
         $body.css({"overflowY": "hidden"});
@@ -25,5 +26,6 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
             top: "-34px"
         }, slidingTime);
         map.invalidateSize();
+        $slideSwitchIcon.addClass('glyphicon-menu-up').removeClass('glyphicon-menu-down');
     }
 };
