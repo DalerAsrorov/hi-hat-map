@@ -53,7 +53,7 @@ body > * {
   padding: 0;
 
   /* Flex! Cool stuff. */
-  /*display: flex;*/
+  display: flex;
   flex-flow: column;
 
   position: absolute;
