@@ -3,7 +3,7 @@ import eslint from 'rollup-plugin-eslint';
 
 export default {
     entry: 'app/js/main.js',
-    dest: 'app/main.min.js',
+    dest: 'app/min/main.min.js',
     format: 'iife',
     sourceMap: 'inline',
     plugins: [
