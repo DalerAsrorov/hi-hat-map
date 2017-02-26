@@ -12,9 +12,9 @@ window.onload = (e) => {
         socket.emit('topic', "trump");
     };
 
-    $(`#downSliderBtn`).on('click', (event) => {
+    $(`#toggleSliderBtn`).on('click', (event) => {
         console.log('CLICKED');
-        ui.slideDown();
+        ui.slideToggleCp('controlPanelWrapper');
     });
 
     // let input = document.getElementById('pac-input')
