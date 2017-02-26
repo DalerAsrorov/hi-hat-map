@@ -2,6 +2,7 @@
 Emotions map of various social and food service apps with cool visualizations and data mapping.
 
 ## Tech & Frameworks
+* ES6
 * NodeJS
 * NLP Libraries
 * Yelp/Instagram/Foursqare/Twitter APIs
