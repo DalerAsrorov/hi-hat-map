@@ -46,15 +46,19 @@ body > * {
 }
 
 #controlPanelWrapper {
-   background: #fff;
-   height: 35%;
-   bottom: 0;
-   width: 100%;
-   padding: 0;
+  background: #fff;
+  height: 35%;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
 
-   /* Flex! Cool stuff. */
-   display: flex;
-   flex-flow: column;
+  /* Flex! Cool stuff. */
+  /*display: flex;*/
+  flex-flow: column;
+
+  position: absolute;
+  bottom: 0px;
+  z-index: 20000;
 }
 
 #arrowPointerWrapper {
