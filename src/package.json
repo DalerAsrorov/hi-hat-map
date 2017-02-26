@@ -4,7 +4,9 @@
   "description": "Map of emotional changes and patterns. ",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js", 
+    "build": "./node_modules/.bin/rollup -c && node index.js",
+    "rollup": "./node_modules/.bin/rollup",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daler Asrorov",
@@ -16,5 +18,11 @@
     "ntwitter": "^0.5.0",
     "ramda": "^0.23.0",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-eslint": "^3.0.0"
   }
 }

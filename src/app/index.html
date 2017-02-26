@@ -24,38 +24,32 @@
 
       <div id="mapWrapper">
       </div>
-      <!-- {{#leaflet-map lat=lat lng=lng zoom=zoom id="mapWrapper" onMoveend=(action "updateCenter")}}
-        {{!-- Specify child layer components here --}}
-        {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-      {{/leaflet-map}} -->
-
-      <div id="controlPanelWrapper">
-        <div id="arrowPointerWrapper">
-          <button class="btn btn-default cp" onclick="slideDown()">
-            <span id="openControlPanelSpan" class="glyphicon glyphicon-menu-up"></span>
-            <span class="control-panel-caption">Control Panel</span>
-          </button>
-        </div>
-
-        <div id="controlPanel" class="col">
-          <div class="panel-comp col-md-4 col-sm-12" id="panelCompLeft">
-
+        <div id="controlPanelWrapper">
+          <div id="arrowPointerWrapper">
+            <button class="btn btn-default cp" id="downSliderBtn">
+              <span id="openControlPanelSpan" class="glyphicon glyphicon-menu-up"></span>
+              <span class="control-panel-caption">Control Panel</span>
+            </button>
           </div>
-          <div class="panel-comp col-md-4 col-sm-12" id="panelCompMiddle">
-<!--             <div id="querySearchWrapper">
-              <input type="" id="querySearch" name="">
-            </div> -->
-            <form class="form" id="querySearchForm" accept-charset="utf-8">
-              <input placeholder="Enter query" type="" id="querySearch" name="">
-            </form>
-          </div>
-          <div class="panel-comp col-md-4 col-sm-12" id="panelCompRight">
 
+          <div id="controlPanel" class="col">
+            <div class="panel-comp col-md-4 col-sm-12" id="panelCompLeft">
+
+            </div>
+            <div class="panel-comp col-md-4 col-sm-12" id="panelCompMiddle">
+  <!--             <div id="querySearchWrapper">
+                <input type="" id="querySearch" name="">
+              </div> -->
+              <form class="form" id="querySearchForm" accept-charset="utf-8">
+                <input placeholder="Enter query" type="" id="querySearch" name="">
+              </form>
+            </div>
+            <div class="panel-comp col-md-4 col-sm-12" id="panelCompRight">
+
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
 
 
 
@@ -68,7 +62,8 @@
     <script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="/js/app.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/socketsetup.js" type="text/javascript" charset="utf-8"></script>
+<!--     <script src="/js/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/actions.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="/main.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
