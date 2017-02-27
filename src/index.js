@@ -30,10 +30,13 @@ app.get('/api', (req, res) => {
     res.send({"Message": "You reached the API base."})
 });
 
-app.get('/api/twitter/trends/:location?', (req, res) => {
-  const location = req.params.location;
-  Twitter.getTrends();
-  console.log("After, location is", location);
+/**
+* woed - yahoo location IDs
+* 1 = Worldwide trends
+*/
+app.get('/api/twitter/trends/:woeid?', (req, res) => {
+  const woeid = req.params.woeid;
+  Twitter.getTrends(woeid);
 });
 
 // app.get('/api/:topic?', function(req, res) {

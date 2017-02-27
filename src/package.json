@@ -16,8 +16,10 @@
     "express": "^4.14.1",
     "http": "0.0.0",
     "ntwitter": "^0.5.0",
+    "oauth": "^0.9.15",
     "ramda": "^0.23.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "twit": "^2.2.5"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^3.0.0",
