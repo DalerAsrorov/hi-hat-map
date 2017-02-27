@@ -36,7 +36,20 @@ app.get('/api', (req, res) => {
 */
 app.get('/api/twitter/trends/:woeid?', (req, res) => {
   const woeid = req.params.woeid;
-  Twitter.getTrends(woeid);
+  Twitter.getTrends(woeid)
+    .then((data) => {
+        res.send({
+          "requestDescription": "List of trends.",
+          "requestData": new Date().getTime(),
+          "data": data
+        });
+    })
+    .catch((error) => {
+        res.send({
+          "message": "ERROR",
+          "details": error
+        })
+    });
 });
 
 // app.get('/api/:topic?', function(req, res) {
