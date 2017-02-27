@@ -21,13 +21,19 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static(__dirname + '/app'));
 // app.use(express.static(__dirname + '/bower_components'));
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + '/app/index.html')
 });
 
-app.get('/api', function(req, res) {
-    Twitter.stream("Daler");
+app.get('/api', (req, res) => {
+    // Twitter.stream("Daler");
     res.send({"Message": "You reached the API base."})
+});
+
+app.get('/api/twitter/trends/:location?', (req, res) => {
+  const location = req.params.location;
+  Twitter.getTrends();
+  console.log("After, location is", location);
 });
 
 // app.get('/api/:topic?', function(req, res) {
