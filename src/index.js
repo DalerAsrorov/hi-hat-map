@@ -40,8 +40,8 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
     .then((data) => {
         res.send({
           "requestDescription": "List of trends.",
-          "requestData": new Date().getTime(),
-          "data": data
+          "requestTime": new Date().getTime(),
+          "data": data[0]
         });
     })
     .catch((error) => {

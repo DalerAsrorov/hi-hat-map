@@ -1,5 +1,7 @@
 import Map from './map.js';
-import * as ui from './ui.js'
+import * as ui from './ui.js';
+import * as Request from './request.js';
+import * as Utils from './utils.js';
 
 // Action
 window.onload = (e) => {
@@ -30,6 +32,16 @@ window.onload = (e) => {
 
     socket.on('tweet', (tweet) => {
         columnsonsole.log('Tweet: ', tweet);
+    });
+
+
+    // Testing area
+    Request.getRequest(Utils.getTrendsPath(1))
+    .then((data) => {
+        console.log('Data', data);
+    })
+    .catch((err) => {
+        console.log("Error request", err);
     });
 };
 
