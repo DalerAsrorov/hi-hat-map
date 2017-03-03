@@ -52,6 +52,31 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
     });
 });
 
+/**
+* Finding the closest location based on lat and long
+* lat, long
+*/
+app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
+  const latAndLongString = req.params.latAndLong.trim();
+  const geoArray = latAndLongString.split(",");
+  const lat = geoArray[0];
+  const long = geoArray[1];
+
+  if(geoArray.length === 2) {
+    Twitter.getClosest(lat, long)
+        .then((data) => {
+            res.send({
+              "requestDescription": "List of trends places.",
+              "requestTime": new Date().getTime(),
+              "data": data[0]
+            });
+        })
+        .catch((error) => {
+            consle.log("Error!", error);
+        });
+  }
+});
+
 // app.get('/api/:topic?', function(req, res) {
 //     let tweet = req.params.topic;
 
@@ -93,7 +118,6 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
 **/
 
 io.on('connection', (socket) => {
-
     socket.on('topic', (topic) => {
         console.log("\nTOPIC: ", topic, "\n");
         let topicStr = topic.toString();

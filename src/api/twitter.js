@@ -27,12 +27,16 @@ module.exports = {
     // get the trends based on geo-location
     // weid represents the location ID
     getTrends: function getTrends(woeid) {
-        return new Promise((resolve, reject) => {
-            T.get('trends/place', {id: woeid}, (err, data) => {
-                if(typeof data === 'undefined') {
+        return new Promise(function (resolve, reject) {
+            console.log("woeid, ", woeid);
+
+            T.get('trends/place', {id: woeid}, function (err, data) {
+                if(!data) {
                     // console.log("ERROR", data, err);
                     reject(err);
+
                 } else {
+                    console.log("Data", data);
                     resolve(data);
                     // console.log("TRENDS:", data);
                     // let trends = data[0].trends;
@@ -42,6 +46,47 @@ module.exports = {
                 }
             });
         });
+    },
+
+    getClosest: function(lat, long) {
+        // Test: San Francisco = 37.773972, -122.431297.
+        lat = lat.trim();
+        long = long.trim(long);
+        console.log("REACHED");
+
+        function isNumber(number) {
+            return parseFloat(number) === Number(number);
+        };
+
+        // const tempLat = parseInt(lat);
+        // const tempLong = parseInt(long);
+        console.log(lat);
+        console.log(long);
+        console.log("Not a number", (isNumber(lat)) && isNumber(long));
+        if((isNumber(lat)) && isNumber(long)) {
+            return new Promise((resolve, reject) => {
+                let latNumber = parseInt(lat);
+                let longNumber = parseInt(long);
+                T.get
+                (
+                    'trends/closest',
+                    {lat: latNumber, long: longNumber},
+                    function(err, data) {
+                        if(data) {
+                            console.log("\nSUCCESSFUL getClosest:\n");
+                            resolve(data);
+                        } else {
+                            console.log("Error with trends/closest.", err);
+                            reject("Error:::", err);
+                        }
+                    }
+                );
+            });
+
+        }
+        else {
+            console.log("Passed strings cannot be converted to number.", lat, long);
+        }
     }
 
 }

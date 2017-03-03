@@ -31,7 +31,7 @@ window.onload = (e) => {
     }).addTo(Map);
 
     socket.on('tweet', (tweet) => {
-        columnsonsole.log('Tweet: ', tweet);
+        console.log('Tweet: ', tweet);
     });
 
 
@@ -39,6 +39,7 @@ window.onload = (e) => {
     Request.getRequest(Utils.getTrendsPath(1))
     .then((data) => {
         console.log('Data', data);
+
     })
     .catch((err) => {
         console.log("Error request", err);
