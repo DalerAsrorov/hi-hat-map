@@ -38,12 +38,18 @@ window.onload = (e) => {
     // Testing area
     Request.getRequest(Utils.getTrendsPath(1))
     .then((data) => {
-        console.log('Data', data);
+        let trends = data.data.trends;
+
 
     })
     .catch((err) => {
         console.log("Error request", err);
     });
+
+    // Request.getRequest(Utils.getTrendsPlaces(lat, long))
+    //     .then((data) => {
+    //         console.log("Trends Data");
+    //     })
 };
 
 
