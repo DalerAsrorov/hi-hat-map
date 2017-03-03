@@ -6,7 +6,6 @@ import * as Utils from './utils.js';
 // Action
 window.onload = (e) => {
     e.preventDefault();
-
     let socket = io.connect('http://localhost:8000/');
 
     function getTweets(event) {
@@ -38,8 +37,32 @@ window.onload = (e) => {
     // Testing area
     Request.getRequest(Utils.getTrendsPath(1))
     .then((data) => {
-        let trends = data.data.trends;
+        const trendsArray = data.data.trends;
+        const trendsNameArray = trendsArray.map((trend) => trend.name);
 
+
+        // constructs the suggestion engine
+        let trends = new Bloodhound({
+          datumTokenizer: Bloodhound.tokenizers.whitespace,
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          // `states` is an array of state names defined in "The Basics"
+          local: trendsNameArray
+        });
+
+        $('#querySearchForm .typeahead').typeahead
+        (
+            {
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'trends',
+                source: trends
+            }
+        );
+
+        console.log(trendsNameArray);
 
     })
     .catch((err) => {
