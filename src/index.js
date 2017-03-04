@@ -53,14 +53,64 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
 });
 
 /**
+*   Given the latitude and longtitude, it finds the trends
+*   of the country given
+*/
+
+app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
+    const latAndLongString = req.params.latAndLong.trim();
+    const geoArray = latAndLongString.split(",");
+    const lat = geoArray[0].trim();
+    const long = geoArray[1].trim();
+
+    console.log("GEO:",lat, ',', long);
+
+    if(geoArray.length === 2) {
+        Twitter.getClosest(lat, long)
+            .then((data) => {
+                const woeid = data[0].woeid;
+                const name = data[0].name;
+                const country = data[0].country;
+                const countryCode = data[0].countryCode;
+
+                Twitter.getTrends(woeid)
+                    .then((data) => {
+                        console.log("THE DATA:", data);
+                        res.send({
+                          "requestDescription": "List of trends.",
+                          "requestTime": new Date().getTime(),
+                          "geo": {
+                              "woeid": woeid,
+                              "name": name,
+                              "country": country,
+                              "countryCode": countryCode,
+                          },
+                          "data": data[0]
+                        });
+                    })
+                    .catch((error) => {
+                        res.send({
+                          "message": "ERROR",
+                          "details": error
+                        })
+                    });
+            })
+            .catch((error) => {
+                consle.log("Error!", error);
+            });
+  }
+});
+
+
+/**
 * Finding the closest location based on lat and long
 * lat, long
 */
 app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
   const latAndLongString = req.params.latAndLong.trim();
   const geoArray = latAndLongString.split(",");
-  const lat = geoArray[0];
-  const long = geoArray[1];
+  const lat = geoArray[0].trim();
+  const long = geoArray[1].trim();
 
   if(geoArray.length === 2) {
     Twitter.getClosest(lat, long)
@@ -119,7 +169,7 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
 
 io.on('connection', (socket) => {
     socket.on('topic', (topic) => {
-        console.log("\nTOPIC: ", topic, "\n");
+        // console.log("\nTOPIC: ", topic, "\n");
         let topicStr = topic.toString();
 
         const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
