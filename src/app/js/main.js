@@ -1,7 +1,7 @@
 import Map from './map.js';
 import * as ui from './ui.js';
 import * as Request from './request.js';
-import * as Utils from './utils.js';
+import * as Paths from './paths.js';
 
 // Action
 window.onload = (e) => {
@@ -35,34 +35,22 @@ window.onload = (e) => {
 
 
     // Testing area
-    Request.getRequest(Utils.getTrendsPath(1))
+    let testGeo = '-25.2744,-133.7751'; // Australia
+    // console.log('Path:', Paths.getGeoTrends(testGeo));
+    console.log(Paths.getGeoTrends(testGeo));
+    Request.getRequest(Paths.getGeoTrends(testGeo))
     .then((data) => {
-        const trendsArray = data.data.trends;
-        const trendsNameArray = trendsArray.map((trend) => trend.name);
+        // const trendsArray = data.data.trends;
+        // const trendsNameArray = trendsArray.map((trend) => trend.name);
 
+        if(data.data) {
+            let listOfTrends = data.data.trends;
+            console.log("Data", listOfTrends);
+        } else {
+            console.log("no data", data);
+        }
 
-        // constructs the suggestion engine
-        let trends = new Bloodhound({
-          datumTokenizer: Bloodhound.tokenizers.whitespace,
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          // `states` is an array of state names defined in "The Basics"
-          local: trendsNameArray
-        });
-
-        $('#querySearchForm .typeahead').typeahead
-        (
-            {
-                hint: true,
-                highlight: true,
-                minLength: 1
-            },
-            {
-                name: 'trends',
-                source: trends
-            }
-        );
-
-        console.log(trendsNameArray);
+        // console.log(trendsNameArray);
 
     })
     .catch((err) => {
