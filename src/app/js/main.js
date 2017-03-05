@@ -45,7 +45,26 @@ window.onload = (e) => {
 
         if(data.data) {
             let listOfTrends = data.data.trends;
-            console.log("Data", listOfTrends);
+            let geoData = data.geo;
+            console.log("Geo Data:", geoData);
+            console.log("Trends:", listOfTrends);
+
+            $("#querySearch").easyAutocomplete({
+                data: listOfTrends,
+                getValue: "name",
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+                // template: {
+                //     type: "custom"
+                //     // method: function(value, item) {
+                //     //     return "<img src='" + item.icon + "' /> | " + item.type + " | " + value;
+                //     // }
+                // }
+            });
+
         } else {
             console.log("no data", data);
         }

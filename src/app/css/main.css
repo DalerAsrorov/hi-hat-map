@@ -16,6 +16,10 @@ body > * {
   flex-flow: column;
 }
 
+.easy-autocomplete {
+  width: auto !important;
+}
+
 .ember-view {
   width: 100%; height: 100%;
 }
@@ -144,13 +148,15 @@ body > * {
 #querySearchForm {
   text-align: center;
   /* width: 50%; */
+  float: none;
+  display: block;
   margin: 0 auto;
   position: relative;
   top: -15px;
 }
 
 #querySearch {
-  width: 65%;
+  width: 75%;
   padding: 5px;
   color: #2f4070;
   font-weight: 500;
