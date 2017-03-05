@@ -2,11 +2,24 @@ import Map from './map.js';
 import * as ui from './ui.js';
 import * as Request from './request.js';
 import * as Paths from './paths.js';
+import StorageSystem from './storagesystem.js';
 
 // Action
 window.onload = (e) => {
     e.preventDefault();
+    const storageSystem = new StorageSystem(window.localStorage);
     let socket = io.connect('http://localhost:8000/');
+    let cpOpen;
+
+
+    // if(storageSystem.getItem('cpOpen'));
+    cpOpen = storageSystem.getItem('cpOpen');
+    console.log('cpOpen:::', cpOpen);
+    if(cpOpen == 'false') {
+        console.log("Should slide: cpOpen", cpOpen);
+        ui.slideToggleCp('controlPanelWrapper', Map);
+    }
+
 
     function getTweets(event) {
         // console.log(`Ready: ${event}`);

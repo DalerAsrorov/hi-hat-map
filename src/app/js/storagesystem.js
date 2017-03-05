@@ -5,7 +5,7 @@ export default class StorageSystem {
     }
 
     getItem(key) {
-        this._localStorage.getItem(key);
+        return this._localStorage.getItem(key);
     }
 
     setItem(key, value) {

@@ -4,7 +4,7 @@ import StorageSystem from './storagesystem.js';
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();
-    const slidingTime = 300;
+    const slidingTime = 270;
     const defaultTop = "-15px";
     const $querySearchForm = $('#querySearchForm');
     const $target = $(`#${targetID}`);
