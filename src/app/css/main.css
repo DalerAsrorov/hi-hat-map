@@ -8,45 +8,31 @@ html, body, .wrapper {
 }
 
 body > * {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif !important;
 }
 
-.wrapper {
-  display: flex;
-  flex-flow: column;
-}
-
-.easy-autocomplete {
-  width: auto !important;
-}
-
-.ember-view {
-  width: 100%; height: 100%;
-}
-
-#mapNav {
-  width: 100%;
-  /*height: 35px;*/
-  flex: 0 1 35px;
+#arrowPointerWrapper {
+  flex: 0 1 33px;
   background: #2F4070;
+}
+
+.btn-default.cp {
+  color: #2f4070;
+  background-color: #fff;
+  border-color: #ccc;
+  border-radius: 0;
+}
+
+.btn-default.cp:hover {
+  background: #d1cdf9;
+}
+
+#controlPanel {
   color: #f4deff;
-  line-height: 1.1;
-  font-weight: 700;
-  padding: 5px;
-
-
-}
-
-
-#mapWrapper {
-  /*width: 100%;
-  height: 100%;*/
-  flex: 1 1 auto;
-}
-
-#map {
   height: 100%;
-  width: 100%;
+  display: flex;
+  flex: 1 1 auto;
+  background: #fff;
 }
 
 #controlPanelWrapper {
@@ -65,44 +51,39 @@ body > * {
   z-index: 20000;
 }
 
-#arrowPointerWrapper {
-  flex: 0 1 33px;
-  background: #2F4070;
-}
-
-#controlPanel {
-  color: #f4deff;
-  height: 100%;
-  display: flex;
-  flex: 1 1 auto;
-  background: #fff;
-}
-
-#slideSwitchIcon {
-    font-size: 13px;
-    font-weight: 700;
-    position: relative;
-    top: 2px;
-}
-
-.size-xl {
-  font-size: 22px;
-}
-
 .control-panel-caption {
   margin-left: 3px;
   font-size: 15px;
 }
 
-.btn-default.cp {
-  color: #2f4070;
-  background-color: #fff;
-  border-color: #ccc;
-  border-radius: 0;
+.easy-autocomplete {
+  width: auto !important;
 }
 
-.btn-default.cp:hover {
-  background: #d1cdf9;
+.easy-autocomplete-container ul {
+  background: #2F4070;
+  color: #f4deff;
+  margin: 0 auto;
+  width: 76% !important;
+}
+
+.easy-autocomplete-container ul li:hover {
+  background: #fff;
+  color: #2F4070;
+}
+
+.easy-autocomplete-container ul li:focus {
+  background: #fff;
+  color: #2F4070;
+}
+
+.easy-autocomplete-container ul li:active {
+  background: #fff;
+  color: #2F4070;
+}
+
+.ember-view {
+  width: 100%; height: 100%;
 }
 
 /** Search input **/
@@ -126,8 +107,26 @@ body > * {
   border-color: #2F4070;
 }
 
-.panel-comp {
+#map {
+  height: 100%;
+  width: 100%;
+}
 
+#mapNav {
+  width: 100%;
+  /*height: 35px;*/
+  flex: 0 1 35px;
+  background: #2F4070;
+  color: #f4deff;
+  line-height: 1.1;
+  font-weight: 700;
+  padding: 5px;
+}
+
+#mapWrapper {
+  /*width: 100%;
+  height: 100%;*/
+  flex: 1 1 auto;
 }
 
 #panelCompLeft {
@@ -142,6 +141,10 @@ body > * {
 
 #panelCompRight {
   /*background: orange;*/
+
+}
+
+.panel-comp {
 
 }
 
@@ -165,6 +168,23 @@ body > * {
   font-size: 16px;
   border: 1px solid rgba(47, 64, 112, 0.41);
 }
+
+#slideSwitchIcon {
+    font-size: 13px;
+    font-weight: 700;
+    position: relative;
+    top: 2px;
+}
+
+.size-xl {
+  font-size: 22px;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+}
+
 
 
 
