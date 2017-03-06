@@ -9,6 +9,12 @@ html, body, .wrapper {
 
 body > * {
   font-family: 'Raleway', sans-serif !important;
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
 }
 
 #arrowPointerWrapper {
@@ -153,8 +159,19 @@ body > * {
 
 }
 
+#panelWrapper .menu {
+  padding: 7px;
+  margin: 3px;
+  font-weight: 800;
+  color: #000;
+}
+
 .panel-comp {
 
+}
+
+.panel-wrapper {
+  padding: 5px;
 }
 
 #querySearchForm {
@@ -187,6 +204,10 @@ body > * {
 
 .size-xl {
   font-size: 22px;
+}
+
+#widgetList {
+
 }
 
 .wrapper {

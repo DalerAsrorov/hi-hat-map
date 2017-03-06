@@ -11,8 +11,6 @@ window.onload = (e) => {
     let socket = io.connect('http://localhost:8000/');
     let cpOpen;
 
-
-    // if(storageSystem.getItem('cpOpen'));
     cpOpen = storageSystem.getItem('cpOpen');
     console.log('cpOpen:::', cpOpen);
     if(cpOpen == 'false') {
@@ -47,20 +45,18 @@ window.onload = (e) => {
     });
 
 
+    // generation
+    ui.generateCpRightPanel('#panelWrapper', {});
+
     // Testing area
     let testGeo = '-25.2744,-133.7751'; // Australia
     // console.log('Path:', Paths.getGeoTrends(testGeo));
     console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
     .then((data) => {
-        // const trendsArray = data.data.trends;
-        // const trendsNameArray = trendsArray.map((trend) => trend.name);
-
         if(data.data) {
             let listOfTrends = data.data.trends;
             let geoData = data.geo;
-            // console.log("Geo Data:", geoData);
-            // console.log("Trends:", listOfTrends);
 
             $("#querySearch").easyAutocomplete({
                 data: listOfTrends,
@@ -93,8 +89,6 @@ window.onload = (e) => {
         } else {
             console.log("no data", data);
         }
-
-        // console.log(trendsNameArray);
 
     })
     .catch((err) => {

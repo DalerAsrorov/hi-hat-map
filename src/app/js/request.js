@@ -9,7 +9,6 @@ export function getRequest(url) {
             } else {
                 rej("Couldn't get the file.");
             }
-
         });
     });
 };

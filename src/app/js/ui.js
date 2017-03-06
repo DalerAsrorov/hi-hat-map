@@ -42,4 +42,31 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
 export function setCpCss(target, height, body=$('body')) {
     body.css({"overflowY": "auto"});
     $target.css({height: cpDefaultHeight});
-};
+}
+
+/**
+*   Based on the given target (div) and data (list of
+*   available options), place a table (or list) of
+*   widgets.
+*/
+export function generateCpRightPanel(target, data) {
+    let $target = $(target);
+
+    for(let i = 0; i < 10; i++) {
+        $target.append
+        (
+            '<div class="col-lg-4">' +
+                '<div class="menu">' +
+                    "Something" +
+                '</div>' +
+            '</div>'
+        );
+    }
+
+    $(target).append($ul);
+}
+
+
+
+
+
