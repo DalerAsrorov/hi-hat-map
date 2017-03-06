@@ -62,8 +62,6 @@ export function generateCpRightPanel(target, data) {
             '</div>'
         );
     }
-
-    $(target).append($ul);
 }
 
 
