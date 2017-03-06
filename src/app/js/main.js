@@ -59,16 +59,25 @@ window.onload = (e) => {
         if(data.data) {
             let listOfTrends = data.data.trends;
             let geoData = data.geo;
-            console.log("Geo Data:", geoData);
-            console.log("Trends:", listOfTrends);
+            // console.log("Geo Data:", geoData);
+            // console.log("Trends:", listOfTrends);
 
             $("#querySearch").easyAutocomplete({
                 data: listOfTrends,
-                getValue: "name",
+                getValue: 'name',
                 list: {
                     match: {
                         enabled: true
-                    }
+                    },
+                    onShowListEvent: function() {
+                        if(storageSystem.getItem('cpOpen') == 'false') {
+                            // easy-autocomplete-container
+                            // add: autocomplete-top
+                            $('.easy-autocomplete-container').addClass('autocomplete-top');
+                        } else {
+                            $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                        }
+                    },
                 }
                 // template: {
                 //     type: "custom"

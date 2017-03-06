@@ -34,3 +34,12 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
         storageSystem.setItem("cpOpen", false);
     }
 };
+
+/**
+*  Helper UI method that will keep the
+*  control panel closed faster.
+*/
+export function setCpCss(target, height, body=$('body')) {
+    body.css({"overflowY": "auto"});
+    $target.css({height: cpDefaultHeight});
+};

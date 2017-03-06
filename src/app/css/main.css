@@ -16,6 +16,10 @@ body > * {
   background: #2F4070;
 }
 
+.autocomplete-top {
+  top: -170px;
+}
+
 .btn-default.cp {
   color: #2f4070;
   background-color: #fff;
