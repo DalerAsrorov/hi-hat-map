@@ -70,13 +70,16 @@ window.onload = (e) => {
                         enabled: true
                     },
                     onShowListEvent: function() {
-                        if(storageSystem.getItem('cpOpen') == 'false') {
-                            // easy-autocomplete-container
-                            // add: autocomplete-top
-                            $('.easy-autocomplete-container').addClass('autocomplete-top');
-                        } else {
-                            $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                        }
+                        switch(storageSystem.getItem('cpOpen')) {
+                            case 'false':
+                               $('.easy-autocomplete-container').addClass('autocomplete-top');
+                               break;
+                            case 'true':
+                               $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                               break;
+                            default:
+                               $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                        };
                     },
                 }
                 // template: {
