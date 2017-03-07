@@ -26,6 +26,14 @@ ul {
   top: -170px;
 }
 
+#banner {
+  height: 50%;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 200px;
+}
+
 .btn-default.cp {
   color: #2f4070;
   background-color: #fff;
@@ -111,6 +119,10 @@ ul {
   top: 0;
   left: 0;
   position: fixed;
+}
+
+header#loadIntro {
+  /*padding: 5px;*/
 }
 
 #initLoader {
@@ -224,6 +236,18 @@ ul {
 
 .size-xl {
   font-size: 22px;
+}
+
+.sub-h {
+  font-size: 30px;
+  font-weight: 700;
+  color: #2F4070;
+}
+
+.super-h {
+  font-size: 70px;
+  font-weight: 800;
+  color: #1aa7ff;
 }
 
 #widgetList {
