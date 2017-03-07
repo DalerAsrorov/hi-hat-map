@@ -33,7 +33,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
         $slideSwitchIcon.addClass('glyphicon-menu-up').removeClass('glyphicon-menu-down');
         storageSystem.setItem("cpOpen", false);
     }
-};
+}
 
 /**
 *  Helper UI method that will keep the
@@ -63,6 +63,29 @@ export function generateCpRightPanel(target, data) {
         );
     }
 }
+
+export function addElementToPanel(
+    panel,
+    eventListener,
+    htmlItemName = "",
+    htmlItem = $('<button></button>'),
+    htmlItemClass = 'menu',
+    columnSize = 'col-lg-4') {
+
+    let $panel = $(panel);
+    let $htmlItem = htmlItem;
+    let $divCol = $('<div></div>');
+
+    $htmlItem.addClass(htmlItemClass);
+    $htmlItem.html('<span class="right-cp-name">'
+                   + htmlItemName + '</span>')
+    $divCol.addClass(columnSize);
+
+    $divCol.append($htmlItem);
+    $panel.append($divCol);
+}
+
+
 
 
 

@@ -46,7 +46,7 @@ window.onload = (e) => {
 
 
     // generation
-    ui.generateCpRightPanel('#panelWrapper', {});
+    // ui.generateCpRightPanel('#panelWrapper', {});
 
     // Testing area
     let testGeo = '-25.2744,-133.7751'; // Australia
@@ -90,6 +90,19 @@ window.onload = (e) => {
             console.log("no data", data);
         }
 
+        (function() {
+            for(let i = 0; i < 10; i++) {
+                ui.addElementToPanel
+                (
+                    '#panelCompRightWrapper',
+                    {},
+                    "Button " + i,
+                    $('<button></button>'),
+                    'menu btn btn-default',
+                    'col-lg-4'
+                );
+            }
+        }());
     })
     .catch((err) => {
         console.log("Error request", err);
