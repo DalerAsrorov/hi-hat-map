@@ -250,6 +250,10 @@ header#loadIntro {
   color: #1aa7ff;
 }
 
+.vanish {
+  display: none;
+}
+
 #widgetList {
 
 }

@@ -17,6 +17,7 @@ window.onload = (e) => {
     /* UNCOMMENT WHEN READY */
     if(!storageSystem.getItem('firstVisit')) {
         console.log('Comes here');
+        ui.removeClass('#initLoader', 'vanish');
         ui.addClass('#initLoader', 'full-overlay');
         storageSystem.setItem("firstVisit", true);
 
