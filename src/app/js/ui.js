@@ -105,6 +105,11 @@ export function removeElement(target) {
     $(target).remove();
 }
 
+export function style(target, styleObject, ...rest) {
+    console.log("style() rest:", rest);
+    $(target).css(styleObject);
+}
+
 
 
 
