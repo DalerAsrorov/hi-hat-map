@@ -101,6 +101,10 @@ export function fadeOut(target, type, callbackHandler = function(){}) {
     $(target).fadeOut(type, callbackHandler);
 }
 
+export function removeElement(target) {
+    $(target).remove();
+}
+
 
 
 

@@ -15,12 +15,15 @@ window.onload = (e) => {
     console.log(storageSystem.getItem('firstVisit'));
 
     /* UNCOMMENT WHEN READY */
-    // if(!storageSystem.getItem('firstVisit')) {
-    //     console.log('Comes here');
-    //     ui.addClass('#initLoader', 'full-overlay');
-    //     storageSystem.setItem("firstVisit", true);
-    //     utils.execWithTimeout(() => ui.fadeOut('#initLoader', 'slow'), 3000);
-    // }
+    if(!storageSystem.getItem('firstVisit')) {
+        console.log('Comes here');
+        ui.addClass('#initLoader', 'full-overlay');
+        storageSystem.setItem("firstVisit", true);
+
+        utils.execWithTimeout(() => {
+            ui.fadeOut('#initLoader', 'slow', e => ui.removeElement('#initLoader'));
+        }, 3000);
+    }
 
     cpOpen = storageSystem.getItem('cpOpen');
     console.log('cpOpen:::', cpOpen);
