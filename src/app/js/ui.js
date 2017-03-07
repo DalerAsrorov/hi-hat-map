@@ -67,7 +67,7 @@ export function generateCpRightPanel(target, data) {
 export function addElementToPanel(
     panel,
     eventListener,
-    htmlItemName = "",
+    htmlItemName = '',
     htmlItem = $('<button></button>'),
     htmlItemClass = 'menu',
     columnSize = 'col-lg-4') {
@@ -85,7 +85,21 @@ export function addElementToPanel(
     $panel.append($divCol);
 }
 
+// export function addTemp(container, image, text, milliseconds=50000) {
 
+// }
+
+export function addClass(target, className) {
+    $(target).addClass(className);
+}
+
+export function removeClass(target, className) {
+    $(target).removeClass(className);
+}
+
+export function fadeOut(target, type, callbackHandler = function(){}) {
+    $(target).fadeOut(type, callbackHandler);
+}
 
 
 

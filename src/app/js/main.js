@@ -2,6 +2,7 @@ import Map from './map.js';
 import * as ui from './ui.js';
 import * as Request from './request.js';
 import * as Paths from './paths.js';
+import * as utils from './utils.js';
 import StorageSystem from './storagesystem.js';
 
 // Action
@@ -10,6 +11,16 @@ window.onload = (e) => {
     const storageSystem = new StorageSystem(window.localStorage);
     let socket = io.connect('http://localhost:8000/');
     let cpOpen;
+
+    console.log(storageSystem.getItem('firstVisit'));
+
+    /* UNCOMMENT WHEN READY */
+    // if(!storageSystem.getItem('firstVisit')) {
+    //     console.log('Comes here');
+    //     ui.addClass('#initLoader', 'full-overlay');
+    //     storageSystem.setItem("firstVisit", true);
+    //     utils.execWithTimeout(() => ui.fadeOut('#initLoader', 'slow'), 3000);
+    // }
 
     cpOpen = storageSystem.getItem('cpOpen');
     console.log('cpOpen:::', cpOpen);
