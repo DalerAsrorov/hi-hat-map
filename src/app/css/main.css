@@ -125,6 +125,10 @@ header#loadIntro {
   /*padding: 5px;*/
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 #initLoader {
 
 }
