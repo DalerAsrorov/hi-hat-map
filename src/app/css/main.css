@@ -130,7 +130,9 @@ header#loadIntro {
 }
 
 #initLoader {
-
+  display: flex;
+  display: -webkit-box;
+  height: 100%;
 }
 
 /** Search input **/
@@ -152,6 +154,10 @@ header#loadIntro {
 
 .leaflet-gac-control:focus {
   border-color: #2F4070;
+}
+
+#mainWrapper {
+  display: none;
 }
 
 #map {

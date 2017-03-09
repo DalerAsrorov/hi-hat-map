@@ -6,8 +6,7 @@ import * as utils from './utils.js';
 import StorageSystem from './storagesystem.js';
 
 // Action
-window.onload = (e) => {
-    e.preventDefault();
+$(window).load(() => {
     const storageSystem = new StorageSystem(window.localStorage);
     let socket = io.connect('http://localhost:8000/');
     let cpOpen;
@@ -15,16 +14,23 @@ window.onload = (e) => {
     console.log(storageSystem.getItem('firstVisit'));
 
     /* UNCOMMENT WHEN READY */
-    if(!storageSystem.getItem('firstVisit')) {
-        console.log('Comes here');
-        ui.removeClass('#initLoader', 'vanish');
-        ui.addClass('#initLoader', 'full-overlay');
-        storageSystem.setItem("firstVisit", true);
+    $(() => {
+        // if(!storageSystem.getItem('firstVisit')) {
+        //     $('#initLoader').fadeOut(5000, () => $('#mainWrapper').fadeIn(2000));
+        //     // console.log('Comes here');
+        //     // ui.removeClass('#initLoader', 'vanish');
+        //     // ui.addClass('#initLoader', 'full-overlay');
+        //     // storageSystem.setItem("firstVisit", true);
 
-        utils.execWithTimeout(() => {
-            ui.fadeOut('#initLoader', 'slow', e => ui.removeElement('#initLoader'));
-        }, 3000);
-    }
+        //     // utils.execWithTimeout(() => {
+        //     //     ui.fadeOut('#initLoader', 'slow', e => ui.removeElement('#initLoader'));
+        //     // }, 3000);
+        // } else {
+        //     $('#initLoader').fadeOut(1000, () => $('#mainWrapper').fadeIn(500));
+        // }
+    });
+
+
 
     cpOpen = storageSystem.getItem('cpOpen');
     console.log('cpOpen:::', cpOpen);
@@ -127,7 +133,7 @@ window.onload = (e) => {
     //     .then((data) => {
     //         console.log("Trends Data");
     //     })
-};
+});
 
 
 

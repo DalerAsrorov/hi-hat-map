@@ -13,6 +13,10 @@ export function getSotedData(panelComponent, ascending=true, limit=0) {
     return data;
 }
 
+export function sortData(ascending=true) {
+
+}
+
 export function getTopData(panelComponent, limit, ascending=true) {
     const data = ascending ? getSotedData(panelComponent, ascending, panelComponent).splice(limit);
     return data;
