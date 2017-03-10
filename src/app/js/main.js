@@ -16,19 +16,19 @@ $(window).load(() => {
     /* INTRO LOADER CODE */
     $(() => {
         if(!storageSystem.getItem('firstVisit')) {
-            ui.fadeOut('#initLoader', 500, () => {
+            ui.fadeOut('#initLoader', 3000, () => {
                 ui.removeElement('#initLoader');
-                ui.makeVisible('#mainWrapper', 1000);
+                ui.makeVisible('#mainWrapper', 500);
             });
         } else {
-            ui.fadeOut('#initLoader', 2000, () => {
+            ui.fadeOut('#initLoader', 550, () => {
                 ui.removeElement('#initLoader');
-                ui.makeVisible('#mainWrapper', 1000);
+                ui.makeVisible('#mainWrapper', 500);
             });
         }
     });
 
-
+    storageSystem.setItem('firstVisit', true);
 
     cpOpen = storageSystem.getItem('cpOpen');
     console.log('cpOpen:::', cpOpen);
