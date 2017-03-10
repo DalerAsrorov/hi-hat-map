@@ -15,19 +15,18 @@ $(window).load(() => {
 
     /* UNCOMMENT WHEN READY */
     $(() => {
-        // if(!storageSystem.getItem('firstVisit')) {
-        //     $('#initLoader').fadeOut(5000, () => $('#mainWrapper').fadeIn(2000));
-        //     // console.log('Comes here');
-        //     // ui.removeClass('#initLoader', 'vanish');
-        //     // ui.addClass('#initLoader', 'full-overlay');
-        //     // storageSystem.setItem("firstVisit", true);
+        if(!storageSystem.getItem('firstVisit')) {
+            $('#initLoader').fadeOut(1000, function() {
+                $('#initLoader').remove();
+                $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
+            });
+        } else {
 
-        //     // utils.execWithTimeout(() => {
-        //     //     ui.fadeOut('#initLoader', 'slow', e => ui.removeElement('#initLoader'));
-        //     // }, 3000);
-        // } else {
-        //     $('#initLoader').fadeOut(1000, () => $('#mainWrapper').fadeIn(500));
-        // }
+            $('#initLoader').fadeOut(1000, function() {
+                $('#initLoader').remove();
+                $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
+            });
+        }
     });
 
 
