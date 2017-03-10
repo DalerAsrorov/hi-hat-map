@@ -13,18 +13,17 @@ $(window).load(() => {
 
     console.log(storageSystem.getItem('firstVisit'));
 
-    /* UNCOMMENT WHEN READY */
+    /* INTRO LOADER CODE */
     $(() => {
         if(!storageSystem.getItem('firstVisit')) {
-            $('#initLoader').fadeOut(1000, function() {
-                $('#initLoader').remove();
-                $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
+            ui.fadeOut('#initLoader', 500, () => {
+                ui.removeElement('#initLoader');
+                ui.makeVisible('#mainWrapper', 1000);
             });
         } else {
-
-            $('#initLoader').fadeOut(1000, function() {
-                $('#initLoader').remove();
-                $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
+            ui.fadeOut('#initLoader', 2000, () => {
+                ui.removeElement('#initLoader');
+                ui.makeVisible('#mainWrapper', 1000);
             });
         }
     });

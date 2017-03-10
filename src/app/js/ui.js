@@ -97,9 +97,9 @@ export function removeClass(target, className) {
     $(target).removeClass(className);
 }
 
-export function fadeOut(target, type, callbackHandler = function(){}) {
-    $(target).fadeOut(type, callbackHandler);
-}
+// export function fadeOut(target, type, callbackHandler = function(){}) {
+//     $(target).fadeOut(type, callbackHandler);
+// }
 
 export function removeElement(target) {
     $(target).remove();
@@ -107,7 +107,19 @@ export function removeElement(target) {
 
 export function style(target, styleObject, ...rest) {
     console.log("style() rest:", rest);
-    $(target).css(styleObject);
+    return $(target).css(styleObject);
+}
+
+export function fadeOut(target, timer, callback) {
+    $(target).fadeOut(timer, function() {
+        // $('#initLoader').remove();
+        // $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
+        callback();
+    });
+}
+
+export function makeVisible(target, timer) {
+    $(target).css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, timer)
 }
 
 
