@@ -5,56 +5,24 @@
  */
 
  class PanelComponent {
-    constructor(id, div=$('<div></div>'), actionHandler, data={}) {
+    constructor(id, name, actionHandler, data=[]) {
         this._id = id;
-        this._div = div;
+        this._name = name;
         this._actionHandler = actionHandler;
         this._data = data;
     }
 
-    /**
-     * This function sorts data in
-     * ascending order or descending
-     * order based on the boolean value given.
-     *  > Ascendent order if true.
-     *  > Descending order if false.
-     */
-
-    getSotedData(ascending=true) {
+    getSotedDataBy(key, ascending=true) {
         let data;
+        const descComparator = R.comparator((a, b) => R.gt(R.prop(key, a), R.prop(key, b)));
 
-        if(ascending) {
-            data = R.sortBy(R.prop(objectKey), this._data);
-        } else {
-            const descComparator = R.comparator((a, b) => R.gt(R.prop(objectKey, a), R.prop(objectKey, b)));
-            data = R.sort(descComparator, this._data);
-        }
-
+        data = ascending ? R.sortBy(R.prop(key), this._data) : R.sort(descComparator, this._data);
         return data;
     }
 
-    getSortedDataAscBy(objectKey) {
-        this.getSortedData(true);
-    }
-
-    getSortedDataDescBy(objectKey) {
-        this.getSortedData(false);
-    }
-
-    getTopData(limit, ascending=true) {
-        acending = ascending ? this.getSortedDataDescBy(asc)
-    }
-
-    formatData(fn) {
-        fn(this._data);
-    }
-
-    getDiv() {
-        return this._data;
-    }
-
-    setDiv(div) {
-        this._div = div;
+    getTopN(limit, key, ascending=true) {
+        let formatted = getSortedDataBy(key, ascending);
+        return R.slice(0, limit + 1, formatted);
     }
 
     getActionHandler() {
@@ -63,6 +31,14 @@
 
     getData() {
         return this._data;
+    }
+
+    getId() {
+        return this._id;
+    }
+
+    getName(name) {
+        this._name = name;
     }
 
     setActionHandler(actionHandler) {
@@ -77,13 +53,16 @@
         this.data = data;
     }
 
+    setName(name) {
+        this._name = name;
+    }
+
     toString() {
         return {
-            "div": this._div,
+            "id": this._id,
+            "name": this._name,
             "actionHandler": this._actionHandler,
             "data": this._data
         };
     }
-
-
  }

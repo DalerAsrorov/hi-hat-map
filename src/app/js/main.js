@@ -137,11 +137,13 @@ $(window).load(() => {
         const listOfActions = [
             {
                 id: '#topTen',
-                name: 'Top 10 Tweets'
+                name: 'Top 10 Tweets',
+                actionHandler: function() {}
             },
             {
                 id: '#topTen',
-                name: 'Top 10 Retweets'
+                name: 'Top 10 Retweets',
+                actionHandler: function() {}
             }
         ];
         ui.appendDropDownTo('#panelCompRightWrapper', 'Top', 'twitterTop', listOfActions);
