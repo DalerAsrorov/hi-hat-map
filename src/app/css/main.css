@@ -146,12 +146,13 @@ header#loadIntro {
 /** Search input **/
 
 #loadImage {
-
+  height: 85%;
+  width: 70%;
 }
 
 #loadImage img {
-  width: 65%;
-  height: 65%;
+  width: inherit;
+  height: inherit;
 }
 
 .leaflet-gac-control {
