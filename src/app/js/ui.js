@@ -27,7 +27,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
         $body.css({"overflowY": "hidden"});
         $target.animate({height: cpNavHeight}, slidingTime);
         $querySearchForm.animate({
-            top: "-34px"
+            top: "-37px"
         }, slidingTime);
         map.invalidateSize();
         $slideSwitchIcon.addClass('fa-caret-up').removeClass('fa-caret-down');
