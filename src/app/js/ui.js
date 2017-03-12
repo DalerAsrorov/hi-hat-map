@@ -85,12 +85,35 @@ export function addElementToPanel(
     $panel.append($divCol);
 }
 
-// export function addTemp(container, image, text, milliseconds=50000) {
+export function addElementTo(target, element=$('<div></div>')) {
+    if(typeof target == 'object') {
+        target.append(element);
+        return target;
+    }
 
-// }
+    return $(`${target}`).append(element);
+}
+
+export function addContainerToContainer(panel, id='', container=$(`<div id=${id}></div>`), classes='') {
+    let addId = container.attr('id') ? container.attr('id') : container.attr('id', `#${id}`);
+    addClass(container, classes);
+    $(panel).append(container);
+    console.log('container', container);
+    return container;
+}
 
 export function addClass(target, className) {
     $(target).addClass(className);
+}
+
+export function addTextTo(target, text) {
+    if(typeof target == 'object') {
+        console.log("Jquery should be applied directly");
+        target.html(text);
+    } else if(typeof target == 'string') {
+        console.log("It's id", target);
+        $(target).html(text);
+    }
 }
 
 export function removeClass(target, className) {
@@ -120,6 +143,24 @@ export function fadeOut(target, timer, callback) {
 
 export function makeVisible(target, timer) {
     $(target).css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, timer)
+}
+
+export function appendDropDownTo(target, dropdownName, dropdownID, dataList) {
+    let $targetRef = $(target).append(`<div class="dropdown" id=${dropdownID}></div>`);
+    let $dropdown = $(target).find(`#${dropdownID}`);
+    console.log("Dropdown", $dropdown);
+    $dropdown.append(`<button class='btn btn-secondary dropdown-toggle' type='button' data-toggle="dropdown">` + dropdownName + `</button>`);
+    let $dropdownRef = $dropdown.append(`<div class='dropdown-menu' </div>`);
+    let $listDiv = $dropdownRef.find('.dropdown-menu');
+
+    dataList.map((action, index) => {
+        $listDiv.append
+        (`
+            <a class ='dropdown-item' href='#'> ${action.name} </a>
+        `)
+    });
+    $dropdown.append($listDiv);
+    $(target).append($dropdown);
 }
 
 

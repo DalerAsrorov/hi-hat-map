@@ -109,19 +109,46 @@ $(window).load(() => {
             console.log("no data", data);
         }
 
-        (function() {
-            for(let i = 0; i < 10; i++) {
-                ui.addElementToPanel
-                (
-                    '#panelCompRightWrapper',
-                    {},
-                    "Button " + i,
-                    $('<a></a>'),
-                    'menu btn btn-secondary',
-                    'col-lg-4'
-                );
+        // (function() {
+        //     // for(let i = 0; i < 10; i++) {
+        //     //     ui.addElementToPanel
+        //     //     (
+        //     //         '#panelCompRightWrapper',
+        //     //         {},
+        //     //         "Button " + i,
+        //     //         $('<a></a>'),
+        //     //         'menu btn btn-secondary',
+        //     //         'col-lg-4'
+        //     //     );
+        //     // }
+
+        //     // undefined by default will place 'div' element
+
+        //     // ui.addElementTo('')
+
+        // }());
+
+        // console.log('Should reach here...');
+        // let dropdown = ui.addContainerToContainer('#panelCompRightWrapper', 'favorites', undefined, 'dropdown show');
+        // let $a = ui.addContainerToContainer(dropdown.attr('id'), undefined, $('<a>'), 'btn btn-secondary dropdown-toggle');
+        // ui.addTextTo($a, $a.attr('id'));
+
+        //target, dropdownName, dropdownID, dataList
+        const listOfActions = [
+            {
+                id: '#topTen',
+                name: 'Top 10 Tweets'
+            },
+            {
+                id: '#topTen',
+                name: 'Top 10 Retweets'
             }
-        }());
+        ];
+        ui.appendDropDownTo('#panelCompRightWrapper', 'Top', 'twitterTop', listOfActions);
+        ui.appendDropDownTo('#panelCompRightWrapper', 'Not Top', 'yelpTop', listOfActions);
+
+
+        console.log('$a', $a);
     })
     .catch((err) => {
         console.log("Error request", err);

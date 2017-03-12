@@ -50,7 +50,7 @@ ul {
 }
 
 #controlPanel {
-  color: #f4deff;
+  color: #000;
   height: 100%;
   display: flex;
   flex: 1 1 auto;
@@ -76,6 +76,10 @@ ul {
 .control-panel-caption {
   margin-left: 3px;
   font-size: 15px;
+}
+
+.cp-options {
+  color: black !important;
 }
 
 .easy-autocomplete {
