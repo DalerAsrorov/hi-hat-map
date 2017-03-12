@@ -116,8 +116,8 @@ $(window).load(() => {
                     '#panelCompRightWrapper',
                     {},
                     "Button " + i,
-                    $('<button></button>'),
-                    'menu btn btn-default',
+                    $('<a></a>'),
+                    'menu btn btn-secondary',
                     'col-lg-4'
                 );
             }

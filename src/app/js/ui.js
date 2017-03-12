@@ -68,7 +68,7 @@ export function addElementToPanel(
     panel,
     eventListener,
     htmlItemName = '',
-    htmlItem = $('<button></button>'),
+    htmlItem = $('<button type="button"></button>'),
     htmlItemClass = 'menu',
     columnSize = 'col-lg-4') {
 
