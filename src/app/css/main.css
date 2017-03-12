@@ -82,6 +82,28 @@ ul {
   color: black !important;
 }
 
+
+
+.dropdown button {
+  width: 100%;
+  height: inherit;
+}
+
+.dropdown-menu {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu .dropdown-item {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0.5em;
+}
+
+.dropdown-toggle::after {
+    margin-left: 20px;
+}
+
 .easy-autocomplete {
   width: auto !important;
 }
@@ -224,6 +246,10 @@ header#loadIntro {
   margin: 3px;
   font-weight: 800;
   color: #000;
+}
+
+#panelCompRightWrapper .dropdown {
+  /*width: 50%;*/
 }
 
 .panel-comp {
