@@ -255,8 +255,8 @@ header#loadIntro {
 }
 
 #slideSwitchIcon {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 1.2em;
+    font-weight: 800;
     position: relative;
     top: 2px;
 }

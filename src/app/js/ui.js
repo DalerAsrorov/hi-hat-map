@@ -20,7 +20,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
         $querySearchForm.animate({
             top: "-15px"
         }, slidingTime);
-        $slideSwitchIcon.addClass('glyphicon-menu-down').removeClass('glyphicon-menu-up');
+        $slideSwitchIcon.addClass('fa-caret-down').removeClass('fa-caret-up');
         storageSystem.setItem("cpOpen", true);
     }
     else {
@@ -30,7 +30,7 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
             top: "-34px"
         }, slidingTime);
         map.invalidateSize();
-        $slideSwitchIcon.addClass('glyphicon-menu-up').removeClass('glyphicon-menu-down');
+        $slideSwitchIcon.addClass('fa-caret-up').removeClass('fa-caret-down');
         storageSystem.setItem("cpOpen", false);
     }
 }
