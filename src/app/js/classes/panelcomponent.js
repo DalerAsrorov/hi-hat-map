@@ -4,19 +4,19 @@
  *
  */
 
- class PanelComponent {
+ export default class PanelComponent {
     constructor(id, name, actionHandler, data=[]) {
-        this._id = id;
-        this._name = name;
-        this._actionHandler = actionHandler;
-        this._data = data;
+        this.id = id;
+        this.name = name;
+        this.actionHandler = actionHandler;
+        this.data = data;
     }
 
     getSotedDataBy(key, ascending=true) {
-        let data;
+        let sortedData;
         const descComparator = R.comparator((a, b) => R.gt(R.prop(key, a), R.prop(key, b)));
 
-        data = ascending ? R.sortBy(R.prop(key), this._data) : R.sort(descComparator, this._data);
+        sortedData = ascending ? R.sortBy(R.prop(key), this.data) : R.sort(descComparator, this.data);
         return data;
     }
 
@@ -26,27 +26,27 @@
     }
 
     getActionHandler() {
-        return this._actionHandler;
+        return this.actionHandler;
     }
 
     getData() {
-        return this._data;
+        return this.data;
     }
 
     getId() {
-        return this._id;
+        return this.id;
     }
 
     getName(name) {
-        this._name = name;
+        this.name = name;
     }
 
     setActionHandler(actionHandler) {
-        this._actionHandler = actionHandler;
+        this.actionHandler = actionHandler;
     }
 
     setActionHandler(fn) {
-        this._actionHandler = fn;
+        this.actionHandler = fn;
     }
 
     setData(data) {
@@ -54,15 +54,15 @@
     }
 
     setName(name) {
-        this._name = name;
+        this.name = name;
     }
 
     toString() {
         return {
-            "id": this._id,
-            "name": this._name,
-            "actionHandler": this._actionHandler,
-            "data": this._data
+            "id": this.id,
+            "name": this.name,
+            "actionHandler": this.actionHandler,
+            "data": this.data
         };
     }
  }

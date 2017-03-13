@@ -1,15 +1,20 @@
-import Map from './map.js';
-import * as ui from './ui.js';
-import * as Request from './request.js';
-import * as Paths from './paths.js';
-import * as utils from './utils.js';
-import StorageSystem from './storagesystem.js';
+import Map from './modules/map.js';
+import * as ui from './modules/ui.js';
+import * as Request from './modules/request.js';
+import * as Paths from './modules/paths.js';
+import * as utils from './modules/utils.js';
+import StorageSystem from './classes/storagesystem.js';
+import PanelComponent from './classes/panelcomponent.js';
+import Components from './classes/components.js';
 
 // Action
 $(window).load(() => {
     const storageSystem = new StorageSystem(window.localStorage);
     let socket = io.connect('http://localhost:8000/');
-    let cpOpen;
+    let cpOpen,
+        cpRightList =[];
+
+    let rightComponents = new Components();
 
     console.log(storageSystem.getItem('firstVisit'));
 
@@ -134,23 +139,24 @@ $(window).load(() => {
         // ui.addTextTo($a, $a.attr('id'));
 
         //target, dropdownName, dropdownID, dataList
-        const listOfActions = [
-            {
-                id: '#topTen',
-                name: 'Top 10 Tweets',
-                actionHandler: function() {}
-            },
-            {
-                id: '#topTen',
-                name: 'Top 10 Retweets',
-                actionHandler: function() {}
-            }
-        ];
-        ui.appendDropDownTo('#panelCompRightWrapper', 'Top', 'twitterTop', listOfActions);
-        ui.appendDropDownTo('#panelCompRightWrapper', 'Not Top', 'yelpTop', listOfActions);
 
 
-        console.log('$a', $a);
+        let panelComp1 = new PanelComponent('#topTen',
+                                           'Top 10 Tweets',
+                                           function(){console.log('hi')},
+                                           [{"name":"daler"}, {"name":"michael"}]);
+        let panelComp2 = new PanelComponent('#topTwenty',
+                                            'Top 10 Retweets',
+                                            function(){console.log('hi')},
+                                            [{"lastname":"asrorov"}, {"lastname":"jojo"}])
+        rightComponents.add(panelComp1);
+        rightComponents.add(panelComp2);
+        rightComponents.setName('Social Media');
+        rightComponents.setId('socMedia');
+
+        console.log("panelComp object:", rightComponents);
+        ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents)
+
     })
     .catch((err) => {
         console.log("Error request", err);
@@ -161,6 +167,3 @@ $(window).load(() => {
     //         console.log("Trends Data");
     //     })
 });
-
-
-

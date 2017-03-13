@@ -1,5 +1,5 @@
 // UI Utils set
-import StorageSystem from './storagesystem.js';
+import StorageSystem from './../classes/storagesystem.js';
 
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
@@ -129,7 +129,6 @@ export function removeElement(target) {
 }
 
 export function style(target, styleObject, ...rest) {
-    console.log("style() rest:", rest);
     return $(target).css(styleObject);
 }
 
@@ -146,10 +145,9 @@ export function makeVisible(target, timer) {
 }
 
 export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) {
-    console.log("HERE", dropdownName, " HERE ", dropdownID, " HERE ", actionsList);
+    // console.log("HERE", dropdownName, " HERE ", dropdownID, " HERE ", actionsList);
     let $targetRef = $(target).append(`<div class="dropdown" id=${dropdownID}></div>`);
     let $dropdown = $(target).find(`#${dropdownID}`);
-    console.log("Dropdown", $dropdown);
     $dropdown.append(`<button class='btn btn-secondary dropdown-toggle' type='button' data-toggle="dropdown">` + dropdownName + `</button>`);
     let $dropdownRef = $dropdown.append(`<div class='dropdown-menu' </div>`);
     let $listDiv = $dropdownRef.find('.dropdown-menu');
@@ -168,8 +166,3 @@ export function appendDropDownToPanel(target, componentsClass) {
     console.log("componentsClass.list:", componentsClass.list);
     appendDropDownTo(target, componentsClass.name, componentsClass.id, componentsClass.list);
 }
-
-
-
-
-
