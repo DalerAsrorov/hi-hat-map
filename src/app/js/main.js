@@ -61,7 +61,7 @@ $(window).load(() => {
             console.log('Location given:', location);
             const lat = location.geometry.location.lat();
             const lng = location.geometry.location.lng();
-            Map.setView([lat, lng], 8);
+            Map.setView([lat, lng], 8, {animate: true, duration: 2.0});
             // Map.panTo(location);
 
         }
