@@ -56,10 +56,13 @@ $(window).load(() => {
     // let input = document.getElementById('pac-input')
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
-        callback: (location) => {
+        callback: function(location) {
             // object of google place is given
             console.log('Location given:', location);
-            Map.panTo(location);
+            const lat = location.geometry.location.lat();
+            const lng = location.geometry.location.lng();
+            Map.setView([lat, lng], 8);
+            // Map.panTo(location);
 
         }
     }).addTo(Map);
@@ -77,85 +80,85 @@ $(window).load(() => {
     // console.log('Path:', Paths.getGeoTrends(testGeo));
     console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
-    .then((data) => {
-        if(data.data) {
-            let listOfTrends = data.data.trends;
-            let geoData = data.geo;
+        .then((data) => {
+            if(data.data) {
+                let listOfTrends = data.data.trends;
+                let geoData = data.geo;
 
-            $("#querySearch").easyAutocomplete({
-                data: listOfTrends,
-                getValue: 'name',
-                list: {
-                    match: {
-                        enabled: true
-                    },
-                    onShowListEvent: function() {
-                        switch(storageSystem.getItem('cpOpen')) {
-                            case 'false':
-                               $('.easy-autocomplete-container').addClass('autocomplete-top');
-                               break;
-                            case 'true':
-                               $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                               break;
-                            default:
-                               $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                        };
-                    },
-                }
-                // template: {
-                //     type: "custom"
-                //     // method: function(value, item) {
-                //     //     return "<img src='" + item.icon + "' /> | " + item.type + " | " + value;
-                //     // }
-                // }
-            });
+                $("#querySearch").easyAutocomplete({
+                    data: listOfTrends,
+                    getValue: 'name',
+                    list: {
+                        match: {
+                            enabled: true
+                        },
+                        onShowListEvent: function() {
+                            switch(storageSystem.getItem('cpOpen')) {
+                                case 'false':
+                                   $('.easy-autocomplete-container').addClass('autocomplete-top');
+                                   break;
+                                case 'true':
+                                   $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                                   break;
+                                default:
+                                   $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                            };
+                        },
+                    }
+                    // template: {
+                    //     type: "custom"
+                    //     // method: function(value, item) {
+                    //     //     return "<img src='" + item.icon + "' /> | " + item.type + " | " + value;
+                    //     // }
+                    // }
+                });
 
-        } else {
-            console.log("no data", data);
-        }
+            } else {
+                console.log("no data", data);
+            }
 
-        // (function() {
-        //     // for(let i = 0; i < 10; i++) {
-        //     //     ui.addElementToPanel
-        //     //     (
-        //     //         '#panelCompRightWrapper',
-        //     //         {},
-        //     //         "Button " + i,
-        //     //         $('<a></a>'),
-        //     //         'menu btn btn-secondary',
-        //     //         'col-lg-4'
-        //     //     );
-        //     // }
+            // (function() {
+            //     // for(let i = 0; i < 10; i++) {
+            //     //     ui.addElementToPanel
+            //     //     (
+            //     //         '#panelCompRightWrapper',
+            //     //         {},
+            //     //         "Button " + i,
+            //     //         $('<a></a>'),
+            //     //         'menu btn btn-secondary',
+            //     //         'col-lg-4'
+            //     //     );
+            //     // }
 
-        //     // undefined by default will place 'div' element
+            //     // undefined by default will place 'div' element
 
-        //     // ui.addElementTo('')
+            //     // ui.addElementTo('')
 
-        // }());
+            // }());
 
-        // console.log('Should reach here...');
-        // let dropdown = ui.addContainerToContainer('#panelCompRightWrapper', 'favorites', undefined, 'dropdown show');
-        // let $a = ui.addContainerToContainer(dropdown.attr('id'), undefined, $('<a>'), 'btn btn-secondary dropdown-toggle');
-        // ui.addTextTo($a, $a.attr('id'));
+            // console.log('Should reach here...');
+            // let dropdown = ui.addContainerToContainer('#panelCompRightWrapper', 'favorites', undefined, 'dropdown show');
+            // let $a = ui.addContainerToContainer(dropdown.attr('id'), undefined, $('<a>'), 'btn btn-secondary dropdown-toggle');
+            // ui.addTextTo($a, $a.attr('id'));
 
-        //target, dropdownName, dropdownID, dataList
+            //target, dropdownName, dropdownID, dataList
 
 
-        let panelComp1 = new PanelComponent('#topTen',
-                                           'Top 10 Tweets',
-                                           function(){console.log('hi')},
-                                           [{"name":"daler"}, {"name":"michael"}]);
-        let panelComp2 = new PanelComponent('#topTwenty',
-                                            'Top 10 Retweets',
-                                            function(){console.log('hi')},
-                                            [{"lastname":"asrorov"}, {"lastname":"jojo"}])
-        rightComponents.add(panelComp1);
-        rightComponents.add(panelComp2);
-        rightComponents.setName('Social Media');
-        rightComponents.setId('socMedia');
+            let panelComp1 = new PanelComponent('#topTen',
+                                               'Top 10 Tweets',
+                                               function(){console.log('hi')},
+                                               [{"name":"daler"}, {"name":"michael"}]);
+            let panelComp2 = new PanelComponent('#topTwenty',
+                                                'Top 10 Retweets',
+                                                function(){console.log('hi')},
+                                                [{"lastname":"asrorov"}, {"lastname":"jojo"}])
+            rightComponents.add(panelComp1);
+            rightComponents.add(panelComp2);
+            rightComponents.setName('Social Media');
+            rightComponents.setId('socMedia');
 
-        console.log("panelComp object:", rightComponents);
-        ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents)
+            console.log("panelComp object:", rightComponents);
+            ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents)
 
     })
     .catch((err) => {
