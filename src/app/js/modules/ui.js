@@ -124,6 +124,10 @@ export function removeClass(target, className) {
 //     $(target).fadeOut(type, callbackHandler);
 // }
 
+export function addEventListenerTo(target, type, fn) {
+    document.getElementById(target).addEventListener(type, fn);
+}
+
 export function removeElement(target) {
     $(target).remove();
 }

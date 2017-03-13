@@ -48,8 +48,8 @@ $(window).load(() => {
         socket.emit('topic', "trump");
     };
 
-    $(`#toggleSliderBtn`).on('click', (event) => {
-        console.log('CLICKED');
+
+    ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => {
         ui.slideToggleCp('controlPanelWrapper', Map);
     });
 
@@ -62,7 +62,6 @@ $(window).load(() => {
             const lat = location.geometry.location.lat();
             const lng = location.geometry.location.lng();
             Map.setView([lat, lng], 8, {animate: true, duration: 2.0});
-            // Map.panTo(location);
 
         }
     }).addTo(Map);
