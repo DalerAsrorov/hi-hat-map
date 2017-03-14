@@ -226,6 +226,10 @@ header#loadIntro {
   flex: 1 1 auto;
 }
 
+#miniPanel {
+  margin-right: 45px;
+}
+
 #panelCompLeft {
   /*background: lightblue;*/
 }
