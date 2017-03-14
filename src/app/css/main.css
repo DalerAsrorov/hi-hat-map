@@ -30,6 +30,11 @@ ul {
   top: -170px;
 }
 
+button#toggleSliderBtn {
+  border-radius: 0;
+
+}
+
 #banner {
   height: 50%;
   width: 50%;
