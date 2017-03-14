@@ -238,6 +238,10 @@ header#loadIntro {
   height: 100%;
 }
 
+#miniPanel button {
+  border-radius: 0;
+}
+
 #panelCompLeft {
   /*background: lightblue;*/
 }
