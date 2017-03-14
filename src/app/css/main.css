@@ -82,6 +82,9 @@ ul {
   color: black !important;
 }
 
+.cp-inline {
+  display: inline-block;
+}
 
 
 .dropdown button {
@@ -227,7 +230,12 @@ header#loadIntro {
 }
 
 #miniPanel {
-  margin-right: 45px;
+  /*margin-right: 45px;*/
+  height: 100%;
+}
+
+#miniPanel .dropup, button {
+  height: 100%;
 }
 
 #panelCompLeft {

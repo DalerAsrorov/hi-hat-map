@@ -30,15 +30,25 @@
       </div>
         <div id="controlPanelWrapper">
           <div id="arrowPointerWrapper">
-            <button class="btn btn-default cp" id="toggleSliderBtn">
+            <button class="btn btn-default cp cp-inline" id="toggleSliderBtn">
               <i id="slideSwitchIcon" class="fa fa-caret-down" aria-hidden="true"></i>
               <span class="control-panel-caption">Control Panel</span>
             </button>
 
-            <div id="miniPanel" class="pull-right">
-                <button type="button" class="btn btn-info">
-                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                </button>
+            <div id="miniPanel" class="cp-inline">
+                <div class="dropup">
+                    <button type="button" class="btn btn-info" data-toggle="dropdown">
+                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    </button>
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="list-group-item list-group-item-action" href="#">HTML</a></li>
+                        <li><a class="list-group-item list-group-item-action" href="#">CSS</a></li>
+                        <li><a class="list-group-item list-group-item-action" href="#">JavaScript</a></li>
+                        <li class="divider"></li>
+                        <li><a class="list-group-item list-group-item-action" href="#">About Us</a></li>
+                    </ul>
+                </div>
             </div>
           </div>
 
