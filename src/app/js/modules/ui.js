@@ -179,6 +179,10 @@ export function onSubmit(target, callback) {
     $(target).submit(callback);
 }
 
+export function getInputValue(target) {
+    return $(target).val();
+}
+
 
 
 
