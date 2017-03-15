@@ -70,6 +70,19 @@ $(window).load(() => {
         console.log('Tweet: ', tweet);
     });
 
+
+    ui.onSubmit('#querySearchForm', function(e) {
+        e.preventDefault();
+
+        // once query selected:
+        // check if location is already selected
+        // if yes, then go to that location
+        //          and show the results
+        // if no, then get the center of the current
+        //        location of the screen and show the results.
+        //
+    });
+
     // generation
     // ui.generateCpRightPanel('#panelWrapper', {});
 
@@ -103,8 +116,7 @@ $(window).load(() => {
                             };
                         },
                         onKeyEnterEvent: function() {
-                            console.log("HEY KEYBOARD");
-                            return "HELLO";
+
                         }
                     }
                     // template: {

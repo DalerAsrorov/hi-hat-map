@@ -166,7 +166,19 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
     $(target).append($dropdown);
 }
 
+export function keypress(target, callback) {
+    $(target).keypress(callback);
+}
+
 export function appendDropDownToPanel(target, componentsClass) {
     console.log("componentsClass.list:", componentsClass.list);
     appendDropDownTo(target, componentsClass.name, componentsClass.id, componentsClass.list);
 }
+
+export function onSubmit(target, callback) {
+    $(target).submit(callback);
+}
+
+
+
+
