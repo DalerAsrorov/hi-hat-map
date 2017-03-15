@@ -247,6 +247,40 @@ header#loadIntro {
   border-radius: 0;
 }
 
+#miniPanel ul.sub-opt li {
+  position: relative;
+}
+
+#miniPanel ul.sub-opt > li:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+#miniPanel ul.sub-opt li a {
+  display: block;
+  min-width: 150px;
+}
+
+#miniPanel ul.sub-opt li ul {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        border: 1px solid #000;
+    -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        display:none;
+}
+
+    #miniPanel ul.sub-opt li:hover > ul
+    {
+        display:block;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+    }
+
+
+
 #panelCompLeft {
   /*background: lightblue;*/
 }

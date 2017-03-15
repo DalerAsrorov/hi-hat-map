@@ -70,7 +70,6 @@ $(window).load(() => {
         console.log('Tweet: ', tweet);
     });
 
-
     // generation
     // ui.generateCpRightPanel('#panelWrapper', {});
 
@@ -103,6 +102,10 @@ $(window).load(() => {
                                    $('.easy-autocomplete-container').removeClass('autocomplete-top');
                             };
                         },
+                        onKeyEnterEvent: function() {
+                            console.log("HEY KEYBOARD");
+                            return "HELLO";
+                        }
                     }
                     // template: {
                     //     type: "custom"
