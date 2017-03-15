@@ -73,9 +73,11 @@ $(window).load(() => {
 
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
-
         const query = ui.getInputValue('#querySearch');
-        console.log(`Entered: ${query}.`);
+        const lat = Map.getCenter().lat;
+        const lng = Map.getCenter().lng;
+
+        console.log(`Geo: ${lat}, ${lng}...`);
         // once query selected:
         // check if location is already selected
         // if yes, then go to that location
