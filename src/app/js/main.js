@@ -8,10 +8,11 @@ import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
 
 // Action
-$(window).load(() => {
+$(window).load(function() {
     const storageSystem = new StorageSystem(window.localStorage);
     let socket = io.connect('http://localhost:8000/');
     let cpOpen,
+        tracker,
         cpRightList =[];
 
     let rightComponents = new Components();
@@ -49,9 +50,7 @@ $(window).load(() => {
     };
 
 
-    ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => {
-        ui.slideToggleCp('controlPanelWrapper', Map);
-    });
+    ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => ui.slideToggleCp('controlPanelWrapper', Map));
 
     // let input = document.getElementById('pac-input')
     new L.Control.GPlaceAutocomplete({
@@ -78,6 +77,14 @@ $(window).load(() => {
         const lng = Map.getCenter().lng;
 
         console.log(`Geo: ${lat}, ${lng}...`);
+
+        if(R.isNil(storageSystem.getItem('locationSelected'))) {
+            console.log('Not selected');
+            storageSystem.setItem('locationSelected', true);
+        } else {
+            console.log('Exists', storageSystem.getItem('locationSelected'));
+        }
+
         // once query selected:
         // check if location is already selected
         // if yes, then go to that location
