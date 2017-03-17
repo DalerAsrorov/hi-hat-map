@@ -116,16 +116,27 @@ $(window).load(function() {
                             enabled: true
                         },
                         onShowListEvent: function() {
+                            // switch(storageSystem.getItem('cpOpen')) {
+                            //     case 'false':
+                            //        $('.easy-autocomplete-container').addClass('autocomplete-top');
+                            //        break;
+                            //     case 'true':
+                            //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                            //        break;
+                            //     default:
+                            //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                            // };
                             switch(storageSystem.getItem('cpOpen')) {
                                 case 'false':
-                                   $('.easy-autocomplete-container').addClass('autocomplete-top');
-                                   break;
+                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
                                 case 'true':
-                                   $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                                   break;
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
                                 default:
-                                   $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                            };
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                            }
+
                         },
                         onKeyEnterEvent: function() {
 
