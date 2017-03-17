@@ -6,6 +6,7 @@ import * as utils from './modules/utils.js';
 import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
+import * as GraphOps from './modules/mapops.js';
 
 // Action
 $(window).load(function() {
@@ -16,8 +17,6 @@ $(window).load(function() {
         cpRightList =[];
 
     let rightComponents = new Components();
-
-    console.log(storageSystem.getItem('firstVisit'));
 
     /* INTRO LOADER CODE */
     $(() => {
@@ -81,8 +80,10 @@ $(window).load(function() {
         if(R.isNil(storageSystem.getItem('locationSelected'))) {
             console.log('Not selected');
             storageSystem.setItem('locationSelected', true);
+
         } else {
             console.log('Exists', storageSystem.getItem('locationSelected'));
+            GraphOps.generateResults('Something lalalala');
         }
 
         // once query selected:
