@@ -83,7 +83,8 @@ $(window).load(function() {
 
         } else {
             console.log('Exists', storageSystem.getItem('locationSelected'));
-            GraphOps.generateResults([1, 2, 3, 4], {lat, lng});
+            const first = GraphOps.generateResults([1, 2, 3, 4]);
+            first({lat, lng});
         }
 
         // once query selected:
