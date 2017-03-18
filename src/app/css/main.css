@@ -232,6 +232,7 @@ header#loadIntro {
   /*width: 100%;
   height: 100%;*/
   flex: 1 1 auto;
+  background: #fff; /* mask the map tile rendering */
 }
 
 #miniPanel {
