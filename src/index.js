@@ -3,7 +3,7 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
-let randa = require('ramda');
+let ramda = require('ramda');
 let httpServer = require('http').createServer(app);
 let io = require('socket.io')(httpServer);
 
