@@ -10,6 +10,14 @@ export default class Components {
         this.list.push(panelComponent);
     }
 
+    remove(panelComponent) {
+        for(var i = 0; i < this.list.length; i++) {
+            if(this.list[i].id === panelComponent.id) {
+                this.list.splice(i, 1);
+            }
+        }
+    }
+
     get() {
         return this;
     }

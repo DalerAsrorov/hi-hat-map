@@ -189,9 +189,15 @@ $(window).load(function() {
             let panelComp2 = new PanelComponent('#topTwenty',
                                                 'Top 10 Retweets',
                                                 function(){console.log('hi')},
-                                                [{"lastname":"asrorov"}, {"lastname":"jojo"}])
+                                                [{"lastname":"asrorov"}, {"lastname":"jojo"}]);
+            let panelComp3 = new PanelComponent('#topThirty',
+                                    'Top 30 Retweets',
+                                    function(){console.log('hi')},
+                                    [{"jorge":"quero"}, {"sandro":"bolo"}]);
+
             rightComponents.add(panelComp1);
             rightComponents.add(panelComp2);
+            rightComponents.add(panelComp3);
             rightComponents.setName('Social Media');
             rightComponents.setId('socMedia');
 
