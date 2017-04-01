@@ -22,7 +22,7 @@ export const drawMarker = R.curry((pointData) => {
     L.marker([51.5, -0.09], {icon: twitterIcon}).addTo(Map);
 });
 
-export const drawObject = function(data, geolocation, iconType) {
+export const drawObject = R.curry((data, geolocation, iconType) => {
     let icon;
     switch(iconType) {
         case 'twitter':
@@ -35,4 +35,4 @@ export const drawObject = function(data, geolocation, iconType) {
     }
 
     console.log('after switch');
-}
+});

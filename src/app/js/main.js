@@ -50,10 +50,6 @@ $(window).load(function() {
 
     // };
 
-    const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
-
-    socket.emit('topic', {topic: "trump", location: sanFrancisco});
-
 
     ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => ui.slideToggleCp('controlPanelWrapper', Map));
 
@@ -61,12 +57,15 @@ $(window).load(function() {
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
         callback: function(location) {
-            // object of google place is given
             console.log('Location given:', location);
             const lat = location.geometry.location.lat();
             const lng = location.geometry.location.lng();
-            Map.setView([lat, lng], 8, {animate: true, duration: 2.0});
 
+            // const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+            const lastLocation = [`${lng}, ${lat}, ${lng+1}, ${lat+1}`];
+
+            storageSystem.setRawItem('lastLocation', lastLocation);
+            Map.setView([lat, lng], 8, {animate: true, duration: 2.0});
         }
     }).addTo(Map);
 
@@ -101,17 +100,40 @@ $(window).load(function() {
         const query = ui.getInputValue('#querySearch');
         const lat = Map.getCenter().lat;
         const lng = Map.getCenter().lng;
+        const location = [lat, lng];
 
         console.log(`Geo: ${lat}, ${lng}...`);
 
-        if(R.isNil(storageSystem.getItem('locationSelected'))) {
+        if(R.isNil(storageSystem.getItem('lastLocation'))) {
             console.log('Not selected');
-            storageSystem.setItem('locationSelected', true);
+            const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+
+            socket.emit('topic', {topic: "trump", location: location});
+            storageSystem.setRawItem('lastLocation', [lat, lng]);
 
         } else {
-            console.log('Exists', storageSystem.getItem('locationSelected'));
-            const first = GraphOps.generateResults([1, 2, 3, 4]);
-            first({lat, lng});
+            console.log('Exists', storageSystem.getItem('lastLocation'));
+            const lastLocation = storageSystem.getRawItem('lastLocation');
+
+            /**
+
+                TODO:
+                - This is for General and Selective timing
+                - Get data points and draw them on the map
+
+             */
+            // const first = GraphOps.generateResults([1, 2, 3, 4]);
+            // first(lastLocation);
+
+            /**
+
+                TODO:
+                - This portion of code is for Socket.io/real time tweet streaming
+                - Get location and query and start connecting to the socket
+
+             */
+
+            socket.emit('topic', {topic: query, location: lastLocation});
         }
 
         // once query selected:
