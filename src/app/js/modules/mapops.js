@@ -28,7 +28,7 @@ export const drawObject = function(data, geolocation, iconType) {
         case 'twitter':
             console.log('data, geo, icon:', data, geolocation, iconType);
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
-            L.marker(geolocation, {icon: icon}).addTo(Map);
+            L.marker([geolocation[1], geolocation[0]], {icon: icon}).addTo(Map);
             break;
         default:
             console.log('No soc media was selected.');

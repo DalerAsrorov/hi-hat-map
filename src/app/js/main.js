@@ -131,56 +131,56 @@ $(window).load(function() {
     // console.log('Path:', Paths.getGeoTrends(testGeo));
     console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
-        .then((data) => {
-            if(data.data) {
-                let listOfTrends = data.data.trends;
-                let geoData = data.geo;
+    .then((data) => {
+        if(data.data) {
+            let listOfTrends = data.data.trends;
+            let geoData = data.geo;
 
-                $("#querySearch").easyAutocomplete({
-                    data: listOfTrends,
-                    getValue: 'name',
-                    list: {
-                        match: {
-                            enabled: true
-                        },
-                        onShowListEvent: function() {
-                            // switch(storageSystem.getItem('cpOpen')) {
-                            //     case 'false':
-                            //        $('.easy-autocomplete-container').addClass('autocomplete-top');
-                            //        break;
-                            //     case 'true':
-                            //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                            //        break;
-                            //     default:
-                            //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                            // };
-                            switch(storageSystem.getItem('cpOpen')) {
-                                case 'false':
-                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
-                                    break;
-                                case 'true':
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
-                                    break;
-                                default:
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
-                            }
-
-                        },
-                        onKeyEnterEvent: function() {
-
+            $("#querySearch").easyAutocomplete({
+                data: listOfTrends,
+                getValue: 'name',
+                list: {
+                    match: {
+                        enabled: true
+                    },
+                    onShowListEvent: function() {
+                        // switch(storageSystem.getItem('cpOpen')) {
+                        //     case 'false':
+                        //        $('.easy-autocomplete-container').addClass('autocomplete-top');
+                        //        break;
+                        //     case 'true':
+                        //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                        //        break;
+                        //     default:
+                        //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
+                        // };
+                        switch(storageSystem.getItem('cpOpen')) {
+                            case 'false':
+                                ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                break;
+                            case 'true':
+                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                break;
+                            default:
+                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
                         }
-                    }
-                    // template: {
-                    //     type: "custom"
-                    //     // method: function(value, item) {
-                    //     //     return "<img src='" + item.icon + "' /> | " + item.type + " | " + value;
-                    //     // }
-                    // }
-                });
 
-            } else {
-                console.log("no data", data);
-            }
+                    },
+                    onKeyEnterEvent: function() {
+
+                    }
+                }
+                // template: {
+                //     type: "custom"
+                //     // method: function(value, item) {
+                //     //     return "<img src='" + item.icon + "' /> | " + item.type + " | " + value;
+                //     // }
+                // }
+            });
+
+        } else {
+            console.log("no data", data);
+        }
 
             // (function() {
             //     // for(let i = 0; i < 10; i++) {
