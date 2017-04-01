@@ -70,8 +70,29 @@ $(window).load(function() {
         }
     }).addTo(Map);
 
+
     socket.on('tweet', (tweet) => {
-        console.log('Tweet: ', tweet);
+        // GraphOps.drawTweet();
+        const coordinates = tweet.place.bounding_box.coordinates[0][1];
+        const user = tweet.user;
+        const text = tweet.text;
+        const id = tweet.id;
+        const created_at = tweet.created_at;
+        const mlsTime = tweet.timestamp_ms;
+
+        const data = {
+            user: user,
+            text: text,
+            created_at: created_at,
+            id: id,
+            mlsTime: mlsTime
+        };
+
+        GraphOps.drawObject(data, coordinates, 'twitter');
+
+        console.log('Tweet: ', tweet, coordinates);
+        // [-121.906598, 36.975477]
+
     });
 
 
