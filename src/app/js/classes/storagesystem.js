@@ -1,6 +1,8 @@
+import Storage from './storage';
 
-export default class StorageSystem {
+export default class StorageSystem extends Storage {
     constructor(localStorage, ...rest) {
+        super();
         this._localStorage = localStorage;
     }
 

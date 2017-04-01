@@ -3,6 +3,7 @@ import * as ui from './modules/ui.js';
 import * as Request from './modules/request.js';
 import * as Paths from './modules/paths.js';
 import * as utils from './modules/utils.js';
+import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
