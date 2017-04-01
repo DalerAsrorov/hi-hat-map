@@ -11,7 +11,9 @@ import * as GraphOps from './modules/mapops.js';
 // Action
 $(window).load(function() {
     const storageSystem = new StorageSystem(window.localStorage);
+
     let socket = io.connect('http://localhost:8000/');
+
     let cpOpen,
         tracker,
         cpRightList =[];
@@ -43,10 +45,14 @@ $(window).load(function() {
     }
 
 
-    function getTweets(event) {
-        // console.log(`Ready: ${event}`);
-        socket.emit('topic', "trump");
-    };
+    // function getTweets(event) {
+    //     // console.log(`Ready: ${event}`);
+
+    // };
+
+    const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+
+    socket.emit('topic', {topic: "trump", location: sanFrancisco});
 
 
     ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => ui.slideToggleCp('controlPanelWrapper', Map));
@@ -192,7 +198,7 @@ $(window).load(function() {
                                                 [{"lastname":"asrorov"}, {"lastname":"jojo"}]);
             let panelComp3 = new PanelComponent('#topThirty',
                                     'Top 30 Retweets',
-                                    function(){console.log('hi')},
+                                    function(){ console.log('hi') },
                                     [{"jorge":"quero"}, {"sandro":"bolo"}]);
 
             rightComponents.add(panelComp1);
@@ -202,7 +208,7 @@ $(window).load(function() {
             rightComponents.setId('socMedia');
 
             console.log("panelComp object:", rightComponents);
-            ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents)
+            ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
 
     })
     .catch((err) => {

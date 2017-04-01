@@ -168,22 +168,23 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
 **/
 
 io.on('connection', (socket) => {
-    socket.on('topic', (topic) => {
+    socket.on('topic', (info) => {
         // console.log("\nTOPIC: ", topic, "\n");
-        let topicStr = topic.toString();
+        const topicStr = info.topic.toString();
+        const location = info.location;
 
-        const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+        console.log('location', topicStr, location);
 
-        Twitter.module.stream('statuses/filter', {'locations': sanFrancisco },
+        Twitter.module.stream('statuses/filter', {'locations': location },
             function(stream) {
-                stream.on('data', function(data) {
-                  let coordinates = tweet.place.bounding_box.coordinates;
-                  stream.on('data', function(data) {
-                  io.sockets.emit('tweet', data);
-                    console.log(data);
-                    socket.broadcast.emit('tweet', data);
-                    socket.emit('tweet', data);
-                  });
+                stream.on('data', function(tweet) {
+                    let coordinates = tweet.place.bounding_box.coordinates;
+                    stream.on('data', function(data) {
+                        io.sockets.emit('tweet', data);
+                        console.log(data);
+                        socket.broadcast.emit('tweet', data);
+                        socket.emit('tweet', data);
+                    });
 
                   stream.on('destroy', function() {
                       console.log("Disconnected from Twitter.");
