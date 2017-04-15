@@ -66,8 +66,6 @@ app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
     const lat = geoArray[0].trim();
     const long = geoArray[1].trim();
 
-    console.log("GEO:",lat, ',', long);
-
     if(geoArray.length === 2) {
         Twitter.getClosest(lat, long)
             .then((data) => {
@@ -78,7 +76,6 @@ app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
 
                 Twitter.getTrends(woeid)
                     .then((data) => {
-                        console.log("THE DATA:", data);
                         res.send({
                           "requestDescription": "List of trends.",
                           "requestTime": new Date().getTime(),
@@ -200,27 +197,30 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
 io.on('connection', (socket) => {
     socket.on('topic', (info) => {
         // console.log("\nTOPIC: ", topic, "\n");
-        const topicStr = info.topic.toString();
+        const topic = info.topic.toString().trim().toLowerCase();
         const location = info.location;
 
-        console.log('location', topicStr, location);
+        console.log('location', topic, location);
 
-        Twitter.module.stream('statuses/filter', {'locations': location},
-            function(stream) {
-                stream.on('data', function(tweet) {
-                    let coordinates = tweet.place.bounding_box.coordinates;
-                    stream.on('data', function(data) {
-                        io.sockets.emit('tweet', data);
-                        console.log(data);
-                        socket.broadcast.emit('tweet', data);
-                        socket.emit('tweet', data);
-                    });
+        // Twitter.module.stream('statuses/filter', {'locations': location, 'track': topic},
+        //     function(stream) {
+        //         stream.on('data', function(tweet) {
+        //             console.log('The tweet', tweet);
+        //             // let coordinates = tweet.place.bounding_box.coordinates;
+        //             stream.on('data', function(data) {
+        //                 console.log(data);
+        //                 socket.emit('tweet', data);
+        //             });
 
-                  stream.on('destroy', function() {
-                      console.log("Disconnected from Twitter.");
-                  });
+        //           stream.on('destroy', function() {
+        //               console.log("Disconnected from Twitter.");
+        //           });
 
-                });
+        //         });
+        // });
+        let stream = Twitter.module.stream('statuses/filter', {locations: location});
+        stream.on('tweet', (tweet) => {
+            socket.emit('tweet', tweet);
         });
     });
 

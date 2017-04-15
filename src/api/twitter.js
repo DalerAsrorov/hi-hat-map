@@ -22,7 +22,7 @@ let twitter = new ntwitter(ntwitterConfig);
 module.exports = {
 
     // base module used for streaming
-    module: twitter,
+    module: T,
 
     // get the trends based on geo-location
     // weid represents the location ID
@@ -30,7 +30,6 @@ module.exports = {
         return new Promise(function (resolve, reject) {
             T.get('trends/place', {id: woeid}, function (err, data) {
                 if(!data) {
-                    // console.log("ERROR", data, err);
                     reject(err);
 
                 } else {
@@ -44,7 +43,6 @@ module.exports = {
         // Test: San Francisco = 37.773972, -122.431297.
         lat = lat.trim();
         long = long.trim(long);
-        console.log("REACHED");
 
         function isNumber(number) {
             return parseFloat(number) === Number(number);

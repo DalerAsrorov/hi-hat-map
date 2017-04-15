@@ -152,7 +152,7 @@ $(window).load(function() {
                 - Get location and query and start connecting to the socket
 
              */
-            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
         }
 
         // once query selected:
