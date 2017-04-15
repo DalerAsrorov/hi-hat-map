@@ -167,7 +167,7 @@ io.on('connection', (socket) => {
 
         console.log('location', topic, location);
 
-        let stream = Twitter.module.stream('statuses/filter', {locations: location});
+        let stream = Twitter.module.stream('statuses/filter', {locations: location, track: topic});
         stream.on('tweet', (tweet) => {
             socket.emit('tweet', tweet);
         });

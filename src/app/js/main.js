@@ -17,6 +17,7 @@ $(window).load(function() {
 
     let cpOpen,
         tracker,
+        trackMode,
         cpRightList =[];
 
     let rightComponents = new Components();
@@ -45,16 +46,8 @@ $(window).load(function() {
         ui.slideToggleCp('controlPanelWrapper', Map);
     }
 
-
-    // function getTweets(event) {
-    //     // console.log(`Ready: ${event}`);
-
-    // };
-
-
     ui.addEventListenerTo('toggleSliderBtn', 'click', (event) => ui.slideToggleCp('controlPanelWrapper', Map));
 
-    // let input = document.getElementById('pac-input')
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
         callback: function(location) {
@@ -70,30 +63,33 @@ $(window).load(function() {
         }
     }).addTo(Map);
 
+    try {
+        let tweet;
+        socket.on('tweet', (tweet) => {
+            tweet = tweet;
+            // GraphOps.drawTweet();
+            const coordinates = tweet.place.bounding_box.coordinates[0][1];
+            const user = tweet.user;
+            const text = tweet.text;
+            const id = tweet.id;
+            const created_at = tweet.created_at;
+            const mlsTime = tweet.timestamp_ms;
 
-    socket.on('tweet', (tweet) => {
-        // GraphOps.drawTweet();
-        const coordinates = tweet.place.bounding_box.coordinates[0][1];
-        const user = tweet.user;
-        const text = tweet.text;
-        const id = tweet.id;
-        const created_at = tweet.created_at;
-        const mlsTime = tweet.timestamp_ms;
+            const data = {
+                user: user,
+                text: text,
+                created_at: created_at,
+                id: id,
+                mlsTime: mlsTime
+            };
 
-        const data = {
-            user: user,
-            text: text,
-            created_at: created_at,
-            id: id,
-            mlsTime: mlsTime
-        };
-
-        GraphOps.drawObject(data, coordinates, 'twitter');
-
-        console.log('Tweet: ', tweet, coordinates);
-        // [-121.906598, 36.975477]
-
-    });
+            GraphOps.drawObject(data, coordinates, 'twitter');
+            console.log('Tweet: ', tweet, coordinates);
+        });
+    } catch(err) {
+        console.log('Err:', err);
+        console.log('Tweet failed:', tweet);
+    }
 
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch(mode) {
@@ -111,7 +107,6 @@ $(window).load(function() {
                 break;
             default:
                 console.log('none of the modes selected');
-
         };
     };
 
@@ -129,10 +124,8 @@ $(window).load(function() {
             // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
             getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
-            storageSystem.setRawItem('lastLocation', lastLocation);
 
         } else {
-            lastLocation = storageSystem.getRawItem('lastLocation');
             console.log('Exists', lastLocation);
 
             /**
@@ -153,7 +146,10 @@ $(window).load(function() {
 
              */
             getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
-        }
+        };
+
+        // last location is saved
+        storageSystem.setRawItem('lastLocation', lastLocation);
 
         // once query selected:
         // check if location is already selected
