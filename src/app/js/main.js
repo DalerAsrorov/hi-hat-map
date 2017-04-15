@@ -259,7 +259,7 @@ $(window).load(function() {
         console.log("Error request", err);
     });
 
-    // Request.getRequest(Utils.getTrendsPlaces(lat, long))
+    // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
     //         console.log("Trends Data");
     //     })

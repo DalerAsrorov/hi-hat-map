@@ -94,11 +94,11 @@ module.exports = {
             max_id: max_id ? max_id : ''
         };
         console.log('params given', params);
-        // return new Promise((res, rej) => {
-        //     T.get('search/tweets', params, (err, data) => {
-
-        //     });
-        // });
+        return new Promise((res, rej) => {
+            T.get('search/tweets', params, (err, data) => {
+                console.log('Received data getTwitData', data);
+            });
+        });
     }
 }
 
