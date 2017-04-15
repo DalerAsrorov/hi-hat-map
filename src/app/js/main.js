@@ -132,8 +132,8 @@ $(window).load(function() {
             storageSystem.setRawItem('lastLocation', lastLocation);
 
         } else {
-            console.log('Exists', storageSystem.getItem('lastLocation'));
             lastLocation = storageSystem.getRawItem('lastLocation');
+            console.log('Exists', lastLocation);
 
             /**
 
@@ -152,8 +152,7 @@ $(window).load(function() {
                 - Get location and query and start connecting to the socket
 
              */
-
-            socket.emit('topic', {topic: query, location: lastLocation});
+            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
         }
 
         // once query selected:
