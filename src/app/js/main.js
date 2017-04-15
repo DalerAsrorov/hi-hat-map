@@ -268,7 +268,7 @@ $(window).load(function() {
     const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
     Request.postRequest(Paths.getTwitData(), testTwitDataItemTest)
     .then((data) => {
-        console.log(`Data after post request: ${data}`)
+        console.log('Data returned from API', data);
     })
     .catch((err) => {
         console.log('Error post request', err);

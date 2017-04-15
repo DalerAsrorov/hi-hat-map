@@ -28,21 +28,13 @@ module.exports = {
     // weid represents the location ID
     getTrends: function getTrends(woeid) {
         return new Promise(function (resolve, reject) {
-            console.log("woeid, ", woeid);
-
             T.get('trends/place', {id: woeid}, function (err, data) {
                 if(!data) {
                     // console.log("ERROR", data, err);
                     reject(err);
 
                 } else {
-                    console.log("Data", data);
                     resolve(data);
-                    // console.log("TRENDS:", data);
-                    // let trends = data[0].trends;
-                    // let locations = data[0].locations;
-                    // console.log("\nTrends: \n", trends, "\n");
-                    // console.log("\nLocations: \n", locations, "\n");
                 }
             });
         });
@@ -58,11 +50,6 @@ module.exports = {
             return parseFloat(number) === Number(number);
         };
 
-        // const tempLat = parseInt(lat);
-        // const tempLong = parseInt(long);
-        console.log(lat);
-        console.log(long);
-        console.log("Not a number", (isNumber(lat)) && isNumber(long));
         if((isNumber(lat)) && isNumber(long)) {
             return new Promise((resolve, reject) => {
                 let latNumber = parseInt(lat);
@@ -85,7 +72,6 @@ module.exports = {
     },
 
     getTwitData: function(query, geocode, radius, count, since_id, max_id) {
-        console.log(arguments);
         var params = {
             q: `${query}`,
             geocode: geocode.join(',').toString().concat(`,${radius}`),
@@ -93,10 +79,13 @@ module.exports = {
             since_id: since_id ? since_id : '',
             max_id: max_id ? max_id : ''
         };
-        console.log('params given', params);
-        return new Promise((res, rej) => {
+        return new Promise((resolve, reject) => {
             T.get('search/tweets', params, (err, data) => {
-                console.log('Received data getTwitData', data);
+                if(!err) {
+                    resolve(data);
+                } else {
+                    reject(err);
+                }
             });
         });
     }
