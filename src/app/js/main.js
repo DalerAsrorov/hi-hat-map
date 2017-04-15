@@ -99,18 +99,15 @@ $(window).load(function() {
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
         const query = ui.getInputValue('#querySearch');
-        const lat = Map.getCenter().lat;
-        const lng = Map.getCenter().lng;
-        const location = [lat, lng];
-
-        console.log(`Geo: ${lat}, ${lng}...`);
 
         if(R.isNil(storageSystem.getItem('lastLocation'))) {
             console.log('Not selected');
-            const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+            const lat = Map.getCenter().lat;
+            const lng = Map.getCenter().lng;
+            const lastLocation = [`${lng}, ${lat}, ${lng+1}, ${lat+1}`];
 
-            socket.emit('topic', {topic: "trump", location: location});
-            storageSystem.setRawItem('lastLocation', [lat, lng]);
+            socket.emit('topic', {topic: query, location: lastLocation});
+            storageSystem.setRawItem('lastLocation', lastLocation);
 
         } else {
             console.log('Exists', storageSystem.getItem('lastLocation'));

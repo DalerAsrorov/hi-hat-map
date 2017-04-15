@@ -205,7 +205,7 @@ io.on('connection', (socket) => {
 
         console.log('location', topicStr, location);
 
-        Twitter.module.stream('statuses/filter', {'locations': location },
+        Twitter.module.stream('statuses/filter', {'locations': location},
             function(stream) {
                 stream.on('data', function(tweet) {
                     let coordinates = tweet.place.bounding_box.coordinates;
