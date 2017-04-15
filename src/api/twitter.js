@@ -67,16 +67,11 @@ module.exports = {
             return new Promise((resolve, reject) => {
                 let latNumber = parseInt(lat);
                 let longNumber = parseInt(long);
-                T.get
-                (
-                    'trends/closest',
-                    {lat: latNumber, long: longNumber},
+                T.get('trends/closest', {lat: latNumber, long: longNumber},
                     function(err, data) {
                         if(data) {
-                            console.log("\nSUCCESSFUL getClosest:\n");
                             resolve(data);
                         } else {
-                            console.log("Error with trends/closest.", err);
                             reject("Error:::", err);
                         }
                     }
@@ -87,7 +82,23 @@ module.exports = {
         else {
             console.log("Passed strings cannot be converted to number.", lat, long);
         }
-    }
+    },
 
+    getTwitData: function(query, geocode, radius, count, since_id, max_id) {
+        console.log(arguments);
+        var params = {
+            q: `${query}`,
+            geocode: geocode.join(',').toString().concat(`,${radius}`),
+            count: count ? count : 100,
+            since_id: since_id ? since_id : '',
+            max_id: max_id ? max_id : ''
+        };
+        console.log('params given', params);
+        // return new Promise((res, rej) => {
+        //     T.get('search/tweets', params, (err, data) => {
+
+        //     });
+        // });
+    }
 }
 

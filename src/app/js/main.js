@@ -265,7 +265,8 @@ $(window).load(function() {
     //     })
 
     // post request testing
-    Request.postRequest(Paths.getTwitData(), {location: '123, 3424', name: 'Daler'})
+    const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
+    Request.postRequest(Paths.getTwitData(), testTwitDataItemTest)
     .then((data) => {
         console.log(`Data after post request: ${data}`)
     })

@@ -141,7 +141,14 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
  app.post('/api/twitter/twitdata', (req, res) => {
     let receivedData = req.body;
 
-    console.log('POST req.body', req.body);
+    const q = receivedData.q;
+    const geocode = receivedData.geocode;
+    const radius = receivedData.radius;
+    const count = receivedData.count;
+    const since_id = receivedData.since_id;
+    const max_id = receivedData.max_id;
+
+    Twitter.getTwitData(q, geocode, radius);
     console.log('POST /api/twitter/twitdata: ', receivedData);
     res.send(receivedData);
  });
@@ -214,7 +221,6 @@ io.on('connection', (socket) => {
     });
 
 });
-
 
 
 httpServer.listen(port, function() {
