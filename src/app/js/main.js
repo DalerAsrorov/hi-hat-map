@@ -95,23 +95,45 @@ $(window).load(function() {
 
     });
 
+    function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
+        switch(mode) {
+            case 'real_time':
+                socket.emit('topic', {topic: query, location: lastLocation});
+                break;
+            case 'specified_time':
+                Request.postRequest(Paths.getTwitData(), twitData)
+                .then((data) => {
+                    console.log('Data returned from API', data);
+                })
+                .catch((err) => {
+                    console.log('Error post request', err);
+                });
+                break;
+            default:
+                console.log('none of the modes selected');
+
+        };
+    };
 
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
         const query = ui.getInputValue('#querySearch');
+        const lat = Map.getCenter().lat;
+        const lng = Map.getCenter().lng;
+        const twitData = {q: query, geocode: [lat, lng], radius: '25mi'};
+
+        let lastLocation = [`${lng}, ${lat}, ${lng+1}, ${lat+1}`];
 
         if(R.isNil(storageSystem.getItem('lastLocation'))) {
-            console.log('Not selected');
-            const lat = Map.getCenter().lat;
-            const lng = Map.getCenter().lng;
-            const lastLocation = [`${lng}, ${lat}, ${lng+1}, ${lat+1}`];
+            console.log('Not selected. twitData:', twitData);
+            // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
-            socket.emit('topic', {topic: query, location: lastLocation});
+            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
             storageSystem.setRawItem('lastLocation', lastLocation);
 
         } else {
             console.log('Exists', storageSystem.getItem('lastLocation'));
-            const lastLocation = storageSystem.getRawItem('lastLocation');
+            lastLocation = storageSystem.getRawItem('lastLocation');
 
             /**
 
@@ -262,12 +284,6 @@ $(window).load(function() {
     //     })
 
     // post request testing
-    const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
-    Request.postRequest(Paths.getTwitData(), testTwitDataItemTest)
-    .then((data) => {
-        console.log('Data returned from API', data);
-    })
-    .catch((err) => {
-        console.log('Error post request', err);
-    });
+
+
 });
