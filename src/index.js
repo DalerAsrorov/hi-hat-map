@@ -154,41 +154,6 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     });
  });
 
-// app.get('/api/:topic?', function(req, res) {
-//     let tweet = req.params.topic;
-
-//     let sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8'];
-
-//     try
-//     {
-//         Twitter.module.stream('statuses/filter', {'locations': sanFrancisco },
-//             function(stream) {
-//                 stream.on('data', function(data) {
-//                   // let coordinates = tweet.place.bounding_box.coordinates;
-//                   // stream.on('data', function(data) {
-//                   // io.sockets.emit('tweet', data);
-//                     console.log(data);
-
-//                   // });
-
-//                   // stream.on('destroy', function() {
-//                   //     console.log("Disconnected from Twitter.");
-//                   // });
-
-//                 });
-
-//             }
-//         );
-//     }
-//     catch(err)
-//     {
-//         console.log("Couldn't stream yet...", err);
-//     }
-
-//     console.log(tweet);
-// });
-
-
 /**
 *   socket.io stuff
 *
@@ -202,22 +167,6 @@ io.on('connection', (socket) => {
 
         console.log('location', topic, location);
 
-        // Twitter.module.stream('statuses/filter', {'locations': location, 'track': topic},
-        //     function(stream) {
-        //         stream.on('data', function(tweet) {
-        //             console.log('The tweet', tweet);
-        //             // let coordinates = tweet.place.bounding_box.coordinates;
-        //             stream.on('data', function(data) {
-        //                 console.log(data);
-        //                 socket.emit('tweet', data);
-        //             });
-
-        //           stream.on('destroy', function() {
-        //               console.log("Disconnected from Twitter.");
-        //           });
-
-        //         });
-        // });
         let stream = Twitter.module.stream('statuses/filter', {locations: location});
         stream.on('tweet', (tweet) => {
             socket.emit('tweet', tweet);
