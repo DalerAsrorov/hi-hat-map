@@ -21,6 +21,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static(__dirname + '/app'));
 // app.use(express.static(__dirname + '/bower_components'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/app/index.html')
 });
@@ -126,6 +129,22 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
         });
   }
 });
+
+/**
+ *
+ * POST:
+ * Function:
+ * (location, topic, time, limit) => {tweets}
+ *
+ */
+
+ app.post('/api/twitter/twitdata', (req, res) => {
+    let receivedData = req.body;
+
+    console.log('POST req.body', req.body);
+    console.log('POST /api/twitter/twitdata: ', receivedData);
+    res.send(receivedData);
+ });
 
 // app.get('/api/:topic?', function(req, res) {
 //     let tweet = req.params.topic;

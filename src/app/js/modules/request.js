@@ -12,3 +12,15 @@ export function getRequest(url) {
         });
     });
 };
+
+export function postRequest(url, info) {
+    return new Promise((res, rej) => {
+        $.post(url, info, (data, status) => {
+            if(status === 'success') {
+                res(data);
+            } else {
+                rej("Unsuccessful POST request.")
+            }
+        });
+    });
+};

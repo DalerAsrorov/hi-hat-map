@@ -263,4 +263,13 @@ $(window).load(function() {
     //     .then((data) => {
     //         console.log("Trends Data");
     //     })
+
+    // post request testing
+    Request.postRequest(Paths.getTwitData(), {location: '123, 3424', name: 'Daler'})
+    .then((data) => {
+        console.log(`Data after post request: ${data}`)
+    })
+    .catch((err) => {
+        console.log('Error post request', err);
+    });
 });

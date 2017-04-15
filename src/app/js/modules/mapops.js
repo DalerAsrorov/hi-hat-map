@@ -30,6 +30,9 @@ export const drawObject = R.curry((data, geolocation, iconType) => {
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
             L.marker([geolocation[1], geolocation[0]], {icon: icon}).addTo(Map);
             break;
+        case 'yelp':
+            console.log('Yelp data, geo, icon', data, geolocation, iconType);
+            break;
         default:
             console.log('No soc media was selected.');
     }

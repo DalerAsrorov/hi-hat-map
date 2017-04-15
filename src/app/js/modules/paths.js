@@ -7,3 +7,8 @@ export function getTrendsPath(weid) {
 export function getGeoTrends(latLongString) {
     return `${window.location.origin}/api/twitter/geotrends/${latLongString}`;
 }
+
+export function getTwitData() {
+    return `${window.location.origin}/api/twitter/twitdata`;
+}
+
