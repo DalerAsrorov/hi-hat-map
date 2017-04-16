@@ -262,9 +262,6 @@ header#loadIntro {
   min-width: 150px;
 }
 
-
-
-
 #panelCompLeft {
   /*background: lightblue;*/
 }
@@ -322,6 +319,10 @@ header#loadIntro {
   border-radius: 5px;
   font-size: 16px;
   border: 1px solid rgba(47, 64, 112, 0.41);
+}
+
+.range-selector {
+  text-align: center;
 }
 
 #slideSwitchIcon {
