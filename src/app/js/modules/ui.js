@@ -167,23 +167,6 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
 }
 
 export function appendRangeSlider(container, divClass, params) {
-    // let newRangeSlider = $(
-    //                        `<div class='${divClass}'>
-    //                             <input type='text'
-    //                                 data-provide='slider'
-    //                                 data-slider-ticks='${JSON.stringify(params.ticks)}'
-    //                                 data-slider-ticks-labels='${JSON.stringify(params.ticksLabels)}'
-    //                                 data-slider-min="${params.min}"
-    //                                 data-slider-max="${params.max}"
-    //                                 data-slider-step="${params.step}"
-    //                                 data-slider-value="${params.value}"
-    //                                 data-slider-tooltip="${params.tooltip}"
-    //                              />
-    //                        </div>`);
-    // let rangeInput = newRangeSlider.find('input');
-    // rangeInput.slider();
-    // appendTo(container, newRangeSlider);
-
     let newRangeSlider = $(
                        `<div class='${divClass}'>
                             <input type='text'
