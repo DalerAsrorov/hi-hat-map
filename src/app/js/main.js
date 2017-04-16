@@ -273,14 +273,19 @@ $(window).load(function() {
     const mockModes = [1, 2, 3];
     const mockLabels = ['one', 'two', 'three'];
     const min = 1, max = 3, step = 1, value = 2, tooltip ='hide';
-    ui.appendRangeSlider('#panelCompMiddle', 'range-selector', {
+    ui.appendRangeSlider('#panelCompMiddle', 'range-selector', 'twitterModes', {
         ticks: mockModes,
         ticksLabels: mockLabels,
         min: min,
         max: max,
         step: step,
         value: value,
-        tooltip: tooltip
+        tooltip: tooltip,
+        eventHandlers: {
+            change: function(slideEvt) {
+                console.log('Event: change. Slider object', slideEvt);
+            }
+        }
     });
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

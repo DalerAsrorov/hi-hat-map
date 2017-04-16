@@ -166,10 +166,10 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
     $(target).append($dropdown);
 }
 
-export function appendRangeSlider(container, divClass, params) {
+export function appendRangeSlider(container, divClass, inputId, params) {
     let newRangeSlider = $(
                        `<div class='${divClass}'>
-                            <input type='text'
+                            <input id='${inputId}' type='text'
                              />
                        </div>`);
     let rangeInput = newRangeSlider.find('input');
@@ -183,9 +183,15 @@ export function appendRangeSlider(container, divClass, params) {
         tooltip: params.tooltip
     });
 
+    for(let [key, value] of Object.entries(params.eventHandlers)) {
+        // key == event and value == handler
+        rangeInput.on(key, value);
+    };
+
     appendTo(container, newRangeSlider);
-    console.log(`Range slider with divClass '${divClass}'' is appended to '${container}'`, appendTo(`${container}`, newRangeSlider));
     rangeInput.slider('refresh');
+
+    console.log(`Range slider with divClass '${divClass}'' is appended to '${container}'`, appendTo(`${container}`, newRangeSlider));
 }
 
 export function keypress(target, callback) {
