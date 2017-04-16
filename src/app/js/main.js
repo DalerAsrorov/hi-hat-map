@@ -17,7 +17,6 @@ $(window).load(function() {
 
     let cpOpen,
         tracker,
-        trackMode,
         cpRightList =[];
 
     let rightComponents = new Components();
@@ -63,11 +62,9 @@ $(window).load(function() {
         }
     }).addTo(Map);
 
-    try {
-        let tweet;
-        socket.on('tweet', (tweet) => {
-            tweet = tweet;
-            // GraphOps.drawTweet();
+    socket.on('tweet', (tweet) => {
+        let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
+        if(coordinates) {
             const coordinates = tweet.place.bounding_box.coordinates[0][1];
             const user = tweet.user;
             const text = tweet.text;
@@ -76,20 +73,19 @@ $(window).load(function() {
             const mlsTime = tweet.timestamp_ms;
 
             const data = {
-                user: user,
-                text: text,
-                created_at: created_at,
-                id: id,
-                mlsTime: mlsTime
+                user,
+                text,
+                created_at,
+                id,
+                mlsTime
             };
 
             GraphOps.drawObject(data, coordinates, 'twitter');
-            console.log('Tweet: ', tweet, coordinates);
-        });
-    } catch(err) {
-        console.log('Err:', err);
-        console.log('Tweet failed:', tweet);
-    }
+        } else {
+            console.log('Passed tweet with no coordinates', tweet);
+        }
+    });
+
 
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch(mode) {
@@ -107,6 +103,7 @@ $(window).load(function() {
                 break;
             default:
                 console.log('none of the modes selected');
+
         };
     };
 
