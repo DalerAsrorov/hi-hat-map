@@ -3,16 +3,20 @@ import * as ui from './modules/ui.js';
 import * as Request from './modules/request.js';
 import * as Paths from './modules/paths.js';
 import * as utils from './modules/utils.js';
+import * as GraphOps from './modules/mapops.js';
+import * as constants from './modules/constants.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
-import * as GraphOps from './modules/mapops.js';
-import * as constants from './modules/constants.js'
+import Twitter from './classes/twitter.js';
+
 
 // Action
 $(window).load(function() {
     const storageSystem = new StorageSystem(window.localStorage);
+    const twitter = new Twitter('twitter');
+    console.log('twitter', twitter);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
 
@@ -96,13 +100,7 @@ $(window).load(function() {
                 socket.emit('topic', {topic: query, location: lastLocation});
                 break;
             case 'specified_time':
-                Request.postRequest(Paths.getTwitData(), twitData)
-                .then((data) => {
-                    console.log('Data returned from API', data);
-                })
-                .catch((err) => {
-                    console.log('Error post request', err);
-                });
+                twitter.getData(Paths.getTwitData(), twitData);
                 break;
             default:
                 console.log('none of the modes selected');
@@ -123,7 +121,7 @@ $(window).load(function() {
             console.log('Not selected. twitData:', twitData);
             // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
 
         } else {
             console.log('Exists', lastLocation);
@@ -145,7 +143,7 @@ $(window).load(function() {
                 - Get location and query and start connecting to the socket
 
              */
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
         };
 
         // last location is saved
@@ -291,6 +289,17 @@ $(window).load(function() {
                     case TWITTER_MODES_INDEX['real_time']:
                         break;
                     case TWITTER_MODES_INDEX['specified_time']:
+                        // check the cache
+                        // if location data already exists
+                        //      return location from cache
+                        // else
+                        //      store location in cache in (key, value) pair where key is location and value is tweets
+                        //      return location
+                        const query = ui.getInputValue('#querySearch');
+                        const lat = Map.getCenter().lat;
+                        const lng = Map.getCenter().lng;
+                        const twitData = {q: query, geocode: [lat, lng], radius: '25mi'};
+                        twitter.getData(Paths.getTwitData(), twitData);
                         break;
                     default:
                         console.log('none selected');
