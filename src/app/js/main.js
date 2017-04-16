@@ -8,10 +8,12 @@ import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
 import * as GraphOps from './modules/mapops.js';
+import * as constants from './modules/constants.js'
 
 // Action
 $(window).load(function() {
     const storageSystem = new StorageSystem(window.localStorage);
+    const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
 
     let socket = io.connect('http://localhost:8000/');
 
@@ -270,17 +272,16 @@ $(window).load(function() {
         console.log("Error request", err);
     });
 
-    const mockModes = [1, 2, 3];
-    const mockLabels = ['one', 'two', 'three'];
-    const min = 1, max = 3, step = 1, value = 2, tooltip ='hide';
+    const arrayOfIndexes = TWITTER_MODES.map((item, index) => index);
+    const arrayOfLabels = TWITTER_MODES.map((mode) => utils.titleCase(mode.split('_').join(' ')));
     ui.appendRangeSlider('#panelCompMiddle', 'range-selector', 'twitterModes', {
-        ticks: mockModes,
-        ticksLabels: mockLabels,
-        min: min,
-        max: max,
-        step: step,
-        value: value,
-        tooltip: tooltip,
+        ticks: arrayOfIndexes,
+        ticksLabels: arrayOfLabels,
+        min: arrayOfIndexes[0],
+        max: arrayOfIndexes[arrayOfIndexes.length - 1],
+        step: 1,
+        value: arrayOfIndexes[0],
+        tooltip: 'hide',
         eventHandlers: {
             change: function(slideEvt) {
                 console.log('Event: change. Slider object', slideEvt);
