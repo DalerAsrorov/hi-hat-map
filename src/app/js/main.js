@@ -270,6 +270,18 @@ $(window).load(function() {
         console.log("Error request", err);
     });
 
+    const mockModes = [1, 2, 3];
+    const mockLabels = ['one', 'two', 'three'];
+    const min = 1, max = 3, step = 1, value = 2, tooltip ='hide';
+    ui.appendRangeSlider('#panelCompMiddle', 'range-selector', {
+        ticks: mockModes,
+        ticksLabels: mockLabels,
+        min: min,
+        max: max,
+        step: step,
+        value: value,
+        tooltip: tooltip
+    });
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
     //         console.log("Trends Data");

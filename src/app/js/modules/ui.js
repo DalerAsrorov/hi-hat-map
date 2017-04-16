@@ -166,8 +166,51 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
     $(target).append($dropdown);
 }
 
+export function appendRangeSlider(container, divClass, params) {
+    // let newRangeSlider = $(
+    //                        `<div class='${divClass}'>
+    //                             <input type='text'
+    //                                 data-provide='slider'
+    //                                 data-slider-ticks='${JSON.stringify(params.ticks)}'
+    //                                 data-slider-ticks-labels='${JSON.stringify(params.ticksLabels)}'
+    //                                 data-slider-min="${params.min}"
+    //                                 data-slider-max="${params.max}"
+    //                                 data-slider-step="${params.step}"
+    //                                 data-slider-value="${params.value}"
+    //                                 data-slider-tooltip="${params.tooltip}"
+    //                              />
+    //                        </div>`);
+    // let rangeInput = newRangeSlider.find('input');
+    // rangeInput.slider();
+    // appendTo(container, newRangeSlider);
+
+    let newRangeSlider = $(
+                       `<div class='${divClass}'>
+                            <input type='text'
+                             />
+                       </div>`);
+    let rangeInput = newRangeSlider.find('input');
+    rangeInput.slider({
+        ticks: params.ticks,
+        ticks_labels: params.ticksLabels,
+        min: params.min,
+        max: params.max,
+        step: params.step,
+        value: params.value,
+        tooltip: params.tooltip
+    });
+
+    appendTo(container, newRangeSlider);
+    console.log(`Range slider with divClass '${divClass}'' is appended to '${container}'`, appendTo(`${container}`, newRangeSlider));
+    rangeInput.slider('refresh');
+}
+
 export function keypress(target, callback) {
     $(target).keypress(callback);
+}
+
+export function appendTo(container, element) {
+    return !!$(`${container}`).append(element);
 }
 
 export function appendDropDownToPanel(target, componentsClass) {
