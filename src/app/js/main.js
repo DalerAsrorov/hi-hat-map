@@ -14,6 +14,7 @@ import * as constants from './modules/constants.js'
 $(window).load(function() {
     const storageSystem = new StorageSystem(window.localStorage);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
+    const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
 
     let socket = io.connect('http://localhost:8000/');
 
@@ -284,10 +285,22 @@ $(window).load(function() {
         tooltip: 'hide',
         eventHandlers: {
             change: function(slideEvt) {
+                const newMode = slideEvt.value.newValue;
+                const prevMode = slideEvt.value.oldValue;
+                switch(newMode) {
+                    case TWITTER_MODES_INDEX['real_time']:
+                        break;
+                    case TWITTER_MODES_INDEX['specified_time']:
+                        break;
+                    default:
+                        console.log('none selected');
+
+                }
                 console.log('Event: change. Slider object', slideEvt);
             }
         }
     });
+
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
     //         console.log("Trends Data");
