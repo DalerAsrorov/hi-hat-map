@@ -97,10 +97,12 @@ $(window).load(function() {
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch(mode) {
             case 'real_time':
-                socket.emit('topic', {topic: query, location: lastLocation});
+                twitter.turnOnSocket(socket, 'topic', {topic: query, location: lastLocation});
                 break;
             case 'specified_time':
-                twitter.getData(Paths.getTwitData(), twitData);
+                twitter.getData(Paths.getTwitData(), twitData)
+                .then((data) => console.log(data))
+                .catch((err) => new Error('err', err));
                 break;
             default:
                 console.log('none of the modes selected');

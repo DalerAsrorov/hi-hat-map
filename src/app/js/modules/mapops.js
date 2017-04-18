@@ -35,7 +35,7 @@ export const drawObject = R.curry((data, geolocation, iconType) => {
             break;
         default:
             console.log('No soc media was selected.');
-    }
+    };
 
     console.log('after switch');
 });

@@ -7,8 +7,9 @@ let ramda = require('ramda');
 let httpServer = require('http').createServer(app);
 let io = require('socket.io')(httpServer);
 
-// custom modules
-let Twitter = require('./api/twitter');
+// modules
+const Sentiment = require('./api/sentiment');
+const Twitter = require('./api/twitter');
 
 let port = process.env.PORT || 8000;
 
@@ -29,7 +30,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-    // Twitter.stream("Daler");
     res.send({"Message": "You reached the API base."})
 });
 
