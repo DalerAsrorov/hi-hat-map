@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import eslint from 'rollup-plugin-eslint';
+import commonjs from 'rollup-plugin-commonjs';
 
 export default {
     entry: 'app/js/main.js',
@@ -12,8 +13,9 @@ export default {
                 'app/css/**'
             ]
         }),
-        babel({
-            exclude: 'node_modules/**'
+        babel(),
+        commonjs({
+            include: 'node_modules/**'
         })
     ]
 

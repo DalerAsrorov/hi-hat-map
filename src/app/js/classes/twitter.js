@@ -1,5 +1,5 @@
 import Mode from './mode.js';
-import * as Request from '../modules/request.js'
+import * as Request from '../modules/request.js';
 
 export default class Twitter extends Mode {
     constructor(name) {
