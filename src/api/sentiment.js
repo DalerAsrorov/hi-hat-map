@@ -10,6 +10,7 @@
 const retext = require('retext');
 const inspect = require('unist-util-inspect');
 const sentiment = require('retext-sentiment');
+const R = require('ramda');
 
 const Sentiment = (function(sentiment){
     this.sentment = sentiment;
@@ -31,28 +32,36 @@ const Sentiment = (function(sentiment){
         });
     };
 
+    function parseSentiment(sentimentTree) {
+        return new Promise((res, rej) => {
+            if(sentimentTree) {
+                res(sentimentTree);
+            } else {
+                rej(sentimentTree);
+            }
+        });
+    };
+
     return {
-        processString: processString
+        processString: processString,
+        parseSentiment: parseSentiment
     };
 
 })(sentiment);
 
-// const randomString ='I hate forgetting to bring a book somewhere I ' +
-//                     'definitely should have brought a book to. ' +
+const randomString ='I hate forgetting to bring a book somewhere I ' +
+                    'definitely should have brought a book to. '
 
-//                      * Note that `bad` is a negative word, but that it's
-//                      * classified as positive due to its preceding `not`
-//                      * on parent (sentence, paragraph, root) level.
-
-//                     'This product is not bad at all. ' +
-//                     /*
-//                      * Emoji.
-//                      */
-//                     'Hai sexy! \ud83d\ude0f'
+                    'This product is not bad at all. ' +
+                    /*
+                     * Emoji.
+                     */
+                    'Hai sexy! \ud83d\ude0f'
 
 // Sentiment
 //     .processString(randomString)
-//     .then((data) => console.log(inspect(data)))
-//     .catch((err) => console.log('Error', err));
+//     .then((data) => Sentiment.parseSentiment(data))
+//     .then((parsedData) => console.log('Reached the promise', inspect(parsedData)));
+    // .catch((err) => console.log('Error', err));
 
 module.exports = Sentiment;
