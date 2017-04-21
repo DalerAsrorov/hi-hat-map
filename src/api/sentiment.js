@@ -38,9 +38,14 @@ const Sentiment = (function(sentiment){
         return new Promise((res, rej) => {
             if(sentimentTree) {
                 const [totalScore, valence] = [
+                    // getting total score and valence
+                    // from the root object -- result gathered
+                    // from all elements of the string
                     R.view(R.lensPath(['data', 'polarity']), sentimentTree),
                     R.view(R.lensPath(['data', 'valence']), sentimentTree)
                 ];
+
+
 
                 res(sentimentTree);
             } else {
