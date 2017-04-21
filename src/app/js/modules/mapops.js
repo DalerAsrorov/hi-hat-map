@@ -1,7 +1,7 @@
 import Map from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
-import R from 'ramda';
+// import R from 'ramda';
 
 // export function generateResults(data) {
 //     console.log('Data', data);

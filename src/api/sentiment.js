@@ -9,6 +9,7 @@
 
 const retext = require('retext');
 const inspect = require('unist-util-inspect');
+const utils = require('./helpers/utils');
 const sentiment = require('retext-sentiment');
 const R = require('ramda');
 
@@ -49,19 +50,21 @@ const Sentiment = (function(sentiment){
 
 })(sentiment);
 
-const randomString ='I hate forgetting to bring a book somewhere I ' +
-                    'definitely should have brought a book to. '
+// const randomString ='I hate forgetting to bring a book somewhere I' +
+//                     'definitely should have brought a book to. '
 
-                    'This product is not bad at all. ' +
-                    /*
-                     * Emoji.
-                     */
-                    'Hai sexy! \ud83d\ude0f'
+//                     'This product is not bad at all. ' +
+//                     /*
+//                      * Emoji.
+//                      */
+//                     'Hai sexy! \ud83d\ude0f';
 
-// Sentiment
-//     .processString(randomString)
-//     .then((data) => Sentiment.parseSentiment(data))
-//     .then((parsedData) => console.log('Reached the promise', inspect(parsedData)));
-    // .catch((err) => console.log('Error', err));
+  // Sentiment
+  //   .processString(randomString)
+  //   .then((data) => Sentiment.parseSentiment(data))
+  //   .then((parsedData) => utils.wrapWithObject('data', parsedData))
+  //   .then((wrappedData) => utils.addMetaDataTo(wrappedData))
+  //   .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
+  //   .catch((err) => console.log('Error', err));
 
 module.exports = Sentiment;

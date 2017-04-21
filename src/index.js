@@ -10,6 +10,7 @@ let io = require('socket.io')(httpServer);
 // modules
 const Sentiment = require('./api/sentiment');
 const Twitter = require('./api/twitter');
+const utils = require('./api/helpers/utils');
 
 let port = process.env.PORT || 8000;
 
@@ -30,7 +31,23 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-    res.send({"Message": "You reached the API base."})
+  const randomString ='I hate forgetting to bring a book somewhere I ' +
+                    'definitely should have brought a book to. '
+
+                    'This product is not bad at all. ' +
+                    /*
+                     * Emoji.
+                     */
+                    'Hai sexy! \ud83d\ude0f';
+  // Sentiment
+  //   .processString(randomString)
+  //   .then((data) => Sentiment.parseSentiment(data))
+  //   .then((parsedData) => utils.wrapWithObject('data', parsedData))
+  //   .then((wrappedData) => utils.addMetaDataTo(wrappedData))
+  //   .then((objectWithMetadata) => res.send(objectWithMetadata))
+  //   .catch((err) => console.log('Error', err));
+
+    res.send({'testName': 'test'});
 });
 
 /**
