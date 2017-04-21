@@ -38,16 +38,18 @@ app.get('/api', (req, res) => {
                     /*
                      * Emoji.
                      */
-                    'Hai sexy! \ud83d\ude0f';
-  // Sentiment
-  //   .processString(randomString)
-  //   .then((data) => Sentiment.parseSentiment(data))
-  //   .then((parsedData) => utils.wrapWithObject('data', parsedData))
-  //   .then((wrappedData) => utils.addMetaDataTo(wrappedData))
-  //   .then((objectWithMetadata) => res.send(objectWithMetadata))
-  //   .catch((err) => console.log('Error', err));
+                    'Hai daler! \ud83d\ude0f' +
+                    '\nBut actually we have been great. ' +
+                    '\nAfter that we could find stuff.';
+  Sentiment
+    .processString(randomString)
+    .then((data) => {res.send(data);})
+    // .then((parsedData) => utils.wrapWithObject('data', parsedData))
+    // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
+    // .then((objectWithMetadata) => console.log(objectWithMetadata))
+    // .catch((err) => console.log('Error', err));
 
-    res.send({'testName': 'test'});
+    // res.send({'testName': 'test'});
 });
 
 /**

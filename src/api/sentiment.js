@@ -26,6 +26,7 @@ const Sentiment = (function(sentiment){
                         // console.log(tree);
                         if(!tree)
                             rej(new Error('Couldn\'t get the sentiment results.'));
+                        console.log(utils.logTree(tree));
                         res(tree);
                     }
                 })
@@ -36,6 +37,11 @@ const Sentiment = (function(sentiment){
     function parseSentiment(sentimentTree) {
         return new Promise((res, rej) => {
             if(sentimentTree) {
+                const [totalScore, valence] = [
+                    R.view(R.lensPath(['data', 'polarity']), sentimentTree),
+                    R.view(R.lensPath(['data', 'valence']), sentimentTree)
+                ];
+
                 res(sentimentTree);
             } else {
                 rej(sentimentTree);
@@ -50,21 +56,21 @@ const Sentiment = (function(sentiment){
 
 })(sentiment);
 
-// const randomString ='I hate forgetting to bring a book somewhere I' +
-//                     'definitely should have brought a book to. '
+const randomString ='I hate forgetting to bring a book somewhere I' +
+                    'definitely should have brought a book to. '
 
-//                     'This product is not bad at all. ' +
-//                     /*
-//                      * Emoji.
-//                      */
-//                     'Hai sexy! \ud83d\ude0f';
+                    'This product is not bad at all. ' +
+                    /*
+                     * Emoji.
+                     */
+                    'Hai sexy! \ud83d\ude0f';
 
-  // Sentiment
-  //   .processString(randomString)
-  //   .then((data) => Sentiment.parseSentiment(data))
-  //   .then((parsedData) => utils.wrapWithObject('data', parsedData))
-  //   .then((wrappedData) => utils.addMetaDataTo(wrappedData))
-  //   .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
-  //   .catch((err) => console.log('Error', err));
+  Sentiment
+    .processString(randomString)
+    .then((data) => Sentiment.parseSentiment(data))
+    .then((parsedData) => utils.wrapWithObject('data', parsedData))
+    .then((wrappedData) => utils.addMetaDataTo(wrappedData))
+    // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
+    .catch((err) => console.log('Error', err));
 
 module.exports = Sentiment;
