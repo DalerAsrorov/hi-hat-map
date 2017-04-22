@@ -88,10 +88,19 @@ const Sentiment = (function(sentiment){
                 );
 
                 const emotionalWords = retrieveEmotionalWords(rootChildren);
-                console.log(emotionalWords);
+                const positiveWords = R.filter((word) => word.polarity > 0)(emotionalWords);
+                const negativeWords = R.filter((word) => word.polarity < 0)(emotionalWords);
 
+                const sentiment = {
+                    negativeWords,
+                    positiveWords,
+                    value: {
+                        totalScore,
+                        valence
+                    }
+                }
 
-                res(sentimentTree);
+                res(sentiment);
             } else {
                 rej(sentimentTree);
             }
@@ -117,7 +126,7 @@ const randomString ='I hate forgetting to bring a book somewhere I' +
   Sentiment
     .processString(randomString)
     .then((data) => Sentiment.parseSentiment(data))
-    // .then((parsedData) => utils.wrapWithObject('data', parsedData))
+    // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
     // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
     // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
     .catch((err) => console.log('Error', err));
