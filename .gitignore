@@ -1,12 +1,12 @@
 # Config directories
-./src/nodemodules/
-./src/app/bower_components/
+src/nodemodules/
+src/app/bower_components/
 
 # Config files
-./src/.babelrc
-./src/.bowerrc
-./src/.eslintrc.json
-./src/bower.json
+src/.babelrc
+src/.bowerrc
+src/.eslintrc.json
+src/bower.json
 
 # OS generated files #
 ######################
