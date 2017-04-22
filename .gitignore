@@ -1,0 +1,19 @@
+# Config directories
+./src/nodemodules/
+./src/app/bower_components/
+
+# Config files
+./src/.babelrc
+./src/.bowerrc
+./src/.eslintrc.json
+./src/bower.json
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
