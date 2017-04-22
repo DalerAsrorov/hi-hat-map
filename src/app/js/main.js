@@ -123,7 +123,7 @@ $(window).load(function() {
             console.log('Not selected. twitData:', twitData);
             // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
-            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
 
         } else {
             console.log('Exists', lastLocation);

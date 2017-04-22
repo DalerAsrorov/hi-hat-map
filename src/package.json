@@ -20,6 +20,7 @@
     "oauth": "^0.9.15",
     "ramda": "^0.23.0",
     "retext": "^5.0.0",
+    "retext-sentiment": "^4.0.0",
     "socket.io": "^1.7.3",
     "twit": "^2.2.5",
     "unist-util-inspect": "^4.1.0"

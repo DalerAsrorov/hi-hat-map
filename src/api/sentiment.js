@@ -125,6 +125,7 @@ const randomString ='I hate forgetting to bring a book somewhere I' +
   Sentiment
     .processString(randomString)
     .then((data) => Sentiment.parseSentiment(data))
+    .then((parsedData) => console.log(parsedData))
     // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
     // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
     // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
