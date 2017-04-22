@@ -49,21 +49,46 @@ const Sentiment = (function(sentiment){
                 const isParagraphNode = node => node.type === 'ParagraphNode';
                 const isSentenceNode = node => node.type === 'SentenceNode';
                 const isWordNode = node => node.type === 'WordNode';
+                const isTextNode = node => node.type === 'TextNode';
                 const getFirstChild = node => node.children[0];
                 const getChildren = node => node.children;
                 const getDataObject = (node) => node.data[0];
+                const hasData = (node) => !(R.isNil(node.data));
+                const storeInArray = (data, array) => array.push(data);
+                const getNeededInfoFromTextNode = function(node) {
+                    return {
+                        text: node.value,
+                        polarity: node.data.polarity,
+                        valence: node.data.valence
+                    };
+                };
 
-                debugger;
-                const getChildrenNodes = R.pipe(
+                // returns an array with the format
+                // [
+                //   {text: 'hate', polarity:-3, valence: 'negative'},
+                //   {text: 'love', polarity: 3, valence: 'positive'},
+                //   ...etc
+                // ]
+                const retrieveEmotionalWords = R.pipe(
                     R.filter(isParagraphNode), // returns all ParagraphNodes
                     R.map(getChildren), // returns Paragraph Node's children
+                    R.flatten(), // flattens array for further processing
+                    R.filter(isSentenceNode), // ...repeat for SentenceNodes
+                    R.map(getChildren),
                     R.flatten(),
-                    R.filter(isSentenceNode), // gets all the SentenceNodes
-                    R.map(getChildren) //
-                    R.tap(console.log)
+                    // ...repeat for WordNodes
+                    R.filter(isWordNode),
+                    R.map(getChildren),
+                    R.flatten(),
+                    // ...repeat for nodes with data(emotional)
+                    R.filter(hasData),
+                    R.flatten(),
+                    R.filter(isTextNode),
+                    R.map(getNeededInfoFromTextNode)
                 );
 
-                const result = getChildrenNodes(rootChildren);
+                const emotionalWords = retrieveEmotionalWords(rootChildren);
+                console.log(emotionalWords);
 
 
                 res(sentimentTree);
