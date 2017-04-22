@@ -5,8 +5,6 @@ src/app/bower_components/
 # Config files
 src/.babelrc
 src/.bowerrc
-src/.eslintrc.json
-src/bower.json
 
 # OS generated files #
 ######################
