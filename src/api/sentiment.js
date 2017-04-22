@@ -26,7 +26,7 @@ const Sentiment = (function(sentiment){
                         // console.log(tree);
                         if(!tree)
                             rej(new Error('Couldn\'t get the sentiment results.'));
-                        console.log(utils.logTree(tree));
+                        // console.log(utils.logTree(tree));
                         res(tree);
                     }
                 })
@@ -37,14 +37,33 @@ const Sentiment = (function(sentiment){
     function parseSentiment(sentimentTree) {
         return new Promise((res, rej) => {
             if(sentimentTree) {
-                const [totalScore, valence] = [
-                    // getting total score and valence
-                    // from the root object -- result gathered
-                    // from all elements of the string
+                // getting total score and valence
+                // from the root object -- result gathered
+                // from all elements of the string
+                const [totalScore, valence, rootChildren] = [
                     R.view(R.lensPath(['data', 'polarity']), sentimentTree),
-                    R.view(R.lensPath(['data', 'valence']), sentimentTree)
+                    R.view(R.lensPath(['data', 'valence']), sentimentTree),
+                    R.view(R.lensPath(['children']), sentimentTree)
                 ];
 
+                const isParagraphNode = node => node.type === 'ParagraphNode';
+                const isSentenceNode = node => node.type === 'SentenceNode';
+                const isWordNode = node => node.type === 'WordNode';
+                const getFirstChild = node => node.children[0];
+                const getChildren = node => node.children;
+                const getDataObject = (node) => node.data[0];
+
+                debugger;
+                const getChildrenNodes = R.pipe(
+                    R.filter(isParagraphNode), // returns all ParagraphNodes
+                    R.map(getChildren), // returns Paragraph Node's children
+                    R.flatten(),
+                    R.filter(isSentenceNode), // gets all the SentenceNodes
+                    R.map(getChildren) //
+                    R.tap(console.log)
+                );
+
+                const result = getChildrenNodes(rootChildren);
 
 
                 res(sentimentTree);
@@ -73,8 +92,8 @@ const randomString ='I hate forgetting to bring a book somewhere I' +
   Sentiment
     .processString(randomString)
     .then((data) => Sentiment.parseSentiment(data))
-    .then((parsedData) => utils.wrapWithObject('data', parsedData))
-    .then((wrappedData) => utils.addMetaDataTo(wrappedData))
+    // .then((parsedData) => utils.wrapWithObject('data', parsedData))
+    // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
     // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
     .catch((err) => console.log('Error', err));
 
