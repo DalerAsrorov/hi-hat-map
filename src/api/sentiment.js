@@ -50,10 +50,11 @@ const Sentiment = (function(sentiment){
                 const isSentenceNode = node => node.type === 'SentenceNode';
                 const isWordNode = node => node.type === 'WordNode';
                 const isTextNode = node => node.type === 'TextNode';
+
                 const getFirstChild = node => node.children[0];
                 const getChildren = node => node.children;
-                const getDataObject = (node) => node.data[0];
-                const hasData = (node) => !(R.isNil(node.data));
+                const getDataObject = node => node.data[0];
+                const hasData = node => !(R.isNil(node.data));
                 const storeInArray = (data, array) => array.push(data);
                 const getNeededInfoFromTextNode = function(node) {
                     return {
@@ -70,17 +71,15 @@ const Sentiment = (function(sentiment){
                 //   ...etc
                 // ]
                 const retrieveEmotionalWords = R.pipe(
-                    R.filter(isParagraphNode), // returns all ParagraphNodes
-                    R.map(getChildren), // returns Paragraph Node's children
-                    R.flatten(), // flattens array for further processing
-                    R.filter(isSentenceNode), // ...repeat for SentenceNodes
+                    R.filter(isParagraphNode),
                     R.map(getChildren),
                     R.flatten(),
-                    // ...repeat for WordNodes
+                    R.filter(isSentenceNode),
+                    R.map(getChildren),
+                    R.flatten(),
                     R.filter(isWordNode),
                     R.map(getChildren),
                     R.flatten(),
-                    // ...repeat for nodes with data(emotional)
                     R.filter(hasData),
                     R.flatten(),
                     R.filter(isTextNode),
