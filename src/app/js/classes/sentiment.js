@@ -16,6 +16,14 @@ export default class Sentiment {
         this.id = id;
     }
 
+    get id() {
+        return this._id;
+    }
+
+    set id(id) {
+        this._id = id;
+    }
+
     processText(sentimentInput) {
         return new Promise((res, req) => {
             postRequest(getSentimentTextAnalysis(), sentimentInput)
@@ -24,13 +32,5 @@ export default class Sentiment {
                 res(data);
             });
         });
-    }
-
-    get id() {
-        return this[id];
-    }
-
-    set id(id) {
-        this[id] = id;
     }
 }
