@@ -28,7 +28,6 @@ export default class Sentiment {
         return new Promise((res, req) => {
             postRequest(getSentimentTextAnalysis(), sentimentInput)
             .then((data) => {
-                console.log(`Sentiment.processText(), ${getSentimentTextAnalysis()}`, '\n', data);
                 res(data);
             });
         });

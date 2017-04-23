@@ -88,9 +88,14 @@ $(window).load(function() {
                 mlsTime
             };
 
-
-
-            GraphOps.drawObject(data, coordinates, 'twitter');
+            // 1. Process sentiment based on passed text
+            // 2. Draw an object with metadata on the map
+            //    and also draw it on the panel (panel is for future work).
+            sentiment.processText({text: text})
+            .then((data) => {
+                console.log('PROCESSED SENTIMENT OBJECT', data);
+                GraphOps.drawObject(data, coordinates, 'twitter');
+            });
         } else {
             console.log('Passed tweet with no coordinates', tweet);
         }
@@ -315,10 +320,6 @@ $(window).load(function() {
         }
     });
 
-    console.log('Going to sentiment');
-
-    console.log('Sentiment instance', sentiment);
-    sentiment.processText({text: 'It\'s such a great weather today.'});
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
