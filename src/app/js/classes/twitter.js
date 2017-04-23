@@ -11,7 +11,6 @@ export default class Twitter extends Mode {
     }
 
     getData(url, twitData) {
-        // url = Paths.getTwitData()
         return new Promise((res, rej) => {
             Request.postRequest(url, twitData)
             .then((data) => {

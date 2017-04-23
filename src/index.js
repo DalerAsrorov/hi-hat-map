@@ -33,34 +33,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-  const randomString ='I hate forgetting to bring a book somewhere I ' +
-                    'definitely should have brought a book to. '
-
-                    'This product is not bad at all. ' +
-                    /*
-                     * Emoji.
-                     */
-                    'Hai daler! \ud83d\ude0f' +
-                    '\nBut actually we have been great. ' +
-                    '\nAfter that we could find stuff.';
-  // Sentiment
-  //   .processText(randomString)
-  //   .then((data) => {res.send(data);})
-  //   // .then((parsedData) => utils.wrapWithObject('data', parsedData))
-  //   // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
-  //   // .then((objectWithMetadata) => console.log(objectWithMetadata))
-  //   // .catch((err) => console.log('Error', err));
-
-    Sentiment
-    .processText(randomString)
-    .then((data) => Sentiment.parseSentiment(data))
-    .then((parsedData) => res.send(parsedData))
-    // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
-    // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
-    // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
-    .catch((err) => console.log('Error', err));
-
-    // res.send({'testName': 'test'});
+    res.send({'app': 'hi-hat-map'});
 });
 
 /**
@@ -131,7 +104,6 @@ app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
   }
 });
 
-
 /**
 * Finding the closest location based on lat and long
 * lat, long
@@ -156,8 +128,6 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
         });
   }
 });
-
-
 
 /**
  *
@@ -211,7 +181,6 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
 *   socket.io stuff
 *
 **/
-
 io.on('connection', (socket) => {
     socket.on('topic', (info) => {
         // console.log("\nTOPIC: ", topic, "\n");
