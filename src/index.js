@@ -62,7 +62,6 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
 *   Given the latitude and longtitude, it finds the trends
 *   of the country given
 */
-
 app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
     const latAndLongString = req.params.latAndLong.trim();
     const geoArray = latAndLongString.split(",");
@@ -136,7 +135,6 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
  * (location, topic, time, limit) => {tweets}
  *
  */
-
  app.post('/api/twitter/twitdata', (req, res) => {
     let receivedData = req.body;
 
@@ -197,7 +195,9 @@ io.on('connection', (socket) => {
 
 });
 
-
+/**
+*  Launching the server.
+**/
 httpServer.listen(port, function() {
   console.log('Listenning on port ' + port);
 });

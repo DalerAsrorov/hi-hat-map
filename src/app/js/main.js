@@ -317,6 +317,7 @@ $(window).load(function() {
 
     console.log('Going to sentiment');
 
+    console.log('Sentiment instance', sentiment);
     sentiment.processText({text: 'It\'s such a great weather today.'});
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
