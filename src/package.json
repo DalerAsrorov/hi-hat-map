@@ -27,6 +27,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "babel-plugin-ramda": "^1.2.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",

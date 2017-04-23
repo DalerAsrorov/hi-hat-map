@@ -11,7 +11,7 @@ import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
 import Twitter from './classes/twitter.js';
 import Sentiment from './classes/sentiment.js';
-import {default as R} from 'ramda';
+import R from 'ramda';
 
 // Action
 $(window).load(function() {
