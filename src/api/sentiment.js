@@ -16,7 +16,7 @@ const R = require('ramda');
 const Sentiment = (function(sentiment){
     this.sentment = sentiment;
 
-    function processString(string) {
+    function processText(string) {
         return new Promise((res, rej) => {
             retext()
                 .use(sentiment)
@@ -94,6 +94,7 @@ const Sentiment = (function(sentiment){
                     negativeWords,
                     positiveWords,
                     value: {
+                        text: ,
                         totalScore,
                         valence
                     }
@@ -107,8 +108,8 @@ const Sentiment = (function(sentiment){
     };
 
     return {
-        processString: processString,
-        parseSentiment: parseSentiment
+        processText,
+        parseSentiment
     };
 
 })(sentiment);
@@ -123,7 +124,7 @@ const randomString ='I hate forgetting to bring a book somewhere I' +
                     'Hai sexy! \ud83d\ude0f';
 
   Sentiment
-    .processString(randomString)
+    .processText(randomString)
     .then((data) => Sentiment.parseSentiment(data))
     .then((parsedData) => console.log(parsedData))
     // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))

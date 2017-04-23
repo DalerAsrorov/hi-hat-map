@@ -6,11 +6,13 @@ let app = express();
 let ramda = require('ramda');
 let httpServer = require('http').createServer(app);
 let io = require('socket.io')(httpServer);
+const url = require('url');
 
 // modules
 const Sentiment = require('./api/sentiment');
 const Twitter = require('./api/twitter');
 const utils = require('./api/helpers/utils');
+
 
 let port = process.env.PORT || 8000;
 
@@ -42,7 +44,7 @@ app.get('/api', (req, res) => {
                     '\nBut actually we have been great. ' +
                     '\nAfter that we could find stuff.';
   // Sentiment
-  //   .processString(randomString)
+  //   .processText(randomString)
   //   .then((data) => {res.send(data);})
   //   // .then((parsedData) => utils.wrapWithObject('data', parsedData))
   //   // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
@@ -50,7 +52,7 @@ app.get('/api', (req, res) => {
   //   // .catch((err) => console.log('Error', err));
 
     Sentiment
-    .processString(randomString)
+    .processText(randomString)
     .then((data) => Sentiment.parseSentiment(data))
     .then((parsedData) => res.send(parsedData))
     // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
@@ -155,6 +157,8 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
   }
 });
 
+
+
 /**
  *
  * POST:
@@ -180,6 +184,27 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     .catch((err) => {
         console.log("Error /api/twitter/twitdata", err);
     });
+ });
+
+ app.post('/api/sentiment/evaluatestring', (req, res) => {
+    const data = req.body;
+    const method = req.method.toUpperCase();
+    const text = data.text;
+    const pathname = url.parse(req.url).pathname.toString();
+
+    const params = {
+        method: method,
+        path: pathname,
+        body: data
+    };
+
+    Sentiment
+    .processText(text)
+    .then((data) => Sentiment.parseSentiment(data))
+    .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
+    .then((wrappedData) => utils.addMetaDataTo(wrappedData, params))
+    .then((finalData) => res.send(finalData))
+    .catch((err) => res.send('Error', err));
  });
 
 /**

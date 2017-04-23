@@ -12,3 +12,7 @@ export function getTwitData() {
     return `${window.location.origin}/api/twitter/twitdata`;
 }
 
+export function getSentimentTextAnalysis() {
+    return `${window.location.origin}/api/sentiment/evaluatestring`;
+}
+

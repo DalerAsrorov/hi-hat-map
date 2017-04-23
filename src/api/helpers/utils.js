@@ -1,4 +1,5 @@
 
+
 module.exports = {
     logTree: (tree) => {
         return JSON.stringify(tree, null, 4);
@@ -34,5 +35,9 @@ module.exports = {
                 rej(new Error('Couldn\'t create wrapper for the object.'));
             }
         });
+    },
+
+    addParamsTo: (object, params) => {
+
     }
 }

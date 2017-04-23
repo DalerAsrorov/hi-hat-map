@@ -10,7 +10,7 @@ import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
 import Twitter from './classes/twitter.js';
-
+import Sentiment from './classes/sentiment.js';
 
 // Action
 $(window).load(function() {
@@ -19,6 +19,7 @@ $(window).load(function() {
     console.log('twitter', twitter);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
+    const sentiment = new Sentiment('social_media');
 
     let socket = io.connect('http://localhost:8000/');
 
@@ -87,6 +88,8 @@ $(window).load(function() {
                 mlsTime
             };
 
+
+
             GraphOps.drawObject(data, coordinates, 'twitter');
         } else {
             console.log('Passed tweet with no coordinates', tweet);
@@ -97,7 +100,7 @@ $(window).load(function() {
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch(mode) {
             case 'real_time':
-                twitter.turnOnSocket(socket, 'topic', {topic: query, location: lastLocation});
+                twitter.socketEmit(socket, 'topic', {topic: query, location: lastLocation});
                 break;
             case 'specified_time':
                 twitter.getData(Paths.getTwitData(), twitData)
@@ -311,6 +314,10 @@ $(window).load(function() {
             }
         }
     });
+
+    console.log('Going to sentiment');
+
+    sentiment.processText({text: 'It\'s such a great weather today.'});
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

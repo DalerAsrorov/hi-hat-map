@@ -6,7 +6,7 @@ export default class Twitter extends Mode {
         super(name);
     }
 
-    turnOnSocket(socket, channel, params) {
+    socketEmit(socket, channel, params) {
         socket.emit(channel, params);
     }
 
