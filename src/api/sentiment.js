@@ -94,7 +94,6 @@ const Sentiment = (function(sentiment){
                     negativeWords,
                     positiveWords,
                     value: {
-                        text: ,
                         totalScore,
                         valence
                     }

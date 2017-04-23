@@ -35,9 +35,5 @@ module.exports = {
                 rej(new Error('Couldn\'t create wrapper for the object.'));
             }
         });
-    },
-
-    addParamsTo: (object, params) => {
-
     }
 }
