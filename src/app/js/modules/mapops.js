@@ -1,7 +1,7 @@
 import Map from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
-import {curry, map, pipe} from 'ramda';
+import {curry, map, pipe, __} from 'ramda';
 
 // export function generateResults(data) {
 //     console.log('Data', data);
