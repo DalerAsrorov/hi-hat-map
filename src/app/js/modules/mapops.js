@@ -23,7 +23,12 @@ export const drawObject = curry((data, geolocation, iconType) => {
         case 'twitter':
             console.log('data, geo, icon:', data, geolocation, iconType);
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
-            L.marker([geolocation[1], geolocation[0]], {icon: icon}).addTo(Map);
+            L.marker([geolocation[1], geolocation[0]], {
+                icon: icon,
+                title: 'Tweet',
+                alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
+                riseOnHover: true
+            }).addTo(Map);
             break;
         case 'yelp':
             console.log('Yelp data, geo, icon', data, geolocation, iconType);
