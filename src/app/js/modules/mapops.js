@@ -18,17 +18,31 @@ export const generateResults = curry((data) => {
 });
 
 export const drawObject = curry((data, geolocation, iconType) => {
-    let icon;
+    let icon, latlng, popup;
+
     switch(iconType) {
         case 'twitter':
             console.log('data, geo, icon:', data, geolocation, iconType);
+
+            // bindPopup( <String> html | <HTMLElement> el | <Popup> popup, <Popup options> options? )
+
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
+            latlng = L.latLng(geolocation[1], geolocation[0]);
+
+            // instantiating pop up
+            popup = L.popup()
+                    .setLatLng(latlng)
+                    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+
             L.marker([geolocation[1], geolocation[0]], {
                 icon: icon,
                 title: 'Tweet',
                 alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
                 riseOnHover: true
-            }).addTo(Map);
+            })
+            .bindPopup(popup)
+            .addTo(Map);
+
             break;
         case 'yelp':
             console.log('Yelp data, geo, icon', data, geolocation, iconType);
@@ -36,6 +50,4 @@ export const drawObject = curry((data, geolocation, iconType) => {
         default:
             console.log('No soc media was selected.');
     };
-
-    console.log('after switch');
 });
