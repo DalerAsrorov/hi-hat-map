@@ -1,34 +1,26 @@
-let ntwitter = require('ntwitter');
 let Twit = require('twit');
 let https = require('https');
 let twitterHelper = require('./helpers/twitter-helper');
 
 const twitConfig = {
-        consumer_key: twitterHelper.twitterTokens.getConsumerKey(),
-        consumer_secret: twitterHelper.twitterTokens.getConsumerSecret(),
-        access_token: twitterHelper.twitterTokens.getAccessTokenKey(),
-        access_token_secret: twitterHelper.twitterTokens.getAccessTokenSecret()
-    },
-    ntwitterConfig = {
-        consumer_key: twitterHelper.twitterTokens.getConsumerKey(),
-        consumer_secret: twitterHelper.twitterTokens.getConsumerSecret(),
-        access_token_key: twitterHelper.twitterTokens.getAccessTokenKey(),
-        access_token_secret: twitterHelper.twitterTokens.getAccessTokenSecret()
-    };
+    consumer_key: twitterHelper.twitterTokens.getConsumerKey(),
+    consumer_secret: twitterHelper.twitterTokens.getConsumerSecret(),
+    access_token: twitterHelper.twitterTokens.getAccessTokenKey(),
+    access_token_secret: twitterHelper.twitterTokens.getAccessTokenSecret()
+};
 
-let T = new Twit(twitConfig);
-let twitter = new ntwitter(ntwitterConfig);
+const Twitter = new Twit(twitConfig);
 
 module.exports = {
 
     // base module used for streaming
-    module: T,
+    module: Twitter,
 
     // get the trends based on geo-location
     // weid represents the location ID
     getTrends: function getTrends(woeid) {
         return new Promise(function (resolve, reject) {
-            T.get('trends/place', {id: woeid}, function (err, data) {
+            Twitter.get('trends/place', {id: woeid}, function (err, data) {
                 if(!data) {
                     reject(err);
 
@@ -52,7 +44,7 @@ module.exports = {
             return new Promise((resolve, reject) => {
                 let latNumber = parseInt(lat);
                 let longNumber = parseInt(long);
-                T.get('trends/closest', {lat: latNumber, long: longNumber},
+                Twitter.get('trends/closest', {lat: latNumber, long: longNumber},
                     function(err, data) {
                         if(data) {
                             resolve(data);
@@ -70,15 +62,19 @@ module.exports = {
     },
 
     getTwitData: function(query, geocode, radius, count, since_id, max_id) {
-        var params = {
+        geocode = geocode.join(',').toString().concat(`,${radius}`).trim();
+        console.log(geocode);
+
+        const params = {
             q: `${query}`,
-            geocode: geocode.join(',').toString().concat(`,${radius}`),
+            geocode: geocode,
             count: count ? count : 100,
             since_id: since_id ? since_id : '',
             max_id: max_id ? max_id : ''
         };
+
         return new Promise((resolve, reject) => {
-            T.get('search/tweets', params, (err, data) => {
+            Twitter.get('search/tweets', params, (err, data) => {
                 if(!err) {
                     resolve(data);
                 } else {

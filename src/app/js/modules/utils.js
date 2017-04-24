@@ -21,4 +21,10 @@ export function capitalize(str) {
   } else {
     return '';
   }
-}
+};
+
+export function wrappObject(object, objectKey) {
+  return {
+    objectKey: object
+  };
+};

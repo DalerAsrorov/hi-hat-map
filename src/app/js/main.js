@@ -116,8 +116,8 @@ $(window).load(function() {
             default:
                 console.log('none of the modes selected');
 
-        };
-    };
+        }
+    }
 
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
@@ -258,15 +258,15 @@ $(window).load(function() {
             let panelComp1 = new PanelComponent('#topTen',
                                                'Top 10 Tweets',
                                                function(){console.log('hi')},
-                                               [{"name":"daler"}, {"name":"michael"}]);
+                                               [{'name':'daler'}, {'name':'michael'}]);
             let panelComp2 = new PanelComponent('#topTwenty',
                                                 'Top 10 Retweets',
                                                 function(){console.log('hi')},
-                                                [{"lastname":"asrorov"}, {"lastname":"jojo"}]);
+                                                [{'lastname':'asrorov'}, {'lastname':'jojo'}]);
             let panelComp3 = new PanelComponent('#topThirty',
                                     'Top 30 Retweets',
                                     function(){ console.log('hi') },
-                                    [{"jorge":"quero"}, {"sandro":"bolo"}]);
+                                    [{'jorge':'quero'}, {'sandro':'bolo'}]);
 
             rightComponents.add(panelComp1);
             rightComponents.add(panelComp2);
@@ -310,7 +310,25 @@ $(window).load(function() {
                         const lat = Map.getCenter().lat;
                         const lng = Map.getCenter().lng;
                         const twitData = {q: query, geocode: [lat, lng], radius: '25mi'};
-                        twitter.getData(Paths.getTwitData(), twitData);
+
+
+                        twitter.getData(Paths.getTwitData(), twitData)
+                        .then((data) => {
+                            const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
+                            const hasGeo = (twit) => !R.isNil(twit.place);
+
+                            // needed property from tweets
+                            // pass it to generate Results
+                            //
+
+                            R.pipe(
+                                R.filter(hasGeo, statuses),
+                                R.tap(console.log)
+                            )(statuses);
+
+                        })
+                        .catch((err) => console.log('getData() - ', err))
+
                         break;
                     default:
                         console.log('none selected');

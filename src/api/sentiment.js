@@ -113,22 +113,4 @@ const Sentiment = (function(sentiment){
 
 })(sentiment);
 
-const randomString ='I hate forgetting to bring a book somewhere I' +
-                    'definitely should have brought a book to. '
-
-                    'This product is not bad at all. ' +
-                    /*
-                     * Emoji.
-                     */
-                    'Hai sexy! \ud83d\ude0f';
-
-  Sentiment
-    .processText(randomString)
-    .then((data) => Sentiment.parseSentiment(data))
-    .then((parsedData) => console.log(parsedData))
-    // .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
-    // .then((wrappedData) => utils.addMetaDataTo(wrappedData))
-    // .then((objectWithMetadata) => console.log(utils.logTree(objectWithMetadata)))
-    .catch((err) => console.log('Error', err));
-
 module.exports = Sentiment;

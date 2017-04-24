@@ -11,16 +11,10 @@ import {curry, map, pipe, __} from 'ramda';
 //     console.log("")
 // }
 
-export const generateResults = curry((data, geo) => {
+export const generateResults = curry((data) => {
     pipe(
-        map(drawMarker), // render points with animations
+        map(drawObject), // render points with animations
     )(data);
-});
-
-export const drawMarker = curry((pointData) => {
-    const twitterIcon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
-
-    L.marker([51.5, -0.09], {icon: twitterIcon}).addTo(Map);
 });
 
 export const drawObject = curry((data, geolocation, iconType) => {
