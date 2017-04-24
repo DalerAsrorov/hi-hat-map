@@ -41,6 +41,7 @@ export const drawObject = curry((data, geolocation, iconType) => {
                 riseOnHover: true
             })
             .bindPopup(popup)
+            .openPopup()
             .addTo(Map);
 
             break;

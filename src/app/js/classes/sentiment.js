@@ -7,9 +7,9 @@ additional processing of the sentiment if needed.
 
 /*=====  Sentiment Class source  ======*/
 
-import { getRequest, postRequest } from '../modules/request.js';
+import { postRequest } from '../modules/request.js';
 import { getSentimentTextAnalysis } from '../modules/paths.js';
-
+import { isNil } from 'ramda';
 
 export default class Sentiment {
     constructor(id) {
@@ -25,11 +25,16 @@ export default class Sentiment {
     }
 
     processText(sentimentInput) {
-        return new Promise((res, req) => {
+        return new Promise((resolve, reject) => {
             postRequest(getSentimentTextAnalysis(), sentimentInput)
             .then((data) => {
-                res(data);
-            });
+                if(!isNil(data)) {
+                    resolve(data);
+                } else {
+                    reject(new Error('Couldn\'t get sentiment. Sentiment object is ', data))
+                }
+            })
+            .catch((err) => new Error(err));
         });
     }
 }
