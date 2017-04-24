@@ -1,7 +1,7 @@
 import Map from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
-import R from 'ramda';
+import {curry, map, pipe} from 'ramda';
 
 // export function generateResults(data) {
 //     console.log('Data', data);
@@ -11,19 +11,19 @@ import R from 'ramda';
 //     console.log("")
 // }
 
-export const generateResults = R.curry((data, geo) => {
-    R.pipe(
-        R.map(drawMarker), // render points with animations
+export const generateResults = curry((data, geo) => {
+    pipe(
+        map(drawMarker), // render points with animations
     )(data);
 });
 
-export const drawMarker = R.curry((pointData) => {
+export const drawMarker = curry((pointData) => {
     const twitterIcon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
 
     L.marker([51.5, -0.09], {icon: twitterIcon}).addTo(Map);
 });
 
-export const drawObject = R.curry((data, geolocation, iconType) => {
+export const drawObject = curry((data, geolocation, iconType) => {
     let icon;
     switch(iconType) {
         case 'twitter':
