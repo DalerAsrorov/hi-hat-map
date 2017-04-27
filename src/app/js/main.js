@@ -315,11 +315,20 @@ $(window).load(function() {
                         twitter.getData(Paths.getTwitData(), twitData)
                         .then((data) => {
                             const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
-                            const hasGeo = (twit) => !R.isNil(twit.place);
 
-                            twitter.processData(statuses, searchMetadata).then((data) => {
+                            const filteredTweets = twitter.processData(statuses, searchMetadata);
 
+                            filteredTweets.forEach(function(data) {
+                                sentiment.processText({text: data.text})
+                                .then(function(sentiment) {
+                                    return new Promise((resolve, reject) => resolve({sentiment: sentiment, data: data}))
+                                })
+                                .then(function(renderObject) {
+                                    GraphOps.drawObject2(renderObject);
+                                });
                             });
+
+                            console.log(filteredTweets);
                         })
                         .catch((err) => console.log('getData() - ', err))
 

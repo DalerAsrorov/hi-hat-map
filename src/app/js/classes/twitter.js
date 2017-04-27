@@ -45,23 +45,7 @@ export default class Twitter extends Mode {
             R.filter(hasGeo),
             R.map(getRequredData),
         )(tweets);
-        console.log('filteredTweetsList', filteredTweetsList);
 
-        const results = [];
-        return new Promise((res, req) => {
-            filteredTweetsList.map(function(data) {
-                sentiment.processText({text: data.text})
-                .then(function(sentiment) {
-                    return new Promise((res, rej) => {
-                        res({sentiment: sentiment, data: data});
-                    })
-                })
-                .then(function(data) {
-                    console.log(data);
-                });
-            });
-        });
-
-        // return result;
+        return filteredTweetsList;
     }
 }
