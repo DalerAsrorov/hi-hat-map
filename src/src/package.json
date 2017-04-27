@@ -1,0 +1,38 @@
+{
+  "name": "hihitmap",
+  "version": "1.0.0",
+  "description": "Map of emotional changes and patterns. ",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install && bower install",
+    "build": "./node_modules/.bin/rollup -c && node index.js",
+    "rollup": "./node_modules/.bin/rollup",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daler Asrorov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "http": "0.0.0",
+    "ntwitter": "^0.5.0",
+    "oauth": "^0.9.15",
+    "ramda": "^0.23.0",
+    "retext": "^5.0.0",
+    "retext-sentiment": "^4.0.0",
+    "socket.io": "^1.7.3",
+    "twit": "^2.2.5",
+    "unist-util-inspect": "^4.1.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-plugin-ramda": "^1.2.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-eslint": "^3.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}

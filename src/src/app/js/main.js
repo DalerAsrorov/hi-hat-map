@@ -3,7 +3,7 @@ import * as ui from './modules/ui.js';
 import * as Request from './modules/request.js';
 import * as Paths from './modules/paths.js';
 import * as utils from './modules/utils.js';
-import * as MapOps from './modules/mapops.js';
+import * as GraphOps from './modules/mapops.js';
 import * as constants from './modules/constants.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
@@ -81,36 +81,21 @@ $(window).load(function() {
             const created_at = tweet.created_at;
             const mlsTime = tweet.timestamp_ms;
 
-            // const data = {
-            //     user,
-            //     text,
-            //     created_at,
-            //     id,
-            //     mlsTime
-            // };
-            const data = twitter.processSingle(tweet);
+            const data = {
+                user,
+                text,
+                created_at,
+                id,
+                mlsTime
+            };
 
             // 1. Process sentiment based on passed text
             // 2. Draw an object with metadata on the map
             //    and also draw it on the panel (panel is for future work).
-
-            // sentiment.processText({text: text})
-            // .then((data) => {
-            //     console.log('PROCESSED SENTIMENT OBJECT', data);
-            //     MapOps.drawObject(data, coordinates, 'twitter');
-            // });
             sentiment.processText({text: text})
             .then((data) => {
                 console.log('PROCESSED SENTIMENT OBJECT', data);
-
-                data.geo = coordinates;
-                const renderObject = {
-                    data,
-                    sentiment,
-                    type: 'twitter'
-                };
-
-                MapOps.renderObject(renderObject);
+                GraphOps.drawObject(data, coordinates, 'twitter');
             });
         } else {
             console.log('Passed tweet with no coordinates', tweet);
@@ -159,7 +144,7 @@ $(window).load(function() {
                 - Get data points and draw them on the map
 
              */
-            // const first = MapOps.generateResults([1, 2, 3, 4]);
+            // const first = GraphOps.generateResults([1, 2, 3, 4]);
             // first(lastLocation);
 
             /**
@@ -336,10 +321,10 @@ $(window).load(function() {
                             filteredTweets.forEach(function(data) {
                                 sentiment.processText({text: data.text})
                                 .then(function(sentiment) {
-                                    return new Promise((resolve, reject) => resolve({sentiment: sentiment, data: data, type: 'twitter'}))
+                                    return new Promise((resolve, reject) => resolve({sentiment: sentiment, data: data}))
                                 })
                                 .then(function(renderObject) {
-                                    MapOps.renderObject(renderObject);
+                                    GraphOps.drawObject2(renderObject);
                                 });
                             });
 
