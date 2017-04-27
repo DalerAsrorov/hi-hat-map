@@ -1,5 +1,6 @@
 import Mode from './mode.js';
 import * as Request from '../modules/request.js';
+import R from 'ramda';
 
 export default class Twitter extends Mode {
     constructor(name) {
@@ -20,5 +21,17 @@ export default class Twitter extends Mode {
                 rej(err);
             });
         });
+    }
+
+    processData(tweets, metadata) {
+        const hasGeo = (twit) => !R.isNil(twit.place);
+
+        const result = R.pipe(
+            R.filter(hasGeo),
+            R.tap(console.log)
+        )(tweets);
+
+
+        return result;
     }
 }

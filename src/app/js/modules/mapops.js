@@ -1,6 +1,7 @@
 import Map from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
+import Leaflet from '../classes/leaflet.js'
 import {curry, map, pipe, __} from 'ramda';
 
 // export function generateResults(data) {
@@ -29,10 +30,8 @@ export const drawObject = curry((data, geolocation, iconType) => {
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
             latlng = L.latLng(geolocation[1], geolocation[0]);
 
-            // instantiating pop up
-            popup = L.popup()
-                    .setLatLng(latlng)
-                    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+            const leaflet = new Leaflet();
+            popup = leaflet.createPopup(latlng, '<p>Hello world!<br />This is a nice popup.</p>');
 
             L.marker([geolocation[1], geolocation[0]], {
                 icon: icon,

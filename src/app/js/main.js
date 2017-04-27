@@ -317,14 +317,8 @@ $(window).load(function() {
                             const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
                             const hasGeo = (twit) => !R.isNil(twit.place);
 
-                            // needed property from tweets
-                            // pass it to generate Results
-                            //
-
-                            R.pipe(
-                                R.filter(hasGeo, statuses),
-                                R.tap(console.log)
-                            )(statuses);
+                            const processedTwitterData = twitter.processData(statuses, searchMetadata)
+                            console.log('processedTwitterData:', processedTwitterData);
 
                         })
                         .catch((err) => console.log('getData() - ', err))

@@ -1,6 +1,6 @@
 
 export default class Components {
-    constructor(id="", name="", list=[]) {
+    constructor(id='', name='', list=[]) {
         this.id = id;
         this.name = name;
         this.list = list;
@@ -57,7 +57,7 @@ export default class Components {
             id: this.id,
             name: this.name,
             list: this.list
-        }
+        };
     }
 
 }

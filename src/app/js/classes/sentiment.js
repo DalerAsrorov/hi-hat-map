@@ -31,7 +31,7 @@ export default class Sentiment {
                 if(!isNil(data)) {
                     resolve(data);
                 } else {
-                    reject(new Error('Couldn\'t get sentiment. Sentiment object is ', data))
+                    reject(new Error('Couldn\'t get sentiment. Sentiment object is ', data));
                 }
             })
             .catch((err) => new Error(err));

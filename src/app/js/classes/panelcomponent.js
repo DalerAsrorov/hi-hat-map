@@ -4,6 +4,8 @@
  *
  */
 
+ import R from 'ramda';
+
  export default class PanelComponent {
     constructor(id, name, actionHandler, data=[]) {
         this.id = id;
