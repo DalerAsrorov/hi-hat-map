@@ -18,6 +18,7 @@ module.exports = {
                     }
                 };
                 object.metadata = metadata;
+
                 res(object);
             } else {
                 rej(new Error('Can\'t add metadata to undefined object.'));

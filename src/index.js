@@ -163,7 +163,7 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     const params = {
         method: method,
         path: pathname,
-        body: data
+        data: JSON.stringify(text)
     };
 
     Sentiment
@@ -171,6 +171,7 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     .then((data) => Sentiment.parseSentiment(data))
     .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
     .then((wrappedData) => utils.addMetaDataTo(wrappedData, params))
+    .catch((err, status) => res.status(500).send(err))
     .then((finalData) => res.send(finalData))
     .catch((err, status) => res.status(500).send(err));
  });

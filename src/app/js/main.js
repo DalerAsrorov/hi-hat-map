@@ -317,9 +317,9 @@ $(window).load(function() {
                             const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
                             const hasGeo = (twit) => !R.isNil(twit.place);
 
-                            const processedTwitterData = twitter.processData(statuses, searchMetadata)
-                            console.log('processedTwitterData:', processedTwitterData);
+                            twitter.processData(statuses, searchMetadata).then((data) => {
 
+                            });
                         })
                         .catch((err) => console.log('getData() - ', err))
 
