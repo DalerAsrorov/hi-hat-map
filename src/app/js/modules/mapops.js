@@ -18,6 +18,15 @@ export const generateResults = curry((data) => {
     )(data);
 });
 
+export const renderObject = function(renderObject) {
+    const data = renderObject.data;
+    const sentiment = renderObject.sentiment;
+    const type = renderObject.type;
+    const geolocation = renderObject.data.geo;
+
+    drawObject(data, geolocation, type);
+}
+
 export const drawObject = curry((data, geolocation, iconType) => {
     let icon, latlng, popup;
 

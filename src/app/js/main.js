@@ -3,7 +3,7 @@ import * as ui from './modules/ui.js';
 import * as Request from './modules/request.js';
 import * as Paths from './modules/paths.js';
 import * as utils from './modules/utils.js';
-import * as GraphOps from './modules/mapops.js';
+import * as MapOps from './modules/mapops.js';
 import * as constants from './modules/constants.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
@@ -95,7 +95,7 @@ $(window).load(function() {
             sentiment.processText({text: text})
             .then((data) => {
                 console.log('PROCESSED SENTIMENT OBJECT', data);
-                GraphOps.drawObject(data, coordinates, 'twitter');
+                MapOps.drawObject(data, coordinates, 'twitter');
             });
         } else {
             console.log('Passed tweet with no coordinates', tweet);
@@ -144,7 +144,7 @@ $(window).load(function() {
                 - Get data points and draw them on the map
 
              */
-            // const first = GraphOps.generateResults([1, 2, 3, 4]);
+            // const first = MapOps.generateResults([1, 2, 3, 4]);
             // first(lastLocation);
 
             /**
@@ -321,10 +321,10 @@ $(window).load(function() {
                             filteredTweets.forEach(function(data) {
                                 sentiment.processText({text: data.text})
                                 .then(function(sentiment) {
-                                    return new Promise((resolve, reject) => resolve({sentiment: sentiment, data: data}))
+                                    return new Promise((resolve, reject) => resolve({sentiment: sentiment, data: data, type: 'twitter'}))
                                 })
                                 .then(function(renderObject) {
-                                    GraphOps.drawObject2(renderObject);
+                                    MapOps.renderObject(renderObject);
                                 });
                             });
 
