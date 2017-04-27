@@ -81,24 +81,11 @@ $(window).load(function() {
             const created_at = tweet.created_at;
             const mlsTime = tweet.timestamp_ms;
 
-            // const data = {
-            //     user,
-            //     text,
-            //     created_at,
-            //     id,
-            //     mlsTime
-            // };
             const data = twitter.processSingle(tweet);
 
             // 1. Process sentiment based on passed text
             // 2. Draw an object with metadata on the map
             //    and also draw it on the panel (panel is for future work).
-
-            // sentiment.processText({text: text})
-            // .then((data) => {
-            //     console.log('PROCESSED SENTIMENT OBJECT', data);
-            //     MapOps.drawObject(data, coordinates, 'twitter');
-            // });
             sentiment.processText({text: text})
             .then((data) => {
                 console.log('PROCESSED SENTIMENT OBJECT', data);
@@ -205,16 +192,6 @@ $(window).load(function() {
                         enabled: true
                     },
                     onShowListEvent: function() {
-                        // switch(storageSystem.getItem('cpOpen')) {
-                        //     case 'false':
-                        //        $('.easy-autocomplete-container').addClass('autocomplete-top');
-                        //        break;
-                        //     case 'true':
-                        //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                        //        break;
-                        //     default:
-                        //        $('.easy-autocomplete-container').removeClass('autocomplete-top');
-                        // };
                         switch(storageSystem.getItem('cpOpen')) {
                             case 'false':
                                 ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
@@ -243,54 +220,27 @@ $(window).load(function() {
             console.log("no data", data);
         }
 
-            // (function() {
-            //     // for(let i = 0; i < 10; i++) {
-            //     //     ui.addElementToPanel
-            //     //     (
-            //     //         '#panelCompRightWrapper',
-            //     //         {},
-            //     //         "Button " + i,
-            //     //         $('<a></a>'),
-            //     //         'menu btn btn-secondary',
-            //     //         'col-lg-4'
-            //     //     );
-            //     // }
+        let panelComp1 = new PanelComponent('#topTen',
+                                           'Top 10 Tweets',
+                                           function(){console.log('hi')},
+                                           [{'name':'daler'}, {'name':'michael'}]);
+        let panelComp2 = new PanelComponent('#topTwenty',
+                                            'Top 10 Retweets',
+                                            function(){console.log('hi')},
+                                            [{'lastname':'asrorov'}, {'lastname':'jojo'}]);
+        let panelComp3 = new PanelComponent('#topThirty',
+                                'Top 30 Retweets',
+                                function(){ console.log('hi') },
+                                [{'jorge':'quero'}, {'sandro':'bolo'}]);
 
-            //     // undefined by default will place 'div' element
+        rightComponents.add(panelComp1);
+        rightComponents.add(panelComp2);
+        rightComponents.add(panelComp3);
+        rightComponents.setName('Social Media');
+        rightComponents.setId('socMedia');
 
-            //     // ui.addElementTo('')
-
-            // }());
-
-            // console.log('Should reach here...');
-            // let dropdown = ui.addContainerToContainer('#panelCompRightWrapper', 'favorites', undefined, 'dropdown show');
-            // let $a = ui.addContainerToContainer(dropdown.attr('id'), undefined, $('<a>'), 'btn btn-secondary dropdown-toggle');
-            // ui.addTextTo($a, $a.attr('id'));
-
-            //target, dropdownName, dropdownID, dataList
-
-
-            let panelComp1 = new PanelComponent('#topTen',
-                                               'Top 10 Tweets',
-                                               function(){console.log('hi')},
-                                               [{'name':'daler'}, {'name':'michael'}]);
-            let panelComp2 = new PanelComponent('#topTwenty',
-                                                'Top 10 Retweets',
-                                                function(){console.log('hi')},
-                                                [{'lastname':'asrorov'}, {'lastname':'jojo'}]);
-            let panelComp3 = new PanelComponent('#topThirty',
-                                    'Top 30 Retweets',
-                                    function(){ console.log('hi') },
-                                    [{'jorge':'quero'}, {'sandro':'bolo'}]);
-
-            rightComponents.add(panelComp1);
-            rightComponents.add(panelComp2);
-            rightComponents.add(panelComp3);
-            rightComponents.setName('Social Media');
-            rightComponents.setId('socMedia');
-
-            console.log("panelComp object:", rightComponents);
-            ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
+        console.log("panelComp object:", rightComponents);
+        ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
 
     })
     .catch((err) => {
