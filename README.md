@@ -1,10 +1,11 @@
-# hi-hat-map
-Emotions map of various social and food service apps with cool visualizations and data mapping.
+# Hi-Hat-Map
+A web app that analyzes the social media through maps and sentiment analysis that provides helpful features for inspecting the emotional side of posts throughout the world.
 
-## Tech & Frameworks
-* ES6
-* NodeJS
-* NLP Libraries
-* Yelp/Instagram/Foursqare/Twitter APIs
-* JQuery
-* HTML/CSS
+## Tech Stack
+    - JavaScript (ES6)
+    - Bootstrap
+    - HTML/CSS
+
+## APIs Used
+    - Twitter
+    - To be continued...
