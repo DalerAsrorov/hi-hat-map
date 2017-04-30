@@ -16,22 +16,28 @@ import R from 'ramda';
 
 // Action
 $(window).load(function() {
+
+    // Statuc modules
     const storageSystem = new StorageSystem(window.localStorage);
     const twitter = new Twitter('twitter');
-    console.log('twitter', twitter);
-    const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
-    const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
-
     const sentiment = new Sentiment('social_media');
     const leaflet = new Leaflet();
 
+    // Dynamic modules
+    let rightComponents = new Components();
+
+    // Constants
+    const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
+    const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
+
+    // connecting to socket
     let socket = io.connect('http://localhost:8000/');
 
+    // other variables used throughout the code
     let cpOpen,
         tracker,
         cpRightList =[];
 
-    let rightComponents = new Components();
 
     /* INTRO LOADER CODE */
     $(() => {
