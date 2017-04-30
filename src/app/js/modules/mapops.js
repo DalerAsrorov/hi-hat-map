@@ -23,8 +23,13 @@ export const renderObject = function(renderObject) {
     const sentiment = renderObject.sentiment;
     const type = renderObject.type;
     const geolocation = renderObject.data.geo;
-
-    drawObject(data, geolocation, type);
+    
+    const dataWrapper = {
+       data, 
+       sentiment
+    };
+    
+    drawObject(dataWrapper, geolocation, type);
 }
 
 export const drawObject = curry((data, geolocation, iconType) => {
