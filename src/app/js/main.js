@@ -11,6 +11,7 @@ import PanelComponent from './classes/panelcomponent.js';
 import Components from './classes/components.js';
 import Twitter from './classes/twitter.js';
 import Sentiment from './classes/sentiment.js';
+import Leaflet from './classes/leaflet.js';
 import R from 'ramda';
 
 // Action
@@ -20,7 +21,9 @@ $(window).load(function() {
     console.log('twitter', twitter);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
+
     const sentiment = new Sentiment('social_media');
+    const leaflet = new Leaflet();
 
     let socket = io.connect('http://localhost:8000/');
 
@@ -46,9 +49,7 @@ $(window).load(function() {
     });
 
     storageSystem.setItem('firstVisit', true);
-
     cpOpen = storageSystem.getItem('cpOpen');
-    console.log('cpOpen:::', cpOpen);
     if(cpOpen == 'false') {
         console.log("Should slide: cpOpen", cpOpen);
         ui.slideToggleCp('controlPanelWrapper', Map);
@@ -74,7 +75,9 @@ $(window).load(function() {
     socket.on('tweet', (tweet) => {
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
         if(coordinates) {
-            const coordinates = tweet.place.bounding_box.coordinates[0][1];
+            const boundingBox = tweet.place.bounding_box;
+            const polygonCenter = leaflet.computePolygonCenter(L, boundingBox);
+            const coordinates = leaflet.transformLatLngToArray(polygonCenter);
             const user = tweet.user;
             const text = tweet.text;
             const id = tweet.id;
@@ -88,8 +91,7 @@ $(window).load(function() {
             //    and also draw it on the panel (panel is for future work).
             sentiment.processText({text: text})
             .then((data) => {
-                console.log('PROCESSED SENTIMENT OBJECT', data);
-
+                console.log('Coordinates form that passed:', coordinates);
                 data.geo = coordinates;
                 const renderObject = {
                     data,
