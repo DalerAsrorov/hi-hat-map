@@ -1,5 +1,7 @@
-// UI Utils set
+/*----------  Utils Module functions  ----------*/
+
 import StorageSystem from './../classes/storagesystem.js';
+import ContextMenu from './../classes/contextmenu.js';
 
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
@@ -215,6 +217,12 @@ export function getInputValue(target) {
     return $(target).val();
 }
 
+export function addContextMenuTo(target, contextMenuId, options) {
+    let contextMenu = new ContextMenu(contextMenuId, options);
+
+    console.log('contextMenu:', contextMenu);
+    return contextMenu;
+}
 
 
 
