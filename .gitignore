@@ -1,6 +1,7 @@
 # Config directories
 src/node_modules/
 src/app/bower_components/
+src/app/min/
 
 # Config files
     # src/.babelrc
