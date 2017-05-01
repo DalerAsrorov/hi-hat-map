@@ -315,7 +315,7 @@ $(window).load(function() {
         }
     });
 
-    let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', {name: 'daler'});
+    let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', 'contextmenu');
 
     console.log('Context menu in main.js', contextMenu);
 

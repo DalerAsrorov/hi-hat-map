@@ -19,4 +19,8 @@ export default class ContextMenu {
 
 
     }
+
+    getHtml() {
+
+    }
 }

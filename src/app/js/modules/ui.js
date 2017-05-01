@@ -217,8 +217,13 @@ export function getInputValue(target) {
     return $(target).val();
 }
 
-export function addContextMenuTo(target, contextMenuId, options) {
-    let contextMenu = new ContextMenu(contextMenuId, options);
+export function addContextMenuTo(target, contextMenuId, eventType) {
+    const $target = $(target);
+    let contextMenu = new ContextMenu(contextMenuId);
+
+    $target.bind(eventType, (ev) => {
+        console.log('onmouseover event was here', ev);
+    });
 
     console.log('contextMenu:', contextMenu);
     return contextMenu;
