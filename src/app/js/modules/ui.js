@@ -228,8 +228,9 @@ export function addContextMenuTo(target, contextMenuId, eventType) {
     const $target = $(target);
     let contextMenu = new ContextMenu(contextMenuId, target);
 
-    $target.bind(eventType, (ev) => {
-        ev.preventDefault();
+    $target.bind(eventType, (event) => {
+        event.preventDefault();
+        contextMenu.adjustPosition(event);
         contextMenu.fadeIn(200);
     });
 

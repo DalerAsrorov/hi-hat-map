@@ -15,6 +15,18 @@ export default class ContextMenu {
         return selector;
     }
 
+    adjustPosition(event) {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        const left = mouseX + 'px';
+        const up = mouseY + 'px';
+
+        this.applyCss({'left': left, 'right': up});
+
+        console.log('adjustPosition event applied', event);
+    }
+
     addMenuSubitem(selfSelector, menuItemSelector, eventListener) {
 
     }
