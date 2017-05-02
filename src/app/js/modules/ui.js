@@ -2,6 +2,7 @@
 
 import StorageSystem from './../classes/storagesystem.js';
 import ContextMenu from './../classes/contextmenu.js';
+import { getType } from './utils.js';
 
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
@@ -126,8 +127,14 @@ export function removeClass(target, className) {
 //     $(target).fadeOut(type, callbackHandler);
 // }
 
-export function addEventListenerTo(target, type, fn) {
-    document.getElementById(target).addEventListener(type, fn);
+export function addEventListenerTo(target, event, fn) {
+    const targetType = getType(target);
+
+    if(targetType === '[object Window]' || targetType === '[object HTMLDocument]') {
+        target.addEventListener(event, fn);
+    } else {
+        document.getElementById(target).addEventListener(event, fn);
+    }
 }
 
 export function removeElement(target) {
@@ -219,10 +226,11 @@ export function getInputValue(target) {
 
 export function addContextMenuTo(target, contextMenuId, eventType) {
     const $target = $(target);
-    let contextMenu = new ContextMenu(contextMenuId);
+    let contextMenu = new ContextMenu(contextMenuId, target);
 
     $target.bind(eventType, (ev) => {
-        console.log('onmouseover event was here', ev);
+        ev.preventDefault();
+        contextMenu.fadeIn(200);
     });
 
     console.log('contextMenu:', contextMenu);
