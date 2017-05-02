@@ -92,6 +92,14 @@ button#toggleSliderBtn {
 }
 
 
+.context-menu-default {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  position: absolute;
+  z-index: 400;
+}
+
 .dropdown button {
   width: 100%;
   height: inherit;

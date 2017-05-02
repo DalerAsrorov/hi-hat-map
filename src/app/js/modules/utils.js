@@ -1,5 +1,9 @@
 
 
+export function getType(object) {
+  return Object.prototype.toString.call(object);
+}
+
 export function titleCase(str) {
     const escapeReg = s => s.replace(/./g, c => `\\${c}`);
     let wordPattern = new RegExp(`[^${escapeReg(' _-¡¿/')}]+`, 'g');
@@ -28,3 +32,4 @@ export function wrappObject(object, objectKey) {
     objectKey: object
   };
 };
+
