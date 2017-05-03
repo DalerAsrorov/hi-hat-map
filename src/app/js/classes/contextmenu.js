@@ -20,9 +20,9 @@ export default class ContextMenu {
         const mouseY = event.clientY;
 
         const left = mouseX + 'px';
-        const up = mouseY + 'px';
+        const top = mouseY + 'px';
 
-        this.applyCss({'left': left, 'right': up});
+        this.applyCss({'left': left, 'top': top});
 
         console.log('adjustPosition event applied', event);
     }
