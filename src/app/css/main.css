@@ -97,7 +97,7 @@ button#toggleSliderBtn {
   height: 200px;
   background: #fff;
   position: absolute;
-  z-index: 400;
+  z-index: 99999;
 }
 
 .dropdown button {

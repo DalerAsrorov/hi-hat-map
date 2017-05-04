@@ -123,10 +123,6 @@ export function removeClass(target, className) {
     $(target).removeClass(className);
 }
 
-// export function fadeOut(target, type, callbackHandler = function(){}) {
-//     $(target).fadeOut(type, callbackHandler);
-// }
-
 export function addEventListenerTo(target, event, fn) {
     const targetType = getType(target);
 
@@ -145,7 +141,7 @@ export function style(target, styleObject, ...rest) {
     return $(target).css(styleObject);
 }
 
-export function fadeOut(target, timer, callback) {
+export function fadeOut(target, timer=500, callback=()=>{}) {
     $(target).fadeOut(timer, function() {
         // $('#initLoader').remove();
         // $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
@@ -244,7 +240,7 @@ export function resetOnMuseUp(target, containerSelector, actionName) {
         console.log('Right click', e);
         if(!container.is(e.target)
            && container.has(e.target).length === 0) {
-            container.hide();
+            fadeOut(containerSelector, 100)
             container.unbind(actionName, target);
         }
     });
