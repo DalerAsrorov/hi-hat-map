@@ -1,4 +1,4 @@
-import { resetOnMuseUp, } from '../modules/ui.js';
+import { resetOnMuseUp } from '../modules/ui.js';
 
 export default class ContextMenu {
     constructor(id, parent) {
