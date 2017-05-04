@@ -1,4 +1,4 @@
-
+import { resetOnMuseUp } from '../modules/ui.js';
 
 export default class ContextMenu {
     constructor(id, parent) {
@@ -57,6 +57,7 @@ export default class ContextMenu {
     //    to hide the context menu
     bind() {
         this.$parent.append(this.$self);
+        resetOnMuseUp(document, this.id, 'click');
     }
 
     fadeIn(speed) {

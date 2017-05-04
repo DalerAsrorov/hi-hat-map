@@ -238,5 +238,17 @@ export function addContextMenuTo(target, contextMenuId, eventType) {
     return contextMenu;
 }
 
+export function resetOnMuseUp(target, containerSelector, actionName) {
+    const container = $(`${containerSelector}`);
+    $(target).mouseup((e) => {
+        console.log('Right click', e);
+        if(!container.is(e.target)
+           && container.has(e.target).length === 0) {
+            container.hide();
+            container.unbind(actionName, target);
+        }
+    });
+}
+
 
 
