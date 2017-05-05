@@ -7,6 +7,10 @@ export default class ContextMenu {
         id = id.indexOf('#') === 0 ? id.substr(1) : id;
         this.$self = $(`<div id=${id}></div>`);
         this.$parent = $(parent);
+
+        // add class context-menu for all
+        // context menu elements.
+        this.addClass('context-menu');
     }
 
     addClass(className, selector=null) {

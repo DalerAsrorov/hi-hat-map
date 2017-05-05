@@ -92,12 +92,16 @@ button#toggleSliderBtn {
 }
 
 
-.context-menu-default {
+.context-menu {
   width: 200px;
   height: 200px;
   background: #fff;
   position: absolute;
   z-index: 99999;
+}
+
+.context-menu:hover {
+  cursor: auto;
 }
 
 .dropdown button {

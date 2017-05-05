@@ -318,7 +318,6 @@ $(window).load(function() {
     let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', 'contextmenu');
     contextMenu.bind();
     contextMenu.hide();
-    contextMenu.addClass('context-menu-default');
 
     // contextMenu.fadeOut();
 
