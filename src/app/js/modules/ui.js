@@ -161,14 +161,18 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
     let $dropdownRef = $dropdown.append(`<div class='dropdown-menu' </div>`);
     let $listDiv = $dropdownRef.find('.dropdown-menu');
 
+    let $ul = $('<ul></ul>');
+
     actionsList.map((action, index) => {
-        $listDiv.append
+        $ul.append
         (`
             <li class='sup-li'>
                 <a class ='list-group-item list-group-item-action' id='${action.id}' href='#'> ${action.name} </a>
             </li>
         `)
     });
+
+    $listDiv.append($ul);
     $dropdown.append($listDiv);
     $(target).append($dropdown);
 }
