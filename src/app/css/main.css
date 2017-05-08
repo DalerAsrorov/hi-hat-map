@@ -360,6 +360,24 @@ header#loadIntro {
   color: #1aa7ff;
 }
 
+.sup-li {
+
+}
+
+.sup-li a {
+  padding: 0;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 5px;
+  text-align: center !important;
+  margin: 0 auto;
+  display: block;
+}
+
+.sup-li a:hover {
+  background: #c5d0f1;
+}
+
 .vanish {
   display: none;
 }

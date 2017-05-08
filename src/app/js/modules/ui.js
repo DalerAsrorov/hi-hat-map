@@ -164,7 +164,9 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
     actionsList.map((action, index) => {
         $listDiv.append
         (`
-            <a class ='dropdown-item' id='${action.id}' href='#'> ${action.name} </a>
+            <li class='sup-li'>
+                <a class ='list-group-item list-group-item-action' id='${action.id}' href='#'> ${action.name} </a>
+            </li>
         `)
     });
     $dropdown.append($listDiv);
@@ -237,7 +239,6 @@ export function addContextMenuTo(target, contextMenuId, eventType) {
 export function resetOnMuseUp(target, containerSelector, actionName) {
     const container = $(`${containerSelector}`);
     $(target).mouseup((e) => {
-        console.log('Right click', e);
         if(!container.is(e.target)
            && container.has(e.target).length === 0) {
             fadeOut(containerSelector, 100)
