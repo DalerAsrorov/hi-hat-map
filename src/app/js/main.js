@@ -250,6 +250,7 @@ $(window).load(function() {
         console.log("panelComp object:", rightComponents);
         ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
 
+
     })
     .catch((err) => {
         console.log("Error request", err);
@@ -318,6 +319,7 @@ $(window).load(function() {
     let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', 'contextmenu');
     contextMenu.bind();
     contextMenu.hide();
+
 
     // contextMenu.fadeOut();
 

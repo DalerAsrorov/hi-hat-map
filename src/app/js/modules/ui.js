@@ -153,6 +153,10 @@ export function makeVisible(target, timer) {
     $(target).css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, timer)
 }
 
+export function appendDropUpTo() {
+
+}
+
 export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) {
     // console.log("HERE", dropdownName, " HERE ", dropdownID, " HERE ", actionsList);
     let $targetRef = $(target).append(`<div class="dropdown" id=${dropdownID}></div>`);
@@ -169,7 +173,7 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
             <li class='sup-li'>
                 <a class ='list-group-item list-group-item-action' id='${action.id}' href='#'> ${action.name} </a>
             </li>
-        `)
+        `);
     });
 
     $listDiv.append($ul);

@@ -1,4 +1,6 @@
-import { resetOnMuseUp } from '../modules/ui.js';
+import { resetOnMuseUp, appendDropDownToPanel } from '../modules/ui.js';
+import Components from './components.js';
+import PanelComponent from './panelcomponent.js';
 
 export default class ContextMenu {
     constructor(id, parent) {
@@ -61,6 +63,20 @@ export default class ContextMenu {
     //    to hide the context menu
     bind() {
         this.$parent.append(this.$self);
+
+        let contextComponents = new Components();
+
+        let contextComp1 = new PanelComponent('#item1', 'item1', ()=>console.log('hi', 1), []);
+        let contextComp2 = new PanelComponent('#item2', 'item2', ()=>console.log('hi', 2), []);
+        let contextComp3 = new PanelComponent('#item3', 'item3', ()=>console.log('hi', 3), []);
+        contextComponents.setName('Context Menu');
+        contextComponents.setId('contextMenu');
+        contextComponents.add(contextComp1);
+        contextComponents.add(contextComp2);
+        contextComponents.add(contextComp3);
+
+        appendDropDownToPanel(`${this.id}`, contextComponents);
+
         resetOnMuseUp(document, this.id, 'click');
     }
 
