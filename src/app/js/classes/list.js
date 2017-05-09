@@ -1,9 +1,11 @@
+import { getType } from '../modules/utils.js';
 
-
-class List {
+export default class List {
     constructor(id, dataName) {
         this.id = id;
         this.dataName = dataName;
+
+        this.$self = $(`<div id=${id} class='list-group' data-name=${dataName}></div>`);
     }
 
     get id() {
@@ -22,12 +24,28 @@ class List {
         this._dataName = dataName;
     }
 
-    addItem() {
+    addClassesToAllItems(classes) {
+        this.$self.children().addClass(classes)
+    }
 
+    addItem(value, handler, child={}) {
+        this.$self.append(`<li class='list-group-item'><span> ${value} </span></li>`);
+    }
+
+    bindTo(container) {
+        if(getType(container) === '[object Object]') {
+            return container.append(this.$self);
+        }
+
+        return $(`${container}`).append(this.$self);
     }
 
     removeItem() {
 
+    }
+
+    $html() {
+        return this.$self;
     }
 
     toString() {

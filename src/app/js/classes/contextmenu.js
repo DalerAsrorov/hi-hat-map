@@ -15,6 +15,14 @@ export default class ContextMenu {
         this.addClass('context-menu');
     }
 
+    get id() {
+        return this._id;
+    }
+
+    set id(id) {
+        this._id = id;
+    }
+
     addClass(className, selector=null) {
         // have data-name attribute added
         selector = selector === null ? !!this.$self.addClass(className) : !!$(`${selector}`).addClass(className);
@@ -63,20 +71,6 @@ export default class ContextMenu {
     //    to hide the context menu
     bind() {
         this.$parent.append(this.$self);
-
-        let contextComponents = new Components();
-
-        let contextComp1 = new PanelComponent('#item1', 'item1', ()=>console.log('hi', 1), []);
-        let contextComp2 = new PanelComponent('#item2', 'item2', ()=>console.log('hi', 2), []);
-        let contextComp3 = new PanelComponent('#item3', 'item3', ()=>console.log('hi', 3), []);
-        contextComponents.setName('Context Menu');
-        contextComponents.setId('contextMenu');
-        contextComponents.add(contextComp1);
-        contextComponents.add(contextComp2);
-        contextComponents.add(contextComp3);
-
-        appendDropDownToPanel(`${this.id}`, contextComponents);
-
         resetOnMuseUp(document, this.id, 'click');
     }
 
@@ -88,8 +82,8 @@ export default class ContextMenu {
         this.$self.fadeOut(speed);
     }
 
-    getHtml() {
-
+    $html() {
+        return this.$self;
     }
 
     hide(delay=500) {

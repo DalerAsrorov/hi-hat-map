@@ -12,6 +12,7 @@ import Components from './classes/components.js';
 import Twitter from './classes/twitter.js';
 import Sentiment from './classes/sentiment.js';
 import Leaflet from './classes/leaflet.js';
+import List from './classes/list.js';
 import R from 'ramda';
 
 // Action
@@ -320,6 +321,12 @@ $(window).load(function() {
     contextMenu.bind();
     contextMenu.hide();
 
+    const list = new List('contextMenuList', 'contextMenuList');
+    list.bindTo(contextMenu.$html());
+    list.addItem('One', ()=>console.log('One'));
+    list.addItem('Two', ()=>console.log('Two'));
+    list.addItem('Three', ()=>console.log('Three'));
+    list.addClassesToAllItems('classOne classTwo');
 
     // contextMenu.fadeOut();
 
