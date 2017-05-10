@@ -40,8 +40,6 @@ export default class ContextMenu {
         const top = `${mouseY - navOffsetHeight}px`;
 
         this.applyCss({'left': left, 'top': top});
-
-        console.log('adjustPosition event applied', event);
     }
 
     addMenuSubitem(selfSelector, menuItemSelector, eventListener) {

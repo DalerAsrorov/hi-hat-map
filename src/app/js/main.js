@@ -58,7 +58,6 @@ $(window).load(function() {
     storageSystem.setItem('firstVisit', true);
     cpOpen = storageSystem.getItem('cpOpen');
     if(cpOpen == 'false') {
-        console.log("Should slide: cpOpen", cpOpen);
         ui.slideToggleCp('controlPanelWrapper', Map);
     }
 
@@ -98,7 +97,6 @@ $(window).load(function() {
             //    and also draw it on the panel (panel is for future work).
             sentiment.processText({text: text})
             .then((data) => {
-                console.log('Coordinates form that passed:', coordinates);
                 data.geo = coordinates;
                 const renderObject = {
                     data,
