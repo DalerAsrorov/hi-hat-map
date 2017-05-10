@@ -377,8 +377,9 @@ header#loadIntro {
   display: block;
 }
 
-.sup-li a:hover {
+.sup-li a:hover, .sup-li:hover {
   background: #c5d0f1;
+  cursor: pointer;
 }
 
 .vanish {

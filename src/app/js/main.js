@@ -326,7 +326,7 @@ $(window).load(function() {
     list.addItem('One', ()=>console.log('One'));
     list.addItem('Two', ()=>console.log('Two'));
     list.addItem('Three', ()=>console.log('Three'));
-    list.addClassesToAllItems('classOne classTwo');
+    list.addClassesToAllItems('sup-li');
 
     // contextMenu.fadeOut();
 
