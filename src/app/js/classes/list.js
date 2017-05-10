@@ -28,8 +28,11 @@ export default class List {
         this.$self.children().addClass(classes)
     }
 
-    addItem(value, handler, child={}) {
-        this.$self.append(`<li class='list-group-item'><span> ${value} </span></li>`);
+    addItem(value, handler, event) {
+        let $li = $(`<li class='list-group-item'><span> ${value} </span></li>`);
+        this.$self.append($li);
+
+        $li.on(event, handler);
     }
 
     bindTo(container) {
