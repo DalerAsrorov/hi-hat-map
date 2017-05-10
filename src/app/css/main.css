@@ -98,7 +98,6 @@ button#toggleSliderBtn {
 
 .context-menu {
   width: 200px;
-  height: 200px;
   background: #fff;
   position: absolute;
   z-index: 99999;
