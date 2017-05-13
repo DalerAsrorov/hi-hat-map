@@ -230,9 +230,10 @@ export function getInputValue(target) {
     return $(target).val();
 }
 
-export function addContextMenuTo(target, contextMenuId, eventType) {
+export function addContextMenuTo(target, contextMenuId, listId, eventType) {
     const $target = $(target);
-    let contextMenu = new ContextMenu(contextMenuId, target);
+    let contextMenu = new ContextMenu(contextMenuId, listId, target);
+    contextMenu.bind();
 
     $target.bind(eventType, (event) => {
         event.preventDefault();

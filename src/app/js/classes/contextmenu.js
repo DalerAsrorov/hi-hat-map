@@ -1,14 +1,16 @@
 import { resetOnMuseUp, appendDropDownToPanel } from '../modules/ui.js';
-import Components from './components.js';
-import PanelComponent from './panelcomponent.js';
+import List from './list.js';
 
 export default class ContextMenu {
-    constructor(id, parent) {
+    constructor(id, listId, parent) {
         this.id = id;
         this.parent = parent;
+        this.listId = listId;
         id = id.indexOf('#') === 0 ? id.substr(1) : id;
         this.$self = $(`<div id=${id}></div>`);
         this.$parent = $(parent);
+
+        this.list = new List(listId, listId);
 
         // add class context-menu for all
         // context menu elements.
@@ -29,6 +31,10 @@ export default class ContextMenu {
         return selector;
     }
 
+    addClassesToAllMenuItems(classes) {
+        this.list.addClassesToAllItems(classes);
+    }
+
     adjustPosition(event) {
         const mouseX = event.clientX;
         const mouseY = event.clientY;
@@ -46,14 +52,8 @@ export default class ContextMenu {
 
     }
 
-    addMenuItem(selector, eventListener) {
-        this.appendMenuItem({selector: selector, eventListener: eventListener})
-    }
-
-    appendMenuItem(params) {
-        const selector = params.selector;
-        const eventListener = params.eventListener;
-
+    appendMenuItem(value, action, event) {
+        this.list.addItem(value, action, event);
     }
 
     applyCss(styleObject) {
@@ -69,6 +69,7 @@ export default class ContextMenu {
     //    to hide the context menu
     bind() {
         this.$parent.append(this.$self);
+        this.list.bindTo(this.$html());
         resetOnMuseUp(document, this.id, 'click');
     }
 
