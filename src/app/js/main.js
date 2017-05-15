@@ -15,9 +15,8 @@ import Leaflet from './classes/leaflet.js';
 import List from './classes/list.js';
 import R from 'ramda';
 
-// Action
 $(window).load(function() {
-
+    console.log('Rollup watch running...');
     // Statuc modules
     const storageSystem = new StorageSystem(window.localStorage);
     const twitter = new Twitter('twitter');
