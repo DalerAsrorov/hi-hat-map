@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/bower_components/EasyAutocomplete/dist/easy-autocomplete.themes.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="/bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" rel="stylesheet">
+    <link href="/css/libs/c3.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
@@ -61,6 +62,9 @@
               <form class="form" id="querySearchForm" accept-charset="utf-8">
                 <input placeholder="Enter query" type="" id="querySearch" class="typeahead" required>
               </form>
+              <div id="sentimentChart">
+
+              </div>
             </section>
             <section class="panel-comp col-md-4 col-sm-12" id="panelCompRight">
               <div id="panelCompRightWrapper" class="panel-wrapper row">
@@ -104,6 +108,8 @@
     <script src="/socket.io/socket.io.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24" charset="utf-8"></script>
+    <script src="/js/libs/d3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/libs/c3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/min/main.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
