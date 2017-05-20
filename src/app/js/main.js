@@ -16,9 +16,8 @@ import List from './classes/list.js';
 import R from 'ramda';
 import * as d3 from 'd3';
 
-// Action
 $(window).load(function() {
-
+    console.log('Rollup watch running...');
     // Statuc modules
     const storageSystem = new StorageSystem(window.localStorage);
     const twitter = new Twitter('twitter');
@@ -250,7 +249,6 @@ $(window).load(function() {
         console.log("panelComp object:", rightComponents);
         ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
 
-
     })
     .catch((err) => {
         console.log("Error request", err);
@@ -341,6 +339,22 @@ $(window).load(function() {
     //     })
 
     // post request testing
+
+var chart = c3.generate({
+    bindto: '#sentimentChart',
+   data: {
+        xs: {
+            'data1': 'x1',
+            'data2': 'x2',
+        },
+        columns: [
+            ['x1', 10, 30, 45, 50, 70, 100],
+            ['x2', 30, 50, 75, 100, 120],
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 20, 180, 240, 100, 190]
+        ]
+    }
+});
 
 
 });

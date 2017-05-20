@@ -2,8 +2,11 @@
 src/node_modules/
 src/app/bower_components/
 
-# install files 
+# install files
 src/.yarnclean
+
+#builds
+src/app/min
 
 # Config files
     # src/.babelrc
