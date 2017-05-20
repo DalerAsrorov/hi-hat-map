@@ -14,6 +14,7 @@ import Sentiment from './classes/sentiment.js';
 import Leaflet from './classes/leaflet.js';
 import List from './classes/list.js';
 import R from 'ramda';
+import * as d3 from 'd3';
 
 // Action
 $(window).load(function() {
