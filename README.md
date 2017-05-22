@@ -9,3 +9,6 @@ A web app that analyzes the social media through maps and sentiment analysis tha
 ## APIs Used
 * Twitter
 * To be continued... 
+
+## License 
+* [MIT](LICENSE)
