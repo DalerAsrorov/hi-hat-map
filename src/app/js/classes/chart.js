@@ -14,6 +14,9 @@ export default class Chart {
         return new Promise((res, rej) => {
             this.chart = c3.generate({
                 bindto: this._id,
+                color: {
+                    pattern: ['#d82727', '#1ae032', '#b5b5b5']
+                },
                 data: data
             });
             res(this.chart);
