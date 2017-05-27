@@ -6,7 +6,6 @@ import * as utils from './modules/utils.js';
 import * as MapOps from './modules/mapops.js';
 import * as constants from './modules/constants.js';
 import * as DataProcessing from './modules/dataprocessing.js';
-import Chart from './classes/chart.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
@@ -25,9 +24,6 @@ $(window).load(function() {
     const twitter = new Twitter('twitter');
     const sentiment = new Sentiment('social_media');
     const leaflet = new Leaflet();
-
-    const chart = new Chart();
-    chart.id = '#sentimentChart';
 
     // Dynamic modules
     let rightComponents = new Components();
@@ -348,9 +344,7 @@ $(window).load(function() {
     // post request testing
 
 
-
-
-    chart.generateChart({
+    const sentimentChart = ui.generateChart('#sentimentChart', {
         xs: {
             'negative': 'x1',
             'positive': 'x2',
@@ -365,9 +359,33 @@ $(window).load(function() {
             ['positive', 20, 180, 240, 100, 190],
             ['neutral', 40, 73, 82, 112, 135]
         ]
-    }).then((data) => {
-        console.log('Data:', data);
     });
+
+
+    console.log('sentimentChart', sentimentChart);
+    console.log('sentimentChart', sentimentChart.getHTML());
+
+    // const chart = new Chart();
+    // chart.id = '#sentimentChart';
+
+    // chart.generateChart({
+    //     xs: {
+    //         'negative': 'x1',
+    //         'positive': 'x2',
+    //         'neutral': 'x3'
+    //     },
+
+    //     columns: [
+    //         ['x1', 10, 30, 45, 50, 70, 100],
+    //         ['x2', 30, 50, 75, 100, 120],
+    //         ['x3', 40, 60, 98, 125, 140],
+    //         ['negative', 30, 200, 100, 400, 150, 250],
+    //         ['positive', 20, 180, 240, 100, 190],
+    //         ['neutral', 40, 73, 82, 112, 135]
+    //     ]
+    // }).then((data) => {
+    //     console.log('Data:', data);
+    // });
 
 
 

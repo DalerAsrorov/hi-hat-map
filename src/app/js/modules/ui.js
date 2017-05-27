@@ -1,8 +1,10 @@
 /*----------  Utils Module functions  ----------*/
 
-import StorageSystem from './../classes/storagesystem.js';
-import ContextMenu from './../classes/contextmenu.js';
+import StorageSystem from '../classes/storagesystem.js';
+import ContextMenu from '../classes/contextmenu.js';
+import Chart from '../classes/chart.js';
 import { getType } from './utils.js';
+import R from 'ramda';
 
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
@@ -244,6 +246,14 @@ export function addContextMenuTo(target, contextMenuId, listId, eventType) {
     console.log('contextMenu:', contextMenu);
     return contextMenu;
 }
+
+export const generateChart = R.curry(function generateChart(id, params) {
+    const chart = new Chart();
+    chart.id = id;
+    chart.chart = null;
+
+    return chart.generateChart(params);
+});
 
 export function resetOnMuseUp(target, containerSelector, actionName) {
     const container = $(`${containerSelector}`);
