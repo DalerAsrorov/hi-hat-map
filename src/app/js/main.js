@@ -5,6 +5,8 @@ import * as Paths from './modules/paths.js';
 import * as utils from './modules/utils.js';
 import * as MapOps from './modules/mapops.js';
 import * as constants from './modules/constants.js';
+import * as DataProcessing from './modules/dataprocessing.js';
+import Chart from './classes/chart.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
 import PanelComponent from './classes/panelcomponent.js';
@@ -92,15 +94,17 @@ $(window).load(function() {
 
             const data = twitter.processSingle(tweet);
 
+
             // 1. Process sentiment based on passed text
             // 2. Draw an object with metadata on the map
             //    and also draw it on the panel (panel is for future work).
             sentiment.processText({text: text})
             .then((data) => {
                 data.geo = coordinates;
+                DataProcessing.createSentimentDataForChart(data);
+
                 const renderObject = {
                     data,
-                    sentiment,
                     type: 'twitter'
                 };
 
@@ -340,25 +344,45 @@ $(window).load(function() {
 
     // post request testing
 
-    const chart = c3.generate({
-        bindto: '#sentimentChart',
-        // size: {
-        //     width: 200,
-        //     height: 100
-        // },
-        data: {
-            xs: {
-                'data1': 'x1',
-                'data2': 'x2',
-            },
-            columns: [
-                ['x1', 10, 30, 45, 50, 70, 100],
-                ['x2', 30, 50, 75, 100, 120],
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 20, 180, 240, 100, 190]
-            ]
-        }
-});
+    const chart = new Chart();
+    chart.id = '#sentimentChart';
+
+    // const chartObject = DataProcessing.createSentDataForChart(sentiment);
+    chart.generateChart({
+        xs: {
+            'data1': 'x1',
+            'data2': 'x2',
+        },
+        columns: [
+            ['x1', 10, 30, 45, 50, 70, 100],
+            ['x2', 30, 50, 75, 100, 120],
+            ['data1', 30, 200, 100, 400, 150, 250],
+            ['data2', 20, 180, 240, 100, 190]
+        ]
+    }).then((data) => {
+        console.log('Data:', data);
+    });
+
+
+    // const chart = c3.generate({
+    //     bindto: '#sentimentChart',
+    //     // size: {
+    //     //     width: 200,
+    //     //     height: 100
+    //     // },
+    //     data: {
+    //         xs: {
+    //             'data1': 'x1',
+    //             'data2': 'x2',
+    //         },
+    //         columns: [
+    //             ['x1', 10, 30, 45, 50, 70, 100],
+    //             ['x2', 30, 50, 75, 100, 120],
+    //             ['data1', 30, 200, 100, 400, 150, 250],
+    //             ['data2', 20, 180, 240, 100, 190]
+    //         ]
+    //     }
+    // });
 
 
 });

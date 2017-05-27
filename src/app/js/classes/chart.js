@@ -2,14 +2,21 @@
 
 export default class Chart {
     constuctor(id) {
-        console.log(`Instantiated a Chart object with id ${id}`);
         this.id = id;
-        this.chart = null;
+        // this.chart = null;
     }
 
-    generateChart(opt={}) {
-        this.chart = c3.generate({
-            bindto: this.id
+    set id(id) {
+        this._id = id;
+    }
+
+    generateChart(data={}) {
+        return new Promise((res, rej) => {
+            this.chart = c3.generate({
+                bindto: this._id,
+                data: data
+            });
+            res(this.chart);
         });
     }
 
