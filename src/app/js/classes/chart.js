@@ -1,4 +1,4 @@
-
+import { COLORS } from '../modules/constants.js';
 
 export default class Chart {
     constuctor(id) {
@@ -15,7 +15,11 @@ export default class Chart {
             this.chart = c3.generate({
                 bindto: this._id,
                 color: {
-                    pattern: ['#d82727', '#1ae032', '#b5b5b5']
+                    pattern: [
+                        COLORS['CHART']['NEGATIVE'],
+                        COLORS['CHART']['POSITIVE'],
+                        COLORS['CHART']['NEUTRAL']
+                    ]
                 },
                 data: data
             });
