@@ -382,10 +382,10 @@ $(window).load(function() {
     const sentimentChart = ui.generateChart('#sentimentChart', {
         x: 'x',
         columns: [
-            fakeDateList,
-            ['negative', 30, 200, 100, 400, 150, 250],
-            ['positive', 20, 180, 240, 100, 190],
-            ['total', 40, 73, 82, 112, 135]
+            ['x', new Date()],
+            ['negative', 0],
+            ['positive', 0],
+            ['total', 0]
         ]
     }, {
         x: {
@@ -399,6 +399,18 @@ $(window).load(function() {
 
     console.log('sentimentChart', sentimentChart);
     console.log('sentimentChart', sentimentChart.getHTML());
+
+    setTimeout(() => {
+        sentimentChart.load({
+            columns: [
+                fakeDateList,
+                ['negative',  30, 200, 100, 400, 150, 250],
+                ['positive', 130, 340, 200, 500, 250, 350]
+            ]
+        });
+    } , 4000)
+
+
 
 
 
