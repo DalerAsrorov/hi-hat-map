@@ -1,3 +1,6 @@
+import Chart from '../classes/chart.js';
+
+const chart = new Chart();
 
 export function getSotedData(panelComponent, ascending=true, limit=0) {
     let data;
@@ -30,24 +33,19 @@ export function formatData(panelComponent, fn) {
     fn(panelComponent._data);
 }
 
-export function createSentimentDataForChart(data) {
+export function createSentimentDataForChart(data, currentChartType='multiple') {
     const sentiment = data.sentiment;
+    let result;
 
-    // {
-    //     xs: {
-    //         'negative': 'x1',
-    //         'positive': 'x2',
-    //         'neutral': 'x3'
-    //     },
+    switch(currentChartType) {
+        case 'multiple':
+            result = chart.structureData(sentiment);
+            break;
+        default:
+            throw new Error('No graph type was selected.')
+    }
 
-    //     columns: [
-    //         ['x1', 10, 30, 45, 50, 70, 100],
-    //         ['x2', 30, 50, 75, 100, 120],
-    //         ['x3', 40, 60, 98, 125, 140],
-    //         ['negative', 30, 200, 100, 400, 150, 250],
-    //         ['positive', 20, 180, 240, 100, 190],
-    //         ['neutral', 40, 73, 82, 112, 135]
-    //     ]
-    // }
 
+
+    return result;
 }

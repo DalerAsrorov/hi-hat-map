@@ -28,6 +28,7 @@ $(window).load(function() {
 
     // Dynamic modules
     let rightComponents = new Components();
+    let sentimentQueue = new DynamicQueue();
 
     // Constants
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
@@ -91,9 +92,7 @@ $(window).load(function() {
             const id = tweet.id;
             const created_at = tweet.created_at;
             const mlsTime = tweet.timestamp_ms;
-
             const data = twitter.processSingle(tweet);
-
 
             // 1. Process sentiment based on passed text
             // 2. Draw an object with metadata on the map
@@ -101,7 +100,19 @@ $(window).load(function() {
             sentiment.processText({text: text})
             .then((data) => {
                 data.geo = coordinates;
-                DataProcessing.createSentimentDataForChart(data);
+
+                let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
+                sentimentQueue.enqueue(selectedChartData);
+
+                if(sentimentQueue.size() === 5) {
+                    console.log('Sentiment queue reached size', sentiment.size());
+                    console.log('Sentiment queue:', sentimentQueue);
+
+                    // load new data after each time the queue size reaches 5
+                    sentimentQueue.clear();
+                }
+
+                console.log('P00P sentimentQueue:', sentimentQueue);
 
                 const renderObject = {
                     data,
@@ -167,7 +178,7 @@ $(window).load(function() {
                 - Get location and query and start connecting to the socket
 
              */
-            getInfoBasedOnChosenMode('specified_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
         };
 
         // last location is saved
@@ -361,8 +372,6 @@ $(window).load(function() {
             ['neutral', 40, 73, 82, 112, 135]
         ]
     });
-
-    let sdQueue = new DynamicQueue();
 
     console.log('sentimentChart', sentimentChart);
     console.log('sentimentChart', sentimentChart.getHTML());
