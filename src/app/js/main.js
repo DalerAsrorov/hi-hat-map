@@ -40,7 +40,47 @@ $(window).load(function() {
     // other variables used throughout the code
     let cpOpen,
         tracker,
-        cpRightList =[];
+        cpRightList = [];
+
+
+    let sentimentChart = ui.generateChart('#sentimentChart', {
+        x: 'x',
+        columns: [
+            ['x', new Date()],
+            ['negative', 0],
+            ['positive', 0],
+            ['total', 0]
+        ]
+    }, {
+        x: {
+            type: 'timeseries',
+            tick: {
+                centered: true,
+                format: utils.formatDateToHoursOnly
+            }
+        }
+    });
+
+    // let fakeDateList = [];
+    // for(let i = 0; i < 6; i++) {
+    //     fakeDateList.push(randomDate(new Date(2012, 0, 1), new Date()));
+    // }
+
+    // fakeDateList.unshift('x');
+    // console.log('P00P After fakeDateList.unshift(x); ', fakeDateList);
+
+    // console.log('sentimentChart', sentimentChart);
+    // console.log('sentimentChart', sentimentChart.getHTML());
+
+    // setTimeout(() => {
+    //     sentimentChart.load({
+    //         columns: [
+    //             fakeDateList,
+    //             ['negative',  30, 200, 100, 400, 150, 250],
+    //             ['positive', 130, 340, 200, 500, 250, 350]
+    //         ]
+    //     });
+    // } , 4000);
 
 
     /* INTRO LOADER CODE */
@@ -104,10 +144,25 @@ $(window).load(function() {
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
 
                 if(sentimentQueue.size() === 5) {
-                    console.log('Sentiment queue reached size', sentimentQueue.size());
-                    console.log('Sentiment queue:', sentimentQueue);
+                    let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
+                        negList = sentimentQueue.queue.map(sentimentObject => sentimentObject.negative),
+                        totalList = sentimentQueue.queue.map(sentimentObject => sentimentObject.total),
+                        dateList = sentimentQueue.queue.map(sentimentObject => sentimentObject.date);
 
+                    // place x before all dates
+                    posList.unshift('positive');
+                    negList.unshift('negative');
+                    totalList.unshift('total');
+                    dateList.unshift('x');
 
+                    sentimentChart.load({
+                        columns: [
+                            dateList,
+                            posList,
+                            negList,
+                            totalList
+                        ]
+                    });
 
                     // load new data after each time the queue size reaches 5
                     sentimentQueue.clear();
@@ -358,57 +413,7 @@ $(window).load(function() {
 
     // post request testing
 
-    const formatDate = (x) => {
-        // "xx:xx:xx" format
-        const xLocaleString = x.toLocaleString();
-        const xFinal = xLocaleString.substring(xLocaleString.indexOf(',') + 1, xLocaleString.length).trim();
 
-        return xFinal;
-
-    }
-
-    function randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    }
-
-    let fakeDateList = [];
-    for(let i = 0; i < 6; i++) {
-        fakeDateList.push(randomDate(new Date(2012, 0, 1), new Date()));
-    }
-
-    fakeDateList.unshift('x');
-    console.log('P00P After fakeDateList.unshift(x); ', fakeDateList);
-
-    const sentimentChart = ui.generateChart('#sentimentChart', {
-        x: 'x',
-        columns: [
-            ['x', new Date()],
-            ['negative', 0],
-            ['positive', 0],
-            ['total', 0]
-        ]
-    }, {
-        x: {
-            type: 'timeseries',
-            tick: {
-                centered: true,
-                format: formatDate
-            }
-        }
-    });
-
-    console.log('sentimentChart', sentimentChart);
-    console.log('sentimentChart', sentimentChart.getHTML());
-
-    setTimeout(() => {
-        sentimentChart.load({
-            columns: [
-                fakeDateList,
-                ['negative',  30, 200, 100, 400, 150, 250],
-                ['positive', 130, 340, 200, 500, 250, 350]
-            ]
-        });
-    } , 4000)
 
 
 

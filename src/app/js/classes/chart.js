@@ -82,7 +82,8 @@ export default class Chart {
         return {
             positive,
             negative,
-            total
+            total,
+            date: new Date()
         }
     }
 
