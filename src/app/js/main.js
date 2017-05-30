@@ -61,28 +61,6 @@ $(window).load(function() {
         }
     });
 
-    // let fakeDateList = [];
-    // for(let i = 0; i < 6; i++) {
-    //     fakeDateList.push(randomDate(new Date(2012, 0, 1), new Date()));
-    // }
-
-    // fakeDateList.unshift('x');
-    // console.log('P00P After fakeDateList.unshift(x); ', fakeDateList);
-
-    // console.log('sentimentChart', sentimentChart);
-    // console.log('sentimentChart', sentimentChart.getHTML());
-
-    // setTimeout(() => {
-    //     sentimentChart.load({
-    //         columns: [
-    //             fakeDateList,
-    //             ['negative',  30, 200, 100, 400, 150, 250],
-    //             ['positive', 130, 340, 200, 500, 250, 350]
-    //         ]
-    //     });
-    // } , 4000);
-
-
     /* INTRO LOADER CODE */
     $(() => {
         if(!storageSystem.getItem('firstVisit')) {
@@ -412,33 +390,4 @@ $(window).load(function() {
     //     })
 
     // post request testing
-
-
-
-
-
-
-
-
-    // const chart = c3.generate({
-    //     bindto: '#sentimentChart',
-    //     // size: {
-    //     //     width: 200,
-    //     //     height: 100
-    //     // },
-    //     data: {
-    //         xs: {
-    //             'data1': 'x1',
-    //             'data2': 'x2',
-    //         },
-    //         columns: [
-    //             ['x1', 10, 30, 45, 50, 70, 100],
-    //             ['x2', 30, 50, 75, 100, 120],
-    //             ['data1', 30, 200, 100, 400, 150, 250],
-    //             ['data2', 20, 180, 240, 100, 190]
-    //         ]
-    //     }
-    // });
-
-
 });
