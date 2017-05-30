@@ -22,7 +22,7 @@ export default class Chart {
         return this._id;
     }
 
-    generateChart(data={}) {
+    generateChart(data={}, axis={}) {
         this._chart = c3.generate({
             bindto: this._id,
             color: {
@@ -32,7 +32,8 @@ export default class Chart {
                     COLORS['CHART']['NEUTRAL']
                 ]
             },
-            data: data
+            data: data,
+            axis: axis
         });
 
         return this;

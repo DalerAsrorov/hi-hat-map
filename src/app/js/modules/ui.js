@@ -247,12 +247,12 @@ export function addContextMenuTo(target, contextMenuId, listId, eventType) {
     return contextMenu;
 }
 
-export const generateChart = R.curry(function generateChart(id, params) {
+export const generateChart = R.curry(function generateChart(id, data, axis) {
     const chart = new Chart();
     chart.id = id;
     chart.chart = null;
 
-    return chart.generateChart(params);
+    return chart.generateChart(data, axis);
 });
 
 export function resetOnMuseUp(target, containerSelector, actionName) {

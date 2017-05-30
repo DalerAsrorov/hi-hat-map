@@ -102,17 +102,20 @@ $(window).load(function() {
                 data.geo = coordinates;
 
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
-                sentimentQueue.enqueue(selectedChartData);
 
                 if(sentimentQueue.size() === 5) {
-                    console.log('Sentiment queue reached size', sentiment.size());
+                    console.log('Sentiment queue reached size', sentimentQueue.size());
                     console.log('Sentiment queue:', sentimentQueue);
+
+
 
                     // load new data after each time the queue size reaches 5
                     sentimentQueue.clear();
                 }
 
-                console.log('P00P sentimentQueue:', sentimentQueue);
+                sentimentQueue.enqueue(selectedChartData);
+
+                console.log('P00P sentimentChart after if statement', sentimentQueue, ' size:', sentimentQueue.size());
 
                 const renderObject = {
                     data,
@@ -355,22 +358,43 @@ $(window).load(function() {
 
     // post request testing
 
+    const formatDate = (x) => {
+        // "xx:xx:xx" format
+        const xLocaleString = x.toLocaleString();
+        const xFinal = xLocaleString.substring(xLocaleString.indexOf(',') + 1, xLocaleString.length).trim();
+
+        return xFinal;
+
+    }
+
+    function randomDate(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
+    let fakeDateList = [];
+    for(let i = 0; i < 6; i++) {
+        fakeDateList.push(randomDate(new Date(2012, 0, 1), new Date()));
+    }
+
+    fakeDateList.unshift('x');
+    console.log('P00P After fakeDateList.unshift(x); ', fakeDateList);
 
     const sentimentChart = ui.generateChart('#sentimentChart', {
-        xs: {
-            'negative': 'x1',
-            'positive': 'x2',
-            'neutral': 'x3'
-        },
-
+        x: 'x',
         columns: [
-            ['x1', 10, 30, 45, 50, 70, 100],
-            ['x2', 30, 50, 75, 100, 120],
-            ['x3', 40, 60, 98, 125, 140],
+            fakeDateList,
             ['negative', 30, 200, 100, 400, 150, 250],
             ['positive', 20, 180, 240, 100, 190],
-            ['neutral', 40, 73, 82, 112, 135]
+            ['total', 40, 73, 82, 112, 135]
         ]
+    }, {
+        x: {
+            type: 'timeseries',
+            tick: {
+                centered: true,
+                format: formatDate
+            }
+        }
     });
 
     console.log('sentimentChart', sentimentChart);
