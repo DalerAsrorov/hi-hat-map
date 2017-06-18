@@ -9,8 +9,9 @@ import * as DataProcessing from './modules/dataprocessing.js';
 import DynamicQueue from './classes/dynamic-queue.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
-import PanelComponent from './classes/panelcomponent.js';
+import Component from './classes/component.js';
 import Components from './classes/components.js';
+import PanelComponent from './classes/panelcomponent.js';
 import Twitter from './classes/twitter.js';
 import Sentiment from './classes/sentiment.js';
 import Leaflet from './classes/leaflet.js';
@@ -99,6 +100,8 @@ $(window).load(function() {
         }
     }).addTo(Map);
 
+
+    const socketStarted = true;
     socket.on('tweet', (tweet) => {
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
         if(coordinates) {
@@ -118,43 +121,41 @@ $(window).load(function() {
             sentiment.processText({text: text})
             .then((data) => {
                 data.geo = coordinates;
-
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
-
-                if(sentimentQueue.size() === 5) {
-                    let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
-                        negList = sentimentQueue.queue.map(sentimentObject => sentimentObject.negative),
-                        totalList = sentimentQueue.queue.map(sentimentObject => sentimentObject.total),
-                        dateList = sentimentQueue.queue.map(sentimentObject => sentimentObject.date);
-
-                    // place x before all dates
-                    posList.unshift('positive');
-                    negList.unshift('negative');
-                    totalList.unshift('total');
-                    dateList.unshift('x');
-
-                    sentimentChart.load({
-                        columns: [
-                            dateList,
-                            posList,
-                            negList,
-                            totalList
-                        ]
-                    });
-
-                    // load new data after each time the queue size reaches 5
-                    sentimentQueue.clear();
-                }
 
                 sentimentQueue.enqueue(selectedChartData);
 
+                // if(sentimentQueue.size() === 5) {
+                let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
+                    negList = sentimentQueue.queue.map(sentimentObject => sentimentObject.negative),
+                    totalList = sentimentQueue.queue.map(sentimentObject => sentimentObject.total),
+                    dateList = sentimentQueue.queue.map(sentimentObject => sentimentObject.date);
+
+                // place x before all dates
+                posList.unshift('positive');
+                negList.unshift('negative');
+                totalList.unshift('total');
+                dateList.unshift('x');
+
+                sentimentChart.load({
+                    columns: [
+                        dateList,
+                        posList,
+                        negList,
+                        totalList
+                    ]
+                });
+
+                // load new data after each time the queue size reaches 5
+                if(sentimentQueue.size() === 5) {
+                    sentimentQueue.dequeue();
+                    console.log('P00P2 Queue item removed');
+                }
+                // }
+
                 console.log('P00P sentimentChart after if statement', sentimentQueue, ' size:', sentimentQueue.size());
 
-                const renderObject = {
-                    data,
-                    type: 'twitter'
-                };
-
+                const renderObject = { data, type: 'twitter' }
                 MapOps.renderObject(renderObject);
             });
         } else {
@@ -368,9 +369,9 @@ $(window).load(function() {
     let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', 'mapContextMenuList', 'contextmenu');
     contextMenu.hide();
     contextMenu.bind();
-    contextMenu.appendMenuItem('One', ()=>console.log('One'), 'click');
-    contextMenu.appendMenuItem('Two', ()=>console.log('Two'), 'click');
-    contextMenu.appendMenuItem('Three', ()=>console.log('Three'), 'click');
+    contextMenu.appendMenuItem('One', ()=> console.log('One'), 'click');
+    contextMenu.appendMenuItem('Two', ()=> console.log('Two'), 'click');
+    contextMenu.appendMenuItem('Three', ()=> console.log('Three'), 'click');
     contextMenu.addClassesToAllMenuItems('sup-li');
 
     // const list = new List('contextMenuList', 'contextMenuList');
@@ -383,6 +384,14 @@ $(window).load(function() {
     // contextMenu.fadeOut();
 
     console.log('Context menu in main.js', contextMenu);
+
+    // Testing Component class
+    let component1 = new Component('comp1', '#mapWrapper', 'div');
+    let component2 = new Component('comp2', `#${component1.id}`, 'span', 'Hello there');
+
+    component2.appendChild(component2);
+
+    console.log('P00P-11 Testing components\n', component1, component2);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

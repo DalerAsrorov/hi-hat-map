@@ -125,6 +125,10 @@ export function removeClass(target, className) {
     $(target).removeClass(className);
 }
 
+export function getElement(selector) {
+    return $(`${selector}`);
+}
+
 export function addEventListenerTo(target, event, fn) {
     const targetType = getType(target);
 
@@ -215,6 +219,14 @@ export function keypress(target, callback) {
     $(target).keypress(callback);
 }
 
+export function append(container, child) {
+    if ((typeof container === 'string') && (typeof child === 'string')) {
+        $(container).append(child);
+    } else {
+        container.append(child);
+    }
+}
+
 export function appendTo(container, element) {
     return !!$(`${container}`).append(element);
 }
@@ -265,6 +277,3 @@ export function resetOnMuseUp(target, containerSelector, actionName) {
         }
     });
 }
-
-
-
