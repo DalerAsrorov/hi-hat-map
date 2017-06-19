@@ -44,7 +44,14 @@ export const drawObject = curry((data, geolocation, iconType) => {
             latlng = L.latLng(geolocation[1], geolocation[0]);
 
             const leaflet = new Leaflet();
-            popup = leaflet.createPopup(latlng, '<p>Hello world!<br />This is a nice popup.</p>');
+            popup = leaflet.createPopup(
+                latlng,
+                '<p>Hello world!<br />This is a nice popup.</p>',
+                {
+                    minWidth: 300,
+                    autoPanPadding: L.point(10, 10)
+                }
+            );
 
             L.marker([geolocation[1], geolocation[0]], {
                 icon: icon,

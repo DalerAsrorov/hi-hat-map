@@ -5,9 +5,8 @@ export default class Leaflet {
 
     }
 
-    createPopup(latlng, content) {
-         return L.popup()
-                .setLatLng(latlng)
+    createPopup(latlng, content, options={}) {
+         return L.popup(options)
                 .setContent(content)
     }
 
@@ -19,8 +18,8 @@ export default class Leaflet {
             let latlng = L.latLng(coordinate[1], coordinate[0]);
             polygonPoints.push(latlng);
         });
-        polygon = L.polygon(polygonPoints);
 
+        polygon = L.polygon(polygonPoints);
         return polygon.getBounds().getCenter();
     }
 
