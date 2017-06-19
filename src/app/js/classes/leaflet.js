@@ -5,7 +5,7 @@ export default class Leaflet {
 
     }
 
-    createPopup(latlng, content, options={}) {
+    createPopup(content, options={}) {
          return L.popup(options)
                 .setContent(content)
     }

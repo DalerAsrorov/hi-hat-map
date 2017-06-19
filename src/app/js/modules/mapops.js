@@ -35,25 +35,29 @@ export const drawObject = curry((data, geolocation, iconType) => {
     switch(iconType) {
         case 'twitter':
             showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
-            console.log('data, geo, icon:', data, geolocation, iconType);
-            console.log(showboxComp);
-
             // bindPopup( <String> html | <HTMLElement> el | <Popup> popup, <Popup options> options? )
 
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
             latlng = L.latLng(geolocation[1], geolocation[0]);
 
             const leaflet = new Leaflet();
+            const popupOptions = {
+                minWidth: 300,
+                autoPanPadding: L.point(10, 10)
+            };
+
             popup = leaflet.createPopup(
-                latlng,
-                '<p>Hello world!<br />This is a nice popup.</p>',
-                {
-                    minWidth: 300,
-                    autoPanPadding: L.point(10, 10)
-                }
+                `<div class='${iconType}-wrapper showbox-wrapper'>
+                    <header>
+
+                    </header>
+                    <div>
+                    </div>
+                 </div>`,
+                popupOptions
             );
 
-            L.marker([geolocation[1], geolocation[0]], {
+            L.marker(latlng, {
                 icon: icon,
                 title: 'Tweet',
                 alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
