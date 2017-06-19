@@ -122,6 +122,8 @@ $(window).load(function() {
             sentiment.processText({text: text})
             .then((data) => {
                 data.geo = coordinates;
+                data.tweet = tweet;
+
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
 
                 sentimentQueue.enqueue(selectedChartData);

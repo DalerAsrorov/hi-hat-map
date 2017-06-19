@@ -21,16 +21,10 @@ export const generateResults = curry(data => {
 
 export const renderObject = function(renderObject) {
     const data = renderObject.data;
-    const sentiment = renderObject.sentiment;
     const type = renderObject.type;
     const geolocation = renderObject.data.geo;
 
-    const dataWrapper = {
-       data,
-       sentiment
-    };
-
-    drawObject(dataWrapper, geolocation, type);
+    drawObject(data, geolocation, type);
 }
 
 export const drawObject = curry((data, geolocation, iconType) => {
@@ -42,6 +36,7 @@ export const drawObject = curry((data, geolocation, iconType) => {
         case 'twitter':
             showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
             console.log('data, geo, icon:', data, geolocation, iconType);
+            console.log(showboxComp);
 
             // bindPopup( <String> html | <HTMLElement> el | <Popup> popup, <Popup options> options? )
 
