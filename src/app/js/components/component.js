@@ -17,7 +17,13 @@ export default class Component {
     }
 
     bind(container) {
-        append(container, this.id);
+        let myTarget = this.id;
+
+        if(typeof container !== 'string') {
+            myTarget = this.$node;
+        }
+
+        append(container, myTarget);
     }
 
     html() {
