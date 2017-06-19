@@ -156,7 +156,11 @@ $(window).load(function() {
 
                 console.log('P00P sentimentChart after if statement', sentimentQueue, ' size:', sentimentQueue.size());
 
-                const renderObject = { data, type: 'twitter' }
+                const renderObject = {
+                    data,
+                    type: 'twitter'
+                };
+
                 MapOps.renderObject(renderObject);
             });
         } else {

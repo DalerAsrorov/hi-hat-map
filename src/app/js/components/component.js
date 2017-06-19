@@ -12,6 +12,10 @@ export default class Component {
         append($(parent), this.$node);
     }
 
+    addClasses(classes='') {
+        this.html().addClass(classes);
+    }
+
     bind(container) {
         append(container, this.id);
     }
@@ -24,5 +28,9 @@ export default class Component {
         if(component instanceof Component) {
             append(this.html(), component.html());
         }
+    }
+
+    appendHtml(html) {
+        append(this.html(), html);
     }
 }
