@@ -9,7 +9,8 @@ import * as DataProcessing from './modules/dataprocessing.js';
 import DynamicQueue from './classes/dynamic-queue.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
-import Component from './classes/component.js';
+import Component from './components/component.js';
+import ShowboxComponent from './components/showbox-component.js';
 import Components from './classes/components.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Twitter from './classes/twitter.js';
@@ -386,8 +387,8 @@ $(window).load(function() {
     console.log('Context menu in main.js', contextMenu);
 
     // Testing Component class
-    let component1 = new Component('comp1', '#mapWrapper', 'div');
-    let component2 = new Component('comp2', `#${component1.id}`, 'span', 'Hello there');
+    let component1 = new ShowboxComponent('comp1', '#mapWrapper', 'div');
+    let component2 = new ShowboxComponent('comp2', `#${component1.id}`, 'span', 'Hello there');
 
     component2.appendChild(component2);
 
