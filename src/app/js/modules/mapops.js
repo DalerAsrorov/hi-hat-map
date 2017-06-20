@@ -28,34 +28,22 @@ export const renderObject = function(renderObject) {
 }
 
 export const drawObject = curry((data, geolocation, iconType) => {
+    const leaflet = new Leaflet();
     let icon, latlng, popup;
-
     let showboxComp;
 
     switch(iconType) {
         case 'twitter':
-            showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
-            // bindPopup( <String> html | <HTMLElement> el | <Popup> popup, <Popup options> options? )
-
-            icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
-            latlng = L.latLng(geolocation[1], geolocation[0]);
-
-            const leaflet = new Leaflet();
             const popupOptions = {
                 minWidth: 300,
                 autoPanPadding: L.point(10, 10)
             };
 
-            popup = leaflet.createPopup(
-                `<div class='${iconType}-wrapper showbox-wrapper'>
-                    <header>
-
-                    </header>
-                    <div>
-                    </div>
-                 </div>`,
-                popupOptions
-            );
+            showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
+            showboxComp.generate();
+            popup = leaflet.createPopup(showboxComp, popupOptions);
+            icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
+            latlng = L.latLng(geolocation[1], geolocation[0]);
 
             L.marker(latlng, {
                 icon: icon,

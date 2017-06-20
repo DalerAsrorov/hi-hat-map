@@ -225,7 +225,7 @@ $(window).load(function() {
             getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
         };
 
-        // last location is saved
+        // last location is savedd
         storageSystem.setRawItem('lastLocation', lastLocation);
 
         // once query selected:

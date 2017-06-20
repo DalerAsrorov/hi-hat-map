@@ -5,9 +5,9 @@ export default class Leaflet {
 
     }
 
-    createPopup(content, options={}) {
+    createPopup(showboxComponent, options={}) {
          return L.popup(options)
-                .setContent(content)
+                .setContent(showboxComponent.rawHtml())
     }
 
     computePolygonCenter(L, boundingBox) {

@@ -6,9 +6,9 @@ export default class Component {
         this.id = id;
         this.parent = parent;
         this.nodeType = nodeType;
+        this.$node = $(`<${nodeType} id=${id}>${content}</${nodeType}>`);
 
         // append to parent
-        this.$node = $(`<${nodeType} id=${id}>${content}</${nodeType}>`);
         append($(parent), this.$node);
     }
 
@@ -16,7 +16,7 @@ export default class Component {
         this.html().addClass(classes);
     }
 
-    bind(container) {
+    bind(container='') {
         let myTarget = this.id;
 
         if(typeof container !== 'string') {
@@ -27,7 +27,13 @@ export default class Component {
     }
 
     html() {
-        return getElement(`${this.id}`);
+        // return getElement(`${this.id}`);
+        return this.$node;
+    }
+
+    rawHtml() {
+        const node = this.html();
+        return node.html().trim();
     }
 
     appendChild(component) {
@@ -38,5 +44,14 @@ export default class Component {
 
     appendHtml(html) {
         append(this.html(), html);
+    }
+
+    update(props) {
+        const { id, parent, $node, nodeType } = props;
+
+        this.id = id ? id : this.id;
+        this.parent = parent ? parent : this.parent;
+        this.nodeType = nodeType ? nodeType : this.nodeType;
+        this.$node = $node ? $node : this.$node;
     }
 }

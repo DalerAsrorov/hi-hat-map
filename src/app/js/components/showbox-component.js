@@ -5,5 +5,4 @@ export default class ShowboxComponent extends Component {
         super(id, parent, nodeType, content);
     }
 
-
 }
