@@ -21,7 +21,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                 <div class='twitter-showbox-content'>
                     <div>
                         <section class='twitter-showbox-prof'>
-                            <img src='${testString2}' alt="${testString}'s profile image" />
+                            <img src='' alt="${testString}'s profile image" />
                             <span class='twitter-showbox-username'>${testString2}</span>
                         </section>
                         <section class='twitter-showbox-total'>
@@ -37,8 +37,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                 </footer>
             </div>`;
 
-        const showboxDOM = convertToDOMElement(template);
-        const $node = $(showboxDOM);
+        const $node = convertToDOMElement(template);
 
         this.update({
             $node

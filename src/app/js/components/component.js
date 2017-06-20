@@ -7,7 +7,6 @@ export default class Component {
         this.parent = parent;
         this.nodeType = nodeType;
         this.$node = $(`<${nodeType} id=${id}>${content}</${nodeType}>`);
-
         // append to parent
         append($(parent), this.$node);
     }

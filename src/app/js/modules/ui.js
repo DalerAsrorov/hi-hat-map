@@ -122,7 +122,8 @@ export function addTextTo(target, text) {
 }
 
 export function convertToDOMElement(htmlTemplate) {
-    return $.parseHTML(htmlTemplate)[0];
+    const domElement = $.parseHTML(htmlTemplate)[0];
+    return $(domElement);
 }
 
 export function removeClass(target, className) {
