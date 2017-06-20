@@ -29,31 +29,29 @@ export const renderObject = function(renderObject) {
 
 export const drawObject = curry((data, geolocation, iconType) => {
     const leaflet = new Leaflet();
-    let icon, latlng, popup;
-    let showboxComp;
+    const latlng = L.latLng(geolocation[1], geolocation[0]);
+    const popupOptions = {
+        autoPanPadding: L.point(10, 10),
+        minWidth: 300
+    };
+
+    let icon, popup, showboxComp, markerOptions;
 
     switch(iconType) {
         case 'twitter':
-            const popupOptions = {
-                minWidth: 300,
-                autoPanPadding: L.point(10, 10)
-            };
-
             showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
-            showboxComp.generate();
+            showboxComp.generateTemplate();
+
             popup = leaflet.createPopup(showboxComp, popupOptions);
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
-            latlng = L.latLng(geolocation[1], geolocation[0]);
 
-            L.marker(latlng, {
+            markerOptions = {
                 icon: icon,
                 title: 'Tweet',
+                // TODO: replace geolocation with username or place.
                 alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
                 riseOnHover: true
-            })
-            .bindPopup(popup)
-            .openPopup()
-            .addTo(Map);
+            };
 
             break;
         case 'yelp':
@@ -62,4 +60,9 @@ export const drawObject = curry((data, geolocation, iconType) => {
         default:
             console.log('No soc media was selected.');
     };
+
+    L.marker(latlng, markerOptions)
+    .bindPopup(popup)
+    .openPopup()
+    .addTo(Map);
 });

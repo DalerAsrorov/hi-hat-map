@@ -7,7 +7,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         this.data = data;
     }
 
-    generate() {
+    generateTemplate() {
         const testString = 'Daler Asrorov';
         const testString2 = 'William Sallivan';
 
@@ -42,7 +42,6 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         this.update({
             $node
         });
-
 
         return $node;
     }
