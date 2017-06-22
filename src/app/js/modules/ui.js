@@ -249,6 +249,13 @@ export function getInputValue(target) {
     return $(target).val();
 }
 
+export function getOuterHTMLText(jqDom) {
+    if(R.isNil(jqDom) || jqDom === '') {
+        return '';
+    }
+    return $('<div />').append(jqDom.clone()).html();
+}
+
 export function addContextMenuTo(target, contextMenuId, listId, eventType) {
     const $target = $(target);
     let contextMenu = new ContextMenu(contextMenuId, listId, target);

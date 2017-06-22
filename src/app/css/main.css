@@ -311,6 +311,64 @@ header#loadIntro {
   padding: 5px;
 }
 
+/* Negaitve,  text with sentiment value less than zero */
+.sent-neg-1 {
+    color: #D05050;
+}
+
+.sent-neg-2 {
+    color: #BC3C3C;
+}
+
+.sent-neg-3 {
+    color: #A82828;
+}
+
+.sent-neg-4 {
+    color: #8A0A0A;
+}
+
+.sent-neg-5 {
+    color: #6C0000;
+}
+
+.sent-neg-6 {
+    color: #580000;
+}
+
+.sent-neg-7-limit {
+    color: #440000;
+}
+
+/* Positive, text with sentiment value greater than zero */
+.sent-pos-1 {
+    color: #64E464;
+}
+
+.sent-pos-2 {
+    color: #46C646;
+}
+
+.sent-pos-3 {
+    color: #28A828;
+}
+
+.sent-pos-4 {
+    color: #0A8A0A;
+}
+
+.sent-pos-5 {
+    color: #006C00;
+}
+
+.sent-pos-6 {
+    color: #004E00;
+}
+
+.sent-pos-7-limit {
+    color: #008080;
+}
+
 .right-cp-name {
 
 }
@@ -400,12 +458,3 @@ header#loadIntro {
   display: flex;
   flex-flow: column;
 }
-
-
-
-
-
-
-
-
-

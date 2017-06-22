@@ -1,5 +1,5 @@
 /* Base component class. */
-import { getElement, append } from '../modules/ui.js';
+import { getElement, append, getOuterHTMLText } from '../modules/ui.js';
 
 export default class Component {
     constructor(id, parent, nodeType='div', content='') {
@@ -31,8 +31,7 @@ export default class Component {
     }
 
     rawHtml() {
-        const node = this.html();
-        return node.html().trim();
+        return getOuterHTMLText(this.html());
     }
 
     appendChild(component) {
