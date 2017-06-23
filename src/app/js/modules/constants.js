@@ -12,6 +12,10 @@ export const IMAGES = {
         TWITTER: '../../img/icons/twitter_i.png',
         YELP: '',
         FOURSQARE: ''
+    },
+
+    DEFAULT: {
+        SHOWBOX_USER_PROFILE_IMG: '../../img/icons/default-user-profile.png'
     }
 }
 

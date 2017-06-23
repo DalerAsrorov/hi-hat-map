@@ -336,7 +336,7 @@ header#loadIntro {
     color: #580000;
 }
 
-.sent-neg-7-limit {
+.sent-neg-7 {
     color: #440000;
 }
 
@@ -365,8 +365,14 @@ header#loadIntro {
     color: #004E00;
 }
 
-.sent-pos-7-limit {
+.sent-pos-7 {
     color: #008080;
+}
+
+.showbox-profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 .right-cp-name {
