@@ -40,7 +40,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         if(!isEmpty(sentimentNegativeWordPolarityDict)) {
             negWordsHtmlDiv = $('<div class="twitter-showbox-negative-words"></div>')
             for(let [key, value] of Object.entries(sentimentNegativeWordPolarityDict)) {
-                negWordsHtmlDiv.append(`<span class='sent-neg-${value}'>${key}</span> `);
+                negWordsHtmlDiv.append(`<span class='sent-neg${value}'>${key}</span> `);
             }
         }
 
