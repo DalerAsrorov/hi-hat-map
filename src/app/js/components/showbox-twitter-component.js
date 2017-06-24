@@ -58,25 +58,25 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         const template =
             `<div class='showbox-wrapper twitter-showbox-wrapper'>
                 <header class='twitter-showbox-header'>
-                    <span> ${sentimentTotalScore} </span>
-                    <span> ${sentimentValence} </span>
+                    <span> ${ sentimentTotalScore } </span>
+                    <span> ${ sentimentValence } </span>
                 </header>
-                <div class='twitter-showbox-content'>
-                    <div>
-                        <section class='twitter-showbox-prof'>
-                            <img class='showbox-profile-img' src='${userProfileImageURL}' alt="${userScreenName}'s' profile image." />
-                            <span class='twitter-showbox-username'></span>
+                <div class='row twitter-showbox-content'>
+                    <div class='twitter-showbox-prof col-lg-12 row'>
+                        <section class='col-lg-2 row'>
+                            <img class='showbox-profile-img col-lg-12' src='${ userProfileImageURL }' alt="${ userScreenName }'s' profile image." />
+                            <span class='twitter-showbox-username col-lg-12'> ${ userScreenName } </span>
                         </section>
-                        <section class='twitter-showbox-total'>
+                        <section class='twitter-showbox-total col-lg-10'>
                         </section>
                     </div>
-                    <div class='twitter-showbox-sentiment'>
+                    <div class='twitter-showbox-sentiment col-lg-12'>
                         <div>
 
                         </div>
                         <div class="twitter-showbox-sentiment-words">
-                            ${getOuterHTMLText(negWordsHtmlDiv) }
-                            ${getOuterHTMLText(posWordsHtmlDiv) }
+                            ${ getOuterHTMLText(negWordsHtmlDiv) }
+                            ${ getOuterHTMLText(posWordsHtmlDiv) }
                         </div>
                     </div>
                 </div>

@@ -370,8 +370,8 @@ header#loadIntro {
 }
 
 .showbox-profile-img {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
@@ -450,6 +450,11 @@ header#loadIntro {
 .sup-li a:hover, .sup-li:hover {
   background: #c5d0f1;
   cursor: pointer;
+}
+
+.twitter-showbox-prof, .twitter-showbox-prof * {
+    padding: 0;
+    margin: 0;
 }
 
 .vanish {
