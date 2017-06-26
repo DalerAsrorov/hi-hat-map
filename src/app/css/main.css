@@ -373,6 +373,11 @@ header#loadIntro {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: 1px solid #a7b2b7;
+}
+
+.showbox-wrapper {
+    padding: 7px;
 }
 
 .right-cp-name {
@@ -380,34 +385,34 @@ header#loadIntro {
 }
 
 #querySearchForm {
-  text-align: center;
-  /* width: 50%; */
-  float: none;
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  top: -15px;
+    text-align: center;
+    /* width: 50%; */
+    float: none;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -15px;
 }
 
 #querySearch {
-  width: 75%;
-  padding: 5px;
-  color: #2f4070;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  border: 1px solid rgba(47, 64, 112, 0.41);
+    width: 75%;
+    padding: 5px;
+    color: #2f4070;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid rgba(47, 64, 112, 0.41);
 }
 
 .range-selector {
-  text-align: center;
+    text-align: center;
 }
 
 #sentimentChart {
-  width: 100%;
-  height: 120px;
-  margin: 0;
+    width: 100%;
+    height: 120px;
+    margin: 0;
 }
 
 #slideSwitchIcon {
@@ -418,19 +423,19 @@ header#loadIntro {
 }
 
 .size-xl {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .sub-h {
-  font-size: 30px;
-  font-weight: 700;
-  color: #2F4070;
+    font-size: 30px;
+    font-weight: 700;
+    color: #2F4070;
 }
 
 .super-h {
-  font-size: 70px;
-  font-weight: 800;
-  color: #1aa7ff;
+    font-size: 70px;
+    font-weight: 800;
+    color: #1aa7ff;
 }
 
 .sup-li {
@@ -438,18 +443,18 @@ header#loadIntro {
 }
 
 .sup-li a {
-  padding: 0;
-  width: 100% !important;
-  height: 100% !important;
-  padding: 5px;
-  text-align: center !important;
-  margin: 0 auto;
-  display: block;
+    padding: 0;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 5px;
+    text-align: center !important;
+    margin: 0 auto;
+    display: block;
 }
 
 .sup-li a:hover, .sup-li:hover {
-  background: #c5d0f1;
-  cursor: pointer;
+    background: #c5d0f1;
+    cursor: pointer;
 }
 
 .twitter-showbox-prof, .twitter-showbox-prof * {
@@ -458,14 +463,18 @@ header#loadIntro {
 }
 
 .vanish {
-  display: none;
+    display: none;
 }
 
 #widgetList {
 
 }
 
+.width-100 {
+    width: 100%;
+}
+
 .wrapper {
-  display: flex;
-  flex-flow: column;
+    display: flex;
+    flex-flow: column;
 }
