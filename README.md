@@ -7,7 +7,7 @@ You can run the project by following steps:
 2. `cd ./hi-hat-map/src`
 3. `npm run setup`
 4. `npm run build` (don't wory about eslint errors)
-5. Run your favorite browser and navigate to `localhost:8000`
+5. Launch your favorite browser and navigate to `localhost:8000`
 
 ## Tech Stack
 * JavaScript (ES6)
