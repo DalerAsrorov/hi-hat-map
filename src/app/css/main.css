@@ -223,6 +223,16 @@ header#loadIntro {
   border-color: #2F4070;
 }
 
+.leaflet-popup-content {
+    margin: 0 !important;
+}
+
+.leaflet-popup-content-wrapper {
+    margin: 0;
+    padding: 0;
+    border-radius: 0 !important;
+}
+
 #mainWrapper {
   visibility: hidden;
 }
@@ -277,6 +287,10 @@ header#loadIntro {
   min-width: 150px;
 }
 
+.margin-10 {
+    margin: 10px;
+}
+
 #panelCompLeft {
   /*background: lightblue;*/
 }
@@ -309,6 +323,10 @@ header#loadIntro {
 
 .panel-wrapper {
   padding: 5px;
+}
+
+.prof-wrapper {
+
 }
 
 /* Negaitve,  text with sentiment value less than zero */
@@ -377,7 +395,7 @@ header#loadIntro {
 }
 
 .showbox-wrapper {
-    padding: 7px;
+
 }
 
 .right-cp-name {
@@ -457,9 +475,33 @@ header#loadIntro {
     cursor: pointer;
 }
 
+.twitter-showbox-content {
+    margin: 0;
+    padding: 10px;
+
+}
+
+.twitter-showbox-prof {
+    padding: 10px;
+}
+
 .twitter-showbox-prof, .twitter-showbox-prof * {
     padding: 0;
     margin: 0;
+}
+
+.twitter-showbox-username {
+    margin-top: 3px;
+    font-weight: 600;
+    color: #284e5a;
+}
+
+.twitter-showbox-wrapper header {
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    background: #2F4070;
+    color: #fff;
 }
 
 .vanish {

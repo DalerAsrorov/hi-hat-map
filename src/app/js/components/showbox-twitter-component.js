@@ -58,8 +58,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         const template =
             `<div class='showbox-wrapper twitter-showbox-wrapper'>
                 <header class='twitter-showbox-header'>
-                    <span> ${ sentimentTotalScore } </span>
-                    <span> ${ sentimentValence } </span>
+                    <time> ${ new Date().toLocaleTimeString() } </time>
                 </header>
                 <div class='row twitter-showbox-content'>
                     <div class='twitter-showbox-prof col-lg-12 row'>
@@ -71,7 +70,8 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                         </section>
                         <section class='twitter-showbox-total col-lg-10'>
                             <div classs='shwobox-stats'>
-                                <span> Some stats </span>
+                                <span> ${ sentimentTotalScore } </span>
+                                <span> ${ sentimentValence } </span>
                             </div>
                         </section>
                     </div>
