@@ -32,8 +32,8 @@ export const drawObject = curry((data, geolocation, iconType) => {
     const latlng = L.latLng(geolocation[1], geolocation[0]);
     const popupOptions = {
         autoPanPadding: L.point(10, 10),
-        minWidth: 300,
-        maxHeight: 250
+        minWidth: 350,
+        maxHeight: 300
     };
 
     let icon, popup, showboxComp, markerOptions;

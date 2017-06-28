@@ -392,6 +392,10 @@ header#loadIntro {
     height: 50px;
     border-radius: 50%;
     border: 1px solid #a7b2b7;
+    clear: both;
+    display: block;
+    float: none;
+    margin: 0 auto !important;
 }
 
 .showbox-wrapper {
@@ -478,11 +482,24 @@ header#loadIntro {
 .twitter-showbox-content {
     margin: 0;
     padding: 10px;
-
+    min-height: 100px;
 }
 
 .twitter-showbox-prof {
     padding: 10px;
+}
+
+.twitter-showbox-prof .row {
+    text-align: center;
+}
+
+.twitter-showbox-prof .row > * {
+    display: block;
+    margin: 0 auto !important;
+}
+
+...twitter-showbox-prof .row span {
+    margin-top: 5px !important;
 }
 
 .twitter-showbox-prof, .twitter-showbox-prof * {

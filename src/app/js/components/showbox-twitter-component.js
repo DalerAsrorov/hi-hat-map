@@ -62,13 +62,13 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                 </header>
                 <div class='row twitter-showbox-content'>
                     <div class='twitter-showbox-prof col-lg-12 row'>
-                        <section class='col-lg-2'>
+                        <section class='col-lg-3'>
                             <div class='row width-100'>
-                                <img class='showbox-profile-img col-lg-12' src='${ userProfileImageURL }' alt="${ userScreenName }'s' profile image." />
-                                <span class='twitter-showbox-username col-lg-12'> ${ userScreenName } </span>
+                                <img class='showbox-profile-img' src='${ userProfileImageURL }' alt="${ userScreenName }'s' profile image." />
+                                <span class='twitter-showbox-username'> ${ userScreenName } </span>
                             </div>
                         </section>
-                        <section class='twitter-showbox-total col-lg-10'>
+                        <section class='twitter-showbox-total col-lg-9'>
                             <div classs='shwobox-stats'>
                                 <span> ${ sentimentTotalScore } </span>
                                 <span> ${ sentimentValence } </span>
