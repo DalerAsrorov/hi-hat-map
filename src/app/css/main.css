@@ -485,6 +485,12 @@ header#loadIntro {
     min-height: 100px;
 }
 
+.twitter-showbox-content > * {
+    padding: 5px;
+    display: block;
+    clear: both;
+}
+
 .twitter-showbox-prof {
     padding: 10px;
 }
@@ -498,7 +504,7 @@ header#loadIntro {
     margin: 0 auto !important;
 }
 
-...twitter-showbox-prof .row span {
+.twitter-showbox-prof .row span {
     margin-top: 5px !important;
 }
 
