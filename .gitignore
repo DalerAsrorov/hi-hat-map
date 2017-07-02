@@ -6,7 +6,7 @@ src/app/bower_components/
 src/.yarnclean
 
 #builds
-src/app/min
+src/app/min/
 
 # Config files
     # src/.babelrc
