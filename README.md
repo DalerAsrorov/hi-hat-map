@@ -3,7 +3,7 @@ A web app that analyzes the social media through maps and sentiment analysis tha
 
 ## Setup & Run
 You can run the project by following steps: 
-1. `git clone` this repository.
+1. `git clone https://github.com/DalerAsrorov/hi-hat-map.git`
 2. `cd ./hi-hat-map/src`
 3. `npm run setup`
 4. `npm run build` (don't wory about eslint errors)
