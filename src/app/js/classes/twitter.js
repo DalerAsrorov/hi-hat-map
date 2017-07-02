@@ -49,11 +49,11 @@ export default class Twitter extends Mode {
                 name: tweet.user.name,
                 username: tweet.user.screen_name,
             };
-        }
+        };
 
         const filteredTweetsList = R.pipe(
             R.filter(hasGeo),
-            R.map(getRequredData),
+            R.map(getRequredData)
         )(tweets);
 
         return filteredTweetsList;

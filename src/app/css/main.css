@@ -508,7 +508,11 @@ header#loadIntro {
     margin-top: 5px !important;
 }
 
-.twitter-showbox-prof, .twitter-showbox-prof * {
+.twitter-showbox-prof {
+    padding: 5px;
+}
+
+.twitter-showbox-prof * {
     padding: 0;
     margin: 0;
 }

@@ -61,19 +61,21 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                     <time> ${ new Date().toLocaleTimeString() } </time>
                 </header>
                 <div class='row twitter-showbox-content'>
-                    <div class='twitter-showbox-prof col-lg-12 row'>
-                        <section class='col-lg-3'>
-                            <div class='row width-100'>
-                                <img class='showbox-profile-img' src='${ userProfileImageURL }' alt="${ userScreenName }'s' profile image." />
-                                <span class='twitter-showbox-username'> ${ userScreenName } </span>
-                            </div>
-                        </section>
-                        <section class='twitter-showbox-total col-lg-9'>
-                            <div classs='shwobox-stats'>
-                                <span> ${ sentimentTotalScore } </span>
-                                <span> ${ sentimentValence } </span>
-                            </div>
-                        </section>
+                    <div class='twitter-showbox-prof col-lg-12'>
+                        <div class='row'>
+                            <section class='col-lg-3'>
+                                <div class='row width-100'>
+                                    <img class='showbox-profile-img' src='${ userProfileImageURL }' alt="${ userScreenName }'s' profile image." />
+                                    <span class='twitter-showbox-username'> ${ userScreenName } </span>
+                                </div>
+                            </section>
+                            <section class='twitter-showbox-total col-lg-9'>
+                                <div classs='shwobox-stats'>
+                                    <span> ${ sentimentTotalScore } </span>
+                                    <span> ${ sentimentValence } </span>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                     <div class='twitter-showbox-sentiment col-lg-12'>
                         <div>
