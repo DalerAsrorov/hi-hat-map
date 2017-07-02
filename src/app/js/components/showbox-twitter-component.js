@@ -70,9 +70,11 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                                 </div>
                             </section>
                             <section class='twitter-showbox-total col-lg-9'>
-                                <div classs='shwobox-stats'>
-                                    <span> ${ sentimentTotalScore } </span>
-                                    <span> ${ sentimentValence } </span>
+                                <div class='twitter-shwobox-stats'>
+                                    <aside>
+                                        <figure class='twitter-showbox-total-score sentiment-total-${sentimentValence}'> ${ sentimentTotalScore } </figure>
+                                        <figure class='twitter-showbox-total-valence sentiment-total-${sentimentValence}'> ${ sentimentValence } </figure>
+                                    </aside>
                                 </div>
                             </section>
                         </div>

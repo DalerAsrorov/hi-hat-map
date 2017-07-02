@@ -444,6 +444,18 @@ header#loadIntro {
     top: 2px;
 }
 
+.sentiment-total-negative {
+    color: red;
+}
+
+.sentiment-total-positive {
+    color: blue;
+}
+
+.sentiment-total-neutral {
+    color: grey;
+}
+
 .size-xl {
     font-size: 22px;
 }
@@ -505,7 +517,7 @@ header#loadIntro {
 }
 
 .twitter-showbox-prof .row span {
-    margin-top: 5px !important;
+    margin-top: 6px !important;
 }
 
 .twitter-showbox-prof {
@@ -515,6 +527,35 @@ header#loadIntro {
 .twitter-showbox-prof * {
     padding: 0;
     margin: 0;
+}
+
+.twitter-shwobox-stats {
+    height: 100%;
+}
+
+.twitter-shwobox-stats aside {
+    background: lightblue;
+    height: 100%;
+    width: 30%;
+    float: right;
+    font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.twitter-shwobox-stats figure.twitter-showbox-total-score {
+    flex: 1;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.twitter-shwobox-stats figure.twitter-showbox-total-valence {
+    flex: 0 1 30%;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 .twitter-showbox-username {
