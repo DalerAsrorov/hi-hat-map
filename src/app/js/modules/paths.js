@@ -1,18 +1,22 @@
 
+const origin = window.location.origin;
 
 export function getTrendsPath(weid) {
-    return `${window.location.origin}/api/twitter/trends/${weid}`;
+    return `${origin}/api/twitter/trends/${weid}`;
 }
 
 export function getGeoTrends(latLongString) {
-    return `${window.location.origin}/api/twitter/geotrends/${latLongString}`;
+    return `${origin}/api/twitter/geotrends/${latLongString}`;
 }
 
 export function getTwitData() {
-    return `${window.location.origin}/api/twitter/twitdata`;
+    return `${origin}/api/twitter/twitdata`;
 }
 
 export function getSentimentTextAnalysis() {
-    return `${window.location.origin}/api/sentiment/evaluatestring`;
+    return `${origin}/api/sentiment/evaluatestring`;
 }
 
+export function stopTwitterStream() {
+    return `${origin}/api/twitter/stream/stop`;
+}

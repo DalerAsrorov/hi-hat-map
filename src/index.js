@@ -16,6 +16,9 @@ const utils = require('./api/helpers/utils');
 
 let port = process.env.PORT || 8000;
 
+// reference to Twitter stream object
+let baseStream;
+
 // create application/json parser
 var jsonParser = bodyParser.json()
 
@@ -175,24 +178,34 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     .catch((err, status) => res.status(500).send(err))
  });
 
+ app.post('/api/twitter/stream/stop', (req, res) => {
+    const data = req.body;
+
+    if(!baseStream) {
+        return res.status(500).send({error: 'There is no stream to stop.'});
+    }
+
+    baseStream.stop();
+    return res.send({status: true});
+ });
+
 /**
 *   socket.io stuff
 *
 **/
-io.on('connection', (socket) => {
+io.on('connection', function (socket) {
     socket.on('topic', (info) => {
-        // console.log("\nTOPIC: ", topic, "\n");
         const topic = info.topic.toString().trim().toLowerCase();
         const location = info.location;
 
         console.log('location', topic, location);
 
-        let stream = Twitter.module.stream('statuses/filter', {locations: location, track: topic});
-        stream.on('tweet', (tweet) => {
+        baseStream = Twitter.module.stream('statuses/filter', {locations: location, track: topic});
+
+        baseStream.on('tweet', (tweet) => {
             socket.emit('tweet', tweet);
         });
     });
-
 });
 
 /**

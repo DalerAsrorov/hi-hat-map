@@ -31,7 +31,7 @@ module.exports = {
         });
     },
 
-    getClosest: function(lat, long) {
+    getClosest: function getClosest(lat, long) {
         // Test: San Francisco = 37.773972, -122.431297.
         lat = lat.trim();
         long = long.trim(long);
@@ -61,7 +61,7 @@ module.exports = {
         }
     },
 
-    getTwitData: function(query, geocode, radius, count, since_id, max_id) {
+    getTwitData: function getTwitData(query, geocode, radius, count, since_id, max_id) {
         geocode = geocode.join(',').toString().concat(`,${radius}`).trim();
         console.log(geocode);
 
@@ -84,4 +84,3 @@ module.exports = {
         });
     }
 }
-

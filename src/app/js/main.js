@@ -405,5 +405,19 @@ $(window).load(function() {
     //         console.log("Trends Data");
     //     })
 
+    ui.addEventListenerTo('stopStream', 'click', (ev) => {
+        Request.postRequest(Paths.stopTwitterStream(), {stop: true})
+        .then((data) => {
+            console.log(data);
+            const streamIsOff = data.status;
+
+            if (streamIsOff) {
+                console.log('Stream is off!');
+            }
+
+            console.log(data);
+        });
+    });
+
     // post request testing
 });
