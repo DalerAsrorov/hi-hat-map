@@ -1,7 +1,9 @@
 import Mode from './mode.js';
-import * as Request from '../modules/request.js';
-import R from 'ramda';
 import Sentiment from './sentiment.js';
+import * as Request from '../modules/request.js';
+import { stopTwitterStream } from '../modules/paths';
+import R from 'ramda';
+
 
 export default class Twitter extends Mode {
 
@@ -57,5 +59,17 @@ export default class Twitter extends Mode {
         )(tweets);
 
         return filteredTweetsList;
+    }
+
+    stopStream() {
+        Request.postRequest(stopTwitterStream(), {stop: true})
+        .then((data) => {
+            const streamIsOff = data.status;
+
+            if (streamIsOff) {
+                console.log('Stream is off!');
+            }
+        });
+
     }
 }
