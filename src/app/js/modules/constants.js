@@ -1,8 +1,8 @@
 export const MAIN = {
     TWITTER_MODES: ['real_time', 'specified_time'],
     TWITTER_MODES_INDEX: {
-        'real_time': 0,
-        'specified_time': 1
+        real_time: 0,
+        specified_time: 1
     }
 }
 
@@ -21,8 +21,12 @@ export const IMAGES = {
 
 export const COLORS = {
     CHART: {
-        'POSITIVE': '#1ae032',
-        'NEGATIVE': '#d82727',
-        'NEUTRAL': '#b5b5b5'
+        POSITIVE: '#1ae032',
+        NEGATIVE: '#d82727',
+        NEUTRAL: '#b5b5b5'
     }
+}
+
+export const FONTS = {
+    WORDCLOUD_D3: 'Impact'
 }

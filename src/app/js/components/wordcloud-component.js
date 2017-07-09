@@ -1,7 +1,16 @@
 import Component from './component.js';
 
-class WordcloudComponent extends Component {
-    constructor() {
+export default class WordcloudComponent extends Component {
+    constructor(id, parent, nodeType='div', content='', words) {
+        super(id, parent, nodeType, content);
+        this.words = words;
+    }
 
+    get words() {
+        return this._words;
+    }
+
+    set words(words=[]) {
+        this._words = words;
     }
 }

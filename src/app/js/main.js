@@ -11,6 +11,7 @@ import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
 import Component from './components/component.js';
 import ShowboxComponent from './components/showbox-component.js';
+import WordcloudD3Component from './components/wordcloud-d3-component.js';
 import Components from './classes/components.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Twitter from './classes/twitter.js';
@@ -18,7 +19,6 @@ import Sentiment from './classes/sentiment.js';
 import Leaflet from './classes/leaflet.js';
 import List from './classes/list.js';
 import R from 'ramda';
-import * as d3 from 'd3';
 
 $(window).load(function() {
     console.log('Rollup watch running...');
@@ -390,15 +390,61 @@ $(window).load(function() {
 
     // contextMenu.fadeOut();
 
-    console.log('Context menu in main.js', contextMenu);
 
-    // Testing Component class
-    let component1 = new ShowboxComponent('comp1', '#mapWrapper', 'div');
-    let component2 = new ShowboxComponent('comp2', `#${component1.id}`, 'span', 'Hello there');
+    // WORDCLOUD STUFF
 
-    component2.appendChild(component2);
+    // var cloud = d3.layout.cloud;
+    //
+    // var fill = d3.scale.category20();
+    //
+    // var layout = cloud()
+    //     .size([500, 500])
+    //     .words([
+    //       "Hello", "world", "normally", "you", "want", "more", "words",
+    //       "than", "this"].map(function(d) {
+    //       return {text: d, size: 10 + Math.random() * 90, test: "haha"};
+    //     }))
+    //     .padding(5)
+    //     .rotate(function() { return ~~(Math.random() * 1) * 90; })
+    //     .font("Impact")
+    //     .fontSize(function(d) { return d.size; })
+    //     .on("end", draw);
+    //
+    // layout.start();
+    //
+    // function draw(words) {
+    //   d3.select("#wordcloudD3").append("svg")
+    //       .attr("width", layout.size()[0])
+    //       .attr("height", layout.size()[1])
+    //     .append("g")
+    //       .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+    //     .selectAll("text")
+    //       .data(words)
+    //     .enter().append("text")
+    //       .style("font-size", function(d) { return d.size + "px"; })
+    //       .style("font-family", "Impact")
+    //       .style("fill", function(d, i) { return '#000'; })
+    //       .attr("text-anchor", "middle")
+    //       .attr("transform", function(d) {
+    //         return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+    //       })
+    //       .text(function(d) { return d.text; });
+    // }
+    const tempWords = [ "Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
+    let WordcloudD3Comp = new WordcloudD3Component(
+        '#wordcloudD3',
+        '',
+        '',
+        '',
+        tempWords
+    );
+    WordcloudD3Comp.draw({
+        size: [200, 200],
+        padding: 5,
+        
+    });
 
-    console.log('P00P-11 Testing components\n', component1, component2);
+        console.log(WordcloudD3Comp);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
