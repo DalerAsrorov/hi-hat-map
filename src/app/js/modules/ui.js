@@ -134,6 +134,10 @@ export function getElement(selector) {
     return $(`${selector}`);
 }
 
+export function convertFromJQueryToDOMElement(jqElement) {
+    return jqElement[0];
+}
+
 export function addEventListenerTo(target, event, fn) {
     const targetType = getType(target);
 

@@ -2,11 +2,11 @@
 import { getElement, append, getOuterHTMLText } from '../modules/ui.js';
 
 export default class Component {
-    constructor(id, parent, nodeType='div', content='') {
+    constructor(id='', parent='', nodeType='div', content='') {
         this.id = id;
         this.parent = parent;
         this.nodeType = nodeType;
-        this.$node = $(`<${nodeType} id=${id}>${content}</${nodeType}>`);
+        this.$node = $(`<${nodeType} id='${id}'>${content}</${nodeType}>`);
         // append to parent
         append($(parent), this.$node);
     }

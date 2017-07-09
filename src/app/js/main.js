@@ -390,14 +390,11 @@ $(window).load(function() {
 
     // contextMenu.fadeOut();
 
-    const tempWords = [ "Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
-    let WordcloudD3Comp = new WordcloudD3Component(
-        '#wordcloudD3',
-        '',
-        '',
-        '',
-        tempWords
-    );
+    // Word cloud testing
+    const tempWords = [ "Hello", "world", "normally", "you", "want", "more", "words", "than", "this"];
+    let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
+    let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
+    WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudD3Comp.draw({
         size: [200, 200],
         padding: 5,

@@ -1,9 +1,12 @@
 import WordcloudComponent from './wordcloud-component.js';
 import { FONTS } from '../modules/constants.js';
+import { convertFromJQueryToDOMElement } from '../modules/ui.js';
 
 export default class WordcloudD3Component extends WordcloudComponent {
-    constructor(id, parent, nodeType='div', content='', words) {
+    constructor(id, parent, nodeType, content, words) {
         super(id, parent, nodeType, content, words);
+
+        this.domNode = convertFromJQueryToDOMElement(this.$node);
 
         this.fill = d3.scale.category20();
         this.cloud = null;
@@ -16,8 +19,11 @@ export default class WordcloudD3Component extends WordcloudComponent {
 
     draw(params) {
         const { size, padding } = params;
-        const cloudId = this.id;
+        const cloudId = this.parent;
+        const myDomNode = this.domNode;
         let layout;
+
+        console.log('this.node = ', myDomNode);
 
         this.cloud = layout = this.createCloud()
                           .size(size)
@@ -33,7 +39,7 @@ export default class WordcloudD3Component extends WordcloudComponent {
         layout.start();
 
         function draw(words) {
-            d3.select(cloudId).append("svg")
+            d3.select(myDomNode).append("svg")
                 .attr("width", layout.size()[0])
                 .attr("height", layout.size()[1])
                 .append("g")
