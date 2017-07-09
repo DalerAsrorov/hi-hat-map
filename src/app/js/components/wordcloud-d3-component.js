@@ -42,7 +42,7 @@ export default class WordcloudD3Component extends WordcloudComponent {
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size + "px"; })
-                .style("font-family", FONTS.WORDCLOUD_D3)
+                .style("font-family", "Impact")
                 .style("fill", function(d, i) { return '#000'; })
                 .attr("text-anchor", "middle")
                 .attr("transform", function(d) {

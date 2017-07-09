@@ -18,6 +18,7 @@ export default class Component {
     bind(container='') {
         let myTarget = this.id;
 
+        this.parent = container;
         if(typeof container !== 'string') {
             myTarget = this.$node;
         }
@@ -37,6 +38,7 @@ export default class Component {
     appendChild(component) {
         if(component instanceof Component) {
             append(this.html(), component.html());
+            component.parent = this.id;
         }
     }
 
