@@ -458,9 +458,6 @@ $(window).load(function() {
         });
     });
 
-
-    console.log(StopButtonL);
-
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
     //         console.log("Trends Data");

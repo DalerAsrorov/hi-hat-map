@@ -16,8 +16,10 @@ You can run the project by following steps:
 
 ## Tech Stack
 * JavaScript (ES6)
+* jQuery
+* [Leaflet](http://leafletjs.com/)
 * Bootstrap
-* HTML/CSS
+* HTML5/CSS3
 
 ## APIs Used
 * Twitter
