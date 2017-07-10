@@ -26,13 +26,14 @@ export default class WordcloudD3Component extends WordcloudComponent {
         const { size, padding, rotation } = params;
         const cloudId = this.parent;
         const myDomNode = this.domNode;
+        const FONT = FONTS.WORDCLOUD_D3;
         let layout;
 
         this.cloud = layout = this._createCloud()
                           .size(size)
                           .words(this.words)
                           .padding(padding)
-                          .font(FONTS.WORDCLOUD_D3)
+                          .font(FONT)
                           .fontSize(d => d.size)
                           .on("end", draw);
 
@@ -48,14 +49,12 @@ export default class WordcloudD3Component extends WordcloudComponent {
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
-                .style("font-size", function(d) { return d.size + "px"; })
-                .style("font-family", "Impact")
+                .style("font-size", (d) => d.size + "px")
+                .style("font-family", FONT)
                 .style("fill", (d, i) => d.color)
                 .attr('text-anchor', "middle")
-                .attr('transform', function(d) {
-                  return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                })
-                .text(function(d) { return d.text; });
+                .attr('transform', d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
+                .text(d => d.text);
         }
     }
 
