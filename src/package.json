@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.1",
-    "d3": "^4.9.1",
     "express": "^4.14.1",
     "http": "0.0.0",
     "leaflet": "^1.1.0",
