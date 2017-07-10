@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daler Asrorov",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
