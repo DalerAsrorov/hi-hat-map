@@ -17,10 +17,12 @@ export default class WordcloudD3Component extends WordcloudComponent {
         return d3.layout.cloud();
     }
 
-    // default function in rotation
+    /**
+     * [Default function for rotation parametarization.]
+     * Source: https://github.com/jasondavies/d3-cloud#rotate
+     */
     _rotateToDegree(d) {
-        return ~~(~~(Math.random() * 6) - 3) * 30;
-
+        return ((~~(Math.random() * 6) - 3) * 30);
     }
 
     draw(params) {
