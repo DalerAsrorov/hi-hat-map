@@ -1,6 +1,9 @@
 # Hi-Hat-Map
 A web app that analyzes the social media through maps and sentiment analysis that provides helpful features for inspecting the emotional side of posts throughout the world.
 
+## Status
+This project is currently under development. Any weird UI tweaks are expected until the end of the first build.
+
 ## Setup & Run
 You can run the project by following steps:
 1. `git clone https://github.com/DalerAsrorov/hi-hat-map.git`
