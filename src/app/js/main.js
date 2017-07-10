@@ -413,7 +413,8 @@ $(window).load(function() {
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudD3Comp.draw({
         size: [200, 200],
-        padding: 5,
+        padding: 5
+        // rotation: () => ~~(Math.random() * 1) * 90
     });
 
     console.log(WordcloudD3Comp);

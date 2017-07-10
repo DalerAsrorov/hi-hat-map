@@ -17,9 +17,10 @@ export default class WordcloudD3Component extends WordcloudComponent {
         return d3.layout.cloud();
     }
 
-    // 90 degrees put text horizontally
-    rotateToDegree(degree) {
-        return ~~(Math.random() * 1) * degree;
+    // default function in rotation
+    _rotateToDegree(d) {
+        return ~~(~~(Math.random() * 6) - 3) * 30;
+
     }
 
     draw(params) {
@@ -30,12 +31,13 @@ export default class WordcloudD3Component extends WordcloudComponent {
         let layout;
 
         this.cloud = layout = this._createCloud()
-                          .size(size)
-                          .words(this.words)
-                          .padding(padding)
-                          .font(FONT)
-                          .fontSize(d => d.size)
-                          .on("end", draw);
+                                    .size(size)
+                                    .words(this.words)
+                                    .padding(padding)
+                                    .font(FONT)
+                                    .rotate(rotation ? rotation : this._rotateToDegree)
+                                    .fontSize(d => d.size)
+                                    .on("end", draw);
 
         layout.start();
 
@@ -49,7 +51,7 @@ export default class WordcloudD3Component extends WordcloudComponent {
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
-                .style("font-size", (d) => d.size + "px")
+                .style("font-size", d => d.size + "px")
                 .style("font-family", FONT)
                 .style("fill", (d, i) => d.color)
                 .attr('text-anchor', "middle")
