@@ -61,13 +61,13 @@ export default class Twitter extends Mode {
         return filteredTweetsList;
     }
 
-    stopStream() {
+    stopStream(fn=()=>{}) {
         Request.postRequest(stopTwitterStream(), {stop: true})
         .then((data) => {
             const streamIsOff = data.status;
 
             if (streamIsOff) {
-                console.log('Stream is off!');
+                fn();
             }
         });
 

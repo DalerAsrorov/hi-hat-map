@@ -22,7 +22,6 @@ import List from './classes/list.js';
 import R from 'ramda';
 
 $(window).load(function() {
-    console.log('Rollup watch running...');
     // Statuc modules
     const storageSystem = new StorageSystem(window.localStorage);
     const twitter = new Twitter('twitter');
@@ -83,6 +82,7 @@ $(window).load(function() {
 
     storageSystem.setItem('firstVisit', true);
     cpOpen = storageSystem.getItem('cpOpen');
+
     if(cpOpen == 'false') {
         ui.slideToggleCp('controlPanelWrapper', Map);
     }
@@ -126,15 +126,20 @@ $(window).load(function() {
             .then((data) => {
                 data.geo = coordinates;
                 data.tweet = tweet;
-                console.log("DATA ", data);
+
+                const sentiment = data.sentiment;
 
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
 
                 sentimentQueue.enqueue(selectedChartData);
 
-                // wordcloudQueue.enqueue({
-                //     words: ,
-                // });
+                // we are interested in tweets that have emotions for word cloud
+                if (sentiment.value.totalScore !== 0) {
+                    wordcloudQueue.enqueue({
+                        words: R.concat(getParameter(sentiment, 'positiveWords', 'text'), getParameter(sentiment, 'negativeWords', 'text')),
+                        polarities: R.concat(getParameter(sentiment, 'positiveWords', 'polarity'), getParameter(sentiment, 'negativeWords', 'polarity'))
+                    });
+                }
 
                 // if(sentimentQueue.size() === 5) {
                 let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
@@ -249,10 +254,10 @@ $(window).load(function() {
     // console.log('Path:', Paths.getGeoTrends(testGeo));
     console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
-    .then((data) => {
-        if(data.data) {
-            let listOfTrends = data.data.trends;
-            let geoData = data.geo;
+    .then(trends => {
+        if(trends.data) {
+            let listOfTrends = trends.data.trends;
+            let geoData = trends.geo;
 
             $("#querySearch").easyAutocomplete({
                 data: listOfTrends,
@@ -408,6 +413,7 @@ $(window).load(function() {
         }
     ];
 
+
     let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
     let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
     WordCloudD3Container.appendChild(WordcloudD3Comp);
@@ -415,6 +421,13 @@ $(window).load(function() {
         size: [200, 200],
         padding: 5
         // rotation: () => ~~(Math.random() * 1) * 90
+    });
+
+
+    $('#stopStream').click(function(ev) {
+        twitter.stopStream(() => {
+            console.log(wordcloudQueue);
+        });
     });
 
     console.log(WordcloudD3Comp);
