@@ -34,7 +34,6 @@ $(window).load(function() {
     let wordcloudQueue = new DynamicQueue();
 
     // Constants
-    console.log('constants', constants);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
 
@@ -42,10 +41,33 @@ $(window).load(function() {
     let socket = io.connect('http://localhost:8000/');
 
     // other variables used throughout the code
-    let cpOpen,
-        tracker,
-        cpRightList = [];
+    let cpOpen;
+    let tracker;
+    let cpRightList = [];
+    let streamStateButtonIsOn = false;
 
+    // Leaflet components
+    let StopButtonL = L.easyButton({
+        states: [{
+            stateName: 'stream-is-on',
+            // TODO: create an icon generator function in utils or somewhere
+            icon: '<i class="fa fa-stop-circle-o" id="stopInit" aria-hidden="true"></i>',
+            title: 'Stop stream',
+            onClick: function(control) {
+                const button = control.button;
+                const self = this;
+
+                twitter.stopStream(() => {
+                    $(button).fadeOut(200, () => {
+                        L.Util.requestAnimFrame(function() {
+                            Map.removeControl(self);
+                            streamStateButtonIsOn = false;
+                        });
+                    });
+                });
+            }
+        }]
+    });
 
     let sentimentChart = ui.generateChart('#sentimentChart', {
         x: 'x',
@@ -104,10 +126,16 @@ $(window).load(function() {
         }
     }).addTo(Map);
 
-
-    const socketStarted = true;
     socket.on('tweet', (tweet) => {
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
+
+        if(!streamStateButtonIsOn) {
+            StopButtonL.addTo(Map);
+            $(StopButtonL.button).show();
+            streamStateButtonIsOn = true;
+        }
+
+
         if(coordinates) {
             const boundingBox = tweet.place.bounding_box;
             const polygonCenter = leaflet.computePolygonCenter(L, boundingBox);
@@ -431,9 +459,7 @@ $(window).load(function() {
     });
 
 
-    L.easyButton('fa-globe', function(btn, map){
-        alert('Hello you clicked!');
-    }).addTo(Map);
+    console.log(StopButtonL);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
