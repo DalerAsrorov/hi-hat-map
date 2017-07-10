@@ -13,45 +13,46 @@ export default class WordcloudD3Component extends WordcloudComponent {
         this.layout = null;
     }
 
-    createCloud() {
+    _createCloud() {
         return d3.layout.cloud();
     }
 
+    // 90 degrees put text horizontally
+    rotateToDegree(degree) {
+        return ~~(Math.random() * 1) * degree;
+    }
+
     draw(params) {
-        const { size, padding } = params;
+        const { size, padding, rotation } = params;
         const cloudId = this.parent;
         const myDomNode = this.domNode;
         let layout;
 
-        console.log('this.node = ', myDomNode);
-
-        this.cloud = layout = this.createCloud()
+        this.cloud = layout = this._createCloud()
                           .size(size)
-                          .words(this.words.map(function(d) {
-                            return {text: d, size: 10 + Math.random() * 90, test: "haha"};
-                          }))
+                          .words(this.words)
                           .padding(padding)
-                          .rotate(function() { return ~~(Math.random() * 1) * 90; })
                           .font(FONTS.WORDCLOUD_D3)
-                          .fontSize(function(d) { return d.size; })
-                          .on("end", draw.bind(this.layout));
+                          .fontSize(d => d.size)
+                          .on("end", draw);
 
         layout.start();
 
         function draw(words) {
+            console.log('words:', words);
             d3.select(myDomNode).append("svg")
-                .attr("width", layout.size()[0])
-                .attr("height", layout.size()[1])
-                .append("g")
+                .attr('width', layout.size()[0])
+                .attr('height', layout.size()[1])
+                .append('g')
                 .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
                 .style("font-size", function(d) { return d.size + "px"; })
                 .style("font-family", "Impact")
-                .style("fill", function(d, i) { return '#000'; })
-                .attr("text-anchor", "middle")
-                .attr("transform", function(d) {
+                .style("fill", (d, i) => d.color)
+                .attr('text-anchor', "middle")
+                .attr('transform', function(d) {
                   return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
                 })
                 .text(function(d) { return d.text; });

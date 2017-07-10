@@ -1,6 +1,7 @@
 import ShowboxComponent from './component.js';
 import { convertToDOMElement, getOuterHTMLText } from '../modules/ui.js';
 import { IMAGES } from '../modules/constants.js';
+import { getParameter } from '../modules/sentiment-utils.js';
 import { zipObj, isEmpty, isNil, keys } from 'ramda';
 
 export default class ShowboxTwitterComponent extends ShowboxComponent {
@@ -26,21 +27,17 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         const sentimentValence = sentiment.value.valence;
 
         // fetching sentiment polarity and word list => {word1: polarity1, word2: polarity2, ...}
-        const sentimentNegativeWordList = sentiment.negativeWords
-                                                        .map(word => word.text);
-        const sentimentNegativePolarityList = sentiment.negativeWords
-                                                        .map(word => word.polarity);
+        const sentimentNegativeWordList = getParameter(sentiment, 'negativeWords', 'text');
+        const sentimentNegativePolarityList = getParameter(sentiment, 'negativeWords', 'polarity');
         const sentimentNegativeWordPolarityDict = zipObj(sentimentNegativeWordList, sentimentNegativePolarityList);
 
         // fetching sentiment negative and word list => {word1: polarity1, word2: polarity2, ...}
-        const sentimentPositiveWordList = sentiment.positiveWords
-                                                        .map(word => word.text);
-        const sentimentPositivePolarityList = sentiment.positiveWords
-                                                        .map(word => word.polarity);
-        // TODO: add this inside of its html container `${keys()}`
+        const sentimentPositiveWordList = getParameter(sentiment, 'positiveWords', 'text');
+        const sentimentPositivePolarityList = getParameter(sentiment, 'positiveWords', 'polarity');
         const sentimentPositiveWordPolarityDict = zipObj(sentimentPositiveWordList, sentimentPositivePolarityList);
 
         let posWordsHtmlDiv = null, negWordsHtmlDiv = null;
+
         if(!isEmpty(sentimentPositiveWordPolarityDict)) {
             posWordsHtmlDiv = $('<div class="twitter-showbox-positive-words"></div>');
             for(let [key, value] of Object.entries(sentimentPositiveWordPolarityDict)) {
@@ -54,7 +51,6 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
             }
         }
 
-        // id, parent, nodeType, content
         const template =
             `<div class='showbox-wrapper twitter-showbox-wrapper'>
                 <header class='twitter-showbox-header'>

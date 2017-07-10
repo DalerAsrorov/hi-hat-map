@@ -28,6 +28,22 @@ export function capitalize(str) {
     }
 }
 
+export function inspectCSSClass(className, prop) {
+    let property = '';
+    const $inspector = $('<div>')
+                        .css('display', 'none')
+                        .addClass(className);
+    $('body').append($inspector);
+
+    try {
+        property = $inspector.css(prop);
+    } finally {
+        $inspector.remove();
+    }
+
+    return property;
+}
+
 export function wrappObject(object, objectKey) {
     return {
         objectKey: object
@@ -41,4 +57,3 @@ export function formatDateToHoursOnly(x) {
 
     return xFinal;
 }
-

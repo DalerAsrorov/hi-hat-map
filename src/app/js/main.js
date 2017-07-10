@@ -6,6 +6,7 @@ import * as utils from './modules/utils.js';
 import * as MapOps from './modules/mapops.js';
 import * as constants from './modules/constants.js';
 import * as DataProcessing from './modules/dataprocessing.js';
+import { getParameter } from './modules/sentiment-utils.js';
 import DynamicQueue from './classes/dynamic-queue.js';
 import Storage from './classes/storage.js';
 import StorageSystem from './classes/storagesystem.js';
@@ -31,8 +32,10 @@ $(window).load(function() {
     // Dynamic modules
     let rightComponents = new Components();
     let sentimentQueue = new DynamicQueue();
+    let wordcloudQueue = new DynamicQueue();
 
     // Constants
+    console.log('constants', constants);
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
 
@@ -123,10 +126,15 @@ $(window).load(function() {
             .then((data) => {
                 data.geo = coordinates;
                 data.tweet = tweet;
+                console.log("DATA ", data);
 
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
 
                 sentimentQueue.enqueue(selectedChartData);
+
+                // wordcloudQueue.enqueue({
+                //     words: ,
+                // });
 
                 // if(sentimentQueue.size() === 5) {
                 let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
@@ -149,14 +157,10 @@ $(window).load(function() {
                     ]
                 });
 
-                // load new data after each time the queue size reaches 5
                 if(sentimentQueue.size() === 5) {
                     sentimentQueue.dequeue();
                     console.log('P00P2 Queue item removed');
                 }
-                // }
-
-                console.log('P00P sentimentChart after if statement', sentimentQueue, ' size:', sentimentQueue.size());
 
                 const renderObject = {
                     data,
@@ -391,7 +395,19 @@ $(window).load(function() {
     // contextMenu.fadeOut();
 
     // Word cloud testing
-    const tempWords = [ "Hello", "world", "normally", "you", "want", "more", "words", "than", "this"];
+    const tempWords = [
+        {
+            text: 'Bingo!',
+            size: 32,
+            color:'#FF00FF'
+        },
+        {
+            text: 'word',
+            size: 42,
+            color:'#2F4070'
+        }
+    ];
+
     let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
     let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
     WordCloudD3Container.appendChild(WordcloudD3Comp);
@@ -400,7 +416,7 @@ $(window).load(function() {
         padding: 5,
     });
 
-        console.log(WordcloudD3Comp);
+    console.log(WordcloudD3Comp);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

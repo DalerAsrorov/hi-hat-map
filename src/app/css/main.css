@@ -332,59 +332,73 @@ header#loadIntro {
 /* Negaitve,  text with sentiment value less than zero */
 .sent-neg-1 {
     color: #D05050;
+    fill: #D05050;
 }
 
 .sent-neg-2 {
     color: #BC3C3C;
+    fill: #BC3C3C;
 }
 
 .sent-neg-3 {
     color: #A82828;
+    fill: #A82828;
 }
 
 .sent-neg-4 {
     color: #8A0A0A;
+    fill: #8A0A0A;
 }
 
 .sent-neg-5 {
     color: #6C0000;
+    fill: #6C0000;
 }
 
 .sent-neg-6 {
     color: #580000;
+    fill: #580000;
 }
 
 .sent-neg-7 {
     color: #440000;
+    fill: #440000;
 }
 
 /* Positive, text with sentiment value greater than zero */
 .sent-pos-1 {
     color: #64E464;
+    fill: #64E464;
 }
 
 .sent-pos-2 {
     color: #46C646;
+    fill: #46C646;
 }
 
 .sent-pos-3 {
     color: #28A828;
+    fill: #28A828;
 }
 
 .sent-pos-4 {
     color: #0A8A0A;
+    fill: #0A8A0A;
 }
 
 .sent-pos-5 {
     color: #006C00;
+    fill: #006C00;
 }
 
 .sent-pos-6 {
     color: #004E00;
+    fill: #004E00;
 }
 
 .sent-pos-7 {
     color: #008080;
+    fill: #008080;
 }
 
 .showbox-profile-img {

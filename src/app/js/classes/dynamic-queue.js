@@ -46,4 +46,8 @@ export default class DynamicQueue {
     size() {
         return lengthR(this.queue);
     }
+
+    list() {
+        return this.queue;
+    }
 }
