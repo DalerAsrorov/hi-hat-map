@@ -430,7 +430,10 @@ $(window).load(function() {
         });
     });
 
-    console.log(WordcloudD3Comp);
+
+    L.easyButton('fa-globe', function(btn, map){
+        alert('Hello you clicked!');
+    }).addTo(Map);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
