@@ -10,6 +10,8 @@ You can run the project by following steps:
         1. `npm install`
         2. `bower install`
 4. `npm run build` (don't wory about eslint errors)
+    * Make sure you see this message in your terminal first:
+        * `Listenning on port 8000`
 5. Launch your favorite browser and navigate to `localhost:8000`
 
 ## Tech Stack
