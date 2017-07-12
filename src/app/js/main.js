@@ -418,13 +418,6 @@ $(window).load(function() {
     contextMenu.appendMenuItem('Three', ()=> console.log('Three'), 'click');
     contextMenu.addClassesToAllMenuItems('sup-li');
 
-    // const list = new List('contextMenuList', 'contextMenuList');
-    // list.bindTo(contextMenu.$html());
-    // list.addItem('One', ()=>console.log('One'), 'click');
-    // list.addItem('Two', ()=>console.log('Two'), 'click');
-    // list.addItem('Three', ()=>console.log('Three'), 'click');
-    // list.addClassesToAllItems('sup-li');
-
     // contextMenu.fadeOut();
 
     // Word cloud testing
