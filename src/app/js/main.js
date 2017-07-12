@@ -48,12 +48,7 @@ $(window).load(function() {
     let streamStateButtonIsOn = false;
 
     // Loader object
-    let MapLoaderComp = new MapLoaderComponent(
-        'mapLoader',
-        '#mapWrapper',
-        'div',
-        '');
-    console.log('MapLoaderComp:', MapLoaderComp);
+    const MapLoaderComp = new MapLoaderComponent('mapLoader', '#mapWrapper', 'div', '');
     MapLoaderComp.init();
 
     // Leaflet components
