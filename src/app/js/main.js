@@ -54,7 +54,7 @@ $(window).load(function() {
         'div',
         '');
     console.log('MapLoaderComp:', MapLoaderComp);
-    MapLoaderComp.renderLoader();
+    MapLoaderComp.init();
 
     // Leaflet components
     let StopButtonL = L.easyButton({

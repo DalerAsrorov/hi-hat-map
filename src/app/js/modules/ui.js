@@ -10,9 +10,9 @@ export function buildTemplate(templateString) {
     return convertToDOMElement(templateString);
 }
 
-export function getLoader(type='html') {
+export function getLoader(size='fa-3x', type='html') {
     const text = `<figure class='app-spinner'>
-                    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    <i class="m-loader fa fa-cog fa-spin ${size} fa-fw"></i>
                     <span class="sr-only">Loading...</span>
                   </figure>`;
 
