@@ -32,7 +32,13 @@ export default class MapLoaderComponent extends Component {
     }
 
     init(display=false) {
-        this._buildTemplate(display);
+        this._buildTemplate();
+
+        if (display) {
+            this.show();
+        } else {
+            this.hide();
+        }
     }
 
     _buildTemplate() {
@@ -58,7 +64,7 @@ export default class MapLoaderComponent extends Component {
         this.$node.css(hideCss);
     }
 
-    insert() {
+    show() {
         this.$node.css(showCss);
     }
 }
