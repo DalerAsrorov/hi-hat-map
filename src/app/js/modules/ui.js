@@ -6,6 +6,10 @@ import Chart from '../classes/chart.js';
 import { getType } from './utils.js';
 import R from 'ramda';
 
+export function buildTemplate(templateString) {
+    return convertToDOMElement(templateString);
+}
+
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();

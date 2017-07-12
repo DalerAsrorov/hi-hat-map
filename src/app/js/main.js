@@ -13,6 +13,7 @@ import StorageSystem from './classes/storagesystem.js';
 import Component from './components/component.js';
 import ShowboxComponent from './components/showbox-component.js';
 import WordcloudD3Component from './components/wordcloud-d3-component.js';
+import MapLoaderComponent from './components/map-loader-component.js';
 import Components from './classes/components.js';
 import PanelComponent from './classes/panelcomponent.js';
 import Twitter from './classes/twitter.js';
@@ -45,6 +46,15 @@ $(window).load(function() {
     let tracker;
     let cpRightList = [];
     let streamStateButtonIsOn = false;
+
+    // Loader object
+    let MapLoaderComp = new MapLoaderComponent(
+        'mapLoader',
+        'mapWrapper',
+        'div',
+        '');
+    console.log('MapLoaderComp:', MapLoaderComp);
+    MapLoaderComp.renderLoader();
 
     // Leaflet components
     let StopButtonL = L.easyButton({

@@ -1,5 +1,5 @@
 import ShowboxComponent from './component.js';
-import { convertToDOMElement, getOuterHTMLText } from '../modules/ui.js';
+import { buildTemplate, convertToDOMElement, getOuterHTMLText } from '../modules/ui.js';
 import { IMAGES } from '../modules/constants.js';
 import { getParameter } from '../modules/sentiment-utils.js';
 import { zipObj, isEmpty, isNil, keys } from 'ramda';
@@ -51,7 +51,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
             }
         }
 
-        const template =
+        const template = buildTemplate(
             `<div class='showbox-wrapper twitter-showbox-wrapper'>
                 <header class='twitter-showbox-header'>
                     <time> ${ new Date().toLocaleTimeString() } </time>
@@ -87,10 +87,10 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
                 </div>
                 <footer class='twitter-showbox-footer'>
                 </footer>
-            </div>`;
+            </div>`
+        );
 
-        const $node = convertToDOMElement(template);
-
+        const $node = template;
         this.update({
             $node
         });

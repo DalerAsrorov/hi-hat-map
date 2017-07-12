@@ -17,7 +17,8 @@ export const IMAGES = {
     },
 
     DEFAULT: {
-        SHOWBOX_USER_PROFILE_IMG: '../../img/icons/default-user-profile.png'
+        SHOWBOX_USER_PROFILE_IMG: '../../img/icons/default-user-profile.png',
+        MAP_LOADER_IMAGE: '../img/map-loader-image.'
     }
 }
 
