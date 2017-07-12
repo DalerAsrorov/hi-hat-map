@@ -10,6 +10,19 @@ export function buildTemplate(templateString) {
     return convertToDOMElement(templateString);
 }
 
+export function getLoader(type='html') {
+    const text = `<figure class='app-spinner'>
+                    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                  </figure>`;
+
+    if (type === 'text') {
+        return text;
+    }
+
+    return buildTemplate(text);
+}
+
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();

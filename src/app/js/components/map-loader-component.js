@@ -1,6 +1,6 @@
 import Component from './component.js';
 import { IMAGES } from '../modules/constants.js';
-import { buildTemplate } from '../modules/ui.js';
+import { buildTemplate, getLoader } from '../modules/ui.js';
 
 export default class MapLoaderComponent extends Component {
     constructor(id, parent, nodeType, content, imageSrc=IMAGES.DEFAULT.MAP_LOADER_IMAGE) {
@@ -17,7 +17,7 @@ export default class MapLoaderComponent extends Component {
     renderLoader() {
         let template = buildTemplate(
             `<div data-name='map-loader' id=${this.id} class='map-loader'>
-                <img src=${this.imageSrc} alt='Loading data into map...' />
+                ${getLoader('text')}
             </div>`
         );
 
