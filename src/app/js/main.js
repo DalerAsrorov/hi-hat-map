@@ -50,7 +50,7 @@ $(window).load(function() {
     // Loader object
     let MapLoaderComp = new MapLoaderComponent(
         'mapLoader',
-        'mapWrapper',
+        '#mapWrapper',
         'div',
         '');
     console.log('MapLoaderComp:', MapLoaderComp);

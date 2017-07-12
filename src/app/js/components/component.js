@@ -2,12 +2,12 @@
 import { getElement, append, getOuterHTMLText } from '../modules/ui.js';
 
 export default class Component {
-    constructor(id='', parent='', nodeType='div', content='') {
+    constructor(id='', parent, nodeType='div', content='') {
+        // this id when binding might already be specified
         this.id = id;
         this.parent = parent;
         this.nodeType = nodeType;
         this.$node = $(`<${nodeType} id='${id}'>${content}</${nodeType}>`);
-        // append to parent
         append($(parent), this.$node);
     }
 
@@ -23,7 +23,7 @@ export default class Component {
             myTarget = this.$node;
         }
 
-        append(container, myTarget);
+        append($(container), $(myTarget));
     }
 
     html() {

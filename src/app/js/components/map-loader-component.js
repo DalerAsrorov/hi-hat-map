@@ -8,6 +8,16 @@ export default class MapLoaderComponent extends Component {
         this.imageSrc = imageSrc;
     }
 
+    _buildTemplate() {
+        const $loader = getLoader();
+        this.$node.append($loader);
+
+        debugger;
+        this.bind(this.parent);
+
+        return this.$node;
+    }
+
     startLoader(mls=0) {
         setTimeout(() => {
             this.renderLoader();
@@ -15,12 +25,6 @@ export default class MapLoaderComponent extends Component {
     }
 
     renderLoader() {
-        let template = buildTemplate(
-            `<div data-name='map-loader' id=${this.id} class='map-loader'>
-                ${getLoader('text')}
-            </div>`
-        );
-
-        console.log(template);
+        this._buildTemplate();
     }
 }
