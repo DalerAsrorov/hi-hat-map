@@ -58,8 +58,7 @@ $(window).load(function() {
     let StopButtonL = L.easyButton({
         states: [{
             stateName: 'stream-is-on',
-            // TODO: create an icon generator function in utils or somewhere
-            icon: '<i class="fa fa-stop-circle-o" id="stopInit" aria-hidden="true"></i>',
+            icon: ui.generateWebIcon('fa-stop-circle-o', 'f1-1x', 'sent-neg-2', 'text'),
             title: 'Stop stream',
             onClick: function(control) {
                 const button = control.button;
