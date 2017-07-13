@@ -1,6 +1,6 @@
 import Component from './component.js';
 import { IMAGES } from '../modules/constants.js';
-import { buildTemplate, getLoader } from '../modules/ui.js';
+import { getLoader } from '../modules/ui.js';
 
 const loaderCss = {
     'position': 'relative',
