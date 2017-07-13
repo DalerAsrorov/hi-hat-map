@@ -11,7 +11,7 @@ export function buildTemplate(templateString) {
 }
 
 export function getLoader(size='fa-3x', type='html') {
-    const text = `<figure class='app-spinner'
+    const text = `<figure class='app-spinner'>
                     ${generateWebIcon('fa-cog', size, 'fa-spin fa-fw m-loader', 'text')}
                     <span class="sr-only">Loading...</span>
                   </figure>`;

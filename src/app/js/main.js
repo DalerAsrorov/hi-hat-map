@@ -465,7 +465,6 @@ $(window).load(function() {
         // rotation: () => ~~(Math.random() * 1) * 90
     });
 
-    console.log('WidgetCompTest', WidgetCompTest);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
