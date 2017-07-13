@@ -344,8 +344,8 @@ $(window).load(function() {
         //         return new PanelComponent(widget.id, widget.desc, widget.action, widget.data);
         // });
 
-        const WidgetComp1 = new WidgetComponent('w1', 'Item W1', (item) =>console.log('hi', item), 'fa-circle-thin',['daler', 'asrorov']);
-        const WidgetComp2 = new WidgetComponent('w2', 'Item W2', (item) =>console.log('hi', item), 'fa-circle-thin', ['shukhrat', 'asrorov']);
+        const WidgetComp1 = new WidgetComponent('w1', 'Item W1', (item) =>console.log('hi', item), null,['daler', 'asrorov']);
+        const WidgetComp2 = new WidgetComponent('w2', 'Item W2', (item) =>console.log('hi', item), null, ['shukhrat', 'asrorov']);
         let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
         WidgetCollectionComp.init();
 

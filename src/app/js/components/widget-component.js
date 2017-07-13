@@ -3,16 +3,17 @@ import { generateWebIcon, buildTemplate } from '../modules/ui';
 
 const WIDGET_NODE_TYPE = 'button';
 const WIDGET_CLASSES = 'cp-widget list-group-item list-group-item-action';
+const WIDGET_DEFAULT_ICON = 'fa-circle-thin';
 const WIDGET_ICON_SIZE = 'fa-2x';
 const IS_ACTIVE ='active';
 
 export default class WidgetComponent extends Component {
-    constructor(id, desc, action, icon, data=null) {
+    constructor(id, desc, action, icon=null, data=null) {
         super(id, null, WIDGET_NODE_TYPE);
 
         this.desc = desc;
         this.action = action;
-        this.icon = icon;
+        this.icon = icon ? icon : WIDGET_DEFAULT_ICON;
         this.data = data;
 
         this.init();
