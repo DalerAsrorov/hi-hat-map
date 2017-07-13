@@ -7,6 +7,7 @@ import * as MapOps from './modules/mapops';
 import * as constants from './modules/constants';
 import * as DataProcessing from './modules/dataprocessing';
 import { getParameter } from './modules/sentiment-utils';
+import Widgets from './modules/widgets';
 import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
 import StorageSystem from './classes/storagesystem';
@@ -14,6 +15,7 @@ import Component from './components/component';
 import ShowboxComponent from './components/showbox-component';
 import WordcloudD3Component from './components/wordcloud-d3-component';
 import MapLoaderComponent from './components/map-loader-component';
+import WidgetComponent from './components/widget-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
 import Twitter from './classes/twitter';
@@ -333,6 +335,16 @@ $(window).load(function() {
             console.log("no data", data);
         }
 
+        // TODO: implement results widgets
+        // const WidgetComp = new WidgetComponent(id, desc, action, icon, data=optional);
+        // const WidgetComp1 = new WidgetComponent(id, desc, action, icon, data=optional);
+        // let WidgetCollectionComp = new WidgetCollection(id, [WidgetComp, WidgetComp1]);
+        // const resultStageWidgets = Widgets.getResultStageWidgets().map((widget) => {
+        //         return new PanelComponent(widget.id, widget.desc, widget.action, widget.data);
+        // });
+
+
+
         let panelComp1 = new PanelComponent('#topTen',
                                            'Top 10 Tweets',
                                            function(){console.log('hi')},
@@ -444,7 +456,6 @@ $(window).load(function() {
         }
     ];
 
-
     let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
     let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
     WordCloudD3Container.appendChild(WordcloudD3Comp);
@@ -454,12 +465,7 @@ $(window).load(function() {
         // rotation: () => ~~(Math.random() * 1) * 90
     });
 
-
-    $('#stopStream').click(function(ev) {
-        twitter.stopStream(() => {
-            console.log(wordcloudQueue);
-        });
-    });
+    console.log('WidgetCompTest', WidgetCompTest);
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

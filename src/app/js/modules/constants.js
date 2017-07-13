@@ -1,4 +1,4 @@
-import { inspectCSSClass } from './utils.js';
+import { inspectCSSClass } from './utils';
 
 export const MAIN = {
     TWITTER_MODES: ['real_time', 'specified_time'],
@@ -6,8 +6,12 @@ export const MAIN = {
         real_time: 0,
         specified_time: 1
     }
-}
+};
 
+
+export const WIDGETS = {
+    WORDCLOUD: 'fa-cloud'
+};
 
 export const IMAGES = {
     SOC_MEDIA_ICONS: {
@@ -20,7 +24,7 @@ export const IMAGES = {
         SHOWBOX_USER_PROFILE_IMG: '../../img/icons/default-user-profile.png',
         MAP_LOADER_IMAGE: '../img/map-loader-image.'
     }
-}
+};
 
 export const COLORS = {
     CHART: {
@@ -48,8 +52,8 @@ export const COLORS = {
             7: inspectCSSClass('sent-pos-7', 'color')
         }
     }
-}
+};
 
 export const FONTS = {
     WORDCLOUD_D3: 'Impact'
-}
+};

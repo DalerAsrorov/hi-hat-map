@@ -1,9 +1,9 @@
 /*----------  Utils Module functions  ----------*/
 
-import StorageSystem from '../classes/storagesystem.js';
-import ContextMenu from '../classes/contextmenu.js';
-import Chart from '../classes/chart.js';
-import { getType } from './utils.js';
+import StorageSystem from '../classes/storagesystem';
+import ContextMenu from '../classes/contextmenu';
+import Chart from '../classes/chart';
+import { getType } from './utils';
 import R from 'ramda';
 
 export function buildTemplate(templateString) {
@@ -11,8 +11,8 @@ export function buildTemplate(templateString) {
 }
 
 export function getLoader(size='fa-3x', type='html') {
-    const text = `<figure class='app-spinner'>
-                    <i class="m-loader fa fa-cog fa-spin ${size} fa-fw"></i>
+    const text = `<figure class='app-spinner'
+                    ${generateWebIcon('fa-cog', size, 'fa-spin fa-fw m-loader', 'text')}
                     <span class="sr-only">Loading...</span>
                   </figure>`;
 
@@ -21,6 +21,16 @@ export function getLoader(size='fa-3x', type='html') {
     }
 
     return buildTemplate(text);
+}
+
+export function generateWebIcon(icon, size='fa-2x', classes='', type='html') {
+    const template = `<i class="fa ${icon} ${size} ${classes}" aria-hidden="true"></i>`;
+
+    if (type === 'text') {
+        return template;
+    }
+
+    return buildTemplate(template);
 }
 
 export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {

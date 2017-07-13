@@ -101,6 +101,13 @@ button#toggleSliderBtn {
     display: inline-block;
 }
 
+.cp-widget {
+
+}
+
+.cp-widget > aside {
+    font-weight: 600;
+}
 
 .context-menu {
     width: 200px;
