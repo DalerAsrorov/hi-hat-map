@@ -16,6 +16,7 @@ import ShowboxComponent from './components/showbox-component';
 import WordcloudD3Component from './components/wordcloud-d3-component';
 import MapLoaderComponent from './components/map-loader-component';
 import WidgetComponent from './components/widget-component';
+import WidgetCollectionComponent from './components/widget-collection-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
 import Twitter from './classes/twitter';
@@ -338,12 +339,15 @@ $(window).load(function() {
         // TODO: implement results widgets
         // const WidgetComp = new WidgetComponent(id, desc, action, icon, data=optional);
         // const WidgetComp1 = new WidgetComponent(id, desc, action, icon, data=optional);
-        // let WidgetCollectionComp = new WidgetCollection(id, [WidgetComp, WidgetComp1]);
+        // let WidgetCollectionComp = new WidgetCollectionComponent(id, [WidgetComp, WidgetComp1]);
         // const resultStageWidgets = Widgets.getResultStageWidgets().map((widget) => {
         //         return new PanelComponent(widget.id, widget.desc, widget.action, widget.data);
         // });
 
-
+        const WidgetComp1 = new WidgetComponent('w1', 'Item W1', (item) =>console.log('hi', item), 'fa-circle-thin',['daler', 'asrorov']);
+        const WidgetComp2 = new WidgetComponent('w2', 'Item W2', (item) =>console.log('hi', item), 'fa-circle-thin', ['shukhrat', 'asrorov']);
+        let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
+        WidgetCollectionComp.init();
 
         let panelComp1 = new PanelComponent('#topTen',
                                            'Top 10 Tweets',
