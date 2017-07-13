@@ -322,29 +322,27 @@ header#loadIntro {
 }
 
 #panelCompLeft {
-  /*background: lightblue;*/
+
 }
 
 #panelCompMiddle {
-  /*background: green;*/
-  border-left: 1px solid rgba(47, 64, 112, 0.41);
-  border-right: 1px solid rgba(47, 64, 112, 0.41);
+    border-right: 1.5px solid rgba(47, 65, 112, 0.11);
+    border-left: 1.5px solid rgba(47, 65, 112, 0.11);
 }
 
 #panelCompRight {
-  /*background: orange;*/
 
 }
 
 #panelCompRightWrapper .menu {
-  padding: 7px;
-  margin: 3px;
-  font-weight: 800;
-  color: #000;
+    padding: 7px;
+    margin: 3px;
+    font-weight: 800;
+    color: #000;
 }
 
 #panelCompRightWrapper .dropdown {
-  /*width: 50%;*/
+    /*width: 50%;*/
 }
 
 .panel-comp {
@@ -352,7 +350,7 @@ header#loadIntro {
 }
 
 .panel-wrapper {
-  padding: 5px;
+    padding: 5px;
 }
 
 .prof-wrapper {
