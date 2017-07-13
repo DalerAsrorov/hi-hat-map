@@ -5,7 +5,7 @@ import * as Paths from './modules/paths';
 import * as utils from './modules/utils';
 import * as MapOps from './modules/mapops';
 import * as constants from './modules/constants';
-import * as DataProcessing from './modules/dataprocessin';
+import * as DataProcessing from './modules/dataprocessing';
 import { getParameter } from './modules/sentiment-utils';
 import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
@@ -132,6 +132,8 @@ $(window).load(function() {
     }).addTo(Map);
 
     socket.on('tweet', (tweet) => {
+        MapLoaderComp.hide();
+
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
 
         if(!streamStateButtonIsOn) {
@@ -231,6 +233,9 @@ $(window).load(function() {
 
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
+
+        MapLoaderComp.show();
+
         const query = ui.getInputValue('#querySearch');
         const lat = Map.getCenter().lat;
         const lng = Map.getCenter().lng;
