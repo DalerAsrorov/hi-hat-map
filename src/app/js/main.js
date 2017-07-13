@@ -459,14 +459,15 @@ $(window).load(function() {
         }
     ];
 
-    let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
-    let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
-    WordCloudD3Container.appendChild(WordcloudD3Comp);
-    WordcloudD3Comp.draw({
-        size: [200, 200],
-        padding: 5
-        // rotation: () => ~~(Math.random() * 1) * 90
-    });
+    // TODO: Added word cloud as a widget
+    // let WordCloudD3Container = new Component('#wordcloudD3', '#panelCompMiddle', 'div', '');
+    // let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
+    // WordCloudD3Container.appendChild(WordcloudD3Comp);
+    // WordcloudD3Comp.draw({
+    //     size: [200, 200],
+    //     padding: 5
+    //     // rotation: () => ~~(Math.random() * 1) * 90
+    // });
 
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
