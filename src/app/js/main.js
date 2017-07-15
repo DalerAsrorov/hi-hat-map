@@ -349,7 +349,7 @@ $(window).load(function() {
         // WidgetCollectionComp.init();
 
         let listOfWidgets1 = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 8; i++) {
             listOfWidgets1.push(new WidgetComponent('w' + i, 'Item W' + i, 'col-lg-2', (item) =>console.log('hi', item, i), 'fa-twitter', ['daler', 'asrorov, ' + i]));
         }
 

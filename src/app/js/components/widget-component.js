@@ -6,6 +6,9 @@ const WIDGET_NODE_TYPE = 'button';
 const WIDGET_CLASSES = 'cp-widget btn btn-secondary';
 const WIDGET_DEFAULT_ICON = 'fa-circle-thin';
 const WIDGET_ICON_SIZE = 'fa-2x';
+const WIDGET_CSS = {
+    'border-radius': '0'
+};
 const IS_ACTIVE ='active';
 
 export default class WidgetComponent extends Component {
@@ -48,6 +51,7 @@ export default class WidgetComponent extends Component {
 
     init() {
         this.$node.addClass(`${WIDGET_CLASSES} ${this.size}`);
+        this.$node.css(WIDGET_CSS);
         this.$node.append(`
             ${ generateWebIcon(this.icon, WIDGET_ICON_SIZE, '', 'text') }
             <aside class='cp-widget-desc'>${this.desc}</aside>
