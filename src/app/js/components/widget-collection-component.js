@@ -2,7 +2,7 @@ import Component from './component';
 import { isEmpty } from 'ramda';
 
 const WC_NODE_TYPE = 'div';
-const WC_NODE_CLASSES = 'list-group';
+const WC_NODE_CLASSES = 'row';
 
 export default class WidgetCollectionComponent extends Component {
     constructor(id, parent, desc, widgets=[]) {

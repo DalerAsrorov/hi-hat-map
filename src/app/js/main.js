@@ -343,10 +343,18 @@ $(window).load(function() {
         //         return new PanelComponent(widget.id, widget.desc, widget.action, widget.data);
         // });
 
-        const WidgetComp1 = new WidgetComponent('w1', 'Item W1', (item) =>console.log('hi', item), null,['daler', 'asrorov']);
-        const WidgetComp2 = new WidgetComponent('w2', 'Item W2', (item) =>console.log('hi', item), null, ['shukhrat', 'asrorov']);
-        let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
-        WidgetCollectionComp.init();
+        // const WidgetComp1 = new WidgetComponent('w1', 'Item W1', 'col-lg-2', (item) =>console.log('hi', item), null,['daler', 'asrorov']);
+        // const WidgetComp2 = new WidgetComponent('w2', 'Item W2', 'col-lg-2', (item) =>console.log('hi', item), null, ['shukhrat', 'asrorov']);
+        // let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
+        // WidgetCollectionComp.init();
+
+        let listOfWidgets1 = [];
+        for (let i = 0; i < 10; i++) {
+            listOfWidgets1.push(new WidgetComponent('w' + i, 'Item W' + i, 'col-lg-2', (item) =>console.log('hi', item, i), 'fa-twitter', ['daler', 'asrorov, ' + i]));
+        }
+
+        let WidgetCollectionComp1 = new WidgetCollectionComponent('wCollet1', '#panelCompLeft', 'Widgets 1', listOfWidgets1);
+        WidgetCollectionComp1.init();
 
         let panelComp1 = new PanelComponent('#topTen',
                                            'Top 10 Tweets',

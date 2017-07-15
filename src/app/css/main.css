@@ -106,7 +106,8 @@ button#toggleSliderBtn {
 }
 
 .cp-widget > aside {
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 12px;
 }
 
 .context-menu {
