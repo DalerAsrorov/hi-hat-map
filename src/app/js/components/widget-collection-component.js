@@ -41,7 +41,7 @@ export default class WidgetCollectionComponent extends Component {
     }
 
     _getButton() {
-        return this.$node.find('button');
+        return this.$node.children('button');
     }
 
     _buildTemplate(classNames='') {
