@@ -17,6 +17,7 @@ const WC_TOGGLE_BUTTON_CSS= {
     'border-radius': '0'
 };
 const WC_TOGGLE_SPEED = 0;
+const IS_ACTIVE = 'active';
 
 export default class WidgetCollectionComponent extends Component {
     constructor(id, parent, desc, widgets=[]) {
@@ -66,6 +67,14 @@ export default class WidgetCollectionComponent extends Component {
         }
 
         return Error('Cannot build widget collection with empty list.');
+    }
+
+    isActive() {
+        return this.$node.find('button').hasClass(IS_ACTIVE);
+    }
+
+    setActive() {
+        this.$node.find('button').addClass(IS_ACTIVE);
     }
 
     init() {

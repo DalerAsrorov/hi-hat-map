@@ -96,7 +96,7 @@ $(window).load(function() {
 
     /* INTRO LOADER CODE */
     $(() => {
-        if(!storageSystem.getItem('firstVisit')) {
+        if (!storageSystem.getItem('firstVisit')) {
             ui.fadeOut('#initLoader', 3000, () => {
                 ui.removeElement('#initLoader');
                 ui.makeVisible('#mainWrapper', 500);
@@ -112,7 +112,7 @@ $(window).load(function() {
     storageSystem.setItem('firstVisit', true);
     cpOpen = storageSystem.getItem('cpOpen');
 
-    if(cpOpen == 'false') {
+    if (cpOpen == 'false') {
         ui.slideToggleCp('controlPanelWrapper', Map);
     }
 
@@ -138,14 +138,14 @@ $(window).load(function() {
 
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
 
-        if(!streamStateButtonIsOn) {
+        if (!streamStateButtonIsOn) {
             StopButtonL.addTo(Map);
             $(StopButtonL.button).show();
             streamStateButtonIsOn = true;
         }
 
 
-        if(coordinates) {
+        if (coordinates) {
             const boundingBox = tweet.place.bounding_box;
             const polygonCenter = leaflet.computePolygonCenter(L, boundingBox);
             const coordinates = leaflet.transformLatLngToArray(polygonCenter);
@@ -199,7 +199,7 @@ $(window).load(function() {
                     ]
                 });
 
-                if(sentimentQueue.size() === 5) {
+                if (sentimentQueue.size() === 5) {
                     sentimentQueue.dequeue();
                     console.log('P00P2 Queue item removed');
                 }
@@ -245,7 +245,7 @@ $(window).load(function() {
 
         let lastLocation = [`${lng}, ${lat}, ${lng+1}, ${lat+1}`];
 
-        if(R.isNil(storageSystem.getItem('lastLocation'))) {
+        if (R.isNil(storageSystem.getItem('lastLocation'))) {
             console.log('Not selected. twitData:', twitData);
             // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
@@ -295,7 +295,7 @@ $(window).load(function() {
     console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
     .then(trends => {
-        if(trends.data) {
+        if (trends.data) {
             let listOfTrends = trends.data.trends;
             let geoData = trends.geo;
 
