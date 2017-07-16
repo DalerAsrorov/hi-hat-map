@@ -40,6 +40,10 @@ export default class WidgetCollectionComponent extends Component {
         })
     }
 
+    _getButton() {
+        return this.$node.find('button');
+    }
+
     _buildTemplate(classNames='') {
         this.$node.addClass(classNames);
 
@@ -48,6 +52,7 @@ export default class WidgetCollectionComponent extends Component {
 
         $toggleButton.click((ev) => {
             $widgetWrapper.slideToggle(WC_TOGGLE_SPEED);
+            this.toggleActive();
         });
 
         if (!isEmpty(this.components)) {
@@ -69,12 +74,24 @@ export default class WidgetCollectionComponent extends Component {
         return Error('Cannot build widget collection with empty list.');
     }
 
+    /**
+     * Adds event listener to the button of Widget Component
+     * @param {[string], [fn]} action [void]
+     */
+    addEventListener(eventType, action) {
+        this._getButton().on(eventType, action);
+    }
+
+    toggleActive() {
+        this.$node.children('button').toggleClass(IS_ACTIVE);
+    }
+
     isActive() {
-        return this.$node.find('button').hasClass(IS_ACTIVE);
+        return this.$node.children('button').hasClass(IS_ACTIVE);
     }
 
     setActive() {
-        this.$node.find('button').addClass(IS_ACTIVE);
+        this.$node.children('button').addClass(IS_ACTIVE);
     }
 
     init() {

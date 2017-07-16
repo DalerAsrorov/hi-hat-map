@@ -17,6 +17,7 @@ import WordcloudD3Component from './components/wordcloud-d3-component';
 import MapLoaderComponent from './components/map-loader-component';
 import WidgetComponent from './components/widget-component';
 import WidgetCollectionComponent from './components/widget-collection-component';
+import WidgetCollectionContainerComponent from './components/widget-collection-container-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
 import Twitter from './classes/twitter';
@@ -348,13 +349,25 @@ $(window).load(function() {
         // let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
         // WidgetCollectionComp.init();
 
-        let listOfWidgets1 = [];
+        let listOfWidgets1 = [], listOfWidgets2 = [];
         for (let i = 0; i < 8; i++) {
+            const j = i * 10;
             listOfWidgets1.push(new WidgetComponent('w' + i, 'Item W' + i, 'col-lg-2', (item) =>console.log('hi', item, i), 'fa-twitter', ['daler', 'asrorov, ' + i]));
+            listOfWidgets2.push(new WidgetComponent('w' + j, 'Item W' + j, 'col-lg-2', (item) =>console.log('hi', item, j), 'fa-twitter', ['daler', 'asrorov, ' + j]));
         }
 
         let WidgetCollectionComp1 = new WidgetCollectionComponent('wCollet1', '#panelCompLeft', 'Widgets 1', listOfWidgets1);
+        let WidgetCollectionComp2 = new WidgetCollectionComponent('wCollet2', '#panelCompLeft', 'Widgets 2', listOfWidgets2);
         WidgetCollectionComp1.init();
+        WidgetCollectionComp2.init();
+
+        let WidgetColContainerComp1 = new WidgetCollectionContainerComponent(
+            'wCollectCont1',
+            '#panelCompLeft',
+            'div',
+            [WidgetCollectionComp1, WidgetCollectionComp2]
+        );
+        WidgetColContainerComp1.init();
 
         let panelComp1 = new PanelComponent('#topTen',
                                            'Top 10 Tweets',
