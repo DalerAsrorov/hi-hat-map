@@ -9,7 +9,9 @@ const WC_WRAPPER_CSS = {
     'clear': 'both',
     'position': 'absolute',
     'display': 'none',
-    'background-color': '#fff'
+    'background-color': '#fff',
+    'width': '100%',
+    'margin': '0'
 };
 const WC_TOGGLE_BUTTON_CLASSES = 'btn btn-secondary';
 const WC_TOGGLE_BUTTON_CSS= {
@@ -46,6 +48,7 @@ export default class WidgetCollectionComponent extends Component {
 
     _buildTemplate(classNames='') {
         this.$node.addClass(classNames);
+        this.$node.css({'margin': '0'});
 
         let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
         let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
