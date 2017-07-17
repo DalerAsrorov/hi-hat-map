@@ -29,21 +29,24 @@ export const renderObject = function(renderObject) {
 
 export const drawObject = curry((data, geolocation, iconType) => {
     const leaflet = new Leaflet();
-    const latlng = L.latLng(geolocation[1], geolocation[0]);
+    const coordinates = [geolocation[0], geolocation[1]];
+    const latlng = L.latLng(coordinates[1], coordinates[0]);
     const popupOptions = {
         autoPanPadding: L.point(10, 10),
         minWidth: 350,
         maxHeight: 300
     };
 
-    let icon, popup, showboxComp, markerOptions;
+    let ShowboxComp;
+    let icon, popup, markerOptions;
 
     switch(iconType) {
         case 'twitter':
-            showboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
-            showboxComp.generateTemplate();
+            debugger;
+            ShowboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
+            ShowboxComp.init();
 
-            popup = leaflet.createPopup(showboxComp, popupOptions);
+            popup = leaflet.createPopup(ShowboxComp, popupOptions);
             icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
 
             markerOptions = {
@@ -62,8 +65,40 @@ export const drawObject = curry((data, geolocation, iconType) => {
             console.log('No soc media was selected.');
     };
 
-    L.marker(latlng, markerOptions)
-    .bindPopup(popup)
-    .openPopup()
-    .addTo(Map);
+
+    debugger;
+    const geojsonFeature = {
+        "type": "Feature",
+        "properties": {
+            "name": iconType,
+            "popupContent": popup,
+            'icon': icon
+        },
+        "geometry": {
+            'type': 'Point',
+            coordinates
+        }
+    };
+
+
+    const feature = leaflet.geoJSON(geojsonFeature, {
+        onEachFeature(feature, layer) {
+            if (feature.properties && feature.properties.popupContent) {
+                layer
+                .bindPopup(feature.properties.popupContent)
+                .openPopup();
+            }
+        },
+
+        pointToLayer(feature, latlng) {
+            return L.marker(latlng, markerOptions);
+        }
+    }).addTo(Map);
+
+
+    console.log('Feature', feature);
+    // L.marker(latlng, markerOptions)
+    // .bindPopup(popup)
+    // .openPopup()
+    // .addTo(Map);
 });

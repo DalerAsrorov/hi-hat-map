@@ -44,7 +44,6 @@ export default class WordcloudD3Component extends WordcloudComponent {
         layout.start();
 
         function draw(words) {
-            console.log('words:', words);
             d3.select(myDomNode).append("svg")
                 .attr('width', layout.size()[0])
                 .attr('height', layout.size()[1])

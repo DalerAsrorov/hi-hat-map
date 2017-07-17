@@ -13,7 +13,7 @@ export default class WidgetCollectionContainerComponent extends Component {
     }
 
     _delegateToggle(wcTarget) {
-        
+
     }
 
     activateAllExcept(WidgetCollectionComp) {
@@ -28,10 +28,6 @@ export default class WidgetCollectionContainerComponent extends Component {
         this.WidgetCollectionCompList.map(WidgetCollection => {
             WidgetCollection.addEventListener(type, action);
         });
-    }
-
-    init() {
-        this._buildTemplate();
     }
 
     setActive() {

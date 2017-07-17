@@ -3,6 +3,9 @@ import { isEmpty } from 'ramda';
 
 const WC_NODE_TYPE = 'div';
 const WC_NODE_CLASSES = 'row';
+const WC_NODE_CSS = {
+    'margin': '0'
+};
 const WC_WRAPPER_CLASSES = 'cp-widget-wrapper';
 const WC_WRAPPER_CSS = {
     'display': 'table',
@@ -46,9 +49,9 @@ export default class WidgetCollectionComponent extends Component {
         return this.$node.children('button');
     }
 
-    _buildTemplate(classNames='') {
-        this.$node.addClass(classNames);
-        this.$node.css({'margin': '0'});
+    _buildTemplate() {
+        this.$node.addClass(WC_NODE_CLASSES);
+        this.$node.css(WC_NODE_CSS);
 
         let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
         let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
@@ -95,9 +98,5 @@ export default class WidgetCollectionComponent extends Component {
 
     setActive() {
         this.$node.children('button').addClass(IS_ACTIVE);
-    }
-
-    init() {
-        return this._buildTemplate(WC_NODE_CLASSES);
     }
 }

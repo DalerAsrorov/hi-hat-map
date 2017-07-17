@@ -49,6 +49,10 @@ export default class Component {
         append(this.html(), html);
     }
 
+    init() {
+        this._buildTemplate();
+    }
+
     update(props) {
         const { id, parent, $node, nodeType } = props;
 

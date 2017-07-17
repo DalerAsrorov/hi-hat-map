@@ -10,7 +10,7 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
         this.data = data;
     }
 
-    generateTemplate() {
+    _buildTemplate() {
         // fetching sentiment values from data object
         const data = this.data;
         const tweet = data.tweet;

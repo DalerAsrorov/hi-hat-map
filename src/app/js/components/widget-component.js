@@ -25,6 +25,15 @@ export default class WidgetComponent extends Component {
         this.$node.click(action);
     }
 
+    _buildTemplate() {
+        this.$node.addClass(`${WIDGET_CLASSES} ${this.size}`);
+        this.$node.css(WIDGET_CSS);
+        this.$node.append(`
+            ${ generateWebIcon(this.icon, WIDGET_ICON_SIZE, '', 'text') }
+            <aside class='cp-widget-desc'>${this.desc}</aside>
+        `);
+    }
+
     addClass(className) {
         this.$node.addClass(className);
     }
@@ -47,14 +56,5 @@ export default class WidgetComponent extends Component {
 
     isActive() {
         return this.$node.hasClass(IS_ACTIVE);
-    }
-
-    init() {
-        this.$node.addClass(`${WIDGET_CLASSES} ${this.size}`);
-        this.$node.css(WIDGET_CSS);
-        this.$node.append(`
-            ${ generateWebIcon(this.icon, WIDGET_ICON_SIZE, '', 'text') }
-            <aside class='cp-widget-desc'>${this.desc}</aside>
-        `);
     }
 }

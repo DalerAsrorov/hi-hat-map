@@ -1,3 +1,5 @@
+import Map from '../modules/map';
+
 
 export default class Leaflet {
 
@@ -25,6 +27,11 @@ export default class Leaflet {
 
     transformLatLngToArray(center) {
         return [center.lng, center.lat];
+    }
+
+    geoJSON(geojsonFeature, options={}) {
+        console.log('geoJSON():', geojsonFeature, options);
+        return L.geoJSON(geojsonFeature, options).addTo(Map);
     }
 
 }
