@@ -18,6 +18,7 @@ import MapLoaderComponent from './components/map-loader-component';
 import WidgetComponent from './components/widget-component';
 import WidgetCollectionComponent from './components/widget-collection-component';
 import WidgetCollectionContainerComponent from './components/widget-collection-container-component';
+import ModalComponent from './components/modal-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
 import Twitter from './classes/twitter';
@@ -489,6 +490,12 @@ $(window).load(function() {
     //     padding: 5
     //     // rotation: () => ~~(Math.random() * 1) * 90
     // });
+
+
+    let WordcloudModalComp = new ModalComponent('wordcloudModal', null, 'div');
+    WordcloudModalComp.init();
+    console.log(WordcloudModalComp);
+
 
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
