@@ -494,6 +494,7 @@ $(window).load(function() {
 
     let WordcloudModalComp = new ModalComponent('wordcloudModal', null, 'div');
     WordcloudModalComp.init();
+    debugger;
     console.log(WordcloudModalComp);
 
 

@@ -18,6 +18,10 @@ export default class Component {
         this.html().addClass(classes);
     }
 
+    addCSS(cssProps={}) {
+        this.html().css(cssProps);
+    }
+
     bind(container='') {
         let myTarget = this.id;
 
@@ -30,7 +34,6 @@ export default class Component {
     }
 
     html() {
-        // return getElement(`${this.id}`);
         return this.$node;
     }
 

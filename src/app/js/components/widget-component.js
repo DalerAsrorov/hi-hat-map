@@ -26,16 +26,12 @@ export default class WidgetComponent extends Component {
     }
 
     _buildTemplate() {
-        this.$node.addClass(`${WIDGET_CLASSES} ${this.size}`);
-        this.$node.css(WIDGET_CSS);
-        this.$node.append(`
+        this.addClasses(`${WIDGET_CLASSES} ${this.size}`);
+        this.addCSS(WIDGET_CSS);
+        this.html().append(`
             ${ generateWebIcon(this.icon, WIDGET_ICON_SIZE, '', 'text') }
             <aside class='cp-widget-desc'>${this.desc}</aside>
         `);
-    }
-
-    addClass(className) {
-        this.$node.addClass(className);
     }
 
     applyActionToData() {
@@ -51,7 +47,7 @@ export default class WidgetComponent extends Component {
     }
 
     makeActive() {
-        this.$node.addClass(IS_ACTIVE);
+        this.addClasses(IS_ACTIVE);
     }
 
     isActive() {
