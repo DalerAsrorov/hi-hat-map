@@ -42,7 +42,6 @@ export const drawObject = curry((data, geolocation, iconType) => {
 
     switch(iconType) {
         case 'twitter':
-            debugger;
             ShowboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
             ShowboxComp.init();
 
@@ -66,7 +65,6 @@ export const drawObject = curry((data, geolocation, iconType) => {
     };
 
 
-    debugger;
     const geojsonFeature = {
         "type": "Feature",
         "properties": {

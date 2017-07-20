@@ -1,6 +1,5 @@
 import Map from '../modules/map';
 
-
 export default class Leaflet {
 
     constructor() {
@@ -30,7 +29,6 @@ export default class Leaflet {
     }
 
     geoJSON(geojsonFeature, options={}) {
-        console.log('geoJSON():', geojsonFeature, options);
         return L.geoJSON(geojsonFeature, options).addTo(Map);
     }
 
