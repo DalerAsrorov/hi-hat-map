@@ -492,38 +492,41 @@ $(window).load(function() {
     // });
 
 
-    let WordcloudModalComp = new ModalComponent('wordcloudModal', null, 'div');
-    WordcloudModalComp.init();
-    WordcloudModalComp.buildHeader('Hello There');
-    WordcloudModalComp.buildBody(
-        `<div id='hello'>
-            <section class='one'>
-                One
-            </section>
-            <section class='two'>
-                Two
-            </section>
-        </div>`);
+    // MODAL COMPONENT
+    // let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
+    // WordcloudModalComp.init();
+    // WordcloudModalComp.buildHeader('Hello There');
+    // WordcloudModalComp.buildBody(
+    //     `<div id='hello'>
+    //         <section class='one'>
+    //             One
+    //         </section>
+    //         <section class='two'>
+    //             Two
+    //         </section>
+    //     </div>`);
+    //
+    // WordcloudModalComp.buildFooter([
+    //     {
+    //         name: 'Destroy',
+    //         type: 'btn btn-info',
+    //         dataDismissModal: true,
+    //         action: (ev) => { console.log(`Name:s`, ev) }
+    //     }, {
+    //         name: 'Help',
+    //         type: 'btn btn-danger',
+    //         dataDismissModal: true,
+    //         action: (ev) => { console.log(`Name:`, ev) }
+    //     }, {
+    //         name: 'Somebody',
+    //         type: 'btn btn-primary',
+    //         dataDismissModal: true,
+    //         action: (ev) => { console.log(`Name:`, ev) }
+    //     }
+    // ]);
+    //
+    // WordcloudModalComp.show();
 
-    WordcloudModalComp.buildFooter([
-        {
-            name: 'Destroy',
-            type: 'btn btn-info',
-            dataDismissModal: true,
-            action: (ev) => console.log(`${this.name}`, ev)
-        }, {
-            name: 'Help',
-            type: 'btn btn-danger',
-            dataDismissModal: true,
-            action: (ev) => console.log(`${this.name}`, ev)
-        }, {
-            name: 'Somebody',
-            type: 'btn btn-primary',
-            dataDismissModal: true,
-            action: (ev) => console.log(`${this.name}`, ev)
-        }
-    ]);
-    
 
 
 

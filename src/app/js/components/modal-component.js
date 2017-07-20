@@ -60,7 +60,7 @@ export default class ModalComponent extends Component {
                     ${button.name}
                 </button>`);
             $button.click(button.action);
-            $modalFooter.append($button);
+            $modalFooter.prepend($button);
         });
 
         this.$modalContent.append($modalFooter);
@@ -72,7 +72,7 @@ export default class ModalComponent extends Component {
         let $modalDialog = $('<div class="modal-dialog" role="document"></div>');
 
         this.$modalContent = $(this.$modalContent);
-        $modalDialog.append(this.$modalContent);
+        $modalDialog.prepend(this.$modalContent);
 
         this.html().append($modalDialog);
     }
@@ -81,5 +81,9 @@ export default class ModalComponent extends Component {
         const customTemplateCreated = false;
 
         return customTemplateCreated;
+    }
+
+    show() {
+        this.html().modal('show');
     }
 }
