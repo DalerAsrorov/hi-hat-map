@@ -10,7 +10,7 @@ export function buildTemplate(templateString) {
     return convertToDOMElement(templateString);
 }
 
-export function getLoader(size='fa-3x', type='html') {
+export function getLoader(size = 'fa-3x', type = 'html') {
     const text = `<figure class='app-spinner'>
                     ${generateWebIcon('fa-cog', size, 'fa-spin fa-fw m-loader', 'text')}
                     <span class="sr-only">Loading...</span>
@@ -23,7 +23,7 @@ export function getLoader(size='fa-3x', type='html') {
     return buildTemplate(text);
 }
 
-export function generateWebIcon(icon, size='fa-2x', classes='', type='html') {
+export function generateWebIcon(icon, size = 'fa-2x', classes = '', type = 'html') {
     const template = `<i class="fa ${icon} ${size} ${classes}" aria-hidden="true"></i>`;
 
     if (type === 'text') {
@@ -33,11 +33,11 @@ export function generateWebIcon(icon, size='fa-2x', classes='', type='html') {
     return buildTemplate(template);
 }
 
-export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = "35%", ...rest) {
+export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = '35%', ...rest) {
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();
     const slidingTime = 270;
-    const defaultTop = "-15px";
+    const defaultTop = '-15px';
     const $querySearchForm = $('#querySearchForm');
     const $target = $(`#${targetID}`);
     const $body = $('body');
@@ -46,24 +46,29 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
     const storageSystem = new StorageSystem(window.localStorage);
 
     //
-    if(cpWrapperHeight === cpNavHeight) {
-        $body.css({"overflowY": "auto"});
-        $target.animate({height: cpDefaultHeight}, slidingTime);
-        $querySearchForm.animate({
-            top: "-15px"
-        }, slidingTime);
+    if (cpWrapperHeight === cpNavHeight) {
+        $body.css({ overflowY: 'auto' });
+        $target.animate({ height: cpDefaultHeight }, slidingTime);
+        $querySearchForm.animate(
+            {
+                top: '-15px'
+            },
+            slidingTime
+        );
         $slideSwitchIcon.addClass('fa-caret-down').removeClass('fa-caret-up');
-        storageSystem.setItem("cpOpen", true);
-    }
-    else {
-        $body.css({"overflowY": "hidden"});
-        $target.animate({height: cpNavHeight}, slidingTime);
-        $querySearchForm.animate({
-            top: "-37px"
-        }, slidingTime);
+        storageSystem.setItem('cpOpen', true);
+    } else {
+        $body.css({ overflowY: 'hidden' });
+        $target.animate({ height: cpNavHeight }, slidingTime);
+        $querySearchForm.animate(
+            {
+                top: '-37px'
+            },
+            slidingTime
+        );
         map.invalidateSize();
         $slideSwitchIcon.addClass('fa-caret-up').removeClass('fa-caret-down');
-        storageSystem.setItem("cpOpen", false);
+        storageSystem.setItem('cpOpen', false);
     }
 }
 
@@ -71,9 +76,9 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
 *  Helper UI method that will keep the
 *  control panel closed faster.
 */
-export function setCpCss(target, height, body=$('body')) {
-    body.css({"overflowY": "auto"});
-    $target.css({height: cpDefaultHeight});
+export function setCpCss(target, height, body = $('body')) {
+    body.css({ overflowY: 'auto' });
+    $target.css({ height: cpDefaultHeight });
 }
 
 /**
@@ -84,15 +89,8 @@ export function setCpCss(target, height, body=$('body')) {
 export function generateCpRightPanel(target, data) {
     let $target = $(target);
 
-    for(let i = 0; i < 10; i++) {
-        $target.append
-        (
-            '<div class="col-lg-4">' +
-                '<div class="menu">' +
-                    "Something" +
-                '</div>' +
-            '</div>'
-        );
+    for (let i = 0; i < 10; i++) {
+        $target.append('<div class="col-lg-4">' + '<div class="menu">' + 'Something' + '</div>' + '</div>');
     }
 }
 
@@ -102,23 +100,22 @@ export function addElementToPanel(
     htmlItemName = '',
     htmlItem = $('<button type="button"></button>'),
     htmlItemClass = 'menu',
-    columnSize = 'col-lg-4') {
-
+    columnSize = 'col-lg-4'
+) {
     let $panel = $(panel);
     let $htmlItem = htmlItem;
     let $divCol = $('<div></div>');
 
     $htmlItem.addClass(htmlItemClass);
-    $htmlItem.html('<span class="right-cp-name">'
-                   + htmlItemName + '</span>')
+    $htmlItem.html('<span class="right-cp-name">' + htmlItemName + '</span>');
     $divCol.addClass(columnSize);
 
     $divCol.append($htmlItem);
     $panel.append($divCol);
 }
 
-export function addElementTo(target, element=$('<div></div>')) {
-    if(typeof target == 'object') {
+export function addElementTo(target, element = $('<div></div>')) {
+    if (typeof target == 'object') {
         target.append(element);
         return target;
     }
@@ -126,7 +123,7 @@ export function addElementTo(target, element=$('<div></div>')) {
     return $(`${target}`).append(element);
 }
 
-export function addContainerToContainer(panel, id='', container=$(`<div id=${id}></div>`), classes='') {
+export function addContainerToContainer(panel, id = '', container = $(`<div id=${id}></div>`), classes = '') {
     let addId = container.attr('id') ? container.attr('id') : container.attr('id', `#${id}`);
     addClass(container, classes);
     $(panel).append(container);
@@ -139,11 +136,11 @@ export function addClass(target, className) {
 }
 
 export function addTextTo(target, text) {
-    if(typeof target == 'object') {
-        console.log("Jquery should be applied directly");
+    if (typeof target == 'object') {
+        console.log('Jquery should be applied directly');
         target.html(text);
-    } else if(typeof target == 'string') {
-        console.log("It's id", target);
+    } else if (typeof target == 'string') {
+        console.log('It\'s id', target);
         $(target).html(text);
     }
 }
@@ -168,7 +165,7 @@ export function convertFromJQueryToDOMElement(jqElement) {
 export function addEventListenerTo(target, event, fn) {
     const targetType = getType(target);
 
-    if(targetType === '[object Window]' || targetType === '[object HTMLDocument]') {
+    if (targetType === '[object Window]' || targetType === '[object HTMLDocument]') {
         target.addEventListener(event, fn);
     } else {
         document.getElementById(target).addEventListener(event, fn);
@@ -183,7 +180,7 @@ export function style(target, styleObject, ...rest) {
     return $(target).css(styleObject);
 }
 
-export function fadeOut(target, timer=500, callback=()=>{}) {
+export function fadeOut(target, timer = 500, callback = () => {}) {
     $(target).fadeOut(timer, function() {
         // $('#initLoader').remove();
         // $('#mainWrapper').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, 1000);
@@ -192,26 +189,27 @@ export function fadeOut(target, timer=500, callback=()=>{}) {
 }
 
 export function makeVisible(target, timer) {
-    $(target).css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1}, timer)
+    $(target).css({ opacity: 0.0, visibility: 'visible' }).animate({ opacity: 1 }, timer);
 }
 
-export function appendDropUpTo() {
-
-}
+export function appendDropUpTo() {}
 
 export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) {
     // console.log("HERE", dropdownName, " HERE ", dropdownID, " HERE ", actionsList);
     let $targetRef = $(target).append(`<div class="dropdown" id=${dropdownID}></div>`);
     let $dropdown = $(target).find(`#${dropdownID}`);
-    $dropdown.append(`<button class='btn btn-secondary dropdown-toggle' type='button' data-toggle="dropdown">` + dropdownName + `</button>`);
-    let $dropdownRef = $dropdown.append(`<div class='dropdown-menu' </div>`);
+    $dropdown.append(
+        '<button class=\'btn btn-secondary dropdown-toggle\' type=\'button\' data-toggle="dropdown">' +
+            dropdownName +
+            '</button>'
+    );
+    let $dropdownRef = $dropdown.append('<div class=\'dropdown-menu\' </div>');
     let $listDiv = $dropdownRef.find('.dropdown-menu');
 
     let $ul = $('<ul></ul>');
 
     actionsList.map((action, index) => {
-        $ul.append
-        (`
+        $ul.append(`
             <li class='sup-li'>
                 <a class ='list-group-item list-group-item-action' id='${action.id}' href='#'> ${action.name} </a>
             </li>
@@ -225,10 +223,11 @@ export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) 
 
 export function appendRangeSlider(container, divClass, inputId, params) {
     let newRangeSlider = $(
-                       `<div class='${divClass}'>
+        `<div class='${divClass}'>
                             <input id='${inputId}' type='text'
                              />
-                       </div>`);
+                       </div>`
+    );
     let rangeInput = newRangeSlider.find('input');
     rangeInput.slider({
         ticks: params.ticks,
@@ -240,15 +239,18 @@ export function appendRangeSlider(container, divClass, inputId, params) {
         tooltip: params.tooltip
     });
 
-    for(let [key, value] of Object.entries(params.eventHandlers)) {
+    for (let [key, value] of Object.entries(params.eventHandlers)) {
         // key == event and value == handler
         rangeInput.on(key, value);
-    };
+    }
 
     appendTo(container, newRangeSlider);
     rangeInput.slider('refresh');
 
-    console.log(`Range slider with divClass '${divClass}'' is appended to '${container}'`, appendTo(`${container}`, newRangeSlider));
+    console.log(
+        `Range slider with divClass '${divClass}'' is appended to '${container}'`,
+        appendTo(`${container}`, newRangeSlider)
+    );
 }
 
 export function keypress(target, callback) {
@@ -256,7 +258,7 @@ export function keypress(target, callback) {
 }
 
 export function append(container, child) {
-    if ((typeof container === 'string') && (typeof child === 'string')) {
+    if (typeof container === 'string' && typeof child === 'string') {
         $(container).append(child);
     } else {
         container.append(child);
@@ -268,7 +270,7 @@ export function appendTo(container, element) {
 }
 
 export function appendDropDownToPanel(target, componentsClass) {
-    console.log("componentsClass.list:", componentsClass.list);
+    console.log('componentsClass.list:', componentsClass.list);
     appendDropDownTo(target, componentsClass.name, componentsClass.id, componentsClass.list);
 }
 
@@ -281,7 +283,7 @@ export function getInputValue(target) {
 }
 
 export function getOuterHTMLText(jqDom) {
-    if(R.isNil(jqDom) || jqDom === '') {
+    if (R.isNil(jqDom) || jqDom === '') {
         return '';
     }
     return $('<div />').append(jqDom.clone()).html();
@@ -292,7 +294,7 @@ export function addContextMenuTo(target, contextMenuId, listId, eventType) {
     let contextMenu = new ContextMenu(contextMenuId, listId, target);
     contextMenu.bind();
 
-    $target.bind(eventType, (event) => {
+    $target.bind(eventType, event => {
         event.preventDefault();
         contextMenu.adjustPosition(event);
         contextMenu.fadeIn(200);
@@ -312,10 +314,9 @@ export const generateChart = R.curry(function generateChart(id, data, axis) {
 
 export function resetOnMuseUp(target, containerSelector, actionName) {
     const container = $(`${containerSelector}`);
-    $(target).mouseup((e) => {
-        if(!container.is(e.target)
-           && container.has(e.target).length === 0) {
-            fadeOut(containerSelector, 100)
+    $(target).mouseup(e => {
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            fadeOut(containerSelector, 100);
             container.unbind(actionName, target);
         }
     });
