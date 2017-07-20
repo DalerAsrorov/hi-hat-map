@@ -5,7 +5,7 @@ const MODAL_BASE_CLASS = 'modal fade';
 const MODAL_HEADER_HTML = '<div class="modal-header"></div>'
 const MODAL_CONTENT_HTML = '<div class="modal-content"></div>';
 const MODAL_FOOTER_HTML = '<div class="modal-footer"></div>';
-const MODAL_CLOSE_BUTTON_HTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal"></button>';
+const MODAL_CLOSE_BUTTON_HTML = '<button class="btn btn-secondary" data-dismiss="modal"></button>';
 const MODAL_CLOSE_ICON = '&times;';
 
 export default class ModalComponent extends Component {
@@ -44,13 +44,27 @@ export default class ModalComponent extends Component {
     }
 
     buildFooter(customButtons=[], closeButtonText='Close') {
-        const $closeButton = $(MODAL_CLOSE_BUTTON_HTML);
-        $closeButton.append(closeButtonText);
+        let $modalFooter = $('<div class="modal-footer"></div>');
+        let $closeButton = $(MODAL_CLOSE_BUTTON_HTML);
 
+        $closeButton.append(closeButtonText);
+        $modalFooter.append($closeButton);
 
         customButtons.map((button) => {
+            const dismissModalAtt = 'data-dismiss="modal"';
+            const dismissModalBool = button.dataDismissModal;
+            const dataDismiss = dismissModalBool ? dismissModalAtt : '';
 
+            let $button = $(
+                `<button class='${button.type} ${dataDismiss}'>
+                    ${button.name}
+                </button>`);
+            $button.click(button.action);
+            $modalFooter.append($button);
         });
+
+        this.$modalContent.append($modalFooter);
+        return $modalFooter;
     }
 
     _buildTemplate() {

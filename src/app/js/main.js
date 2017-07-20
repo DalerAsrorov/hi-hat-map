@@ -504,7 +504,26 @@ $(window).load(function() {
                 Two
             </section>
         </div>`);
-    console.log(WordcloudModalComp);
+
+    WordcloudModalComp.buildFooter([
+        {
+            name: 'Destroy',
+            type: 'btn btn-info',
+            dataDismissModal: true,
+            action: (ev) => console.log(`${this.name}`, ev)
+        }, {
+            name: 'Help',
+            type: 'btn btn-danger',
+            dataDismissModal: true,
+            action: (ev) => console.log(`${this.name}`, ev)
+        }, {
+            name: 'Somebody',
+            type: 'btn btn-primary',
+            dataDismissModal: true,
+            action: (ev) => console.log(`${this.name}`, ev)
+        }
+    ]);
+    
 
 
 

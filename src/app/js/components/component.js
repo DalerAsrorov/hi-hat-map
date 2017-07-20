@@ -64,4 +64,12 @@ export default class Component {
         this.nodeType = nodeType ? nodeType : this.nodeType;
         this.$node = $node ? $node : this.$node;
     }
+
+    hideFromDom() {
+        this.html().css('display', 'none');
+    }
+
+    showInDom() {
+        this.html().css('display', 'block');
+    }
 }
