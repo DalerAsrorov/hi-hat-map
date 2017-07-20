@@ -29,23 +29,24 @@ export default class ModalComponent extends Component {
         $modalHeaderWrapper.append($header);
         $modalHeaderWrapper.append($closeButton);
         this.$modalContent.append($modalHeaderWrapper);
+
+        return $modalHeaderWrapper;
     }
 
-    buildContent(html='') {
+    buildBody(html='') {
         let resultContent = html;
+        let $modalBody = $('<div class="modal-body"></div>');
 
-        if (!isEmpty(resultContent)) {
-            const template = '';
-        } else {
+        $modalBody.append(resultContent);
+        this.$modalContent.append($modalBody);
 
-        }
-
-        return resultContent;
+        return $modalBody;
     }
 
     buildFooter(customButtons=[], closeButtonText='Close') {
         const $closeButton = $(MODAL_CLOSE_BUTTON_HTML);
         $closeButton.append(closeButtonText);
+
 
         customButtons.map((button) => {
 
@@ -53,7 +54,7 @@ export default class ModalComponent extends Component {
     }
 
     _buildTemplate() {
-        this.$node.addClass(MODAL_BASE_CLASS);
+        this.html().addClass(MODAL_BASE_CLASS);
         let $modalDialog = $('<div class="modal-dialog" role="document"></div>');
 
         this.$modalContent = $(this.$modalContent);

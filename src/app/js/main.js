@@ -494,7 +494,16 @@ $(window).load(function() {
 
     let WordcloudModalComp = new ModalComponent('wordcloudModal', null, 'div');
     WordcloudModalComp.init();
-    debugger;
+    WordcloudModalComp.buildHeader('Hello There');
+    WordcloudModalComp.buildBody(
+        `<div id='hello'>
+            <section class='one'>
+                One
+            </section>
+            <section class='two'>
+                Two
+            </section>
+        </div>`);
     console.log(WordcloudModalComp);
 
 
