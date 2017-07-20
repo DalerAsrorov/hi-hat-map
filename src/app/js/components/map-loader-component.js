@@ -10,7 +10,7 @@ const loaderCss = {
 const loaderDivCss = {
     'display': 'none', // default state
     'position': 'absolute',
-    'z-index': '1111',
+    'z-index': '1030',
     'background': 'white',
     'width': '100%',
     'height': '100%',

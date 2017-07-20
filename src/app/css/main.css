@@ -78,14 +78,11 @@ button#toggleSliderBtn {
     bottom: 0;
     width: 100%;
     padding: 0;
-
-    /* Flex! Cool stuff. */
     display: flex;
     flex-flow: column;
-
     position: absolute;
     bottom: 0px;
-    z-index: 20000;
+    z-index: 1040;
 }
 
 .control-panel-caption {
@@ -313,13 +310,13 @@ header#loadIntro {
   min-width: 150px;
 }
 
-.margin-10 {
-    margin: 10px;
-}
-
 .m-loader {
     margin: 0 auto;
     display: block;
+}
+
+.margin-10 {
+    margin: 10px;
 }
 
 #panelCompLeft {

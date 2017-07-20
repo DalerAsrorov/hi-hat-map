@@ -492,7 +492,7 @@ $(window).load(function() {
     // });
 
 
-    // MODAL COMPONENT
+    // MODAL stuff
     // let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
     // WordcloudModalComp.init();
     // WordcloudModalComp.buildHeader('Hello There');
