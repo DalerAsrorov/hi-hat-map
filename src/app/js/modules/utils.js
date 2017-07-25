@@ -1,5 +1,3 @@
-
-
 export function getType(object) {
     return Object.prototype.toString.call(object);
 }
@@ -10,15 +8,15 @@ export function titleCase(str) {
     let result = str.replace(wordPattern, capitalize);
 
     return result;
-};
+}
 
-export function execWithTimeout(callback, time, selector="") {
+export function execWithTimeout(callback, time, selector = '') {
     setTimeout(callback, time);
-};
+}
 
-export function execWithInterval(callback, time, selector="") {
-    setInterval(callback, time)
-};
+export function execWithInterval(callback, time, selector = '') {
+    setInterval(callback, time);
+}
 
 export function capitalize(str) {
     if (str.length) {
@@ -28,11 +26,16 @@ export function capitalize(str) {
     }
 }
 
+export function performActionOnDQueue(dQueue, callback) {
+    while (!dQueue.isEmpty()) {
+        callback(dQueue.getFront());
+        dQueue.dequeue();
+    }
+}
+
 export function inspectCSSClass(className, prop) {
     let property = '';
-    const $inspector = $('<div>')
-                        .css('display', 'none')
-                        .addClass(className);
+    const $inspector = $('<div>').css('display', 'none').addClass(className);
     $('body').append($inspector);
 
     try {
@@ -47,7 +50,7 @@ export function inspectCSSClass(className, prop) {
 export function wrappObject(object, objectKey) {
     return {
         objectKey: object
-    }
+    };
 }
 
 // "xx:xx:xx" format

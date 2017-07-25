@@ -135,14 +135,11 @@ $(window).load(function() {
                         $(button).fadeOut(200, () => {
                             L.Util.requestAnimFrame(function() {
                                 Map.removeControl(self);
-
-                                while (!wordcloudQueue.isEmpty()) {
-                                    const sentMap = wordcloudQueue.getFront();
-                                    tempList.push(sentMap);
-                                    wordcloudQueue.dequeue();
-                                }
-
-                                // utils.performActionOnDQueue(wordcloudQueue, element => {});
+                                utils.performActionOnDQueue(wordcloudQueue, element => {
+                                    // console.log(element);
+                                    // TODO: process quueue and draw
+                                    // wordcloud, count frequencies from each queue
+                                });
 
                                 streamStateButtonIsOn = false;
                             });
