@@ -12,9 +12,9 @@ export function buildWordPolarityMap(data) {
         const score = item[1];
 
         if (!acc[word]) {
-            acc[word] = score;
+            acc[word] = [score];
         } else {
-            acc[word] += score;
+            acc[word] = [...acc[word], score];
         }
 
         return acc;

@@ -136,7 +136,13 @@ $(window).load(function() {
                             L.Util.requestAnimFrame(function() {
                                 Map.removeControl(self);
 
-                                console.log('wordcloudQueue:', wordcloudQueue);
+                                while (!wordcloudQueue.isEmpty()) {
+                                    const sentMap = wordcloudQueue.getFront();
+                                    tempList.push(sentMap);
+                                    wordcloudQueue.dequeue();
+                                }
+
+                                // utils.performActionOnDQueue(wordcloudQueue, element => {});
 
                                 streamStateButtonIsOn = false;
                             });
@@ -255,6 +261,8 @@ $(window).load(function() {
                         words,
                         polarities
                     });
+
+                    console.log(wordPolarityMap);
 
                     wordcloudQueue.enqueue(wordPolarityMap);
                 }
