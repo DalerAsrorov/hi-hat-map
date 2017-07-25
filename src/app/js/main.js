@@ -136,7 +136,7 @@ $(window).load(function() {
                             L.Util.requestAnimFrame(function() {
                                 Map.removeControl(self);
                                 utils.performActionOnDQueue(wordcloudQueue, element => {
-                                    // console.log(element);
+                                    console.log('~Element:', element);
                                     // TODO: process quueue and draw
                                     // wordcloud, count frequencies from each queue
                                 });
