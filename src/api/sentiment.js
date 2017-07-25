@@ -13,7 +13,7 @@ const utils = require('./helpers/utils');
 const sentiment = require('retext-sentiment');
 const R = require('ramda');
 
-const Sentiment = (function(sentiment){
+const Sentiment = (function(sentiment) {
     this.sentment = sentiment;
 
     function processText(string) {
@@ -24,19 +24,18 @@ const Sentiment = (function(sentiment){
                     return function transformer(tree) {
                         // console.log(inspect(tree));
                         // console.log(tree);
-                        if(!tree)
-                            rej(new Error('Couldn\'t get the sentiment results.'));
+                        if (!tree) rej(new Error("Couldn't get the sentiment results."));
                         // console.log(utils.logTree(tree));
                         res(tree);
-                    }
+                    };
                 })
-                .processSync(string)
+                .processSync(string);
         });
-    };
+    }
 
     function parseSentiment(sentimentTree) {
         return new Promise((res, rej) => {
-            if(sentimentTree) {
+            if (sentimentTree) {
                 // getting total score and valence
                 // from the root object -- result gathered
                 // from all elements of the string
@@ -54,7 +53,7 @@ const Sentiment = (function(sentiment){
                 const getFirstChild = node => node.children[0];
                 const getChildren = node => node.children;
                 const getDataObject = node => node.data[0];
-                const hasData = node => !(R.isNil(node.data));
+                const hasData = node => !R.isNil(node.data);
                 const storeInArray = (data, array) => array.push(data);
                 const getNeededInfoFromTextNode = function(node) {
                     return {
@@ -87,8 +86,8 @@ const Sentiment = (function(sentiment){
                 );
 
                 const emotionalWords = retrieveEmotionalWords(rootChildren);
-                const positiveWords = R.filter((word) => word.polarity > 0)(emotionalWords);
-                const negativeWords = R.filter((word) => word.polarity < 0)(emotionalWords);
+                const positiveWords = R.filter(word => word.polarity > 0)(emotionalWords);
+                const negativeWords = R.filter(word => word.polarity < 0)(emotionalWords);
 
                 const sentiment = {
                     negativeWords,
@@ -97,20 +96,19 @@ const Sentiment = (function(sentiment){
                         totalScore,
                         valence
                     }
-                }
+                };
 
                 res(sentiment);
             } else {
                 rej(sentimentTree);
             }
         });
-    };
+    }
 
     return {
         processText,
         parseSentiment
     };
-
 })(sentiment);
 
 module.exports = Sentiment;

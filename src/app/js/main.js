@@ -6,7 +6,6 @@ import * as utils from './modules/utils';
 import * as MapOps from './modules/mapops';
 import * as constants from './modules/constants';
 import * as DataProcessing from './modules/dataprocessing';
-import { getParameter } from './modules/sentiment-utils';
 import Widgets from './modules/widgets';
 import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
@@ -26,6 +25,7 @@ import Sentiment from './classes/sentiment';
 import Leaflet from './classes/leaflet';
 import List from './classes/list';
 import R from 'ramda';
+import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
 
 $(window).load(function() {
     // Statuc modules
@@ -81,8 +81,8 @@ $(window).load(function() {
         }
     ];
 
-    WordcloudD3Comp.words = tempWords;
-    WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
+    // WordcloudD3Comp.words = tempWords;
+    // WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
 
     // WordcloudModalComp.buildFooter([
     //     {
@@ -240,16 +240,23 @@ $(window).load(function() {
 
                 // we are interested in tweets that have emotions for word cloud
                 if (sentiment.value.totalScore !== 0) {
-                    wordcloudQueue.enqueue({
-                        words: R.concat(
+                    const [words, polarities] = [
+                        R.concat(
                             getParameter(sentiment, 'positiveWords', 'text'),
                             getParameter(sentiment, 'negativeWords', 'text')
                         ),
-                        polarities: R.concat(
+                        R.concat(
                             getParameter(sentiment, 'positiveWords', 'polarity'),
                             getParameter(sentiment, 'negativeWords', 'polarity')
                         )
+                    ];
+
+                    const wordPolarityMap = buildWordPolarityMap({
+                        words,
+                        polarities
                     });
+
+                    wordcloudQueue.enqueue(wordPolarityMap);
                 }
 
                 // if(sentimentQueue.size() === 5) {
@@ -287,17 +294,17 @@ $(window).load(function() {
 
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch (mode) {
-            case 'real_time':
-                twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
-                break;
-            case 'specified_time':
-                twitter
+        case 'real_time':
+            twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
+            break;
+        case 'specified_time':
+            twitter
                     .getData(Paths.getTwitData(), twitData)
                     .then(data => console.log(data))
                     .catch(err => new Error('err', err));
-                break;
-            default:
-                console.log('none of the modes selected');
+            break;
+        default:
+            console.log('none of the modes selected');
         }
     }
 
@@ -375,14 +382,14 @@ $(window).load(function() {
                         },
                         onShowListEvent: function() {
                             switch (storageSystem.getItem('cpOpen')) {
-                                case 'false':
-                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
-                                    break;
-                                case 'true':
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
-                                    break;
-                                default:
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                            case 'false':
+                                ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                break;
+                            case 'true':
+                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                break;
+                            default:
+                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
                             }
                         },
                         onKeyEnterEvent: function() {}
@@ -513,21 +520,21 @@ $(window).load(function() {
                 const newMode = slideEvt.value.newValue;
                 const prevMode = slideEvt.value.oldValue;
                 switch (newMode) {
-                    case TWITTER_MODES_INDEX['real_time']:
-                        break;
-                    case TWITTER_MODES_INDEX['specified_time']:
+                case TWITTER_MODES_INDEX['real_time']:
+                    break;
+                case TWITTER_MODES_INDEX['specified_time']:
                         // check the cache
                         // if location data already exists
                         //      return location from cache
                         // else
                         //      store location in cache in (key, value) pair where key is location and value is tweets
                         //      return location
-                        const query = ui.getInputValue('#querySearch');
-                        const lat = Map.getCenter().lat;
-                        const lng = Map.getCenter().lng;
-                        const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
+                    const query = ui.getInputValue('#querySearch');
+                    const lat = Map.getCenter().lat;
+                    const lng = Map.getCenter().lng;
+                    const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
 
-                        twitter
+                    twitter
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
                                 const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
@@ -551,9 +558,9 @@ $(window).load(function() {
                             })
                             .catch(err => console.log('getData() - ', err));
 
-                        break;
-                    default:
-                        console.log('none selected');
+                    break;
+                default:
+                    console.log('none selected');
                 }
                 console.log('Event: change. Slider object', slideEvt);
             }

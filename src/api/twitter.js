@@ -12,18 +12,16 @@ const twitConfig = {
 const Twitter = new Twit(twitConfig);
 
 module.exports = {
-
     // base module used for streaming
     module: Twitter,
 
     // get the trends based on geo-location
     // weid represents the location ID
     getTrends: function getTrends(woeid) {
-        return new Promise(function (resolve, reject) {
-            Twitter.get('trends/place', {id: woeid}, function (err, data) {
-                if(!data) {
+        return new Promise(function(resolve, reject) {
+            Twitter.get('trends/place', { id: woeid }, function(err, data) {
+                if (!data) {
                     reject(err);
-
                 } else {
                     resolve(data);
                 }
@@ -38,26 +36,22 @@ module.exports = {
 
         function isNumber(number) {
             return parseFloat(number) === Number(number);
-        };
+        }
 
-        if((isNumber(lat)) && isNumber(long)) {
+        if (isNumber(lat) && isNumber(long)) {
             return new Promise((resolve, reject) => {
                 let latNumber = parseInt(lat);
                 let longNumber = parseInt(long);
-                Twitter.get('trends/closest', {lat: latNumber, long: longNumber},
-                    function(err, data) {
-                        if(data) {
-                            resolve(data);
-                        } else {
-                            reject("Error:::", err);
-                        }
+                Twitter.get('trends/closest', { lat: latNumber, long: longNumber }, function(err, data) {
+                    if (data) {
+                        resolve(data);
+                    } else {
+                        reject('Error:::', err);
                     }
-                );
+                });
             });
-
-        }
-        else {
-            console.log("Passed strings cannot be converted to number.", lat, long);
+        } else {
+            console.log('Passed strings cannot be converted to number.', lat, long);
         }
     },
 
@@ -75,7 +69,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             Twitter.get('search/tweets', params, (err, data) => {
-                if(!err) {
+                if (!err) {
                     resolve(data);
                 } else {
                     reject(err);
@@ -83,4 +77,4 @@ module.exports = {
             });
         });
     }
-}
+};
