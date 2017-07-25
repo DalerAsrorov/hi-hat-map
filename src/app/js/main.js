@@ -42,6 +42,8 @@ $(window).load(function() {
     // Constants
     const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
+    const MODAL_HEADERS = constants.MAIN.MODAL_HEADERS;
+    const WIDGET_PARAMS = constants.WIDGET_PARAMS;
 
     // connecting to socket
     let socket = io.connect('http://localhost:8000/');
@@ -52,9 +54,71 @@ $(window).load(function() {
     let cpRightList = [];
     let streamStateButtonIsOn = false;
 
-    // Loader object
+    // Loader Components
     const MapLoaderComp = new MapLoaderComponent('mapLoader', '#mapWrapper', 'div', '');
     MapLoaderComp.init();
+
+    // Wordcloud Components
+    let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
+    WordcloudModalComp.init();
+    WordcloudModalComp.buildHeader(MODAL_HEADERS.WORDCLOUD);
+
+    let WordCloudD3Container = new Component('wordcloudD3Wrapper', `#${WordcloudModalComp.id}`, 'div', '');
+    let WordcloudD3Comp = new WordcloudD3Component('wordcloudD3Comp', '', 'div', '');
+    WordCloudD3Container.appendChild(WordcloudD3Comp);
+    WordcloudModalComp.buildBody(WordCloudD3Container.html());
+
+    const tempWords = [
+        {
+            text: 'Bingo!',
+            size: 32,
+            color: '#FF00FF'
+        },
+        {
+            text: 'word',
+            size: 42,
+            color: '#2F4070'
+        }
+    ];
+
+    WordcloudD3Comp.words = tempWords;
+    WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
+
+    // WordcloudModalComp.buildFooter([
+    //     {
+    //         name: 'Destroy',
+    //         type: 'btn btn-info',
+    //         dataDismissModal: true,
+    //         action: ev => {
+    //             console.log('Name:s', ev);
+    //         }
+    //     },
+    //     {
+    //         name: 'Help',
+    //         type: 'btn btn-danger',
+    //         dataDismissModal: true,
+    //         action: ev => {
+    //             console.log('Name:', ev);
+    //         }
+    //     },
+    //     {
+    //         name: 'Somebody',
+    //         type: 'btn btn-primary',
+    //         dataDismissModal: true,
+    //         action: ev => {
+    //             console.log('Name:', ev);
+    //         }
+    //     }
+    // ]);
+
+    // WordcloudModalComp.show();
+
+    // WordcloudD3Comp.draw({
+    //     size: [200, 200],
+    //     padding: 5
+    //     // rotation: () => ~~(Math.random() * 1) * 90
+    // });
+    // WordcloudModalComp.show();
 
     // Leaflet components
     let StopButtonL = L.easyButton({
@@ -71,6 +135,9 @@ $(window).load(function() {
                         $(button).fadeOut(200, () => {
                             L.Util.requestAnimFrame(function() {
                                 Map.removeControl(self);
+
+                                console.log('wordcloudQueue:', wordcloudQueue);
+
                                 streamStateButtonIsOn = false;
                             });
                         });
@@ -220,17 +287,17 @@ $(window).load(function() {
 
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch (mode) {
-        case 'real_time':
-            twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
-            break;
-        case 'specified_time':
-            twitter
+            case 'real_time':
+                twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
+                break;
+            case 'specified_time':
+                twitter
                     .getData(Paths.getTwitData(), twitData)
                     .then(data => console.log(data))
                     .catch(err => new Error('err', err));
-            break;
-        default:
-            console.log('none of the modes selected');
+                break;
+            default:
+                console.log('none of the modes selected');
         }
     }
 
@@ -308,14 +375,14 @@ $(window).load(function() {
                         },
                         onShowListEvent: function() {
                             switch (storageSystem.getItem('cpOpen')) {
-                            case 'false':
-                                ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
-                                break;
-                            case 'true':
-                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
-                                break;
-                            default:
-                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                case 'false':
+                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
+                                case 'true':
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
+                                default:
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
                             }
                         },
                         onKeyEnterEvent: function() {}
@@ -446,21 +513,21 @@ $(window).load(function() {
                 const newMode = slideEvt.value.newValue;
                 const prevMode = slideEvt.value.oldValue;
                 switch (newMode) {
-                case TWITTER_MODES_INDEX['real_time']:
-                    break;
-                case TWITTER_MODES_INDEX['specified_time']:
+                    case TWITTER_MODES_INDEX['real_time']:
+                        break;
+                    case TWITTER_MODES_INDEX['specified_time']:
                         // check the cache
                         // if location data already exists
                         //      return location from cache
                         // else
                         //      store location in cache in (key, value) pair where key is location and value is tweets
                         //      return location
-                    const query = ui.getInputValue('#querySearch');
-                    const lat = Map.getCenter().lat;
-                    const lng = Map.getCenter().lng;
-                    const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
+                        const query = ui.getInputValue('#querySearch');
+                        const lat = Map.getCenter().lat;
+                        const lng = Map.getCenter().lng;
+                        const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
 
-                    twitter
+                        twitter
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
                                 const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
@@ -484,9 +551,9 @@ $(window).load(function() {
                             })
                             .catch(err => console.log('getData() - ', err));
 
-                    break;
-                default:
-                    console.log('none selected');
+                        break;
+                    default:
+                        console.log('none selected');
                 }
                 console.log('Event: change. Slider object', slideEvt);
             }
@@ -503,10 +570,16 @@ $(window).load(function() {
 
     // contextMenu.fadeOut();
 
+    // TODO: Added word cloud as a widget
+
+    // let WidgetsMap = {};
+    // AllWidgets.map(widget => {
+    //     Widgets[widget.id] = new WidgetComponent(widget.id, widget.desc, widget.action, widget.icon, widget.data);
+    // });
+
+    // WidgetComponent(id, desc, action, icon, data=optional)
     // MODAL stuff
-    let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
-    WordcloudModalComp.init();
-    WordcloudModalComp.buildHeader('Hello There');
+
     // WordcloudModalComp.buildBody(
     //     `<div id='hello'>
     //         <section class='one'>
@@ -516,51 +589,9 @@ $(window).load(function() {
     //             Two
     //         </section>
     //     </div>`);
-    //
-    // WordcloudModalComp.buildFooter([
-    //     {
-    //         name: 'Destroy',
-    //         type: 'btn btn-info',
-    //         dataDismissModal: true,
-    //         action: (ev) => { console.log(`Name:s`, ev) }
-    //     }, {
-    //         name: 'Help',
-    //         type: 'btn btn-danger',
-    //         dataDismissModal: true,
-    //         action: (ev) => { console.log(`Name:`, ev) }
-    //     }, {
-    //         name: 'Somebody',
-    //         type: 'btn btn-primary',
-    //         dataDismissModal: true,
-    //         action: (ev) => { console.log(`Name:`, ev) }
-    //     }
-    // ]);
+
     //
     // WordcloudModalComp.show();
-
-    const tempWords = [
-        {
-            text: 'Bingo!',
-            size: 32,
-            color: '#FF00FF'
-        },
-        {
-            text: 'word',
-            size: 42,
-            color: '#2F4070'
-        }
-    ];
-    let WordCloudD3Container = new Component('#wordcloudD3', '#wordcloudModal', 'div', '');
-    let WordcloudD3Comp = new WordcloudD3Component('', '', 'div', '', tempWords);
-    WordCloudD3Container.appendChild(WordcloudD3Comp);
-    WordcloudD3Comp.draw({
-        // size: [200, 200],
-        padding: 5
-        // rotation: () => ~~(Math.random() * 1)
-    });
-
-    WordcloudModalComp.buildBody(WordCloudD3Container.html());
-    WordcloudModalComp.show();
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

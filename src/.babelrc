@@ -1,4 +1,4 @@
 {
-    "presets": ["es2015-rollup"],
-    "plugins": ["ramda"]
+    "presets": ["es2015-rollup", "es2016"],
+    "plugins": ["ramda", "transform-object-rest-spread"]
 }

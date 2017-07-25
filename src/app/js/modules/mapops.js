@@ -3,7 +3,7 @@ import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
 import Leaflet from '../classes/leaflet.js';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
-import {curry, map, pipe, __} from 'ramda';
+import { curry, map, pipe, __ } from 'ramda';
 
 // export function generateResults(data) {
 //     console.log('Data', data);
@@ -15,7 +15,7 @@ import {curry, map, pipe, __} from 'ramda';
 
 export const generateResults = curry(data => {
     pipe(
-        map(drawObject), // render points with animations
+        map(drawObject) // render points with animations
     )(data);
 });
 
@@ -25,7 +25,7 @@ export const renderObject = function(renderObject) {
     const geolocation = renderObject.data.geo;
 
     drawObject(data, geolocation, type);
-}
+};
 
 export const drawObject = curry((data, geolocation, iconType) => {
     const leaflet = new Leaflet();
@@ -40,59 +40,56 @@ export const drawObject = curry((data, geolocation, iconType) => {
     let ShowboxComp;
     let icon, popup, markerOptions;
 
-    switch(iconType) {
-        case 'twitter':
-            ShowboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
-            ShowboxComp.init();
+    switch (iconType) {
+    case 'twitter':
+        ShowboxComp = new ShowboxTwitterComponent('', '', 'div', '', data);
+        ShowboxComp.init();
 
-            popup = leaflet.createPopup(ShowboxComp, popupOptions);
-            icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
+        popup = leaflet.createPopup(ShowboxComp, popupOptions);
+        icon = MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.TWITTER);
 
-            markerOptions = {
-                icon: icon,
-                title: 'Tweet',
+        markerOptions = {
+            icon: icon,
+            title: 'Tweet',
                 // TODO: replace geolocation with username or place.
-                alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
-                riseOnHover: true
-            };
+            alt: `Tweet in (${geolocation[1]}, ${geolocation[0]})`,
+            riseOnHover: true
+        };
 
-            break;
-        case 'yelp':
-            console.log('Yelp data, geo, icon', data, geolocation, iconType);
-            break;
-        default:
-            console.log('No soc media was selected.');
-    };
-
+        break;
+    case 'yelp':
+        console.log('Yelp data, geo, icon', data, geolocation, iconType);
+        break;
+    default:
+        console.log('No soc media was selected.');
+    }
 
     const geojsonFeature = {
-        "type": "Feature",
-        "properties": {
-            "name": iconType,
-            "popupContent": popup,
-            'icon': icon
+        type: 'Feature',
+        properties: {
+            name: iconType,
+            popupContent: popup,
+            icon: icon
         },
-        "geometry": {
-            'type': 'Point',
+        geometry: {
+            type: 'Point',
             coordinates
         }
     };
 
+    const feature = leaflet
+        .geoJSON(geojsonFeature, {
+            onEachFeature(feature, layer) {
+                if (feature.properties && feature.properties.popupContent) {
+                    layer.bindPopup(feature.properties.popupContent).openPopup();
+                }
+            },
 
-    const feature = leaflet.geoJSON(geojsonFeature, {
-        onEachFeature(feature, layer) {
-            if (feature.properties && feature.properties.popupContent) {
-                layer
-                .bindPopup(feature.properties.popupContent)
-                .openPopup();
+            pointToLayer(feature, latlng) {
+                return L.marker(latlng, markerOptions);
             }
-        },
-
-        pointToLayer(feature, latlng) {
-            return L.marker(latlng, markerOptions);
-        }
-    }).addTo(Map);
-
+        })
+        .addTo(Map);
 
     console.log('Feature', feature);
     // L.marker(latlng, markerOptions)

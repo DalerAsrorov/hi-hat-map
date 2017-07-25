@@ -5,9 +5,11 @@ export const MAIN = {
     TWITTER_MODES_INDEX: {
         real_time: 0,
         specified_time: 1
+    },
+    MODAL_HEADERS: {
+        WORDCLOUD: 'Sentiment WordCloud'
     }
 };
-
 
 export const WIDGETS = {
     WORDCLOUD: 'fa-cloud'
@@ -56,4 +58,11 @@ export const COLORS = {
 
 export const FONTS = {
     WORDCLOUD_D3: 'Impact'
+};
+
+export const WIDGET_PARAMS = {
+    WORDCLOUD: {
+        size: [500, 500],
+        padding: 5
+    }
 };
