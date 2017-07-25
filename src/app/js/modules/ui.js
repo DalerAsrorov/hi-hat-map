@@ -37,7 +37,6 @@ export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapp
     const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
     const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();
     const slidingTime = 270;
-    const defaultTop = '-15px';
     const $querySearchForm = $('#querySearchForm');
     const $target = $(`#${targetID}`);
     const $body = $('body');
@@ -312,7 +311,7 @@ export const generateChart = R.curry(function generateChart(id, data, axis) {
     return chart.generateChart(data, axis);
 });
 
-export function resetOnMuseUp(target, containerSelector, actionName) {
+export function resetOnMouseUp(target, containerSelector, actionName) {
     const container = $(`${containerSelector}`);
     $(target).mouseup(e => {
         if (!container.is(e.target) && container.has(e.target).length === 0) {

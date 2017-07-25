@@ -77,19 +77,17 @@ export const drawObject = curry((data, geolocation, iconType) => {
         }
     };
 
-    const feature = leaflet
-        .geoJSON(geojsonFeature, {
-            onEachFeature(feature, layer) {
-                if (feature.properties && feature.properties.popupContent) {
-                    layer.bindPopup(feature.properties.popupContent).openPopup();
-                }
-            },
-
-            pointToLayer(feature, latlng) {
-                return L.marker(latlng, markerOptions);
+    const feature = leaflet.geoJSON(geojsonFeature, {
+        onEachFeature(feature, layer) {
+            if (feature.properties && feature.properties.popupContent) {
+                layer.bindPopup(feature.properties.popupContent).openPopup();
             }
-        })
-        .addTo(Map);
+        },
+
+        pointToLayer(feature, latlng) {
+            return L.marker(latlng, markerOptions);
+        }
+    });
 
     console.log('Feature', feature);
     // L.marker(latlng, markerOptions)

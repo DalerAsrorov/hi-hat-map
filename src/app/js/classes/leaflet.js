@@ -1,21 +1,18 @@
 import Map from '../modules/map';
 
 export default class Leaflet {
+    constructor() {}
 
-    constructor() {
-
-    }
-
-    createPopup(showboxComponent, options={}) {
-         return L.popup(options)
-                .setContent(showboxComponent.rawHtml())
+    createPopup(showboxComponent, options = {}) {
+        return L.popup(options).setContent(showboxComponent.rawHtml());
     }
 
     computePolygonCenter(L, boundingBox) {
-        let polygonPoints = [], polygon;
+        let polygonPoints = [],
+            polygon;
         const coordinates = boundingBox.coordinates[0];
 
-        coordinates.forEach((coordinate) => {
+        coordinates.forEach(coordinate => {
             let latlng = L.latLng(coordinate[1], coordinate[0]);
             polygonPoints.push(latlng);
         });
@@ -28,8 +25,7 @@ export default class Leaflet {
         return [center.lng, center.lat];
     }
 
-    geoJSON(geojsonFeature, options={}) {
+    geoJSON(geojsonFeature, options = {}) {
         return L.geoJSON(geojsonFeature, options).addTo(Map);
     }
-
 }

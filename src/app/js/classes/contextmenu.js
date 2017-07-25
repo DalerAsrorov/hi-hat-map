@@ -1,4 +1,4 @@
-import { resetOnMuseUp, appendDropDownToPanel } from '../modules/ui.js';
+import { resetOnMouseUp, appendDropDownToPanel } from '../modules/ui.js';
 import List from './list.js';
 
 export default class ContextMenu {
@@ -70,7 +70,7 @@ export default class ContextMenu {
     bind() {
         this.$parent.append(this.$self);
         this.list.bindTo(this.$html());
-        resetOnMuseUp(document, this.id, 'click');
+        resetOnMouseUp(document, this.id, 'click');
     }
 
     fadeIn(speed) {
