@@ -52,6 +52,7 @@ $(window).load(function() {
     let tracker;
     let cpRightList = [];
     let streamStateButtonIsOn = false;
+    let WordPolarityHashMap = new Map();
 
     // Loader Components
     const MapLoaderComp = new MapLoaderComponent('mapLoader', '#mapWrapper', 'div', '');
@@ -134,21 +135,24 @@ $(window).load(function() {
                         $(button).fadeOut(200, () => {
                             L.Util.requestAnimFrame(function() {
                                 LMap.removeControl(self);
-                                // utils.performActionOnDQueue(wordcloudQueue, element => {
-                                //     console.log('~Element:', element);
-                                //     // TODO: process quueue and draw
-                                //     // wordcloud, count frequencies from each queue
-                                // });
-                                // let wordcloudWordMapQueue = DynamicQueue();
 
-                                let wordPolarityMap = new Map();
                                 utils.performActionOnDQueue(wordcloudQueue, wordPolarityDict => {
-                                    console.log(wordPolarityDict);
-                                    // const word = wordPolarityDict
-                                    // wordPolarityMap.set(wordPolarityDict, );
+                                    Object.entries(wordPolarityDict).forEach(([word, props]) => {
+                                        const { score, freq } = props;
+
+                                        if (!WordPolarityHashMap.get(word)) {
+                                            WordPolarityHashMap.set(word, { score, freq });
+                                        } else {
+                                            WordPolarityHashMap.set(word, {
+                                                freq: WordPolarityHashMap.get(word).freq + freq,
+                                                score
+                                            });
+                                        }
+                                    });
                                 });
 
-                                console.log('P00P_wordPolarityMap:', wordcloudQueue);
+                                WordPolarityHashMap.clear();
+                                console.log('After clear:', WordPolarityHashMap);
 
                                 streamStateButtonIsOn = false;
                             });
