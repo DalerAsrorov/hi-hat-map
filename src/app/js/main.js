@@ -39,11 +39,8 @@ $(window).load(function() {
     let wordcloudQueue = new DynamicQueue();
 
     // Constants
-    const TWITTER_MODES = constants.MAIN.TWITTER_MODES;
-    const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
-    const MODAL_HEADERS = constants.MAIN.MODAL_HEADERS;
-    const WIDGET_PARAMS = constants.WIDGET_PARAMS;
-    const { MAP_PARAMS } = constants;
+    const { WIDGET_PARAMS, MAP_PARAMS } = constants;
+    const { TWITTER_MODES, TWITTER_MODES_INDEX, MODAL_HEADERS } = constants.MAIN;
 
     // connecting to socket
     let socket = io.connect('http://localhost:8000/');
@@ -316,8 +313,7 @@ $(window).load(function() {
         MapLoaderComp.show();
 
         const query = ui.getInputValue('#querySearch');
-        const lat = LMap.getCenter().lat;
-        const lng = LMap.getCenter().lng;
+        const { lat, lng } = LMap.getCenter();
         const twitData = { q: query, geocode: [lat, lng], radius: MAP_PARAMS.TWITTER.RADIUS };
 
         let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
