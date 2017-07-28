@@ -1,4 +1,4 @@
-import Map from './map.js';
+import LMap from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
 import Leaflet from '../classes/leaflet.js';
@@ -90,8 +90,4 @@ export const drawObject = curry((data, geolocation, iconType) => {
     });
 
     console.log('Feature', feature);
-    // L.marker(latlng, markerOptions)
-    // .bindPopup(popup)
-    // .openPopup()
-    // .addTo(Map);
 });

@@ -13,7 +13,7 @@ export function buildWordPolarityMap(data) {
 
         if (!acc[word]) {
             acc[word] = {
-                freq: 0,
+                freq: 1,
                 score
             };
         } else {
