@@ -66,3 +66,9 @@ export const WIDGET_PARAMS = {
         padding: 5
     }
 };
+
+export const MAP_PARAMS = {
+    TWITTER: {
+        RADIUS: '25mi'
+    }
+};

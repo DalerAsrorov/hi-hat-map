@@ -43,6 +43,7 @@ $(window).load(function() {
     const TWITTER_MODES_INDEX = constants.MAIN.TWITTER_MODES_INDEX;
     const MODAL_HEADERS = constants.MAIN.MODAL_HEADERS;
     const WIDGET_PARAMS = constants.WIDGET_PARAMS;
+    const { MAP_PARAMS } = constants;
 
     // connecting to socket
     let socket = io.connect('http://localhost:8000/');
@@ -67,9 +68,6 @@ $(window).load(function() {
     let WordcloudD3Comp = new WordcloudD3Component('wordcloudD3Comp', '', 'div', '');
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudModalComp.buildBody(WordCloudD3Container.html());
-
-    // WordcloudD3Comp.words = tempWords;
-    // WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
 
     // WordcloudModalComp.buildFooter([
     //     {
@@ -98,13 +96,6 @@ $(window).load(function() {
     //     }
     // ]);
 
-    // WordcloudModalComp.show();
-
-    // WordcloudD3Comp.draw({
-    //     size: [200, 200],
-    //     padding: 5
-    //     // rotation: () => ~~(Math.random() * 1) * 90
-    // });
     // WordcloudModalComp.show();
 
     // Leaflet components
@@ -327,7 +318,7 @@ $(window).load(function() {
         const query = ui.getInputValue('#querySearch');
         const lat = LMap.getCenter().lat;
         const lng = LMap.getCenter().lng;
-        const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
+        const twitData = { q: query, geocode: [lat, lng], radius: MAP_PARAMS.TWITTER.RADIUS };
 
         let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
 
