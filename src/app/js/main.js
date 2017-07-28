@@ -11,7 +11,6 @@ import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
 import StorageSystem from './classes/storagesystem';
 import Component from './components/component';
-import ShowboxComponent from './components/showbox-component';
 import WordcloudD3Component from './components/wordcloud-d3-component';
 import MapLoaderComponent from './components/map-loader-component';
 import WidgetComponent from './components/widget-component';
@@ -167,8 +166,11 @@ $(window).load(function() {
         }
     );
 
-    /* INTRO LOADER CODE */
-    $(() => {
+    /* The loader component renders first
+        before the control panel's components
+        show up on the page
+    */
+    {
         if (!storageSystem.getItem('firstVisit')) {
             ui.fadeOut('#initLoader', 3000, () => {
                 ui.removeElement('#initLoader');
@@ -180,7 +182,7 @@ $(window).load(function() {
                 ui.makeVisible('#mainWrapper', 500);
             });
         }
-    });
+    }
 
     storageSystem.setItem('firstVisit', true);
     cpOpen = storageSystem.getItem('cpOpen');
@@ -228,9 +230,6 @@ $(window).load(function() {
             const mlsTime = tweet.timestamp_ms;
             const data = twitter.processSingle(tweet);
 
-            // 1. Process sentiment based on passed text
-            // 2. Draw an object with metadata on the map
-            //    and also draw it on the panel (panel is for future work).
             sentiment.processText({ text: text }).then(data => {
                 data.geo = coordinates;
                 data.tweet = tweet;
@@ -598,22 +597,6 @@ $(window).load(function() {
     // AllWidgets.map(widget => {
     //     Widgets[widget.id] = new WidgetComponent(widget.id, widget.desc, widget.action, widget.icon, widget.data);
     // });
-
-    // WidgetComponent(id, desc, action, icon, data=optional)
-    // MODAL stuff
-
-    // WordcloudModalComp.buildBody(
-    //     `<div id='hello'>
-    //         <section class='one'>
-    //             One
-    //         </section>
-    //         <section class='two'>
-    //             Two
-    //         </section>
-    //     </div>`);
-
-    //
-    // WordcloudModalComp.show();
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
