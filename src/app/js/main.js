@@ -549,9 +549,8 @@ $(window).load(function() {
                     twitter
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
-                                const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
-
-                                const filteredTweets = twitter.processData(statuses, searchMetadata);
+                                const { statuses, search_metadata } = data;
+                                const filteredTweets = twitter.processData(statuses, search_metadata);
 
                                 filteredTweets.forEach(function(data) {
                                     sentiment
@@ -559,9 +558,9 @@ $(window).load(function() {
                                         .then(function(sentiment) {
                                             return new Promise((resolve, reject) =>
                                                 resolve({
-                                                    sentiment: sentiment,
-                                                    data: data,
-                                                    type: 'twitter'
+                                                    type: 'twitter',
+                                                    sentiment,
+                                                    data
                                                 })
                                             );
                                         })
