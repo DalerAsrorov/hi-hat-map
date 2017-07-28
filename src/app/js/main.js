@@ -68,19 +68,6 @@ $(window).load(function() {
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudModalComp.buildBody(WordCloudD3Container.html());
 
-    const tempWords = [
-        {
-            text: 'Bingo!',
-            size: 32,
-            color: '#FF00FF'
-        },
-        {
-            text: 'word',
-            size: 42,
-            color: '#2F4070'
-        }
-    ];
-
     // WordcloudD3Comp.words = tempWords;
     // WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
 
@@ -151,8 +138,13 @@ $(window).load(function() {
                                     });
                                 });
 
-                                WordPolarityHashMap.clear();
-                                console.log('After clear:', WordPolarityHashMap);
+                                const wordcloudDataStructure = utils.convertMapToWordcloudDataStructure(
+                                    WordPolarityHashMap
+                                );
+
+                                WordcloudD3Comp._words = wordcloudDataStructure;
+                                WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
+                                WordcloudModalComp.show();
 
                                 streamStateButtonIsOn = false;
                             });
@@ -310,20 +302,20 @@ $(window).load(function() {
 
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch (mode) {
-        case 'real_time':
-            twitter.socketEmit(socket, 'topic', {
-                topic: query,
-                location: lastLocation
-            });
-            break;
-        case 'specified_time':
-            twitter
+            case 'real_time':
+                twitter.socketEmit(socket, 'topic', {
+                    topic: query,
+                    location: lastLocation
+                });
+                break;
+            case 'specified_time':
+                twitter
                     .getData(Paths.getTwitData(), twitData)
                     .then(data => console.log(data))
                     .catch(err => new Error('err', err));
-            break;
-        default:
-            console.log('none of the modes selected');
+                break;
+            default:
+                console.log('none of the modes selected');
         }
     }
 
@@ -401,14 +393,14 @@ $(window).load(function() {
                         },
                         onShowListEvent: function() {
                             switch (storageSystem.getItem('cpOpen')) {
-                            case 'false':
-                                ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
-                                break;
-                            case 'true':
-                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
-                                break;
-                            default:
-                                ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                case 'false':
+                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
+                                case 'true':
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    break;
+                                default:
+                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
                             }
                         },
                         onKeyEnterEvent: function() {}
@@ -539,25 +531,25 @@ $(window).load(function() {
                 const newMode = slideEvt.value.newValue;
                 const prevMode = slideEvt.value.oldValue;
                 switch (newMode) {
-                case TWITTER_MODES_INDEX['real_time']:
-                    break;
-                case TWITTER_MODES_INDEX['specified_time']:
+                    case TWITTER_MODES_INDEX['real_time']:
+                        break;
+                    case TWITTER_MODES_INDEX['specified_time']:
                         // check the cache
                         // if location data already exists
                         //      return location from cache
                         // else
                         //      store location in cache in (key, value) pair where key is location and value is tweets
                         //      return location
-                    const query = ui.getInputValue('#querySearch');
-                    const lat = LMap.getCenter().lat;
-                    const lng = LMap.getCenter().lng;
-                    const twitData = {
-                        q: query,
-                        geocode: [lat, lng],
-                        radius: '25mi'
-                    };
+                        const query = ui.getInputValue('#querySearch');
+                        const lat = LMap.getCenter().lat;
+                        const lng = LMap.getCenter().lng;
+                        const twitData = {
+                            q: query,
+                            geocode: [lat, lng],
+                            radius: '25mi'
+                        };
 
-                    twitter
+                        twitter
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
                                 const { statuses, search_metadata } = data;
@@ -584,9 +576,9 @@ $(window).load(function() {
                             })
                             .catch(err => console.log('getData() - ', err));
 
-                    break;
-                default:
-                    console.log('none selected');
+                        break;
+                    default:
+                        console.log('none selected');
                 }
                 console.log('Event: change. Slider object', slideEvt);
             }

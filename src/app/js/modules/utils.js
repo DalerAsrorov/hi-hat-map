@@ -1,3 +1,5 @@
+import { COLORS } from './constants';
+
 export function getType(object) {
     return Object.prototype.toString.call(object);
 }
@@ -51,6 +53,46 @@ export function wrappObject(object, objectKey) {
     return {
         objectKey: object
     };
+}
+
+// const tempWords = [
+//     {
+//         text: 'Bingo!',
+//         size: 32,
+//         color: '#FF00FF'
+//     },
+//     {
+//         text: 'word',
+//         size: 42,
+//         color: '#2F4070'
+//     }
+// ];
+export function convertMapToWordcloudDataStructure(iterable) {
+    const sizeIncrease = 10;
+    let dataStructure = [];
+
+    iterable.forEach((props, word) =>
+        dataStructure.push({
+            text: word,
+            size: props.freq * sizeIncrease,
+            color: colorGenerator(props.score)
+        })
+    );
+
+    return dataStructure;
+}
+
+export function colorGenerator(score) {
+    const { SENTIMENT: { POSITIVE }, SENTIMENT: { NEGATIVE } } = COLORS;
+
+    const scoreIndex = Math.abs(score);
+    let result = POSITIVE[scoreIndex];
+
+    if (score < 0) {
+        result = NEGATIVE[scoreIndex];
+    }
+
+    return result;
 }
 
 // "xx:xx:xx" format
