@@ -11,7 +11,6 @@ import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
 import StorageSystem from './classes/storagesystem';
 import Component from './components/component';
-import ShowboxComponent from './components/showbox-component';
 import WordcloudD3Component from './components/wordcloud-d3-component';
 import MapLoaderComponent from './components/map-loader-component';
 import WidgetComponent from './components/widget-component';
@@ -167,8 +166,11 @@ $(window).load(function() {
         }
     );
 
-    /* INTRO LOADER CODE */
-    $(() => {
+    /* The loader component renders first
+        before the control panel's components
+        show up on the page
+    */
+    {
         if (!storageSystem.getItem('firstVisit')) {
             ui.fadeOut('#initLoader', 3000, () => {
                 ui.removeElement('#initLoader');
@@ -180,7 +182,7 @@ $(window).load(function() {
                 ui.makeVisible('#mainWrapper', 500);
             });
         }
-    });
+    }
 
     storageSystem.setItem('firstVisit', true);
     cpOpen = storageSystem.getItem('cpOpen');
@@ -228,9 +230,6 @@ $(window).load(function() {
             const mlsTime = tweet.timestamp_ms;
             const data = twitter.processSingle(tweet);
 
-            // 1. Process sentiment based on passed text
-            // 2. Draw an object with metadata on the map
-            //    and also draw it on the panel (panel is for future work).
             sentiment.processText({ text: text }).then(data => {
                 data.geo = coordinates;
                 data.tweet = tweet;
@@ -300,7 +299,10 @@ $(window).load(function() {
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch (mode) {
         case 'real_time':
-            twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
+            twitter.socketEmit(socket, 'topic', {
+                topic: query,
+                location: lastLocation
+            });
             break;
         case 'specified_time':
             twitter
@@ -537,21 +539,28 @@ $(window).load(function() {
                     const query = ui.getInputValue('#querySearch');
                     const lat = Map.getCenter().lat;
                     const lng = Map.getCenter().lng;
-                    const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
+                    const twitData = {
+                        q: query,
+                        geocode: [lat, lng],
+                        radius: '25mi'
+                    };
 
                     twitter
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
-                                const [statuses, searchMetadata] = [data.statuses, data.search_metadata];
-
-                                const filteredTweets = twitter.processData(statuses, searchMetadata);
+                                const { statuses, search_metadata } = data;
+                                const filteredTweets = twitter.processData(statuses, search_metadata);
 
                                 filteredTweets.forEach(function(data) {
                                     sentiment
                                         .processText({ text: data.text })
                                         .then(function(sentiment) {
                                             return new Promise((resolve, reject) =>
-                                                resolve({ sentiment: sentiment, data: data, type: 'twitter' })
+                                                resolve({
+                                                    type: 'twitter',
+                                                    sentiment,
+                                                    data
+                                                })
                                             );
                                         })
                                         .then(function(renderObject) {
@@ -588,22 +597,6 @@ $(window).load(function() {
     // AllWidgets.map(widget => {
     //     Widgets[widget.id] = new WidgetComponent(widget.id, widget.desc, widget.action, widget.icon, widget.data);
     // });
-
-    // WidgetComponent(id, desc, action, icon, data=optional)
-    // MODAL stuff
-
-    // WordcloudModalComp.buildBody(
-    //     `<div id='hello'>
-    //         <section class='one'>
-    //             One
-    //         </section>
-    //         <section class='two'>
-    //             Two
-    //         </section>
-    //     </div>`);
-
-    //
-    // WordcloudModalComp.show();
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {
