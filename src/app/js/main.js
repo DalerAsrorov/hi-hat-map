@@ -1,4 +1,4 @@
-import Map from './modules/map';
+import LMap from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';
 import * as Paths from './modules/paths';
@@ -133,12 +133,22 @@ $(window).load(function() {
                     twitter.stopStream(() => {
                         $(button).fadeOut(200, () => {
                             L.Util.requestAnimFrame(function() {
-                                Map.removeControl(self);
-                                utils.performActionOnDQueue(wordcloudQueue, element => {
-                                    console.log('~Element:', element);
-                                    // TODO: process quueue and draw
-                                    // wordcloud, count frequencies from each queue
+                                LMap.removeControl(self);
+                                // utils.performActionOnDQueue(wordcloudQueue, element => {
+                                //     console.log('~Element:', element);
+                                //     // TODO: process quueue and draw
+                                //     // wordcloud, count frequencies from each queue
+                                // });
+                                // let wordcloudWordMapQueue = DynamicQueue();
+
+                                let wordPolarityMap = new Map();
+                                utils.performActionOnDQueue(wordcloudQueue, wordPolarityDict => {
+                                    console.log(wordPolarityDict);
+                                    // const word = wordPolarityDict
+                                    // wordPolarityMap.set(wordPolarityDict, );
                                 });
+
+                                console.log('P00P_wordPolarityMap:', wordcloudQueue);
 
                                 streamStateButtonIsOn = false;
                             });
@@ -188,10 +198,10 @@ $(window).load(function() {
     cpOpen = storageSystem.getItem('cpOpen');
 
     if (cpOpen == 'false') {
-        ui.slideToggleCp('controlPanelWrapper', Map);
+        ui.slideToggleCp('controlPanelWrapper', LMap);
     }
 
-    ui.addEventListenerTo('toggleSliderBtn', 'click', event => ui.slideToggleCp('controlPanelWrapper', Map));
+    ui.addEventListenerTo('toggleSliderBtn', 'click', event => ui.slideToggleCp('controlPanelWrapper', LMap));
 
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
@@ -204,9 +214,9 @@ $(window).load(function() {
             const lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
 
             storageSystem.setRawItem('lastLocation', lastLocation);
-            Map.setView([lat, lng], 8, { animate: true, duration: 2.0 });
+            LMap.setView([lat, lng], 8, { animate: true, duration: 2.0 });
         }
-    }).addTo(Map);
+    }).addTo(LMap);
 
     socket.on('tweet', tweet => {
         MapLoaderComp.hide();
@@ -214,7 +224,7 @@ $(window).load(function() {
         let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
 
         if (!streamStateButtonIsOn) {
-            StopButtonL.addTo(Map);
+            StopButtonL.addTo(LMap);
             $(StopButtonL.button).show();
             streamStateButtonIsOn = true;
         }
@@ -234,7 +244,7 @@ $(window).load(function() {
                 data.geo = coordinates;
                 data.tweet = tweet;
 
-                const sentiment = data.sentiment;
+                const { sentiment } = data;
 
                 let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
 
@@ -257,8 +267,6 @@ $(window).load(function() {
                         words,
                         polarities
                     });
-
-                    console.log(wordPolarityMap);
 
                     wordcloudQueue.enqueue(wordPolarityMap);
                 }
@@ -321,8 +329,8 @@ $(window).load(function() {
         MapLoaderComp.show();
 
         const query = ui.getInputValue('#querySearch');
-        const lat = Map.getCenter().lat;
-        const lng = Map.getCenter().lng;
+        const lat = LMap.getCenter().lat;
+        const lng = LMap.getCenter().lng;
         const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
 
         let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
@@ -537,8 +545,8 @@ $(window).load(function() {
                         //      store location in cache in (key, value) pair where key is location and value is tweets
                         //      return location
                     const query = ui.getInputValue('#querySearch');
-                    const lat = Map.getCenter().lat;
-                    const lng = Map.getCenter().lng;
+                    const lat = LMap.getCenter().lat;
+                    const lng = LMap.getCenter().lng;
                     const twitData = {
                         q: query,
                         geocode: [lat, lng],
