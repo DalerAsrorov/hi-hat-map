@@ -300,7 +300,10 @@ $(window).load(function() {
     function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
         switch (mode) {
         case 'real_time':
-            twitter.socketEmit(socket, 'topic', { topic: query, location: lastLocation });
+            twitter.socketEmit(socket, 'topic', {
+                topic: query,
+                location: lastLocation
+            });
             break;
         case 'specified_time':
             twitter
@@ -537,7 +540,11 @@ $(window).load(function() {
                     const query = ui.getInputValue('#querySearch');
                     const lat = Map.getCenter().lat;
                     const lng = Map.getCenter().lng;
-                    const twitData = { q: query, geocode: [lat, lng], radius: '25mi' };
+                    const twitData = {
+                        q: query,
+                        geocode: [lat, lng],
+                        radius: '25mi'
+                    };
 
                     twitter
                             .getData(Paths.getTwitData(), twitData)
@@ -551,7 +558,11 @@ $(window).load(function() {
                                         .processText({ text: data.text })
                                         .then(function(sentiment) {
                                             return new Promise((resolve, reject) =>
-                                                resolve({ sentiment: sentiment, data: data, type: 'twitter' })
+                                                resolve({
+                                                    sentiment: sentiment,
+                                                    data: data,
+                                                    type: 'twitter'
+                                                })
                                             );
                                         })
                                         .then(function(renderObject) {
