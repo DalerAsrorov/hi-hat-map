@@ -36,15 +36,6 @@ export const COLORS = {
     },
     SENTIMENT: {
         POSITIVE: {
-            1: inspectCSSClass('sent-neg-1', 'color'),
-            2: inspectCSSClass('sent-neg-2', 'color'),
-            3: inspectCSSClass('sent-neg-3', 'color'),
-            4: inspectCSSClass('sent-neg-4', 'color'),
-            5: inspectCSSClass('sent-neg-5', 'color'),
-            6: inspectCSSClass('sent-neg-6', 'color'),
-            7: inspectCSSClass('sent-neg-7', 'color')
-        },
-        NEGATIVE: {
             1: inspectCSSClass('sent-pos-1', 'color'),
             2: inspectCSSClass('sent-pos-2', 'color'),
             3: inspectCSSClass('sent-pos-3', 'color'),
@@ -52,6 +43,15 @@ export const COLORS = {
             5: inspectCSSClass('sent-pos-5', 'color'),
             6: inspectCSSClass('sent-pos-6', 'color'),
             7: inspectCSSClass('sent-pos-7', 'color')
+        },
+        NEGATIVE: {
+            1: inspectCSSClass('sent-neg-1', 'color'),
+            2: inspectCSSClass('sent-neg-2', 'color'),
+            3: inspectCSSClass('sent-neg-3', 'color'),
+            4: inspectCSSClass('sent-neg-4', 'color'),
+            5: inspectCSSClass('sent-neg-5', 'color'),
+            6: inspectCSSClass('sent-neg-6', 'color'),
+            7: inspectCSSClass('sent-neg-7', 'color')
         }
     }
 };
@@ -63,7 +63,13 @@ export const FONTS = {
 export const WIDGET_PARAMS = {
     WORDCLOUD: {
         size: [1120, 600],
-        padding: 5
+        padding: 4
+    }
+};
+
+export const WORDCLOUD_PARAMS = {
+    D3: {
+        wordSizeFill: 35
     }
 };
 

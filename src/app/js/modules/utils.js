@@ -1,4 +1,4 @@
-import { COLORS } from './constants';
+import { COLORS, WORDCLOUD_PARAMS } from './constants';
 
 export function getType(object) {
     return Object.prototype.toString.call(object);
@@ -68,13 +68,13 @@ export function wrappObject(object, objectKey) {
 //     }
 // ];
 export function convertMapToWordcloudDataStructure(iterable) {
-    const sizeIncrease = 20;
+    const { D3: { wordSizeFill } } = WORDCLOUD_PARAMS;
     let dataStructure = [];
 
     iterable.forEach((props, word) =>
         dataStructure.push({
             text: word,
-            size: props.freq * sizeIncrease,
+            size: props.freq * wordSizeFill,
             color: colorGenerator(props.score)
         })
     );
@@ -84,8 +84,8 @@ export function convertMapToWordcloudDataStructure(iterable) {
 
 export function colorGenerator(score) {
     const { SENTIMENT: { POSITIVE }, SENTIMENT: { NEGATIVE } } = COLORS;
-
     const scoreIndex = Math.abs(score);
+
     let result = POSITIVE[scoreIndex];
 
     if (score < 0) {
