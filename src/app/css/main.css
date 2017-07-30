@@ -324,7 +324,7 @@ button {
 }
 
 .modal-cp-lg {
-    width: 80%;
+    max-width: 80%;
 }
 
 #panelCompLeft {

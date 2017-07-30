@@ -68,7 +68,7 @@ export function wrappObject(object, objectKey) {
 //     }
 // ];
 export function convertMapToWordcloudDataStructure(iterable) {
-    const sizeIncrease = 10;
+    const sizeIncrease = 20;
     let dataStructure = [];
 
     iterable.forEach((props, word) =>

@@ -29,7 +29,6 @@ export default class WordcloudD3Component extends WordcloudComponent {
     }
 
     draw(params) {
-        const cloudId = this.parent;
         const myDomNode = this.domNode;
         const FONT = FONTS.WORDCLOUD_D3;
 
