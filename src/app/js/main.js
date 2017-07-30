@@ -62,6 +62,7 @@ $(window).load(function() {
     WordcloudModalComp.buildHeader(MODAL_HEADERS.WORDCLOUD);
 
     let WordCloudD3Container = new Component('wordcloudD3Wrapper', `#${WordcloudModalComp.id}`, 'div', '');
+
     let WordcloudD3Comp = new WordcloudD3Component('wordcloudD3Comp', '', 'div', '');
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudModalComp.buildBody(WordCloudD3Container.html());

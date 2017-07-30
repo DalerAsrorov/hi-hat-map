@@ -62,8 +62,8 @@ export const FONTS = {
 
 export const WIDGET_PARAMS = {
     WORDCLOUD: {
-        size: [500, 500],
-        padding: 5
+        size: [760, 500],
+        padding: 7
     }
 };
 

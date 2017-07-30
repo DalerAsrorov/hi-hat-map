@@ -9,8 +9,9 @@ const MODAL_CLOSE_BUTTON_HTML = '<button class="btn btn-secondary" data-dismiss=
 const MODAL_CLOSE_ICON = '&times;';
 
 export default class ModalComponent extends Component {
-    constructor(id, parent, nodeType, content, modelContent = null) {
+    constructor(id, parent, nodeType, content, size = 'modal-lg modal-cp-lg', modelContent = null) {
         super(id, parent, nodeType, content);
+        this.size = size;
         this.$modalContent = modelContent ? modelContent : MODAL_CONTENT_HTML;
     }
 
@@ -70,7 +71,7 @@ export default class ModalComponent extends Component {
 
     _buildTemplate() {
         this.html().addClass(MODAL_BASE_CLASS);
-        let $modalDialog = $('<div class="modal-dialog" role="document"></div>');
+        let $modalDialog = $(`<div class="modal-dialog ${this.size}" role="document"></div>`);
 
         this.$modalContent = $(this.$modalContent);
         $modalDialog.prepend(this.$modalContent);
