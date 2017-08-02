@@ -23,6 +23,7 @@ const WC_TOGGLE_BUTTON_CSS = {
 };
 const WC_TOGGLE_SPEED = 0;
 const IS_ACTIVE = 'active';
+const IS_ANIMATING = 'redBorderAnimation';
 
 export default class WidgetCollectionComponent extends Component {
     constructor(id, parent, desc, widgets = []) {
@@ -103,5 +104,13 @@ export default class WidgetCollectionComponent extends Component {
 
     setActive() {
         this.$node.children('button').addClass(IS_ACTIVE);
+    }
+
+    toggleAnimation(option = true) {
+        if (option) {
+            this.$node.children('button').addClass(IS_ANIMATING);
+        } else {
+            this.$node.children('button').removeClass(IS_ANIMATING);
+        }
     }
 }
