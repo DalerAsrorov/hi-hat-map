@@ -1,7 +1,7 @@
 import Component from './component';
 import { generateWebIcon } from '../modules/ui';
 
-const WIDGET_NODE_TYPE = 'buttcpon';
+const WIDGET_NODE_TYPE = 'button';
 // const WIDGET_CLASSES = 'cp-widget list-group-item list-group-item-action';
 const WIDGET_CLASSES = 'cp-widget btn btn-secondary';
 const WIDGET_DEFAULT_ICON = 'fa-circle-thin';

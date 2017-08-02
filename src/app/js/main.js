@@ -372,18 +372,9 @@ $(window).load(function() {
     // generation
     // ui.generateCpRightPanel('#panelWrapper', {});
 
-    let tempWidget = new WidgetComponent(
-        'widgetID',
-        'Item W20s',
-        'col-lg-2',
-        item => console.log('hi', item, Math.random(10) * 10),
-        'fa-bar-chart',
-        ['daler', 'asrorov, ' + Math.random(10) * 10]
-    );
-
     Object.entries(WidgetModuleMap).forEach(([widgetID, widget]) => {
         WidgetChartsCollectionComp.addWidgetComponent(
-            new WidgetComponent(widgetID, widget.name, 'col-lg-2', widget.action, widget.icon)
+            new WidgetComponent(widgetID, widget.name, WIDGET_PARAMS.ICON_SIZE, widget.action, widget.icon)
         );
     });
 
