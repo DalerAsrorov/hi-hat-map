@@ -3,7 +3,6 @@ import { toggleModal } from './ui';
 
 const WidgetModuleMap = {
     wordCloudWidget: {
-        self: this,
         name: 'Wordcloud',
         action(ev) {
             toggleModal(WidgetModuleMap.wordCloudWidget.relation, 'show');

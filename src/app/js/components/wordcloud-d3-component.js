@@ -1,6 +1,7 @@
-import WordcloudComponent from './wordcloud-component.js';
-import { FONTS } from '../modules/constants.js';
-import { convertFromJQueryToDOMElement } from '../modules/ui.js';
+import WordcloudComponent from './wordcloud-component';
+import { FONTS } from '../modules/constants';
+import { convertFromJQueryToDOMElement } from '../modules/ui';
+import * as Converter from '../modules/converter';
 import { isEmpty } from 'ramda';
 
 const DEFAULT_SIZE = [500, 500];
@@ -17,6 +18,7 @@ export default class WordcloudD3Component extends WordcloudComponent {
     }
 
     _createCloud() {
+        window.d3Cloud = d3.layout.cloud();
         return d3.layout.cloud();
     }
 
@@ -26,6 +28,23 @@ export default class WordcloudD3Component extends WordcloudComponent {
      */
     _rotateToDegree(d) {
         return (~~(Math.random() * 6) - 3) * 30;
+    }
+
+    convertToCanvas() {
+        console.log('start co`nvertToCanvas');
+        const cloudSVGNode = this.html().find('svg')[0];
+        const svgString = Converter.getSVGString(cloudSVGNode);
+        Converter.svgString2Image(svgString, 2000, 1000, 'png', (file, fileSize) => {
+            console.log('Successful File:', file, fileSize);
+            saveAs(file); // FileSaver.js function
+        });
+
+        // temp1.find('svg')[0]
+        console.log('Converter', Converter);
+        console.log(cloudSVGNode);
+        // svgString2Image(svgString2Image, 200, 200, 'png', (blob, filsize) => {
+        //     console.log('Blob and file size', blob, filsize);
+        // });
     }
 
     draw(params) {

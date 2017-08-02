@@ -143,7 +143,7 @@ $(window).load(function() {
 
                                 WordcloudD3Comp._words = wordcloudDataStructure;
                                 WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD }); // eslint-disable
-                                // WordcloudModalComp.show();
+                                WordcloudD3Comp.convertToCanvas();
 
                                 streamStateButtonIsOn = false;
                             });

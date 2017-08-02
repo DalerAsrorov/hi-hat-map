@@ -13,30 +13,29 @@ const Sentiment = require('./api/sentiment');
 const Twitter = require('./api/twitter');
 const utils = require('./api/helpers/utils');
 
-
 let port = process.env.PORT || 8000;
 
 // reference to Twitter stream object
 let baseStream;
 
 // create application/json parser
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static(__dirname + '/app'));
 // app.use(express.static(__dirname + '/bower_components'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/app/index.html')
+    res.sendFile(__dirname + '/app/index.html');
 });
 
 app.get('/api', (req, res) => {
-    res.send({'app': 'hi-hat-map'});
+    res.send({ app: 'hi-hat-map' });
 });
 
 /**
@@ -44,21 +43,21 @@ app.get('/api', (req, res) => {
 * 1 = Worldwide trends
 */
 app.get('/api/twitter/trends/:woeid?', (req, res) => {
-  const woeid = req.params.woeid;
-  Twitter.getTrends(woeid)
-    .then((data) => {
-        res.send({
-          "requestDescription": "List of trends.",
-          "requestTime": new Date().getTime(),
-          "data": data[0]
-        });
-    })
-    .catch((error) => {
-        res.send({
-          "message": "ERROR",
-          "details": error
+    const woeid = req.params.woeid;
+    Twitter.getTrends(woeid)
+        .then(data => {
+            res.send({
+                requestDescription: 'List of trends.',
+                requestTime: new Date().getTime(),
+                data: data[0]
+            });
         })
-    });
+        .catch(error => {
+            res.send({
+                message: 'ERROR',
+                details: error
+            });
+        });
 });
 
 /**
@@ -67,68 +66,68 @@ app.get('/api/twitter/trends/:woeid?', (req, res) => {
 */
 app.get('/api/twitter/geotrends/:latAndLong?', (req, res) => {
     const latAndLongString = req.params.latAndLong.trim();
-    const geoArray = latAndLongString.split(",");
+    const geoArray = latAndLongString.split(',');
     const lat = geoArray[0].trim();
     const long = geoArray[1].trim();
 
-    if(geoArray.length === 2) {
+    if (geoArray.length === 2) {
         Twitter.getClosest(lat, long)
-            .then((data) => {
+            .then(data => {
                 const woeid = data[0].woeid;
                 const name = data[0].name;
                 const country = data[0].country;
                 const countryCode = data[0].countryCode;
 
                 Twitter.getTrends(woeid)
-                    .then((data) => {
+                    .then(data => {
                         res.send({
-                          "requestDescription": "List of trends.",
-                          "requestTime": new Date().getTime(),
-                          "geo": {
-                              "woeid": woeid,
-                              "name": name,
-                              "country": country,
-                              "countryCode": countryCode,
-                          },
-                          "data": data[0]
+                            requestDescription: 'List of trends.',
+                            requestTime: new Date().getTime(),
+                            geo: {
+                                woeid: woeid,
+                                name: name,
+                                country: country,
+                                countryCode: countryCode
+                            },
+                            data: data[0]
                         });
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         res.send({
-                          "message": "ERROR",
-                          "details": error
-                        })
+                            message: 'ERROR',
+                            details: error
+                        });
                     });
             })
-            .catch((error) => {
-                consle.log("Error!", error);
+            .catch(error => {
+                consle.log('Error!', error);
             });
-  }
+    }
 });
 
 /**
 * Finding the closest location based on lat and long
 * lat, long
 */
-app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
-  const latAndLongString = req.params.latAndLong.trim();
-  const geoArray = latAndLongString.split(",");
-  const lat = geoArray[0].trim();
-  const long = geoArray[1].trim();
+app.get('/api/twitter/place/:latAndLong?', (req, res) => {
+    const latAndLongString = req.params.latAndLong.trim();
+    const geoArray = latAndLongString.split(',');
+    const lat = geoArray[0].trim();
+    const long = geoArray[1].trim();
 
-  if(geoArray.length === 2) {
-    Twitter.getClosest(lat, long)
-        .then((data) => {
-            res.send({
-              "requestDescription": "List of trends places.",
-              "requestTime": new Date().getTime(),
-              "data": data[0]
+    if (geoArray.length === 2) {
+        Twitter.getClosest(lat, long)
+            .then(data => {
+                res.send({
+                    requestDescription: 'List of trends places.',
+                    requestTime: new Date().getTime(),
+                    data: data[0]
+                });
+            })
+            .catch(error => {
+                consle.log('Error!', error);
             });
-        })
-        .catch((error) => {
-            consle.log("Error!", error);
-        });
-  }
+    }
 });
 
 /**
@@ -138,7 +137,7 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
  * (location, topic, time, limit) => {tweets}
  *
  */
- app.post('/api/twitter/twitdata', (req, res) => {
+app.post('/api/twitter/twitdata', (req, res) => {
     let receivedData = req.body;
 
     const q = receivedData.q;
@@ -149,15 +148,15 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
     const max_id = receivedData.max_id;
 
     Twitter.getTwitData(q, geocode, radius, since_id, max_id)
-    .then((tweets) => {
-        res.send(tweets);
-    })
-    .catch((err) => {
-        console.log("Error /api/twitter/twitdata", err);
-    });
- });
+        .then(tweets => {
+            res.send(tweets);
+        })
+        .catch(err => {
+            console.log('Error /api/twitter/twitdata', err);
+        });
+});
 
- app.post('/api/sentiment/evaluatestring', (req, res) => {
+app.post('/api/sentiment/evaluatestring', (req, res) => {
     const data = req.body;
     const method = req.method.toUpperCase();
     const text = data.text;
@@ -169,40 +168,39 @@ app.get('/api/twitter/place/:latAndLong?', (req,res) =>  {
         data: JSON.stringify(text)
     };
 
-    Sentiment
-    .processText(text)
-    .then((data) => Sentiment.parseSentiment(data))
-    .then((parsedData) => utils.wrapWithObject('sentiment', parsedData))
-    .then((wrappedData) => utils.addMetaDataTo(wrappedData, params))
-    .then((finalData) => res.send(finalData))
-    .catch((err, status) => res.status(500).send(err))
- });
+    Sentiment.processText(text)
+        .then(data => Sentiment.parseSentiment(data))
+        .then(parsedData => utils.wrapWithObject('sentiment', parsedData))
+        .then(wrappedData => utils.addMetaDataTo(wrappedData, params))
+        .then(finalData => res.send(finalData))
+        .catch((err, status) => res.status(500).send(err));
+});
 
- app.post('/api/twitter/stream/stop', (req, res) => {
+app.post('/api/twitter/stream/stop', (req, res) => {
     const data = req.body;
 
-    if(!baseStream) {
-        return res.status(500).send({error: 'There is no stream to stop.'});
+    if (!baseStream) {
+        return res.status(500).send({ error: 'There is no stream to stop.' });
     }
 
     baseStream.stop();
-    return res.send({status: true});
- });
+    return res.send({ status: true });
+});
 
 /**
 *   socket.io stuff
 *
 **/
-io.on('connection', function (socket) {
-    socket.on('topic', (info) => {
+io.on('connection', function(socket) {
+    socket.on('topic', info => {
         const topic = info.topic.toString().trim().toLowerCase();
         const location = info.location;
 
         console.log('location', topic, location);
 
-        baseStream = Twitter.module.stream('statuses/filter', {locations: location, track: topic});
+        baseStream = Twitter.module.stream('statuses/filter', { locations: location, track: topic });
 
-        baseStream.on('tweet', (tweet) => {
+        baseStream.on('tweet', tweet => {
             socket.emit('tweet', tweet);
         });
     });
@@ -212,5 +210,5 @@ io.on('connection', function (socket) {
 *  Launching the server.
 **/
 httpServer.listen(port, function() {
-  console.log('Listenning on port ' + port);
+    console.log('Listenning on port ' + port);
 });
