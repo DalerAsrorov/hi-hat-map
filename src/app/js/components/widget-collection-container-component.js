@@ -1,40 +1,37 @@
 import Component from './component';
 
 export default class WidgetCollectionContainerComponent extends Component {
-    constructor(id, parent, nodeType='div', WidgetCollectionCompList) {
+    constructor(id, parent, nodeType = 'div', widgetCollectionCompList = []) {
         super(id, parent, nodeType);
-        this.WidgetCollectionCompList = WidgetCollectionCompList;
+        this.widgetCollectionCompList = widgetCollectionCompList;
     }
 
     _buildTemplate() {
-        this.WidgetCollectionCompList.map(WidgetCollection => {
-            this.appendChild(WidgetCollection);
+        this.widgetCollectionCompList.map(widgetCollection => {
+            this.appendChild(widgetCollection);
         });
     }
 
-    _delegateToggle(wcTarget) {
-
-    }
+    _delegateToggle(wcTarget) {}
 
     activateAllExcept(WidgetCollectionComp) {
-        this.WidgetCollectionCompList.map(WidgetColection => {
-            if(WidgetColection !== WidgetCollectionComp) {
-
+        this.widgetCollectionCompList.map(WidgetColection => {
+            if (WidgetColection !== WidgetCollectionComp) {
             }
         });
     }
 
-    delegateActionToCollections(type, action=()=>{}) {
-        this.WidgetCollectionCompList.map(WidgetCollection => {
+    delegateActionToCollections(type, action = () => {}) {
+        this.widgetCollectionCompList.map(WidgetCollection => {
             WidgetCollection.addEventListener(type, action);
         });
     }
 
-    setActive() {
-
+    addWidgetCollection(widgetCollection) {
+        this.widgetCollectionCompList.push(widgetCollection);
     }
 
-    disable() {
+    setActive() {}
 
-    }
+    disable() {}
 }

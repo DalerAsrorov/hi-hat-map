@@ -4,28 +4,28 @@ import { isEmpty } from 'ramda';
 const WC_NODE_TYPE = 'div';
 const WC_NODE_CLASSES = 'row';
 const WC_NODE_CSS = {
-    'margin': '0'
+    margin: '0'
 };
 const WC_WRAPPER_CLASSES = 'cp-widget-wrapper';
 const WC_WRAPPER_CSS = {
-    'display': 'table',
-    'clear': 'both',
-    'position': 'absolute',
-    'display': 'none',
+    display: 'table',
+    clear: 'both',
+    position: 'absolute',
+    display: 'none',
     'background-color': '#fff',
-    'width': '100%',
-    'margin': '0'
+    width: '100%',
+    margin: '0'
 };
 const WC_TOGGLE_BUTTON_CLASSES = 'btn btn-secondary';
-const WC_TOGGLE_BUTTON_CSS= {
-    'width': '100%',
+const WC_TOGGLE_BUTTON_CSS = {
+    width: '100%',
     'border-radius': '0'
 };
 const WC_TOGGLE_SPEED = 0;
 const IS_ACTIVE = 'active';
 
 export default class WidgetCollectionComponent extends Component {
-    constructor(id, parent, desc, widgets=[]) {
+    constructor(id, parent, desc, widgets = []) {
         super(id, parent, WC_NODE_TYPE, '');
         this.widgets = widgets;
         this.desc = desc;
@@ -38,11 +38,11 @@ export default class WidgetCollectionComponent extends Component {
         const bottomElementHeight = $bottomElement.outerHeight();
 
         const topDiff = topOffsetBottom - topOffsetUp - $bottomElement.outerHeight();
-        const top = (topDiff - positionTop) + bottomElementHeight;
+        const top = topDiff - positionTop + bottomElementHeight;
 
         $topElement.css({
             top: -top
-        })
+        });
     }
 
     _getButton() {
@@ -56,14 +56,15 @@ export default class WidgetCollectionComponent extends Component {
         let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
         let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
 
-        $toggleButton.click((ev) => {
+        $toggleButton.click(ev => {
             $widgetWrapper.slideToggle(WC_TOGGLE_SPEED);
             this.toggleActive();
         });
 
-        if (!isEmpty(this.components)) {
-            this.widgets.map((widget) => {
-                $widgetWrapper.append(widget.html());
+        if (!isEmpty(this.widgets)) {
+            console.log('If else statement is here', this.widgets);
+            this.widgets.map(widgetComp => {
+                $widgetWrapper.append(widgetComp.html());
             });
 
             this.$node.append($widgetWrapper);
@@ -78,6 +79,10 @@ export default class WidgetCollectionComponent extends Component {
         }
 
         return Error('Cannot build widget collection with empty list.');
+    }
+
+    addWidgetComponent(widgetComp) {
+        this.widgets.push(widgetComp);
     }
 
     /**

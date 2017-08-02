@@ -19,6 +19,7 @@ import WidgetCollectionContainerComponent from './components/widget-collection-c
 import ModalComponent from './components/modal-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
+import { default as WidgetModuleMap } from './modules/widgets';
 import Twitter from './classes/twitter';
 import Sentiment from './classes/sentiment';
 import Leaflet from './classes/leaflet';
@@ -50,11 +51,21 @@ $(window).load(function() {
     let tracker;
     let cpRightList = [];
     let streamStateButtonIsOn = false;
+
+    // data structures
     let WordPolarityHashMap = new Map();
+    let WidgetMap = new Map();
 
     // Loader Components
     const MapLoaderComp = new MapLoaderComponent('mapLoader', '#mapWrapper', 'div', '');
     MapLoaderComp.init();
+
+    // Widget Components
+    let WidgetChartsCollectionComp = new WidgetCollectionComponent(
+        'widgetChartsCollection',
+        '#panelCompLeft',
+        'Chart Widgets'
+    );
 
     // Wordcloud Components
     let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
@@ -62,7 +73,6 @@ $(window).load(function() {
     WordcloudModalComp.buildHeader(MODAL_HEADERS.WORDCLOUD);
 
     let WordCloudD3Container = new Component('wordcloudD3Wrapper', `#${WordcloudModalComp.id}`, 'div', '');
-
     let WordcloudD3Comp = new WordcloudD3Component('wordcloudD3Comp', '', 'div', '');
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudModalComp.buildBody(WordCloudD3Container.html());
@@ -132,8 +142,8 @@ $(window).load(function() {
                                 );
 
                                 WordcloudD3Comp._words = wordcloudDataStructure;
-                                WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD });
-                                WordcloudModalComp.show();
+                                WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD }); // eslint-disable
+                                // WordcloudModalComp.show();
 
                                 streamStateButtonIsOn = false;
                             });
@@ -362,6 +372,23 @@ $(window).load(function() {
     // generation
     // ui.generateCpRightPanel('#panelWrapper', {});
 
+    let tempWidget = new WidgetComponent(
+        'widgetID',
+        'Item W20s',
+        'col-lg-2',
+        item => console.log('hi', item, Math.random(10) * 10),
+        'fa-bar-chart',
+        ['daler', 'asrorov, ' + Math.random(10) * 10]
+    );
+
+    Object.entries(WidgetModuleMap).forEach(([widgetID, widget]) => {
+        WidgetChartsCollectionComp.addWidgetComponent(
+            new WidgetComponent(widgetID, widget.name, 'col-lg-2', widget.action, widget.icon)
+        );
+    });
+
+    WidgetChartsCollectionComp.init();
+
     // Testing area
     let testGeo = '-25.2744,-133.7751'; // Australia
     // console.log('Path:', Paths.getGeoTrends(testGeo));
@@ -403,68 +430,6 @@ $(window).load(function() {
             } else {
                 console.log('no data', data);
             }
-
-            // TODO: implement results widgets
-            // const WidgetComp = new WidgetComponent(id, desc, action, icon, data=optional);
-            // const WidgetComp1 = new WidgetComponent(id, desc, action, icon, data=optional);
-            // let WidgetCollectionComp = new WidgetCollectionComponent(id, [WidgetComp, WidgetComp1]);
-            // const resultStageWidgets = Widgets.getResultStageWidgets().map((widget) => {
-            //         return new PanelComponent(widget.id, widget.desc, widget.action, widget.data);
-            // });
-
-            // const WidgetComp1 = new WidgetComponent('w1', 'Item W1', 'col-lg-2', (item) =>console.log('hi', item), null,['daler', 'asrorov']);
-            // const WidgetComp2 = new WidgetComponent('w2', 'Item W2', 'col-lg-2', (item) =>console.log('hi', item), null, ['shukhrat', 'asrorov']);
-            // let WidgetCollectionComp = new WidgetCollectionComponent('wCollet', '#panelCompLeft', 'Widgets', [WidgetComp1, WidgetComp2]);
-            // WidgetCollectionComp.init();
-
-            let listOfWidgets1 = [],
-                listOfWidgets2 = [];
-            for (let i = 0; i < 8; i++) {
-                const j = i * 10;
-                listOfWidgets1.push(
-                    new WidgetComponent(
-                        'w' + i,
-                        'Item W' + i,
-                        'col-lg-2',
-                        item => console.log('hi', item, i),
-                        'fa-twitter',
-                        ['daler', 'asrorov, ' + i]
-                    )
-                );
-                listOfWidgets2.push(
-                    new WidgetComponent(
-                        'w' + j,
-                        'Item W' + j,
-                        'col-lg-2',
-                        item => console.log('hi', item, j),
-                        'fa-twitter',
-                        ['daler', 'asrorov, ' + j]
-                    )
-                );
-            }
-
-            let WidgetCollectionComp1 = new WidgetCollectionComponent(
-                'wCollet1',
-                '#panelCompLeft',
-                'Widgets 1',
-                listOfWidgets1
-            );
-            let WidgetCollectionComp2 = new WidgetCollectionComponent(
-                'wCollet2',
-                '#panelCompLeft',
-                'Widgets 2',
-                listOfWidgets2
-            );
-            WidgetCollectionComp1.init();
-            WidgetCollectionComp2.init();
-
-            let WidgetColContainerComp1 = new WidgetCollectionContainerComponent(
-                'wCollectCont1',
-                '#panelCompLeft',
-                'div',
-                [WidgetCollectionComp1, WidgetCollectionComp2]
-            );
-            WidgetColContainerComp1.init();
 
             let panelComp1 = new PanelComponent(
                 '#topTen',
@@ -582,13 +547,6 @@ $(window).load(function() {
     contextMenu.addClassesToAllMenuItems('sup-li');
 
     // contextMenu.fadeOut();
-
-    // TODO: Added word cloud as a widget
-
-    // let WidgetsMap = {};
-    // AllWidgets.map(widget => {
-    //     Widgets[widget.id] = new WidgetComponent(widget.id, widget.desc, widget.action, widget.icon, widget.data);
-    // });
 
     // Request.getRequest(Utils.getTrendsPlaces(lat, long))å
     //     .then((data) => {

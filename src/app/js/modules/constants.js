@@ -12,7 +12,11 @@ export const MAIN = {
 };
 
 export const WIDGETS = {
-    WORDCLOUD: 'fa-cloud'
+    WORDCLOUD: 'fa-cloud',
+    BAR_CHARTS: 'fa-bar-chart',
+    PIE_CHARTS: 'fa-pie-chart',
+    AREA_CHARTS: 'fa-area-chart',
+    GROWTH_CHARTS: 'fa-line-chart'
 };
 
 export const IMAGES = {
@@ -64,7 +68,8 @@ export const WIDGET_PARAMS = {
     WORDCLOUD: {
         size: [1120, 600],
         padding: 4
-    }
+    },
+    ICON_SIZE: 'col-lg-2'
 };
 
 export const WORDCLOUD_PARAMS = {
