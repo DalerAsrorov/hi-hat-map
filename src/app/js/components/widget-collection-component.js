@@ -16,7 +16,7 @@ const WC_WRAPPER_CSS = {
     width: '100%',
     margin: '0'
 };
-const WC_TOGGLE_BUTTON_CLASSES = 'btn btn-secondary';
+const WC_TOGGLE_BUTTON_CLASSES = 'btn btn-secondary widget-collection-btn';
 const WC_TOGGLE_BUTTON_CSS = {
     width: '100%',
     'border-radius': '0'

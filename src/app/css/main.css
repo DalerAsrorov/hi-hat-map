@@ -1,8 +1,15 @@
 /* MAIN-COLOR: #2F4070*/
 /* HEADER-COLOR: #f4deff*/
 
+@keyframes animateBorder {
+    to {
+        box-shadow: 0 0 0 4px #ea3556;
+    }
+}
+
 * ul {
     list-style-type: none;
+    box-sizing: border-box;
 }
 
 html,
@@ -643,4 +650,8 @@ button {
 .wrapper {
     display: flex;
     flex-flow: column;
+}
+
+.redBorderAnimation {
+    animation: 1s animateBorder infinite;
 }

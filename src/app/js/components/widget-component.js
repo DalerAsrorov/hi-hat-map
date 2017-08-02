@@ -3,7 +3,7 @@ import { generateWebIcon } from '../modules/ui';
 
 const WIDGET_NODE_TYPE = 'button';
 // const WIDGET_CLASSES = 'cp-widget list-group-item list-group-item-action';
-const WIDGET_CLASSES = 'cp-widget btn btn-secondary';
+const WIDGET_CLASSES = 'btn btn-secondary cp-widget ';
 const WIDGET_DEFAULT_ICON = 'fa-circle-thin';
 const WIDGET_ICON_SIZE = 'fa-2x';
 const WIDGET_CSS = {
