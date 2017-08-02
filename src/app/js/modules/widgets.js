@@ -1,24 +1,23 @@
 import { WIDGETS } from './constants';
+import { toggleModal } from './ui';
 
-const WIDGET_ICON_SIZE = 'fa-2x';
-const WIDGET_ICON_CLASS = 'widget-icon';
-const ICON_TYPE = 'text';
-
-export default {
+const WidgetModuleMap = {
     wordCloudWidget: {
+        self: this,
         name: 'Wordcloud',
-        action(params = null) {
-            console.log('Wordcloud widget');
+        action(ev) {
+            toggleModal(WidgetModuleMap.wordCloudWidget.relation, 'show');
         },
-        relation: 'deordcloudModal',
+        relation: 'wordcloudModal',
         icon: WIDGETS['WORDCLOUD'],
         data: {}
     },
 
     barCharts: {
         name: 'Bar Charts',
-        action(params = null) {
+        action(ev) {
             console.log('Bar chart widget');
+            console.log('this', WidgetModuleMap.barCharts.relation);
         },
         relation: 'barChartsModal',
         icon: WIDGETS['BAR_CHARTS'],
@@ -27,8 +26,8 @@ export default {
 
     pieCharts: {
         name: 'Pie Charts',
-        action(params = null) {
-            console.log('Pie charts widget');
+        action(ev) {
+            console.log('this', WidgetModuleMap.pieCharts.relation);
         },
         relation: 'pieChartsModal',
         icon: WIDGETS['PIE_CHARTS'],
@@ -37,8 +36,8 @@ export default {
 
     lineCharts: {
         name: 'Area Charts',
-        action(params = null) {
-            console.log('Line charts widget');
+        action(ev) {
+            console.log('this', WidgetModuleMap.lineCharts.relation);
         },
         relation: 'lineChartsModal',
         icon: WIDGETS['AREA_CHARTS'],
@@ -54,11 +53,22 @@ export default {
      */
     growthCharts: {
         name: 'Growth Charts',
-        action(params = null) {
+        action(ev) {
             console.log('Growth charts widget');
         },
         relation: 'growthChartsModal',
         icon: WIDGETS['GROWTH_CHARTS'],
         data: {}
+    },
+    statCharts: {
+        name: 'Stat Charts',
+        action(ev) {
+            console.log('statCharts charts widget');
+        },
+        relation: 'growthChartsModal',
+        icon: WIDGETS['STAT_CHARTS'],
+        data: {}
     }
 };
+
+export default WidgetModuleMap;

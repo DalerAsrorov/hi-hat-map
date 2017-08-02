@@ -16,7 +16,8 @@ export const WIDGETS = {
     BAR_CHARTS: 'fa-bar-chart',
     PIE_CHARTS: 'fa-pie-chart',
     AREA_CHARTS: 'fa-area-chart',
-    GROWTH_CHARTS: 'fa-line-chart'
+    GROWTH_CHARTS: 'fa-line-chart',
+    STAT_CHARTS: 'fa-calculator'
 };
 
 export const IMAGES = {

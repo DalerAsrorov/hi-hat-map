@@ -77,6 +77,7 @@ export default class ModalComponent extends Component {
         $modalDialog.prepend(this.$modalContent);
 
         this.html().append($modalDialog);
+        $('body').append(this.html());
     }
 
     buildCustomTemplate() {

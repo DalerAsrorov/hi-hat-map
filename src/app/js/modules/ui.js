@@ -320,3 +320,7 @@ export function resetOnMouseUp(target, containerSelector, actionName) {
         }
     });
 }
+
+export function toggleModal(modalID, operation = 'show') {
+    $(`#${modalID}`).modal(operation);
+}

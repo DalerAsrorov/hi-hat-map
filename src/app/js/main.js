@@ -19,7 +19,7 @@ import WidgetCollectionContainerComponent from './components/widget-collection-c
 import ModalComponent from './components/modal-component';
 import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
-import { default as WidgetModuleMap } from './modules/widgets';
+import WidgetModuleMap from './modules/widgets';
 import Twitter from './classes/twitter';
 import Sentiment from './classes/sentiment';
 import Leaflet from './classes/leaflet';
