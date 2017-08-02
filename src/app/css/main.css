@@ -103,7 +103,6 @@ button#toggleSliderBtn {
 }
 
 .cp-widget {
-    margin: 10px 0px 12px 10px;
 }
 
 .cp-widget > aside {
@@ -125,6 +124,7 @@ button#toggleSliderBtn {
 .cp-widget-desc {
     display: block;
     font-size: 11px;
+    font-weight: 600;
     text-align: center;
     margin: 0 auto;
     float: none;

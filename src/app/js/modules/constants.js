@@ -69,7 +69,7 @@ export const WIDGET_PARAMS = {
         size: [1120, 600],
         padding: 4
     },
-    ICON_SIZE: 'col-lg-2'
+    ICON_SIZE: 'col-lg-3'
 };
 
 export const WORDCLOUD_PARAMS = {
