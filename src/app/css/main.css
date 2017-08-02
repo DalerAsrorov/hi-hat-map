@@ -103,6 +103,7 @@ button#toggleSliderBtn {
 }
 
 .cp-widget {
+    margin: 10px 0px 12px 10px;
 }
 
 .cp-widget > aside {
@@ -127,6 +128,7 @@ button#toggleSliderBtn {
     text-align: center;
     margin: 0 auto;
     float: none;
+    margin-top: 5px;
 }
 
 .dropdown button {
