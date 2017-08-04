@@ -1,116 +1,127 @@
 import Component from './component';
 import { isEmpty } from 'ramda';
+import { DOMActions } from '../modules/constants';
 
 const WC_NODE_TYPE = 'div';
 const WC_NODE_CLASSES = 'row';
 const WC_NODE_CSS = {
-    margin: '0'
+	margin: '0'
 };
 const WC_WRAPPER_CLASSES = 'cp-widget-wrapper';
 const WC_WRAPPER_CSS = {
-    display: 'table',
-    clear: 'both',
-    position: 'absolute',
-    display: 'none',
-    'background-color': '#fff',
-    width: '100%',
-    margin: '0'
+	clear: 'both',
+	position: 'absolute',
+	display: 'none',
+	'background-color': '#fff',
+	width: '100%',
+	margin: '0'
 };
 const WC_TOGGLE_BUTTON_CLASSES = 'btn btn-secondary widget-collection-btn';
 const WC_TOGGLE_BUTTON_CSS = {
-    width: '100%',
-    'border-radius': '0'
+	width: '100%',
+	'border-radius': '0'
 };
 const WC_TOGGLE_SPEED = 0;
 const IS_ACTIVE = 'active';
-const IS_ANIMATING = 'redBorderAnimation';
 
 export default class WidgetCollectionComponent extends Component {
-    constructor(id, parent, desc, widgets = []) {
-        super(id, parent, WC_NODE_TYPE, '');
-        this.widgets = widgets;
-        this.desc = desc;
-    }
+	constructor(id, parent, desc, widgets = []) {
+		super(id, parent, WC_NODE_TYPE, '');
+		this.widgets = widgets;
+		this.desc = desc;
+	}
 
-    _alignPosition($bottomElement, $topElement) {
-        const topOffsetUp = $topElement.offset().top;
-        const topOffsetBottom = $bottomElement.offset().top;
-        const positionTop = $topElement.position().top;
-        const bottomElementHeight = $bottomElement.outerHeight();
+	_alignPosition($bottomElement, $topElement) {
+		const topOffsetUp = $topElement.offset().top;
+		const topOffsetBottom = $bottomElement.offset().top;
+		const positionTop = $topElement.position().top;
+		const bottomElementHeight = $bottomElement.outerHeight();
 
-        const topDiff = topOffsetBottom - topOffsetUp - $bottomElement.outerHeight();
-        const top = topDiff - positionTop + bottomElementHeight;
+		const topDiff = topOffsetBottom - topOffsetUp - $bottomElement.outerHeight();
+		const top = topDiff - positionTop + bottomElementHeight;
 
-        $topElement.css({
-            top: -top
-        });
-    }
+		$topElement.css({
+			top: -top
+		});
+	}
 
-    _getButton() {
-        return this.$node.children('button');
-    }
+	getWidget(widgetID) {
+		const widgets = this.widgets;
 
-    _buildTemplate() {
-        this.$node.addClass(WC_NODE_CLASSES);
-        this.$node.css(WC_NODE_CSS);
+		for (let i = 0; i < widgets.length; i++) {
+			if (widgets[i].id === widgetID) {
+				return widgets[i];
+			}
+		}
 
-        let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
-        let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
+		return null;
+	}
 
-        $toggleButton.click(ev => {
-            $widgetWrapper.slideToggle(WC_TOGGLE_SPEED);
-            this.toggleActive();
-        });
+	_getButton() {
+		return this.$node.children('button');
+	}
 
-        if (!isEmpty(this.widgets)) {
-            console.log('If else statement is here', this.widgets);
-            this.widgets.map(widgetComp => {
-                $widgetWrapper.append(widgetComp.html());
-            });
+	_buildTemplate() {
+		this.$node.addClass(WC_NODE_CLASSES);
+		this.$node.css(WC_NODE_CSS);
 
-            this.$node.append($widgetWrapper);
-            this.$node.append($toggleButton);
+		let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
+		let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
 
-            this._alignPosition($toggleButton, $widgetWrapper);
+		$toggleButton.click(ev => {
+			$widgetWrapper.slideToggle(WC_TOGGLE_SPEED);
+			this.toggleActive();
+		});
 
-            $widgetWrapper.css(WC_WRAPPER_CSS);
-            $toggleButton.css(WC_TOGGLE_BUTTON_CSS);
+		if (!isEmpty(this.widgets)) {
+			console.log('If else statement is here', this.widgets);
+			this.widgets.map(widgetComp => {
+				$widgetWrapper.append(widgetComp.html());
+			});
 
-            return this.html();
-        }
+			this.$node.append($widgetWrapper);
+			this.$node.append($toggleButton);
 
-        return Error('Cannot build widget collection with empty list.');
-    }
+			this._alignPosition($toggleButton, $widgetWrapper);
 
-    addWidgetComponent(widgetComp) {
-        this.widgets.push(widgetComp);
-    }
+			$widgetWrapper.css(WC_WRAPPER_CSS);
+			$toggleButton.css(WC_TOGGLE_BUTTON_CSS);
 
-    /**
+			return this.html();
+		}
+
+		return Error('Cannot build widget collection with empty list.');
+	}
+
+	addWidgetComponent(widgetComp) {
+		this.widgets.push(widgetComp);
+	}
+
+	/**
      * Adds event listener to the button of Widget Component
      * @param {[string], [fn]} action [void]
      */
-    addEventListener(eventType, action) {
-        this._getButton().on(eventType, action);
-    }
+	addEventListener(eventType, action) {
+		this._getButton().on(eventType, action);
+	}
 
-    toggleActive() {
-        this.$node.children('button').toggleClass(IS_ACTIVE);
-    }
+	toggleActive() {
+		this.$node.children('button').toggleClass(IS_ACTIVE);
+	}
 
-    isActive() {
-        return this.$node.children('button').hasClass(IS_ACTIVE);
-    }
+	isActive() {
+		return this.$node.children('button').hasClass(IS_ACTIVE);
+	}
 
-    setActive() {
-        this.$node.children('button').addClass(IS_ACTIVE);
-    }
+	setActive() {
+		this.$node.children('button').addClass(IS_ACTIVE);
+	}
 
-    toggleAnimation(option = true) {
-        if (option) {
-            this.$node.children('button').addClass(IS_ANIMATING);
-        } else {
-            this.$node.children('button').removeClass(IS_ANIMATING);
-        }
-    }
+	toggleAnimation(option = true) {
+		if (option) {
+			this.html().children('button').addClass(DOMActions.isAnimating);
+		} else {
+			this.html().children('button').removeClass(DOMActions.isAnimating);
+		}
+	}
 }
