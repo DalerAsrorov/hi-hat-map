@@ -76,6 +76,8 @@ export default class Component {
 
 	doToggleAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
 		const myNode = this.$node;
-		return childElementSelector ? myNode.children(childElementSelector).toggleClass(animation) : this.$node.toggleClass(doRedBorderAnimation);
+		return childElementSelector
+			? myNode.children(childElementSelector).toggleClass(animation)
+			: myNode.toggleClass(doRedBorderAnimation);
 	}
 }
