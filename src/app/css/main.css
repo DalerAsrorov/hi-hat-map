@@ -4,7 +4,7 @@
 @keyframes animateBorder {
 	to {
 		box-shadow: 0 0 0 4px #ea3556;
-		border: 2px dotted #ea3556;
+		/*border: 2px dotted #ea3556;*/
 	}
 }
 
@@ -111,7 +111,7 @@ button#toggleSliderBtn {
 }
 
 .cp-widget {
-	margin: 10px;
+	margin: 1.2em;
 }
 
 .cp-widget > aside {

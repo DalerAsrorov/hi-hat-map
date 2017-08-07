@@ -1,6 +1,5 @@
 import Component from './component';
 import { isEmpty } from 'ramda';
-import { DOMActions } from '../modules/constants';
 
 const WC_NODE_TYPE = 'div';
 const WC_NODE_CLASSES = 'row';
@@ -117,11 +116,7 @@ export default class WidgetCollectionComponent extends Component {
 		this.$node.children('button').addClass(IS_ACTIVE);
 	}
 
-	toggleAnimation(option = true) {
-		if (option) {
-			this.html().children('button').addClass(DOMActions.isAnimating);
-		} else {
-			this.html().children('button').removeClass(DOMActions.isAnimating);
-		}
+	doToggleAnimation() {
+		super.doToggleAnimation('button');
 	}
 }

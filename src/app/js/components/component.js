@@ -1,6 +1,6 @@
 /* Base component class. */
 import { getElement, append, getOuterHTMLText } from '../modules/ui';
-import { DOMActions } from '../modules/constants';
+import { doRedBorderAnimation } from '../modules/action-class-names';
 
 export default class Component {
 	constructor(id = '', parent = null, nodeType = 'div', content = '') {
@@ -74,13 +74,8 @@ export default class Component {
 		this.html().css('display', 'block');
 	}
 
-	toggleAnimation(option = true) {
-		const { isAnimating } = DOMActions;
-
-		if (option) {
-			this.$node.addClass(isAnimating);
-		} else {
-			this.$node.removeClass(isAnimating);
-		}
+	doToggleAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+		const myNode = this.$node;
+		return childElementSelector ? myNode.children(childElementSelector).toggleClass(animation) : this.$node.toggleClass(doRedBorderAnimation);
 	}
 }

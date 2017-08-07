@@ -1,5 +1,4 @@
 import { generateWebIcon } from '../modules/ui';
-import { DOMActions } from '../modules/constants';
 import Component from './component';
 
 const WIDGET_NODE_TYPE = 'button';
@@ -55,8 +54,7 @@ export default class WidgetComponent extends Component {
 		return this.$node.hasClass(IS_ACTIVE);
 	}
 
-	toggleAnimation(option = true) {
-		console.log(this.html().children('button'));
-		this.html().toggleClass(DOMActions.isAnimating);
+	doToggleAnimation() {
+		super.doToggleAnimation();
 	}
 }

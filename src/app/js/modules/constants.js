@@ -84,7 +84,3 @@ export const MAP_PARAMS = {
 		RADIUS: '25mi'
 	}
 };
-
-export const DOMActions = {
-	isAnimating: 'redBorderAnimation'
-};
