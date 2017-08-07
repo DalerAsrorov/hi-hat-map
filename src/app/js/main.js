@@ -382,8 +382,8 @@ $(window).load(function() {
 	WidgetChartsCollectionComp.init();
 	const wordcloudWidget = WidgetChartsCollectionComp.getWidget('wordCloudWidget');
 	console.log('The widget 2', wordcloudWidget);
-	WidgetChartsCollectionComp.doToggleAnimation();
-	wordcloudWidget.doToggleAnimation();
+	// WidgetChartsCollectionComp.doToggleAnimation();
+	// wordcloudWidget.doToggleAnimation();
 
 	// Testing area
 	let testGeo = '-25.2744,-133.7751'; // Australia
