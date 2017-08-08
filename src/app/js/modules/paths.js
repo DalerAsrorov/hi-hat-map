@@ -1,4 +1,3 @@
-
 const origin = window.location.origin;
 
 export function getTrendsPath(weid) {

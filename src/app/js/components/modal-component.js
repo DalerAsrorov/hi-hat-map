@@ -1,4 +1,3 @@
-import { isEmpty } from 'ramda';
 import Component from './component';
 
 const MODAL_BASE_CLASS = 'modal fade';
@@ -45,7 +44,7 @@ export default class ModalComponent extends Component {
     }
 
     buildFooter(customButtons = [], closeButtonText = 'Close') {
-        let $modalFooter = $('<div class="modal-footer"></div>');
+        let $modalFooter = $(MODAL_FOOTER_HTML);
         let $closeButton = $(MODAL_CLOSE_BUTTON_HTML);
 
         $closeButton.append(closeButtonText);

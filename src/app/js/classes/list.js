@@ -1,4 +1,4 @@
-import { getType } from '../modules/utils.js';
+import { getType } from '../modules/utils';
 
 export default class List {
     constructor(id, dataName) {
@@ -25,7 +25,7 @@ export default class List {
     }
 
     addClassesToAllItems(classes) {
-        this.$self.children().addClass(classes)
+        this.$self.children().addClass(classes);
     }
 
     addItem(value, handler, event) {
@@ -36,16 +36,14 @@ export default class List {
     }
 
     bindTo(container) {
-        if(getType(container) === '[object Object]') {
+        if (getType(container) === '[object Object]') {
             return container.append(this.$self);
         }
 
         return $(`${container}`).append(this.$self);
     }
 
-    removeItem() {
-
-    }
+    removeItem() {}
 
     $html() {
         return this.$self;

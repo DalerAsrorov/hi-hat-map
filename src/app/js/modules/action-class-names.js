@@ -1,1 +1,1 @@
-export const doRedBorderAnimation = 'redBorderAnimation'
+export const doRedBorderAnimation = 'redBorderAnimation';

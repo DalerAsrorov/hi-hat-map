@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from './component';
 
 export default class WordcloudComponent extends Component {
     constructor(id, parent, nodeType, content, words) {
@@ -10,7 +10,7 @@ export default class WordcloudComponent extends Component {
         return this._words;
     }
 
-    set words(words=[]) {
+    set words(words = []) {
         this._words = words;
     }
 }

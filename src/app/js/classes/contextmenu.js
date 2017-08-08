@@ -1,5 +1,5 @@
-import { resetOnMouseUp, appendDropDownToPanel } from '../modules/ui.js';
-import List from './list.js';
+import { resetOnMouseUp, appendDropDownToPanel } from '../modules/ui';
+import List from './list';
 
 export default class ContextMenu {
     constructor(id, listId, parent) {
@@ -25,7 +25,7 @@ export default class ContextMenu {
         this._id = id;
     }
 
-    addClass(className, selector=null) {
+    addClass(className, selector = null) {
         // have data-name attribute added
         selector = selector === null ? !!this.$self.addClass(className) : !!$(`${selector}`).addClass(className);
         return selector;
@@ -45,12 +45,10 @@ export default class ContextMenu {
         const navOffsetHeight = nav.offsetHeight;
         const top = `${mouseY - navOffsetHeight}px`;
 
-        this.applyCss({'left': left, 'top': top});
+        this.applyCss({ left: left, top: top });
     }
 
-    addMenuSubitem(selfSelector, menuItemSelector, eventListener) {
-
-    }
+    addMenuSubitem(selfSelector, menuItemSelector, eventListener) {}
 
     appendMenuItem(value, action, event) {
         this.list.addItem(value, action, event);
@@ -74,7 +72,7 @@ export default class ContextMenu {
     }
 
     fadeIn(speed) {
-        this.$self.fadeIn(speed)
+        this.$self.fadeIn(speed);
     }
 
     fadeOut(speed) {
@@ -85,17 +83,13 @@ export default class ContextMenu {
         return this.$self;
     }
 
-    hide(delay=500) {
+    hide(delay = 500) {
         this.$self.hide(delay);
     }
 
-    refresh() {
+    refresh() {}
 
-    }
-
-    show(delay=500) {
+    show(delay = 500) {
         this.$self.show(delay);
     }
-
-
 }

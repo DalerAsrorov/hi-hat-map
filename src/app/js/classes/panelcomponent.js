@@ -4,17 +4,17 @@
  *
  */
 
- import R from 'ramda';
+import R from 'ramda';
 
- export default class PanelComponent {
-    constructor(id, name, actionHandler, data=[]) {
+export default class PanelComponent {
+    constructor(id, name, actionHandler, data = []) {
         this.id = id;
         this.name = name;
         this.actionHandler = actionHandler;
         this.data = data;
     }
 
-    getSotedDataBy(key, ascending=true) {
+    getSotedDataBy(key, ascending = true) {
         let sortedData;
         const descComparator = R.comparator((a, b) => R.gt(R.prop(key, a), R.prop(key, b)));
 
@@ -22,7 +22,7 @@
         return data;
     }
 
-    getTopN(limit, key, ascending=true) {
+    getTopN(limit, key, ascending = true) {
         let formatted = getSortedDataBy(key, ascending);
         return R.slice(0, limit + 1, formatted);
     }
@@ -61,10 +61,10 @@
 
     toString() {
         return {
-            "id": this.id,
-            "name": this.name,
-            "actionHandler": this.actionHandler,
-            "data": this.data
+            id: this.id,
+            name: this.name,
+            actionHandler: this.actionHandler,
+            data: this.data
         };
     }
- }
+}

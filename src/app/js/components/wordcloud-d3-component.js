@@ -1,5 +1,4 @@
 import { FONTS } from '../modules/constants';
-import { isEmpty } from 'ramda';
 import { convertFromJQueryToDOMElement } from '../modules/ui';
 import * as Converter from '../modules/converter';
 import WordcloudComponent from './wordcloud-component';

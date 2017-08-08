@@ -1,12 +1,10 @@
-import Mode from './mode.js';
-import Sentiment from './sentiment.js';
-import * as Request from '../modules/request.js';
+import Mode from './mode';
+import Sentiment from './sentiment';
+import * as Request from '../modules/request';
 import { stopTwitterStream } from '../modules/paths';
 import R from 'ramda';
 
-
 export default class Twitter extends Mode {
-
     constructor(name) {
         super(name);
     }
@@ -18,12 +16,12 @@ export default class Twitter extends Mode {
     getData(url, twitData) {
         return new Promise((res, rej) => {
             Request.postRequest(url, twitData)
-            .then((data) => {
-                res(data);
-            })
-            .catch((err) => {
-                rej(err);
-            });
+                .then(data => {
+                    res(data);
+                })
+                .catch(err => {
+                    rej(err);
+                });
         });
     }
 
@@ -35,13 +33,13 @@ export default class Twitter extends Mode {
             location: tweet.place.full_name + ', ' + tweet.place.country,
             profileImage: tweet.user.profile_image_url || 'no-image',
             name: tweet.user.name,
-            username: tweet.user.screen_name,
+            username: tweet.user.screen_name
         };
     }
 
     processData(tweets, metadata) {
-        const hasGeo = (tweet) => !R.isNil(tweet.place);
-        const getRequredData = (tweet) => {
+        const hasGeo = tweet => !R.isNil(tweet.place);
+        const getRequredData = tweet => {
             return {
                 text: tweet.text,
                 created_at: tweet.created_at,
@@ -49,27 +47,22 @@ export default class Twitter extends Mode {
                 location: tweet.place.full_name + ', ' + tweet.place.country,
                 profileImage: tweet.user.profile_image_url || 'no-image',
                 name: tweet.user.name,
-                username: tweet.user.screen_name,
+                username: tweet.user.screen_name
             };
         };
 
-        const filteredTweetsList = R.pipe(
-            R.filter(hasGeo),
-            R.map(getRequredData)
-        )(tweets);
+        const filteredTweetsList = R.pipe(R.filter(hasGeo), R.map(getRequredData))(tweets);
 
         return filteredTweetsList;
     }
 
-    stopStream(fn=()=>{}) {
-        Request.postRequest(stopTwitterStream(), {stop: true})
-        .then((data) => {
+    stopStream(fn = () => {}) {
+        Request.postRequest(stopTwitterStream(), { stop: true }).then(data => {
             const streamIsOff = data.status;
 
             if (streamIsOff) {
                 fn();
             }
         });
-
     }
 }

@@ -1,37 +1,37 @@
-import Component from './component.js';
-import { IMAGES } from '../modules/constants.js';
-import { getLoader } from '../modules/ui.js';
+import Component from './component';
+import { IMAGES } from '../modules/constants';
+import { getLoader } from '../modules/ui';
 
 const loaderCss = {
-    'position': 'relative',
-    'top': '25%'
+    position: 'relative',
+    top: '25%'
 };
 
 const loaderDivCss = {
-    'display': 'none', // default state
-    'position': 'absolute',
+    display: 'none', // default state
+    position: 'absolute',
     'z-index': '1030',
-    'background': 'white',
-    'width': '100%',
-    'height': '100%',
-    'opacity': '0.75'
+    background: 'white',
+    width: '100%',
+    height: '100%',
+    opacity: '0.75'
 };
 
 const showCss = {
-    'display': 'block'
+    display: 'block'
 };
 
 const hideCss = {
-    'display': 'none'
+    display: 'none'
 };
 
 export default class MapLoaderComponent extends Component {
-    constructor(id, parent, nodeType, content, imageSrc=IMAGES.DEFAULT.MAP_LOADER_IMAGE) {
+    constructor(id, parent, nodeType, content, imageSrc = IMAGES.DEFAULT.MAP_LOADER_IMAGE) {
         super(id, parent, nodeType, content);
         this.imageSrc = imageSrc;
     }
 
-    init(display=false) {
+    init(display = false) {
         this._buildTemplate();
 
         if (display) {
@@ -54,7 +54,7 @@ export default class MapLoaderComponent extends Component {
         return this.$node;
     }
 
-    startLoader(mls=0) {
+    startLoader(mls = 0) {
         setTimeout(() => {
             this.renderLoader();
         }, mls);

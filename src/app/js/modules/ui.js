@@ -1,9 +1,9 @@
 /*----------  Utils Module functions  ----------*/
 
+import { getType } from './utils';
 import StorageSystem from '../classes/storagesystem';
 import ContextMenu from '../classes/contextmenu';
 import Chart from '../classes/chart';
-import { getType } from './utils';
 import R from 'ramda';
 
 export function buildTemplate(templateString) {

@@ -2,8 +2,8 @@ import LMap from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
 import Leaflet from '../classes/leaflet.js';
+import { curry, map, pipe } from 'ramda';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
-import { curry, map, pipe, __ } from 'ramda';
 
 // export function generateResults(data) {
 //     console.log('Data', data);
