@@ -26,6 +26,7 @@ import Leaflet from './classes/leaflet';
 import List from './classes/list';
 import R from 'ramda';
 import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
+import * as Emitter from './modules/emitter';
 
 $(window).load(function() {
     // Statuc modules
@@ -143,6 +144,9 @@ $(window).load(function() {
 
                                 WordcloudD3Comp._words = wordcloudDataStructure;
                                 WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD }); // eslint-disable
+
+                                WidgetChartsCollectionComp.doToggleAnimation();
+                                wordcloudWidget.doToggleAnimation();
 
                                 // WordcloudD3Comp.convertToCanvas();
 
@@ -382,8 +386,6 @@ $(window).load(function() {
     WidgetChartsCollectionComp.init();
     const wordcloudWidget = WidgetChartsCollectionComp.getWidget('wordCloudWidget');
     console.log('The widget 2', wordcloudWidget);
-    // WidgetChartsCollectionComp.doToggleAnimation();
-    // wordcloudWidget.doToggleAnimation();
 
     // Testing area
     let testGeo = '-25.2744,-133.7751'; // Australia
@@ -550,4 +552,9 @@ $(window).load(function() {
     //     })
 
     // post request testing
+
+    Emitter.on('wordcloudIsOpen', data => {
+        WidgetChartsCollectionComp.doToggleAnimation();
+        wordcloudWidget.doToggleAnimation();
+    });
 });

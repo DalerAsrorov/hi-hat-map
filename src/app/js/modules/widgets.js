@@ -1,10 +1,12 @@
 import { WIDGETS } from './constants';
 import { toggleModal } from './ui';
+import { emit } from './emitter';
 
 const WidgetModuleMap = {
     wordCloudWidget: {
         name: 'Wordcloud',
         action(ev) {
+            emit('wordcloudIsOpen', { open: true, ev });
             toggleModal(WidgetModuleMap.wordCloudWidget.relation, 'show');
         },
         relation: 'wordcloudModal',
