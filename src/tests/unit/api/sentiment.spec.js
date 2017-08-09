@@ -1,4 +1,5 @@
 /*eslint no-undef: "off"*/
+'use strict';
 
 const Sentiment = require('../../../api/sentiment');
 const chai = require('chai');

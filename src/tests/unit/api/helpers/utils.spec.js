@@ -1,4 +1,5 @@
 /*eslint no-undef: "off"*/
+'use strict';
 
 const utils = require('../../../../api/helpers/utils');
 const chaiAsPromised = require('chai-as-promised');
