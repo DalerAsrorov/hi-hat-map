@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import LMap from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';

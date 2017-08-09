@@ -7,9 +7,9 @@
  *
  */
 
+/*eslint no-undef: "off"*/
+
 const retext = require('retext');
-const inspect = require('unist-util-inspect');
-const utils = require('./helpers/utils');
 const sentiment = require('retext-sentiment');
 const R = require('ramda');
 
@@ -24,7 +24,7 @@ const Sentiment = (function(sentiment) {
                     return function transformer(tree) {
                         // console.log(inspect(tree));
                         // console.log(tree);
-                        if (!tree) rej(new Error("Couldn't get the sentiment results."));
+                        if (!tree) rej(new Error('Couldn\'t get the sentiment results.'));
                         // console.log(utils.logTree(tree));
                         res(tree);
                     };
@@ -50,11 +50,8 @@ const Sentiment = (function(sentiment) {
                 const isWordNode = node => node.type === 'WordNode';
                 const isTextNode = node => node.type === 'TextNode';
 
-                const getFirstChild = node => node.children[0];
                 const getChildren = node => node.children;
-                const getDataObject = node => node.data[0];
                 const hasData = node => !R.isNil(node.data);
-                const storeInArray = (data, array) => array.push(data);
                 const getNeededInfoFromTextNode = function(node) {
                     return {
                         text: node.value,
@@ -90,12 +87,12 @@ const Sentiment = (function(sentiment) {
                 const negativeWords = R.filter(word => word.polarity < 0)(emotionalWords);
 
                 const sentiment = {
-                    negativeWords,
-                    positiveWords,
                     value: {
                         totalScore,
                         valence
-                    }
+                    },
+                    negativeWords,
+                    positiveWords
                 };
 
                 res(sentiment);

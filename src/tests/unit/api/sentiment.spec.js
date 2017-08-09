@@ -8,13 +8,14 @@ chai.use(require('chai-as-promised'));
 let expect = chai.expect;
 
 describe('Testing sentiment module in api', () => {
-    const { processText } = Sentiment;
+    const { processText, parseSentiment } = Sentiment;
     const sampleEmotionalText = 'I love spending great time with the best friends, too great but bad luck.';
+
     const processTextPromise = processText(sampleEmotionalText);
 
     processTextPromise.then(data => console.log(data));
 
-    it('processText returns a promise', () => {
+    it('processText method returns a promise', () => {
         return expect(processTextPromise).to.be.a('promise');
     });
 
@@ -50,5 +51,11 @@ describe('Testing sentiment module in api', () => {
             .property('data')
             .that.has.deep.property('valence')
             .that.is.a('string');
+    });
+
+    it('parseSentiment method returns a promise', () => {
+        return processTextPromise.then(sentimentTree => {
+            return expect(parseSentiment(sentimentTree)).to.be.a('promise');
+        });
     });
 });
