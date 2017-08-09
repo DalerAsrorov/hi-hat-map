@@ -39,7 +39,7 @@ describe('Testing sentiment module in api', () => {
     });
 
     it('processText tree returns proper data object with polarity', () => {
-        expect(processTextPromise).to.eventually.have.deep
+        return expect(processTextPromise).to.eventually.have.deep
             .property('data')
             .that.has.deep.property('polarity')
             .that.is.a('number');
