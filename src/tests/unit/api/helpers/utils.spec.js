@@ -20,32 +20,35 @@ describe('Testing utils module in api', () => {
 
     const addMetaDataPromise = utils.addMetaDataTo(sampleObject, sampleParams);
 
-    it('addMetaDataTo method should return Promise', () => {
-        expect(addMetaDataPromise).to.be.a('promise');
+    it('addMetaDataTo method returns a Promise', () => {
+        return expect(addMetaDataPromise).to.be.a('promise');
     });
 
-    it('addMetaDataTo method promise should resolve with an object', () => {
-        expect(addMetaDataPromise).to.eventually.be.an('object');
+    it('addMetaDataTo method promise resolves with an object', () => {
+        return expect(addMetaDataPromise).to.eventually.be.an('object');
     });
 
-    it('addMetaDataTo should add metadata key to a new object', () => {
-        expect(addMetaDataPromise).to.eventually.have.property('metadata');
+    it('addMetaDataTo adds metadata key to a new object', () => {
+        return expect(addMetaDataPromise).to.eventually.have.property('metadata');
     });
 
-    it('addMetaDataTo should include passed params', () => {
-        expect(addMetaDataPromise).to.eventually.have.property('name');
-        expect(addMetaDataPromise).to.eventually.have.property('city');
+    it('addMetaDataTo includes passed params: name', () => {
+        return expect(addMetaDataPromise).to.eventually.have.property('name');
     });
 
-    it('wrapWithObject should return a promise', () => {
+    it('addMetaDataTo includes passed params: city', () => {
+        return expect(addMetaDataPromise).to.eventually.have.property('city');
+    });
+
+    it('wrapWithObject returns a promise', () => {
         const key = 'theKey';
 
-        expect(utils.wrapWithObject(key, sampleObject)).to.be.a('promise');
+        return expect(utils.wrapWithObject(key, sampleObject)).to.be.a('promise');
     });
 
-    it('wrapWithObject promise should resolve withan object with a given key', () => {
+    it('wrapWithObject promise resolvse with an object that includes the passed in key', () => {
         const key = 'theKey';
 
-        expect(utils.wrapWithObject(key, sampleObject)).to.eventually.include.keys(key);
+        return expect(utils.wrapWithObject(key, sampleObject)).to.eventually.include.keys(key);
     });
 });
