@@ -1,5 +1,5 @@
 # Hi-Hat-Map
-A web app that analyzes the social media through maps and sentiment analysis that provides helpful features for inspecting the emotional side of posts throughout the world.
+A map-based application that consists of rich bundle of tools to learn trends and sentimental pattern analytics in multiple social networking platforms.
 
 ## Status
 This project is currently under development. Any weird UI tweaks are expected until the end of the first build.
@@ -30,7 +30,9 @@ You can run the project by following steps:
 
 ## APIs Used
 * Twitter
-* To be continued...
+* TODO:
+    * `Yelp`
+    * `Instagram`
 
 ## License
 * [MIT](LICENSE)
