@@ -23,6 +23,7 @@ You can run the project by following steps:
 
 ## Tech Stack
 * JavaScript (ES6)
+* NodeJS
 * jQuery
 * [Leaflet](http://leafletjs.com/)
 * Bootstrap
