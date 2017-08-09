@@ -24,7 +24,16 @@ describe('Testing utils module in api', () => {
         expect(addMetaDataPromise).to.be.a('promise');
     });
 
-    it('addMetaDataPromise adds params key to a new object', () => {
-        expect(addMetaDataPromise).to.eventually.have.property('params');
+    it('addMetaDataTo method promise should resolve with an object', () => {
+        expect(addMetaDataPromise).to.eventually.be.an('object');
+    });
+
+    it('addMetaDataTo should add metadata key to a new object', () => {
+        expect(addMetaDataPromise).to.eventually.have.property('metadata');
+    });
+
+    it('addMetaDataTo should include passed params', () => {
+        expect(addMetaDataPromise).to.eventually.have.property('name');
+        expect(addMetaDataPromise).to.eventually.have.property('city');
     });
 });
