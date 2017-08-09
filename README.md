@@ -17,6 +17,10 @@ You can run the project by following steps:
         * `Listenning on port 8000`
 5. Launch your favorite browser and navigate to `localhost:8000`
 
+## Tests
+1. `cd ./src`
+2. `npm run test`  
+
 ## Tech Stack
 * JavaScript (ES6)
 * jQuery
