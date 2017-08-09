@@ -116,6 +116,14 @@ export default class WidgetCollectionComponent extends Component {
         this.$node.children('button').addClass(IS_ACTIVE);
     }
 
+    startAnimation() {
+        super.startAnimation('button');
+    }
+
+    stopAnimation() {
+        super.stopAnimation('button');
+    }    
+
     doToggleAnimation() {
         super.doToggleAnimation('button');
     }

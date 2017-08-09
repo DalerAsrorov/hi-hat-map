@@ -54,6 +54,14 @@ export default class WidgetComponent extends Component {
         return this.$node.hasClass(IS_ACTIVE);
     }
 
+    startAnimation() {
+        super.startAnimation(); 
+    }
+    
+    stopAnimation() {
+        super.stopAnimation(); 
+    }
+
     doToggleAnimation() {
         super.doToggleAnimation();
     }

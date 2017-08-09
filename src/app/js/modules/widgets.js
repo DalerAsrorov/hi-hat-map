@@ -1,15 +1,16 @@
 import { WIDGETS } from './constants';
 import { toggleModal } from './ui';
 import { emit } from './emitter';
+import { wrodcloudStruct } from './widget-action-structures';
 
 const WidgetModuleMap = {
     wordCloudWidget: {
         name: 'Wordcloud',
         action(ev) {
-            emit('wordcloudIsOpen', { open: true, ev });
+            emit(wrodcloudStruct['action'], { open: true });
             toggleModal(WidgetModuleMap.wordCloudWidget.relation, 'show');
         },
-        relation: 'wordcloudModal',
+        relation: wrodcloudStruct['id'],
         icon: WIDGETS['WORDCLOUD'],
         data: {}
     },

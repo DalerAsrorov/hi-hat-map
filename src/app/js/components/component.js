@@ -73,6 +73,20 @@ export default class Component {
     showInDom() {
         this.html().css('display', 'block');
     }
+	
+    startAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+        const myNode = this.$node;
+        return childElementSelector
+            ? myNode.children(childElementSelector).addClass(animation)
+			: myNode.addClass(doRedBorderAnimation); 
+    }
+
+    stopAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+        const myNode = this.$node;
+        return childElementSelector
+            ? myNode.children(childElementSelector).removeClass(animation)
+            : myNode.removeClass(doRedBorderAnimation); 
+    }
 
     doToggleAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
         const myNode = this.$node;

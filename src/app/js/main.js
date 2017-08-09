@@ -6,6 +6,8 @@ import * as utils from './modules/utils';
 import * as MapOps from './modules/mapops';
 import * as constants from './modules/constants';
 import * as DataProcessing from './modules/dataprocessing';
+import * as Emitter from './modules/emitter';
+import * as WidgetStructs from './modules/widget-action-structures';
 import Widgets from './modules/widgets';
 import DynamicQueue from './classes/dynamic-queue';
 import Storage from './classes/storage';
@@ -26,7 +28,6 @@ import Leaflet from './classes/leaflet';
 import List from './classes/list';
 import R from 'ramda';
 import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
-import * as Emitter from './modules/emitter';
 
 $(window).load(function() {
     // Statuc modules
@@ -69,7 +70,7 @@ $(window).load(function() {
     );
 
     // Wordcloud Components
-    let WordcloudModalComp = new ModalComponent('wordcloudModal', '#wrapper', 'div');
+    let WordcloudModalComp = new ModalComponent(WidgetStructs['wrodcloudStruct']['id'], '#wrapper', 'div');
     WordcloudModalComp.init();
     WordcloudModalComp.buildHeader(MODAL_HEADERS.WORDCLOUD);
 
@@ -145,8 +146,8 @@ $(window).load(function() {
                                 WordcloudD3Comp._words = wordcloudDataStructure;
                                 WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD }); // eslint-disable
 
-                                WidgetChartsCollectionComp.doToggleAnimation();
-                                wordcloudWidget.doToggleAnimation();
+                                WidgetChartsCollectionComp.startAnimation();
+                                wordcloudWidget.startAnimation();
 
                                 // WordcloudD3Comp.convertToCanvas();
 
@@ -553,8 +554,8 @@ $(window).load(function() {
 
     // post request testing
 
-    Emitter.on('wordcloudIsOpen', data => {
-        WidgetChartsCollectionComp.doToggleAnimation();
-        wordcloudWidget.doToggleAnimation();
+    Emitter.on(WidgetStructs['wrodcloudStruct']['action'], data => {
+        WidgetChartsCollectionComp.stopAnimation();
+        wordcloudWidget.stopAnimation();
     });
 });
