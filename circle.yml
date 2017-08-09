@@ -1,5 +1,7 @@
+general:
+  build_dir: src
+
 test:
   override:
-    - cd "src"
     - npm run test
     - if [[ -e test-results.xml ]]; then cp test-results.xml $CIRCLE_TEST_REPORTS/test-results.xml; fi
