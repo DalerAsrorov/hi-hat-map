@@ -19,7 +19,7 @@ module.exports = {
 
                 res(object);
             } else {
-                rej(new Error("Can't add metadata to undefined object."));
+                rej(new Error('Can\'t add metadata to undefined object.'));
             }
         });
     },
@@ -31,7 +31,7 @@ module.exports = {
                 dataWrapper[objectKey] = objectValue;
                 res(dataWrapper);
             } else {
-                rej(new Error("Couldn't create wrapper for the object."));
+                rej(new Error('Couldn\'t create wrapper for the object.'));
             }
         });
     }

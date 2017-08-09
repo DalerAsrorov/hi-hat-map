@@ -36,4 +36,16 @@ describe('Testing utils module in api', () => {
         expect(addMetaDataPromise).to.eventually.have.property('name');
         expect(addMetaDataPromise).to.eventually.have.property('city');
     });
+
+    it('wrapWithObject should return a promise', () => {
+        const key = 'theKey';
+
+        expect(utils.wrapWithObject(key, sampleObject)).to.be.a('promise');
+    });
+
+    it('wrapWithObject promise should resolve withan object with a given key', () => {
+        const key = 'theKey';
+
+        expect(utils.wrapWithObject(key, sampleObject)).to.eventually.include.keys(key);
+    });
 });
