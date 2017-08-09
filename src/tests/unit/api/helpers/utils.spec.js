@@ -8,18 +8,18 @@ chai.use(chaiAsPromised);
 
 let expect = chai.expect;
 
-const sampleObject = {
-    name: 'Daler',
-    city: 'SF'
-};
-
-const sampleParams = {
-    year: '2017'
-};
-
-const addMetaDataPromise = utils.addMetaDataTo(sampleObject, sampleParams);
-
 describe('Testing utils module in api', () => {
+    const sampleObject = {
+        name: 'Daler',
+        city: 'SF'
+    };
+
+    const sampleParams = {
+        year: '2017'
+    };
+
+    const addMetaDataPromise = utils.addMetaDataTo(sampleObject, sampleParams);
+
     it('addMetaDataTo method should return Promise', () => {
         expect(addMetaDataPromise).to.be.a('promise');
     });
