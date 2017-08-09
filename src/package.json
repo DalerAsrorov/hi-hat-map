@@ -20,6 +20,7 @@
         "http": "0.0.0",
         "leaflet": "^1.1.0",
         "mitt": "^1.1.2",
+        "mocha-circleci-reporter": "^0.0.2",
         "ntwitter": "^0.5.0",
         "oauth": "^0.9.15",
         "ramda": "^0.23.0",
