@@ -1,3 +1,5 @@
+[![Build Status](https://circleci.com/gh/DalerAsrorov/hi-hat-map.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/DalerAsrorov/hi-hat-map)
+
 # Hi-Hat-Map
 A map-based application that consists of rich bundle of tools to learn trends and sentimental pattern analytics in multiple social networking platforms.
 
