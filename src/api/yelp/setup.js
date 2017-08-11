@@ -1,6 +1,7 @@
-const send = require('@tonybadguy/call-me-maybe');
+const _send = require('@tonybadguy/call-me-maybe');
 
 const BASE = 'https://api.yelp.com';
+const BASE_V3_URL = `${BASE}/v3`;
 const OAUTH_URL = `${BASE}/oauth2/token`;
 
 const APP_PARAMS = {
@@ -11,7 +12,7 @@ const APP_PARAMS = {
 
 const getAccessToken = () => {
     return new Promise((res, rej) => {
-        send({
+        _send({
             url: OAUTH_URL,
             method: 'post',
             urlencodedBody: APP_PARAMS
@@ -32,5 +33,6 @@ const getAccessToken = () => {
 };
 
 module.exports = {
-    getAccessToken
+    getAccessToken, 
+    BASE_V3_URL
 };
