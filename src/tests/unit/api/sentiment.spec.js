@@ -14,8 +14,6 @@ describe('Testing sentiment module in api', () => {
 
     const processTextPromise = processText(sampleEmotionalText);
 
-    processTextPromise.then(data => console.log(data));
-
     it('processText method returns a promise', () => {
         return expect(processTextPromise).to.be.a('promise');
     });
