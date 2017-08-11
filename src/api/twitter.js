@@ -1,5 +1,4 @@
 let Twit = require('twit');
-let https = require('https');
 let twitterHelper = require('./helpers/twitter-helper');
 
 const twitConfig = {
