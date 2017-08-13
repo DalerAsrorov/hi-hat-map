@@ -9,7 +9,7 @@ chai.use(chaiAsPromised);
 
 let expect = chai.expect;
 
-describe('Testing api', () => {
+describe('Testing Yelp api', () => {
     const TEST_BUSINESS_PARAMS = {
         term: 'shop',
         latitude: 37.773972,
