@@ -49,7 +49,7 @@ describe('Testing Yelp api', () => {
     });
 
     it('searchRartings returns a promise with an object with list of reviewes with length equal to 3', () => {
-        expect(Yelp.searchRatings(businessID)).to.eventually.have
+        return expect(Yelp.searchRatings(businessID)).to.eventually.have
             .property('reviews')
             .that.is.an('array')
             .to.have.lengthOf(3);
