@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 'use strict';
 
 let express = require('express');

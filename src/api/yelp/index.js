@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 const _send = require('@tonybadguy/call-me-maybe');
 const setup = require('./setup');
 const cache = require('memory-cache');
