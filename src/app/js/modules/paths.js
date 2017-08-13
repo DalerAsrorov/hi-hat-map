@@ -27,3 +27,7 @@ export function searchYelpBusiness(id) {
 export function searchYelpBusinessReviews(id) {
     return `${origin}/api/yelp/reviews/${id}`;
 }
+
+export function searchYelpBusinesses() {
+    return `${origin}/api/yelp/businesses`;
+}

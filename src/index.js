@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 'use strict';
 
 let express = require('express');
@@ -61,6 +63,21 @@ app.get('/api/yelp/reviews/:id', (req, res) => {
     Yelp.searchReviews(id).then(data => {
         const requestTime = new Date().getTime();
         const requestDescription = 'Yelp API - ' + id + ' ratings results.';
+
+        res.send({
+            requestTime,
+            requestDescription,
+            data
+        });
+    });
+});
+
+app.post('/api/yelp/businesses', (req, res) => {
+    const { body } = req;
+
+    Yelp.searchBusinesses(body).then(data => {
+        const requestTime = new Date().getTime();
+        const requestDescription = 'Yelp API - businesses search.';
 
         res.send({
             requestTime,

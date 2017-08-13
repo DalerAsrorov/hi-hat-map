@@ -1,4 +1,4 @@
-import { searchYelpBusiness, searchYelpBusinessReviews } from '../modules/paths';
+import { searchYelpBusinesses, searchYelpBusiness, searchYelpBusinessReviews } from '../modules/paths';
 import * as Request from '../modules/request';
 import Mode from './mode';
 
@@ -14,7 +14,12 @@ export default class Yelp extends Mode {
         });
     }
 
-    searchBusinesses() {}
+    searchBusinesses(params) {
+        return Request.postRequest(searchYelpBusinesses(), params).then(response => {
+            const { data } = response;
+            return data;
+        });
+    }
 
     searchReviews(id) {
         return Request.getRequest(searchYelpBusinessReviews(id)).then(response => {

@@ -33,7 +33,7 @@ describe('Testing Yelp api', () => {
         return expect(Yelp.searchBusinesses).to.be.a('function');
     });
 
-    it('searchBusinesses returns a promise resolves with an object with list of businesses', () => {
+    it('searchBusinesses returns a promise that resolves with an object with list of businesses', () => {
         const myKeys = ['region', 'total', 'businesses'];
         const propertyName = 'businesses';
 
