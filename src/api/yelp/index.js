@@ -48,7 +48,7 @@ const Yelp = (function() {
         }).then(response => response.jsonBody);
     }
 
-    function searchRatings(businessID) {
+    function searchReviews(businessID) {
         return _send({
             url: RATINGS_SEARCH(businessID),
             bearerToken: accessTokenCache.get(accessTokenKey)
@@ -59,7 +59,7 @@ const Yelp = (function() {
         init,
         searchBusinesses,
         searchBusiness,
-        searchRatings
+        searchReviews
     };
 })();
 

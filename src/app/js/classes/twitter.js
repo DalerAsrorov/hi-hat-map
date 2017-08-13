@@ -1,5 +1,4 @@
 import Mode from './mode';
-import Sentiment from './sentiment';
 import * as Request from '../modules/request';
 import { stopTwitterStream } from '../modules/paths';
 import R from 'ramda';

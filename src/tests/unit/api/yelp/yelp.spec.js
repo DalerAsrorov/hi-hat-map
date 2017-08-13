@@ -1,7 +1,7 @@
 /*eslint no-undef: "off"*/
 'use strict';
 
-const Yelp = require('../../../../api/yelp/yelp');
+const Yelp = require('../../../../api/yelp');
 const chaiAsPromised = require('chai-as-promised');
 const chai = require('chai');
 
@@ -44,12 +44,12 @@ describe('Testing Yelp api', () => {
             .that.is.an('array').that.is.not.empty;
     });
 
-    it('searchRartings method exists', () => {
-        return expect(Yelp.searchRatings).to.be.a('function');
+    it('searchReviews method exists', () => {
+        return expect(Yelp.searchReviews).to.be.a('function');
     });
 
-    it('searchRartings returns a promise with an object with list of reviewes with length equal to 3', () => {
-        return expect(Yelp.searchRatings(businessID)).to.eventually.have
+    it('searchReviews returns a promise with an object with list of reviewes with length equal to 3', () => {
+        return expect(Yelp.searchReviews(businessID)).to.eventually.have
             .property('reviews')
             .that.is.an('array')
             .to.have.lengthOf(3);
