@@ -3,7 +3,6 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
-let ramda = require('ramda');
 let httpServer = require('http').createServer(app);
 let io = require('socket.io')(httpServer);
 const url = require('url');
@@ -11,6 +10,7 @@ const url = require('url');
 // modules
 const Sentiment = require('./api/sentiment');
 const Twitter = require('./api/twitter');
+const Yelp = require('./api/yelp');
 const utils = require('./api/helpers/utils');
 
 let port = process.env.PORT || 8000;
@@ -27,6 +27,10 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(express.static(__dirname + '/app'));
 // app.use(express.static(__dirname + '/bower_components'));
 
+// init APIs
+Yelp.init();
+
+// use middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,6 +40,34 @@ app.get('/', (req, res) => {
 
 app.get('/api', (req, res) => {
     res.send({ app: 'hi-hat-map' });
+});
+
+app.get('/api/yelp/business/:id', (req, res) => {
+    const { id } = req.params;
+    Yelp.searchBusiness(id).then(data => {
+        const requestTime = new Date().getTime();
+        const requestDescription = 'Yelp API - ' + id + ' business info';
+
+        res.send({
+            requestTime,
+            requestDescription,
+            data
+        });
+    });
+});
+
+app.get('/api/yelp/reviews/:id', (req, res) => {
+    const { id } = req.params;
+    Yelp.searchReviews(id).then(data => {
+        const requestTime = new Date().getTime();
+        const requestDescription = 'Yelp API - ' + id + ' ratings results.';
+
+        res.send({
+            requestTime,
+            requestDescription,
+            data
+        });
+    });
 });
 
 /**

@@ -25,6 +25,7 @@ import Components from './classes/components';
 import PanelComponent from './classes/panelcomponent';
 import WidgetModuleMap from './modules/widgets';
 import Twitter from './classes/twitter';
+import Yelp from './classes/yelp';
 import Sentiment from './classes/sentiment';
 import Leaflet from './classes/leaflet';
 import List from './classes/list';
@@ -35,6 +36,7 @@ $(window).load(function() {
     // Statuc modules
     const storageSystem = new StorageSystem(window.localStorage);
     const twitter = new Twitter('twitter');
+    const YelpAPI = new Yelp('yelp');
     const sentiment = new Sentiment('social_media');
     const leaflet = new Leaflet();
 
@@ -560,4 +562,8 @@ $(window).load(function() {
         WidgetChartsCollectionComp.stopAnimation();
         wordcloudWidget.stopAnimation();
     });
+
+    // const tempYelpBusinessID = 'life-san-francisco';
+    // YelpAPI.searchBusiness(tempYelpBusinessID).then(data => console.log('after then tempYelpBusinessID', data));
+    // YelpAPI.searchReviews(tempYelpBusinessID).then(data => console.log('after then tempYelpBusinessID', data));
 });
