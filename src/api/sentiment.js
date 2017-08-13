@@ -23,9 +23,7 @@ const Sentiment = (function(sentiment) {
                 .use(function() {
                     return function transformer(tree) {
                         // console.log(inspect(tree));
-                        // console.log(tree);
                         if (!tree) rej(new Error('Couldn\'t get the sentiment results.'));
-                        // console.log(utils.logTree(tree));
                         res(tree);
                     };
                 })

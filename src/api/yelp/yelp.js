@@ -9,26 +9,30 @@ const Yelp = (function() {
     const businessSearch = `${BASE_V3_URL}/businesses/search`;
     const tempAccessToken =
         '6eJjO8MyHbd-wGHruAg_qEuY6sOQr1w14TKJ1s2CAkTXJb_famWPnQ_oMqnGDj06U-K77tPQaOohl2YXzU0coHjn8WzIoRbk0cJoHmgu45b-7JPSzvSKigpdsV2NWXYx';
+    const accessTokenKey = 'accessToken';
     let accessTokenCache = new cache.Cache();
     let businessesCache = new cache.Cache();
 
     function init() {
-        if (!accessTokenCache.get('accessToken')) {
-            console.log('Cache is empty');
-            // getAccessToken().then(tokenStruct => {
-            //     const { access_token } = tokenStruct;
-            //     this.accessToken = access_token;
-            // });
-            accessTokenCache.put('accessToken', tempAccessToken);
-        }
-        this.accessToken = accessTokenCache.get('accessToken');
+        return new Promise((resolve, reject) => {
+            if (!accessTokenCache.get('accessToken')) {
+                getAccessToken()
+                    .then(tokenStruct => {
+                        // TODO: Uncoment code below for production
+                        // const { access_token } = tokenStruct;
+                        accessTokenCache.put(accessTokenKey, businessesCache);
+                        resolve();
+                    })
+                    .catch(err => reject(err));
+            }
+        });
     }
 
     function searchBusiness(params) {
         return _send({
             url: businessSearch,
             query: params,
-            bearerToken: this.accessToken
+            bearerToken: accessTokenCache.get(accessTokenKey)
         }).then(response => response.jsonBody);
     }
 
@@ -43,13 +47,5 @@ const TEST_PARAMS = {
     latitude: 37.773972,
     longitude: -122.431297
 };
-
-// Yelp.init();
-// setTimeout(() => {
-//     Yelp.searchBusiness(TEST_PARAMS).then(data => {
-//         console.log('The data, ');
-//         console.log(data);
-//     });
-// }, 1000);
 
 module.exports = Yelp;
