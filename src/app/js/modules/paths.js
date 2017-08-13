@@ -19,3 +19,11 @@ export function getSentimentTextAnalysis() {
 export function stopTwitterStream() {
     return `${origin}/api/twitter/stream/stop`;
 }
+
+export function searchYelpBusiness(id) {
+    return `${origin}/api/yelp/business/${id}`;
+}
+
+export function searchYelpBusinessReviews(id) {
+    return `${origin}/api/yelp/reviews/${id}`;
+}
