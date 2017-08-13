@@ -16,15 +16,16 @@ const Yelp = (function() {
     function init() {
         return new Promise((resolve, reject) => {
             if (!accessTokenCache.get('accessToken')) {
-                getAccessToken()
-                    .then(tokenStruct => {
-                        // TODO: Uncoment code below for production
-                        // const { access_token } = tokenStruct;
-                        accessTokenCache.put(accessTokenKey, businessesCache);
-                        resolve();
-                    })
-                    .catch(err => reject(err));
+                // getAccessToken()
+                //     .then(tokenStruct => {
+                //         const { access_token } = tokenStruct;
+                //         accessTokenCache.put(accessTokenKey, access_token);
+                //         resolve();
+                //     })
+                //     .catch(err => reject(err));
+                accessTokenCache.put(accessTokenKey, tempAccessToken);
             }
+            resolve();
         });
     }
 
