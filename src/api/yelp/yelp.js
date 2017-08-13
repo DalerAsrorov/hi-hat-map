@@ -14,7 +14,8 @@ const Yelp = (function() {
 
     const BUSINESS_BASE = `${BASE_V3_URL}/businesses`;
     const BUSINESS_SEARCH = () => `${BUSINESS_BASE}/search`;
-    const RATINGS_SEARCH = businessID => `${BUSINESS_BASE}/${businessID}/reviews`;
+    const BUSINESS_SINGLE_SEARCH = id => `${BUSINESS_BASE}/${id}`;
+    const RATINGS_SEARCH = id => `${BUSINESS_BASE}/${id}/reviews`;
 
     function init() {
         return new Promise((resolve, reject) => {
@@ -32,10 +33,17 @@ const Yelp = (function() {
         });
     }
 
-    function searchBusiness(params) {
+    function searchBusinesses(params) {
         return _send({
             url: BUSINESS_SEARCH(),
             query: params,
+            bearerToken: accessTokenCache.get(accessTokenKey)
+        }).then(response => response.jsonBody);
+    }
+
+    function searchBusiness(businessID) {
+        return _send({
+            url: BUSINESS_SINGLE_SEARCH(businessID),
             bearerToken: accessTokenCache.get(accessTokenKey)
         }).then(response => response.jsonBody);
     }
@@ -49,9 +57,17 @@ const Yelp = (function() {
 
     return {
         init,
+        searchBusinesses,
         searchBusiness,
         searchRatings
     };
 })();
+
+// Yelp.init();
+// const businessID = 'life-san-francisco';
+
+// setTimeout(() => {
+//     Yelp.searchBusiness(businessID).then(data => console.log(data.id));
+// }, 100);
 
 module.exports = Yelp;
