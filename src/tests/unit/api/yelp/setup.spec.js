@@ -16,7 +16,7 @@ describe('Testing setup in yelp api', () => {
         return expect(getAccessToken()).to.eventually.be.fulfilled;
     });
 
-    it('getAccessToken returns an object with an access token, berar, and days', () => {
+    it('getAccessToken returns an object with an access token, token type, and expiration in days', () => {
         const keys = ['access_token', 'token_type', 'expires_in'];
         return expect(getAccessToken()).to.eventually.have.all.keys(keys);
     });
