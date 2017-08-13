@@ -565,5 +565,10 @@ $(window).load(function() {
 
     // const tempYelpBusinessID = 'life-san-francisco';
     // YelpAPI.searchBusiness(tempYelpBusinessID).then(data => console.log('after then tempYelpBusinessID', data));
-    // YelpAPI.searchReviews(tempYelpBusinessID).then(data => console.log('after then tempYelpBusinessID', data));
+
+    // YelpAPI.searchBusinesses({
+    //     term: 'shop',
+    //     latitude: 37.773972,
+    //     longitude: -122.431297
+    // }).then(data => console.log('after then tempYelpBusinessID', data));
 });

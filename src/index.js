@@ -70,6 +70,21 @@ app.get('/api/yelp/reviews/:id', (req, res) => {
     });
 });
 
+app.post('/api/yelp/businesses', (req, res) => {
+    const { body } = req;
+
+    Yelp.searchBusinesses(body).then(data => {
+        const requestTime = new Date().getTime();
+        const requestDescription = 'Yelp API - businesses search.';
+
+        res.send({
+            requestTime,
+            requestDescription,
+            data
+        });
+    });
+});
+
 /**
 * woed - yahoo location IDs
 * 1 = Worldwide trends
