@@ -46,7 +46,7 @@ app.get('/api/yelp/business/:id', (req, res) => {
     const { id } = req.params;
     Yelp.searchBusiness(id).then(data => {
         const requestTime = new Date().getTime();
-        const requestDescription = 'Yelp API - business info';
+        const requestDescription = 'Yelp API - ' + id + ' business info';
 
         res.send({
             requestTime,
@@ -60,7 +60,7 @@ app.get('/api/yelp/reviews/:id', (req, res) => {
     const { id } = req.params;
     Yelp.searchReviews(id).then(data => {
         const requestTime = new Date().getTime();
-        const requestDescription = 'Yelp API - business info';
+        const requestDescription = 'Yelp API - ' + id + ' ratings results.';
 
         res.send({
             requestTime,

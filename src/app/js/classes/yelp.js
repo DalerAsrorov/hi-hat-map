@@ -1,14 +1,25 @@
-import Mode from './mode';
+import { searchYelpBusiness, searchYelpBusinessReviews } from '../modules/paths';
 import * as Request from '../modules/request';
+import Mode from './mode';
 
-class Yelp extends Mode {
-    constructor(id) {
-        this.id = id;
+export default class Yelp extends Mode {
+    constructor(name) {
+        super(name);
     }
 
-    searchBusiness() {}
+    searchBusiness(id) {
+        return Request.getRequest(searchYelpBusiness(id)).then(response => {
+            const { data } = response;
+            return data;
+        });
+    }
 
     searchBusinesses() {}
 
-    searchReviews() {}
+    searchReviews(id) {
+        return Request.getRequest(searchYelpBusinessReviews(id)).then(response => {
+            const { data } = response;
+            return data;
+        });
+    }
 }
