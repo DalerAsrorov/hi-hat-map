@@ -1,1 +1,1 @@
-web: sh -c 'cd ./src && node index'
+web: cd ./src && node index
