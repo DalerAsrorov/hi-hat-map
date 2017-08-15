@@ -10,7 +10,8 @@
         "rollup": "./node_modules/.bin/rollup",
         "server": "node index.js",
         "test": "mocha ./tests/**/*.js",
-        "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=4 --semi=true '{api,__{js,tests}__}/**/*.js'"
+        "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=4 --semi=true '{api,__{js,tests}__}/**/*.js'",
+        "postinstall": "cd src && npm install"
     },
     "author": "Daler Asrorov",
     "license": "MIT",
