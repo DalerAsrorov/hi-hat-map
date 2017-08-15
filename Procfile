@@ -1,1 +1,1 @@
-web: sh -c 'cd ./src && npm run server'
+web: sh -c 'cd ./src && node index'
