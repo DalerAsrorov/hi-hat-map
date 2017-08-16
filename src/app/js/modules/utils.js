@@ -4,6 +4,22 @@ export function getType(object) {
     return Object.prototype.toString.call(object);
 }
 
+export function getMyCoordinates() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            return navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                const latLng = L.latLng(latitude, longitude);
+                resolve(latLng);
+            });
+        } else {
+            reject(
+                new Error('Navigator API is not supported by this browser.')
+            );
+        }
+    });
+}
+
 export function titleCase(str) {
     const escapeReg = s => s.replace(/./g, c => `\\${c}`);
     let wordPattern = new RegExp(`[^${escapeReg(' _-¡¿/')}]+`, 'g');
@@ -98,7 +114,9 @@ export function colorGenerator(score) {
 // "xx:xx:xx" format
 export function formatDateToHoursOnly(x) {
     const xLocaleString = x.toLocaleString();
-    const xFinal = xLocaleString.substring(xLocaleString.indexOf(',') + 1, xLocaleString.length).trim();
+    const xFinal = xLocaleString
+        .substring(xLocaleString.indexOf(',') + 1, xLocaleString.length)
+        .trim();
 
     return xFinal;
 }

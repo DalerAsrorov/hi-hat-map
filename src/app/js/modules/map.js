@@ -1,4 +1,5 @@
 /*eslint no-undef: "off"*/
+import { getMyCoordinates } from './utils';
 
 let mapLayer = MQ.mapLayer();
 let LMap;
@@ -24,15 +25,7 @@ L.control
     .addTo(LMap);
 
 export function navigateToUserLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const { latitude, longitude } = position.coords;
-            const latLng = L.latLng(latitude, longitude);
-            LMap.flyTo(latLng);
-        });
-    } else {
-        return new Error('Navigator API is not supported by this browser.');
-    }
+    getMyCoordinates().then(latLng => LMap.flyTo(latLng));
 }
 
 export default LMap;
