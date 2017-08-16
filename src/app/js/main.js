@@ -1,6 +1,7 @@
 /*eslint no-undef: "off"*/
 
-import LMap from './modules/map';
+import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
+import LMap, { navigateToUserLocation } from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';
 import * as Paths from './modules/paths';
@@ -30,7 +31,6 @@ import Sentiment from './classes/sentiment';
 import Leaflet from './classes/leaflet';
 import List from './classes/list';
 import R from 'ramda';
-import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
 
 $(window).load(function() {
     // Statuc modules
@@ -47,7 +47,11 @@ $(window).load(function() {
 
     // Constants
     const { WIDGET_PARAMS, MAP_PARAMS } = constants;
-    const { TWITTER_MODES, TWITTER_MODES_INDEX, MODAL_HEADERS } = constants.MAIN;
+    const {
+        TWITTER_MODES,
+        TWITTER_MODES_INDEX,
+        MODAL_HEADERS
+    } = constants.MAIN;
 
     // connecting to socket
     let socket = io.connect('http://localhost:8000/');
@@ -63,7 +67,13 @@ $(window).load(function() {
     let WidgetMap = new Map();
 
     // Loader Components
-    const MapLoaderComp = new MapLoaderComponent('mapLoader', '#mapWrapper', 'div', '');
+    const MapLoaderComp = new MapLoaderComponent(
+        'mapLoader',
+        '#mapWrapper',
+        'div',
+        ''
+    );
+
     MapLoaderComp.init();
 
     // Widget Components
@@ -74,12 +84,26 @@ $(window).load(function() {
     );
 
     // Wordcloud Components
-    let WordcloudModalComp = new ModalComponent(WidgetStructs['wrodcloudStruct']['id'], '#wrapper', 'div');
+    let WordcloudModalComp = new ModalComponent(
+        WidgetStructs['wrodcloudStruct']['id'],
+        '#wrapper',
+        'div'
+    );
     WordcloudModalComp.init();
     WordcloudModalComp.buildHeader(MODAL_HEADERS.WORDCLOUD);
 
-    let WordCloudD3Container = new Component('wordcloudD3Wrapper', `#${WordcloudModalComp.id}`, 'div', '');
-    let WordcloudD3Comp = new WordcloudD3Component('wordcloudD3Comp', '', 'div', '');
+    let WordCloudD3Container = new Component(
+        'wordcloudD3Wrapper',
+        `#${WordcloudModalComp.id}`,
+        'div',
+        ''
+    );
+    let WordcloudD3Comp = new WordcloudD3Component(
+        'wordcloudD3Comp',
+        '',
+        'div',
+        ''
+    );
     WordCloudD3Container.appendChild(WordcloudD3Comp);
     WordcloudModalComp.buildBody(WordCloudD3Container.html());
 
@@ -117,7 +141,12 @@ $(window).load(function() {
         states: [
             {
                 stateName: 'stream-is-on',
-                icon: ui.generateWebIcon('fa-stop-circle-o', 'f1-1x', 'sent-neg-2', 'text'),
+                icon: ui.generateWebIcon(
+                    'fa-stop-circle-o',
+                    'f1-1x',
+                    'sent-neg-2',
+                    'text'
+                ),
                 title: 'Stop stream',
                 onClick: function(control) {
                     const button = control.button;
@@ -128,27 +157,42 @@ $(window).load(function() {
                             L.Util.requestAnimFrame(function() {
                                 LMap.removeControl(self);
 
-                                utils.performActionOnDQueue(wordcloudQueue, wordPolarityDict => {
-                                    Object.entries(wordPolarityDict).forEach(([word, props]) => {
-                                        const { score, freq } = props;
+                                utils.performActionOnDQueue(
+                                    wordcloudQueue,
+                                    wordPolarityDict => {
+                                        Object.entries(
+                                            wordPolarityDict
+                                        ).forEach(([word, props]) => {
+                                            const { score, freq } = props;
 
-                                        if (!WordPolarityHashMap.get(word)) {
-                                            WordPolarityHashMap.set(word, { score, freq });
-                                        } else {
-                                            WordPolarityHashMap.set(word, {
-                                                freq: WordPolarityHashMap.get(word).freq + freq,
-                                                score
-                                            });
-                                        }
-                                    });
-                                });
+                                            if (
+                                                !WordPolarityHashMap.get(word)
+                                            ) {
+                                                WordPolarityHashMap.set(word, {
+                                                    score,
+                                                    freq
+                                                });
+                                            } else {
+                                                WordPolarityHashMap.set(word, {
+                                                    freq:
+                                                        WordPolarityHashMap.get(
+                                                            word
+                                                        ).freq + freq,
+                                                    score
+                                                });
+                                            }
+                                        });
+                                    }
+                                );
 
                                 const wordcloudDataStructure = utils.convertMapToWordcloudDataStructure(
                                     WordPolarityHashMap
                                 );
 
                                 WordcloudD3Comp._words = wordcloudDataStructure;
-                                WordcloudD3Comp.draw({ ...WIDGET_PARAMS.WORDCLOUD }); // eslint-disable
+                                WordcloudD3Comp.draw({
+                                    ...WIDGET_PARAMS.WORDCLOUD
+                                }); // eslint-disable
 
                                 WidgetChartsCollectionComp.startAnimation();
                                 wordcloudWidget.startAnimation();
@@ -168,7 +212,12 @@ $(window).load(function() {
         '#sentimentChart',
         {
             x: 'x',
-            columns: [['x', new Date()], ['negative', 0], ['positive', 0], ['total', 0]]
+            columns: [
+                ['x', new Date()],
+                ['negative', 0],
+                ['positive', 0],
+                ['total', 0]
+            ]
         },
         {
             x: {
@@ -181,11 +230,9 @@ $(window).load(function() {
         }
     );
 
-    /* The loader component renders first
-        before the control panel's components
-        show up on the page
-    */
+    // First actions
     {
+        // Initiate UI loader
         if (!storageSystem.getItem('firstVisit')) {
             ui.fadeOut('#initLoader', 3000, () => {
                 ui.removeElement('#initLoader');
@@ -197,6 +244,9 @@ $(window).load(function() {
                 ui.makeVisible('#mainWrapper', 500);
             });
         }
+
+        // Navigate to user's location in map.
+        navigateToUserLocation();
     }
 
     storageSystem.setItem('firstVisit', true);
@@ -206,7 +256,9 @@ $(window).load(function() {
         ui.slideToggleCp('controlPanelWrapper', LMap);
     }
 
-    ui.addEventListenerTo('toggleSliderBtn', 'click', event => ui.slideToggleCp('controlPanelWrapper', LMap));
+    ui.addEventListenerTo('toggleSliderBtn', 'click', event =>
+        ui.slideToggleCp('controlPanelWrapper', LMap)
+    );
 
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
@@ -226,7 +278,9 @@ $(window).load(function() {
     socket.on('tweet', tweet => {
         MapLoaderComp.hide();
 
-        let coordinates = tweet.place ? tweet.place.bounding_box.coordinates[0][1] : null;
+        let coordinates = tweet.place
+            ? tweet.place.bounding_box.coordinates[0][1]
+            : null;
 
         if (!streamStateButtonIsOn) {
             StopButtonL.addTo(LMap);
@@ -251,7 +305,10 @@ $(window).load(function() {
 
                 const { sentiment } = data;
 
-                let selectedChartData = DataProcessing.createSentimentDataForChart(data, 'multiple');
+                let selectedChartData = DataProcessing.createSentimentDataForChart(
+                    data,
+                    'multiple'
+                );
 
                 sentimentQueue.enqueue(selectedChartData);
 
@@ -263,7 +320,11 @@ $(window).load(function() {
                             getParameter(sentiment, 'negativeWords', 'text')
                         ),
                         R.concat(
-                            getParameter(sentiment, 'positiveWords', 'polarity'),
+                            getParameter(
+                                sentiment,
+                                'positiveWords',
+                                'polarity'
+                            ),
                             getParameter(sentiment, 'negativeWords', 'polarity')
                         )
                     ];
@@ -277,10 +338,18 @@ $(window).load(function() {
                 }
 
                 // if(sentimentQueue.size() === 5) {
-                let posList = sentimentQueue.queue.map(sentimentObject => sentimentObject.positive),
-                    negList = sentimentQueue.queue.map(sentimentObject => sentimentObject.negative),
-                    totalList = sentimentQueue.queue.map(sentimentObject => sentimentObject.total),
-                    dateList = sentimentQueue.queue.map(sentimentObject => sentimentObject.date);
+                let posList = sentimentQueue.queue.map(
+                        sentimentObject => sentimentObject.positive
+                    ),
+                    negList = sentimentQueue.queue.map(
+                        sentimentObject => sentimentObject.negative
+                    ),
+                    totalList = sentimentQueue.queue.map(
+                        sentimentObject => sentimentObject.total
+                    ),
+                    dateList = sentimentQueue.queue.map(
+                        sentimentObject => sentimentObject.date
+                    );
 
                 // place x before all dates
                 posList.unshift('positive');
@@ -335,7 +404,11 @@ $(window).load(function() {
 
         const query = ui.getInputValue('#querySearch');
         const { lat, lng } = LMap.getCenter();
-        const twitData = { q: query, geocode: [lat, lng], radius: MAP_PARAMS.TWITTER.RADIUS };
+        const twitData = {
+            q: query,
+            geocode: [lat, lng],
+            radius: MAP_PARAMS.TWITTER.RADIUS
+        };
 
         let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
 
@@ -343,7 +416,12 @@ $(window).load(function() {
             console.log('Not selected. twitData:', twitData);
             // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
 
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode(
+                'real_time',
+                query,
+                lastLocation,
+                twitData
+            );
         } else {
             console.log('Exists', lastLocation);
 
@@ -364,7 +442,12 @@ $(window).load(function() {
                 - Get location and query and start connecting to the socket
 
              */
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
+            getInfoBasedOnChosenMode(
+                'real_time',
+                query,
+                lastLocation,
+                twitData
+            );
         }
 
         // last location is savedd
@@ -384,12 +467,20 @@ $(window).load(function() {
 
     Object.entries(WidgetModuleMap).forEach(([widgetID, widget]) => {
         WidgetChartsCollectionComp.addWidgetComponent(
-            new WidgetComponent(widgetID, widget.name, WIDGET_PARAMS.ICON_SIZE, widget.action, widget.icon)
+            new WidgetComponent(
+                widgetID,
+                widget.name,
+                WIDGET_PARAMS.ICON_SIZE,
+                widget.action,
+                widget.icon
+            )
         );
     });
 
     WidgetChartsCollectionComp.init();
-    const wordcloudWidget = WidgetChartsCollectionComp.getWidget('wordCloudWidget');
+    const wordcloudWidget = WidgetChartsCollectionComp.getWidget(
+        'wordCloudWidget'
+    );
     console.log('The widget 2', wordcloudWidget);
 
     // Testing area
@@ -412,13 +503,22 @@ $(window).load(function() {
                         onShowListEvent: function() {
                             switch (storageSystem.getItem('cpOpen')) {
                                 case 'false':
-                                    ui.addClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    ui.addClass(
+                                        '.easy-autocomplete-container',
+                                        'autocomplete-top'
+                                    );
                                     break;
                                 case 'true':
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    ui.removeClass(
+                                        '.easy-autocomplete-container',
+                                        'autocomplete-top'
+                                    );
                                     break;
                                 default:
-                                    ui.removeClass('.easy-autocomplete-container', 'autocomplete-top');
+                                    ui.removeClass(
+                                        '.easy-autocomplete-container',
+                                        'autocomplete-top'
+                                    );
                             }
                         },
                         onKeyEnterEvent: function() {}
@@ -473,7 +573,9 @@ $(window).load(function() {
         });
 
     const arrayOfIndexes = TWITTER_MODES.map((item, index) => index);
-    const arrayOfLabels = TWITTER_MODES.map(mode => utils.titleCase(mode.split('_').join(' ')));
+    const arrayOfLabels = TWITTER_MODES.map(mode =>
+        utils.titleCase(mode.split('_').join(' '))
+    );
     ui.appendRangeSlider('#panelCompMiddle', 'range-selector', 'twitterModes', {
         ticks: arrayOfIndexes,
         ticksLabels: arrayOfLabels,
@@ -509,18 +611,22 @@ $(window).load(function() {
                             .getData(Paths.getTwitData(), twitData)
                             .then(data => {
                                 const { statuses, search_metadata } = data;
-                                const filteredTweets = twitter.processData(statuses, search_metadata);
+                                const filteredTweets = twitter.processData(
+                                    statuses,
+                                    search_metadata
+                                );
 
                                 filteredTweets.forEach(function(data) {
                                     sentiment
                                         .processText({ text: data.text })
                                         .then(function(sentiment) {
-                                            return new Promise((resolve, reject) =>
-                                                resolve({
-                                                    type: 'twitter',
-                                                    sentiment,
-                                                    data
-                                                })
+                                            return new Promise(
+                                                (resolve, reject) =>
+                                                    resolve({
+                                                        type: 'twitter',
+                                                        sentiment,
+                                                        data
+                                                    })
                                             );
                                         })
                                         .then(function(renderObject) {
@@ -541,7 +647,12 @@ $(window).load(function() {
         }
     });
 
-    let contextMenu = ui.addContextMenuTo('#mapWrapper', '#mapContextMenu', 'mapContextMenuList', 'contextmenu');
+    let contextMenu = ui.addContextMenuTo(
+        '#mapWrapper',
+        '#mapContextMenu',
+        'mapContextMenuList',
+        'contextmenu'
+    );
     contextMenu.hide();
     contextMenu.bind();
     contextMenu.appendMenuItem('One', () => console.log('One'), 'click');
