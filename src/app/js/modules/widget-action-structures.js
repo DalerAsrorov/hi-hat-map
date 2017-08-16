@@ -1,5 +1,4 @@
-
 export const wrodcloudStruct = {
-    id: 'wordcloudModal', 
+    id: 'wordcloudModal',
     action: 'wordcloudIsOpen'
-}
+};

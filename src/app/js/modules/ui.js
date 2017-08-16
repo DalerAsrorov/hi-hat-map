@@ -1,4 +1,4 @@
-/*----------  Utils Module functions  ----------*/
+/*eslint no-undef: "off"*/
 
 import { getType } from './utils';
 import StorageSystem from '../classes/storagesystem';
@@ -12,7 +12,12 @@ export function buildTemplate(templateString) {
 
 export function getLoader(size = 'fa-3x', type = 'html') {
     const text = `<figure class='app-spinner'>
-                    ${generateWebIcon('fa-cog', size, 'fa-spin fa-fw m-loader', 'text')}
+                    ${generateWebIcon(
+                        'fa-cog',
+                        size,
+                        'fa-spin fa-fw m-loader',
+                        'text'
+                    )}
                     <span class="sr-only">Loading...</span>
                   </figure>`;
 
@@ -23,7 +28,12 @@ export function getLoader(size = 'fa-3x', type = 'html') {
     return buildTemplate(text);
 }
 
-export function generateWebIcon(icon, size = 'fa-2x', classes = '', type = 'html') {
+export function generateWebIcon(
+    icon,
+    size = 'fa-2x',
+    classes = '',
+    type = 'html'
+) {
     const template = `<i class="fa ${icon} ${size} ${classes}" aria-hidden="true"></i>`;
 
     if (type === 'text') {
@@ -33,9 +43,18 @@ export function generateWebIcon(icon, size = 'fa-2x', classes = '', type = 'html
     return buildTemplate(template);
 }
 
-export function slideToggleCp(targetID, map, heightSetterID = 'arrowPointerWrapper', cpDefaultHeight = '35%', ...rest) {
-    const cpNavHeight = document.getElementById(heightSetterID).offsetHeight.toString();
-    const cpWrapperHeight = document.getElementById(targetID).offsetHeight.toString();
+export function slideToggleCp(
+    targetID,
+    map,
+    heightSetterID = 'arrowPointerWrapper',
+    cpDefaultHeight = '35%'
+) {
+    const cpNavHeight = document
+        .getElementById(heightSetterID)
+        .offsetHeight.toString();
+    const cpWrapperHeight = document
+        .getElementById(targetID)
+        .offsetHeight.toString();
     const slidingTime = 270;
     const $querySearchForm = $('#querySearchForm');
     const $target = $(`#${targetID}`);
@@ -89,7 +108,13 @@ export function generateCpRightPanel(target, data) {
     let $target = $(target);
 
     for (let i = 0; i < 10; i++) {
-        $target.append('<div class="col-lg-4">' + '<div class="menu">' + 'Something' + '</div>' + '</div>');
+        $target.append(
+            '<div class="col-lg-4">' +
+                '<div class="menu">' +
+                'Something' +
+                '</div>' +
+                '</div>'
+        );
     }
 }
 
@@ -122,11 +147,15 @@ export function addElementTo(target, element = $('<div></div>')) {
     return $(`${target}`).append(element);
 }
 
-export function addContainerToContainer(panel, id = '', container = $(`<div id=${id}></div>`), classes = '') {
-    let addId = container.attr('id') ? container.attr('id') : container.attr('id', `#${id}`);
+export function addContainerToContainer(
+    panel,
+    id = '',
+    container = $(`<div id=${id}></div>`),
+    classes = ''
+) {
     addClass(container, classes);
     $(panel).append(container);
-    console.log('container', container);
+
     return container;
 }
 
@@ -164,7 +193,10 @@ export function convertFromJQueryToDOMElement(jqElement) {
 export function addEventListenerTo(target, event, fn) {
     const targetType = getType(target);
 
-    if (targetType === '[object Window]' || targetType === '[object HTMLDocument]') {
+    if (
+        targetType === '[object Window]' ||
+        targetType === '[object HTMLDocument]'
+    ) {
         target.addEventListener(event, fn);
     } else {
         document.getElementById(target).addEventListener(event, fn);
@@ -175,7 +207,7 @@ export function removeElement(target) {
     $(target).remove();
 }
 
-export function style(target, styleObject, ...rest) {
+export function style(target, styleObject) {
     return $(target).css(styleObject);
 }
 
@@ -188,14 +220,22 @@ export function fadeOut(target, timer = 500, callback = () => {}) {
 }
 
 export function makeVisible(target, timer) {
-    $(target).css({ opacity: 0.0, visibility: 'visible' }).animate({ opacity: 1 }, timer);
+    $(target)
+        .css({ opacity: 0.0, visibility: 'visible' })
+        .animate({ opacity: 1 }, timer);
 }
 
 export function appendDropUpTo() {}
 
-export function appendDropDownTo(target, dropdownName, dropdownID, actionsList) {
-    // console.log("HERE", dropdownName, " HERE ", dropdownID, " HERE ", actionsList);
-    let $targetRef = $(target).append(`<div class="dropdown" id=${dropdownID}></div>`);
+export function appendDropDownTo(
+    target,
+    dropdownName,
+    dropdownID,
+    actionsList
+) {
+    let $targetRef = $(target).append(
+        `<div class="dropdown" id=${dropdownID}></div>`
+    );
     let $dropdown = $(target).find(`#${dropdownID}`);
     $dropdown.append(
         '<button class=\'btn btn-secondary dropdown-toggle\' type=\'button\' data-toggle="dropdown">' +
@@ -269,8 +309,12 @@ export function appendTo(container, element) {
 }
 
 export function appendDropDownToPanel(target, componentsClass) {
-    console.log('componentsClass.list:', componentsClass.list);
-    appendDropDownTo(target, componentsClass.name, componentsClass.id, componentsClass.list);
+    appendDropDownTo(
+        target,
+        componentsClass.name,
+        componentsClass.id,
+        componentsClass.list
+    );
 }
 
 export function onSubmit(target, callback) {
@@ -299,7 +343,6 @@ export function addContextMenuTo(target, contextMenuId, listId, eventType) {
         contextMenu.fadeIn(200);
     });
 
-    console.log('contextMenu:', contextMenu);
     return contextMenu;
 }
 

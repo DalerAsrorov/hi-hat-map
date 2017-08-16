@@ -1,14 +1,24 @@
+/*eslint no-undef: "off"*/
+
 import Component from './component';
 
 const MODAL_BASE_CLASS = 'modal fade';
 const MODAL_HEADER_HTML = '<div class="modal-header"></div>';
 const MODAL_CONTENT_HTML = '<div class="modal-content"></div>';
 const MODAL_FOOTER_HTML = '<div class="modal-footer"></div>';
-const MODAL_CLOSE_BUTTON_HTML = '<button class="btn btn-secondary" data-dismiss="modal"></button>';
+const MODAL_CLOSE_BUTTON_HTML =
+    '<button class="btn btn-secondary" data-dismiss="modal"></button>';
 const MODAL_CLOSE_ICON = '&times;';
 
 export default class ModalComponent extends Component {
-    constructor(id, parent, nodeType, content, size = 'modal-lg modal-cp-lg', modelContent = null) {
+    constructor(
+        id,
+        parent,
+        nodeType,
+        content,
+        size = 'modal-lg modal-cp-lg',
+        modelContent = null
+    ) {
         super(id, parent, nodeType, content);
         this.size = size;
         this.$modalContent = modelContent ? modelContent : MODAL_CONTENT_HTML;
@@ -70,7 +80,9 @@ export default class ModalComponent extends Component {
 
     _buildTemplate() {
         this.html().addClass(MODAL_BASE_CLASS);
-        let $modalDialog = $(`<div class="modal-dialog ${this.size}" role="document"></div>`);
+        let $modalDialog = $(
+            `<div class="modal-dialog ${this.size}" role="document"></div>`
+        );
 
         this.$modalContent = $(this.$modalContent);
         $modalDialog.prepend(this.$modalContent);

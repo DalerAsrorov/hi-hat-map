@@ -1,4 +1,5 @@
-/* Base component class. */
+/*eslint no-undef: "off"*/
+
 import { append, getOuterHTMLText } from '../modules/ui';
 import { doRedBorderAnimation } from '../modules/action-class-names';
 
@@ -73,22 +74,31 @@ export default class Component {
     showInDom() {
         this.html().css('display', 'block');
     }
-	
-    startAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+
+    startAnimation(
+        childElementSelector = null,
+        animation = doRedBorderAnimation
+    ) {
         const myNode = this.$node;
         return childElementSelector
             ? myNode.children(childElementSelector).addClass(animation)
-			: myNode.addClass(doRedBorderAnimation); 
+            : myNode.addClass(doRedBorderAnimation);
     }
 
-    stopAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+    stopAnimation(
+        childElementSelector = null,
+        animation = doRedBorderAnimation
+    ) {
         const myNode = this.$node;
         return childElementSelector
             ? myNode.children(childElementSelector).removeClass(animation)
-            : myNode.removeClass(doRedBorderAnimation); 
+            : myNode.removeClass(doRedBorderAnimation);
     }
 
-    doToggleAnimation(childElementSelector = null, animation = doRedBorderAnimation) {
+    doToggleAnimation(
+        childElementSelector = null,
+        animation = doRedBorderAnimation
+    ) {
         const myNode = this.$node;
         return childElementSelector
             ? myNode.children(childElementSelector).toggleClass(animation)

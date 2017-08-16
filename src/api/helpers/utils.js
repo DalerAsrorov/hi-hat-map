@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 module.exports = {
     logTree: tree => {
         return JSON.stringify(tree, null, 4);

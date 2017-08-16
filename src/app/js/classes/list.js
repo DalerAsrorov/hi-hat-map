@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import { getType } from '../modules/utils';
 
 export default class List {
@@ -5,7 +7,9 @@ export default class List {
         this.id = id;
         this.dataName = dataName;
 
-        this.$self = $(`<div id=${id} class='list-group' data-name=${dataName}></div>`);
+        this.$self = $(
+            `<div id=${id} class='list-group' data-name=${dataName}></div>`
+        );
     }
 
     get id() {

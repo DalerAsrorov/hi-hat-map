@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 // Below are the functions that handle actual exporting:
 // getSVGString ( svgNode ) and svgString2Image( svgString, width, height, format, callback )
 export function getSVGString(svgNode) {
@@ -26,11 +28,13 @@ export function getSVGString(svgNode) {
         let nodes = parentElement.getElementsByTagName('*');
         for (let i = 0; i < nodes.length; i++) {
             let id = nodes[i].id;
-            if (!contains('#' + id, selectorTextArr)) selectorTextArr.push('#' + id);
+            if (!contains('#' + id, selectorTextArr))
+                selectorTextArr.push('#' + id);
 
             let classes = nodes[i].classList;
             for (let c = 0; c < classes.length; c++)
-                if (!contains('.' + classes[c], selectorTextArr)) selectorTextArr.push('.' + classes[c]);
+                if (!contains('.' + classes[c], selectorTextArr))
+                    selectorTextArr.push('.' + classes[c]);
         }
 
         // Extract CSS Rules
@@ -47,7 +51,8 @@ export function getSVGString(svgNode) {
 
             let cssRules = s.cssRules;
             for (let r = 0; r < cssRules.length; r++) {
-                if (contains(cssRules[r].selectorText, selectorTextArr)) extractedCSSText += cssRules[r].cssText;
+                if (contains(cssRules[r].selectorText, selectorTextArr))
+                    extractedCSSText += cssRules[r].cssText;
             }
         }
 
@@ -71,7 +76,9 @@ export function getSVGString(svgNode) {
 export function svgString2Image(svgString, width, height, format, callback) {
     format = format ? format : 'png';
 
-    const imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString))); // Convert SVG string to data URL
+    const imgsrc =
+        'data:image/svg+xml;base64,' +
+        btoa(unescape(encodeURIComponent(svgString))); // Convert SVG string to data URL
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 

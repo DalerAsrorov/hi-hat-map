@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import LMap from './map.js';
 import { IMAGES } from './constants.js';
 import * as MapElements from './mapelements.js';
@@ -5,18 +7,8 @@ import Leaflet from '../classes/leaflet.js';
 import { curry, map, pipe } from 'ramda';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
 
-// export function generateResults(data) {
-//     console.log('Data', data);
-// }
-
-// export function animateTransition(data) {
-//     console.log("")
-// }
-
 export const generateResults = curry(data => {
-    pipe(
-        map(drawObject) // render points with animations
-    )(data);
+    pipe(map(drawObject))(data);
 });
 
 export const renderObject = function(renderObject) {

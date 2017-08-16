@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import { resetOnMouseUp, appendDropDownToPanel } from '../modules/ui';
 import List from './list';
 
@@ -27,7 +29,10 @@ export default class ContextMenu {
 
     addClass(className, selector = null) {
         // have data-name attribute added
-        selector = selector === null ? !!this.$self.addClass(className) : !!$(`${selector}`).addClass(className);
+        selector =
+            selector === null
+                ? !!this.$self.addClass(className)
+                : !!$(`${selector}`).addClass(className);
         return selector;
     }
 

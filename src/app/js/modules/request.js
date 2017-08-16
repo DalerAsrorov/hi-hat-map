@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 export function getRequest(url) {
     return new Promise((res, rej) => {
         $.get(url, (data, status) => {

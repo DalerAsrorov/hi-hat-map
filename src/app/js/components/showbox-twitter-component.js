@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import ShowboxComponent from './component';
 import { buildTemplate, getOuterHTMLText } from '../modules/ui';
 import { IMAGES } from '../modules/constants';
@@ -20,35 +22,71 @@ export default class ShowboxTwitterComponent extends ShowboxComponent {
 
         // fetching tweet's user data
         const userScreenName = tweet.user.screen_name;
-        const userProfileImageURL = tweet.user.profile_image_url || IMAGES.DEFAULT.SHOWBOX_USER_PROFILE_IMG;
+        const userProfileImageURL =
+            tweet.user.profile_image_url ||
+            IMAGES.DEFAULT.SHOWBOX_USER_PROFILE_IMG;
 
         // fetching total sentiment values
         const sentimentTotalScore = sentiment.value.totalScore;
         const sentimentValence = sentiment.value.valence;
 
         // fetching sentiment polarity and word list => {word1: polarity1, word2: polarity2, ...}
-        const sentimentNegativeWordList = getParameter(sentiment, 'negativeWords', 'text');
-        const sentimentNegativePolarityList = getParameter(sentiment, 'negativeWords', 'polarity');
-        const sentimentNegativeWordPolarityDict = zipObj(sentimentNegativeWordList, sentimentNegativePolarityList);
+        const sentimentNegativeWordList = getParameter(
+            sentiment,
+            'negativeWords',
+            'text'
+        );
+        const sentimentNegativePolarityList = getParameter(
+            sentiment,
+            'negativeWords',
+            'polarity'
+        );
+        const sentimentNegativeWordPolarityDict = zipObj(
+            sentimentNegativeWordList,
+            sentimentNegativePolarityList
+        );
 
         // fetching sentiment negative and word list => {word1: polarity1, word2: polarity2, ...}
-        const sentimentPositiveWordList = getParameter(sentiment, 'positiveWords', 'text');
-        const sentimentPositivePolarityList = getParameter(sentiment, 'positiveWords', 'polarity');
-        const sentimentPositiveWordPolarityDict = zipObj(sentimentPositiveWordList, sentimentPositivePolarityList);
+        const sentimentPositiveWordList = getParameter(
+            sentiment,
+            'positiveWords',
+            'text'
+        );
+        const sentimentPositivePolarityList = getParameter(
+            sentiment,
+            'positiveWords',
+            'polarity'
+        );
+        const sentimentPositiveWordPolarityDict = zipObj(
+            sentimentPositiveWordList,
+            sentimentPositivePolarityList
+        );
 
         let posWordsHtmlDiv = null,
             negWordsHtmlDiv = null;
 
         if (!isEmpty(sentimentPositiveWordPolarityDict)) {
-            posWordsHtmlDiv = $('<div class="twitter-showbox-positive-words"></div>');
-            for (let [key, value] of Object.entries(sentimentPositiveWordPolarityDict)) {
-                posWordsHtmlDiv.append(`<span class='sent-pos-${value}'>${key}</span> `);
+            posWordsHtmlDiv = $(
+                '<div class="twitter-showbox-positive-words"></div>'
+            );
+            for (let [key, value] of Object.entries(
+                sentimentPositiveWordPolarityDict
+            )) {
+                posWordsHtmlDiv.append(
+                    `<span class='sent-pos-${value}'>${key}</span> `
+                );
             }
         }
         if (!isEmpty(sentimentNegativeWordPolarityDict)) {
-            negWordsHtmlDiv = $('<div class="twitter-showbox-negative-words"></div>');
-            for (let [key, value] of Object.entries(sentimentNegativeWordPolarityDict)) {
-                negWordsHtmlDiv.append(`<span class='sent-neg${value}'>${key}</span> `);
+            negWordsHtmlDiv = $(
+                '<div class="twitter-showbox-negative-words"></div>'
+            );
+            for (let [key, value] of Object.entries(
+                sentimentNegativeWordPolarityDict
+            )) {
+                negWordsHtmlDiv.append(
+                    `<span class='sent-neg${value}'>${key}</span> `
+                );
             }
         }
 

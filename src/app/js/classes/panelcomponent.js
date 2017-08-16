@@ -16,15 +16,15 @@ export default class PanelComponent {
 
     getSotedDataBy(key, ascending = true) {
         let sortedData;
-        const descComparator = R.comparator((a, b) => R.gt(R.prop(key, a), R.prop(key, b)));
+        const descComparator = R.comparator((a, b) =>
+            R.gt(R.prop(key, a), R.prop(key, b))
+        );
 
-        sortedData = ascending ? R.sortBy(R.prop(key), this.data) : R.sort(descComparator, this.data);
-        return data;
-    }
+        sortedData = ascending
+            ? R.sortBy(R.prop(key), this.data)
+            : R.sort(descComparator, this.data);
 
-    getTopN(limit, key, ascending = true) {
-        let formatted = getSortedDataBy(key, ascending);
-        return R.slice(0, limit + 1, formatted);
+        return sortedData;
     }
 
     getActionHandler() {
@@ -41,10 +41,6 @@ export default class PanelComponent {
 
     getName(name) {
         this.name = name;
-    }
-
-    setActionHandler(actionHandler) {
-        this.actionHandler = actionHandler;
     }
 
     setActionHandler(fn) {

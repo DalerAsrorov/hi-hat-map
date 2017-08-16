@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import { COLORS } from '../modules/constants.js';
 
 export default class Chart {
@@ -26,7 +28,11 @@ export default class Chart {
         this._chart = c3.generate({
             bindto: this._id,
             color: {
-                pattern: [COLORS['CHART']['NEGATIVE'], COLORS['CHART']['POSITIVE'], COLORS['CHART']['NEUTRAL']]
+                pattern: [
+                    COLORS['CHART']['NEGATIVE'],
+                    COLORS['CHART']['POSITIVE'],
+                    COLORS['CHART']['NEUTRAL']
+                ]
             },
             data: data,
             axis: axis
@@ -43,11 +49,15 @@ export default class Chart {
         as needed for c3.js graph library
     */
     structureData(sentiment) {
-        const positive = sentiment['positiveWords'].reduce((acc, current, index) => {
+        const positive = sentiment[
+            'positiveWords'
+        ].reduce((acc, current, index) => {
             return (acc += current.polarity);
         }, 0);
 
-        const negative = sentiment['negativeWords'].reduce((acc, current, index) => {
+        const negative = sentiment[
+            'negativeWords'
+        ].reduce((acc, current, index) => {
             return (acc += current.polarity);
         }, 0);
 
