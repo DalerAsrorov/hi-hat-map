@@ -1,11 +1,24 @@
 /*eslint no-undef: "off"*/
 
-import LMap from './map.js';
+import { curry, map, pipe } from 'ramda';
 import { IMAGES } from './constants.js';
+import { emit } from './emitter';
+import { getMyCoordinates } from './utils';
+import { MAP_LOADER_HIDE, MAP_LOADER_SHOW } from './actions';
+import LMap from './map.js';
 import * as MapElements from './mapelements.js';
 import Leaflet from '../classes/leaflet.js';
-import { curry, map, pipe } from 'ramda';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
+
+export function navigateToUserLocation() {
+    setTimeout(() => {
+        emit(MAP_LOADER_SHOW);
+        getMyCoordinates().then(latLng => {
+            emit(MAP_LOADER_HIDE, { latLng });
+            LMap.flyTo(latLng);
+        });
+    });
+}
 
 export const generateResults = curry(data => {
     pipe(map(drawObject))(data);

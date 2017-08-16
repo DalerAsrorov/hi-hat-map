@@ -3,10 +3,14 @@
 let mapLayer = MQ.mapLayer();
 let LMap;
 
+const mapInitialSetup = {
+    center: [40.731701, -73.993411],
+    zoom: 8
+};
+
 LMap = L.map('mapWrapper', {
     layers: mapLayer,
-    center: [40.731701, -73.993411],
-    zoom: 12
+    ...mapInitialSetup
 });
 
 L.control
