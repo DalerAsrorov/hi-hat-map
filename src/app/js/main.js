@@ -10,6 +10,7 @@ import * as MapOps from './modules/mapops';
 import * as constants from './modules/constants';
 import * as DataProcessing from './modules/dataprocessing';
 import * as Emitter from './modules/emitter';
+import * as Actions from './modules/actions';
 import * as WidgetStructs from './modules/widget-action-structures';
 import Widgets from './modules/widgets';
 import DynamicQueue from './classes/dynamic-queue';
@@ -74,6 +75,7 @@ $(window).load(function() {
         ''
     );
 
+    // Map Components
     MapLoaderComp.init();
 
     // Widget Components
@@ -246,7 +248,7 @@ $(window).load(function() {
         }
 
         // Navigate to user's location in map.
-        navigateToUserLocation();
+        MapOps.navigateToUserLocation();
     }
 
     storageSystem.setItem('firstVisit', true);
@@ -276,7 +278,7 @@ $(window).load(function() {
     }).addTo(LMap);
 
     socket.on('tweet', tweet => {
-        MapLoaderComp.hide();
+        Emitter.emit(Actions.MAP_LOADER_HIDE);
 
         let coordinates = tweet.place
             ? tweet.place.bounding_box.coordinates[0][1]
@@ -400,7 +402,7 @@ $(window).load(function() {
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
 
-        MapLoaderComp.show();
+        Emitter.emit(Actions.MAP_LOADER_SHOW);
 
         const query = ui.getInputValue('#querySearch');
         const { lat, lng } = LMap.getCenter();
@@ -672,6 +674,15 @@ $(window).load(function() {
     Emitter.on(WidgetStructs['wrodcloudStruct']['action'], data => {
         WidgetChartsCollectionComp.stopAnimation();
         wordcloudWidget.stopAnimation();
+    });
+
+    Emitter.on(Actions.MAP_LOADER_SHOW, data => {
+        console.log('show');
+        MapLoaderComp.show();
+    });
+
+    Emitter.on(Actions.MAP_LOADER_HIDE, data => {
+        MapLoaderComp.hide();
     });
 
     // const tempYelpBusinessID = 'life-san-francisco';

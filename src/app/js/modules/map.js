@@ -1,5 +1,4 @@
 /*eslint no-undef: "off"*/
-import { getMyCoordinates } from './utils';
 
 let mapLayer = MQ.mapLayer();
 let LMap;
@@ -23,9 +22,5 @@ L.control
         Light: MQ.lightLayer()
     })
     .addTo(LMap);
-
-export function navigateToUserLocation() {
-    getMyCoordinates().then(latLng => LMap.flyTo(latLng));
-}
 
 export default LMap;

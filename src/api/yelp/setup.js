@@ -17,22 +17,22 @@ const getAccessToken = () => {
             method: 'post',
             urlencodedBody: APP_PARAMS
         })
-            .then(response => {
-                const { statusCode, jsonBody } = response;
+			.then(response => {
+    const { statusCode, jsonBody } = response;
 
-                if (statusCode !== 200) {
-                    return rej(new Error('Response successfull, but data not available.'));
-                }
+    if (statusCode !== 200) {
+        return rej(new Error('Response successfull, but data not available.'));
+    }
 
-                return res(jsonBody);
-            })
-            .catch(error => {
-                return rej(error);
-            });
+    return res(jsonBody);
+})
+			.catch(error => {
+    return rej(error);
+});
     });
 };
 
 module.exports = {
-    getAccessToken, 
+    getAccessToken,
     BASE_V3_URL
 };
