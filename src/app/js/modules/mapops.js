@@ -12,7 +12,7 @@ import ShowboxTwitterComponent from '../components/showbox-twitter-component.js'
 
 export function navigateToUserLocation() {
     getMyCoordinates().then(latLng => {
-        LMap.flyTo(latLng);
+        LMap.flyTo(latLng, 12);
     });
 }
 
