@@ -346,7 +346,7 @@ button {
     max-width: 80%;
 }
 
-#mapWrapper .mode-create {
+.map.mode-create {
     cursor: crosshair;
 }
 

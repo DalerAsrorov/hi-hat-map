@@ -5,7 +5,8 @@ let LMap;
 
 const mapInitialSetup = {
     center: [30, -30],
-    zoom: 3
+    zoom: 3,
+    doubleClickZoom: false
 };
 
 LMap = L.map('mapWrapper', {

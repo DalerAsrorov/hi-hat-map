@@ -13,9 +13,7 @@ export function getMyCoordinates() {
                 resolve(latLng);
             });
         } else {
-            reject(
-                new Error('Navigator API is not supported by this browser.')
-            );
+            reject(new Error('Navigator API is not supported by this browser.'));
         }
     });
 }
@@ -114,9 +112,7 @@ export function colorGenerator(score) {
 // "xx:xx:xx" format
 export function formatDateToHoursOnly(x) {
     const xLocaleString = x.toLocaleString();
-    const xFinal = xLocaleString
-        .substring(xLocaleString.indexOf(',') + 1, xLocaleString.length)
-        .trim();
+    const xFinal = xLocaleString.substring(xLocaleString.indexOf(',') + 1, xLocaleString.length).trim();
 
     return xFinal;
 }
