@@ -4,8 +4,8 @@ let mapLayer = MQ.mapLayer();
 let LMap;
 
 const mapInitialSetup = {
-    center: [40.731701, -73.993411],
-    zoom: 8
+    center: [30, -30],
+    zoom: 3
 };
 
 LMap = L.map('mapWrapper', {
