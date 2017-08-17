@@ -11,12 +11,8 @@ import Leaflet from '../classes/leaflet.js';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
 
 export function navigateToUserLocation() {
-    setTimeout(() => {
-        emit(MAP_LOADER_SHOW);
-        getMyCoordinates().then(latLng => {
-            emit(MAP_LOADER_HIDE, { latLng });
-            LMap.flyTo(latLng);
-        });
+    getMyCoordinates().then(latLng => {
+        LMap.flyTo(latLng);
     });
 }
 
