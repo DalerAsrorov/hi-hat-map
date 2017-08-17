@@ -228,7 +228,6 @@ $(window).load(function() {
             // const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
             const lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
 
-            storageSystem.setRawItem('lastLocation', lastLocation);
             LMap.setView([lat, lng], 8, { animate: true, duration: 2.0 });
         }
     }).addTo(LMap);
@@ -353,44 +352,7 @@ $(window).load(function() {
 
         let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
 
-        if (R.isNil(storageSystem.getItem('lastLocation'))) {
-            console.log('Not selected. twitData:', twitData);
-            // const testTwitDataItemTest = {q: 'trump', geocode: [37.7749, -122.4194], radius: '25mi'};
-
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
-        } else {
-            console.log('Exists', lastLocation);
-
-            /**
-
-                TODO:
-                - This is for General and Selective timing
-                - Get data points and draw them on the map
-
-             */
-            // const first = MapOps.generateResults([1, 2, 3, 4]);
-            // first(lastLocation);
-
-            /**
-
-                TODO:
-                - This portion of code is for Socket.io/real time tweet streaming
-                - Get location and query and start connecting to the socket
-
-             */
-            getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
-        }
-
-        // last location is savedd
-        storageSystem.setRawItem('lastLocation', lastLocation);
-
-        // once query selected:
-        // check if location is already selected
-        // if yes, then go to that location
-        //          and show the results
-        // if no, then get the center of the current
-        //        location of the screen and show the results.
-        //
+        getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
     });
 
     // generation
