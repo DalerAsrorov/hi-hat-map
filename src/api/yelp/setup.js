@@ -4,11 +4,15 @@ const BASE = 'https://api.yelp.com';
 const BASE_V3_URL = `${BASE}/v3`;
 const OAUTH_URL = `${BASE}/oauth2/token`;
 
+require('dotenv').config();
+
 const APP_PARAMS = {
     grant_type: 'client_credentials',
-    client_id: 'TtdxZywYg33t0-nhl0zVig',
-    client_secret: 'XegowVnpX2PAX84SbXwo8m5g3q5amtkxnJfKHuElgIY7gUS1OEPR3hdemAJNW4cz'
+    client_id: process.env.YELP_CLIENT_ID,
+    client_secret: process.env.YELP_CLIENT_SECRET
 };
+
+console.log(APP_PARAMS);
 
 const getAccessToken = () => {
     return new Promise((res, rej) => {
@@ -17,18 +21,18 @@ const getAccessToken = () => {
             method: 'post',
             urlencodedBody: APP_PARAMS
         })
-			.then(response => {
-    const { statusCode, jsonBody } = response;
+            .then(response => {
+                const { statusCode, jsonBody } = response;
 
-    if (statusCode !== 200) {
-        return rej(new Error('Response successfull, but data not available.'));
-    }
+                if (statusCode !== 200) {
+                    return rej(new Error('Response successfull, but data not available.'));
+                }
 
-    return res(jsonBody);
-})
-			.catch(error => {
-    return rej(error);
-});
+                return res(jsonBody);
+            })
+            .catch(error => {
+                return rej(error);
+            });
     });
 };
 

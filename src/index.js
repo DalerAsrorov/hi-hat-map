@@ -9,6 +9,8 @@ let httpServer = require('http').createServer(app);
 let io = require('socket.io')(httpServer);
 const url = require('url');
 
+require('dotenv').config();
+
 // modules
 const Sentiment = require('./api/sentiment');
 const Twitter = require('./api/twitter');
