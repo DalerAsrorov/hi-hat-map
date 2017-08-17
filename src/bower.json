@@ -26,6 +26,7 @@
     "EasyAutocomplete": "^1.3.5",
     "seiyria-bootstrap-slider": "^9.7.3",
     "bootstrap": "v4.0.0-alpha.6",
-    "Leaflet.EasyButton": "^2.2.0"
+    "Leaflet.EasyButton": "^2.2.0",
+    "leaflet-freedraw": "^2.2.1"
   }
 }

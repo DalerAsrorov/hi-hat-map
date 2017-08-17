@@ -30,3 +30,8 @@ export function generateMapViewScreenshot(id, imageClasses) {
         });
     });
 }
+
+export function addFreeDrawLayerToMap() {
+    const freeDraw = new FreeDraw({ mode: FreeDraw.ALL });
+    LMap.addLayer(freeDraw);
+}

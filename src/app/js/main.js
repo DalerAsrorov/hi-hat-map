@@ -1,7 +1,7 @@
 /*eslint no-undef: "off"*/
 
 import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
-import { generateMapViewScreenshot } from './modules/leaflet-ops';
+import { generateMapViewScreenshot, addFreeDrawLayerToMap } from './modules/leaflet-ops';
 import LMap from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';
@@ -556,4 +556,6 @@ $(window).load(function() {
     //     latitude: 37.773972,
     //     longitude: -122.431297
     // }).then(data => console.log('after then tempYelpBusinessID', data));
+
+    addFreeDrawLayerToMap();
 });
