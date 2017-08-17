@@ -2,14 +2,11 @@
 'use strict';
 
 const setup = require('../../../../api/twitter/setup');
-const chaiAsPromised = require('chai-as-promised');
 const chai = require('chai');
-
-chai.use(chaiAsPromised);
 
 let expect = chai.expect;
 
-describe.only('Testing Setup module in Twitter API', () => {
+describe('Testing Setup module in Twitter API', () => {
     const { twitterTokens } = setup;
 
     it('it is an object that contains twitterTokens object', () => {
