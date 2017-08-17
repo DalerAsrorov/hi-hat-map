@@ -12,15 +12,6 @@ export default class WidgetCollectionContainerComponent extends Component {
         });
     }
 
-    _delegateToggle(wcTarget) {}
-
-    activateAllExcept(WidgetCollectionComp) {
-        this.widgetCollectionCompList.map(WidgetColection => {
-            if (WidgetColection !== WidgetCollectionComp) {
-            }
-        });
-    }
-
     delegateActionToCollections(type, action = () => {}) {
         this.widgetCollectionCompList.map(WidgetCollection => {
             WidgetCollection.addEventListener(type, action);

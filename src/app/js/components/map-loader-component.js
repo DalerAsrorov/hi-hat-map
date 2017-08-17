@@ -26,7 +26,13 @@ const hideCss = {
 };
 
 export default class MapLoaderComponent extends Component {
-    constructor(id, parent, nodeType, content, imageSrc = IMAGES.DEFAULT.MAP_LOADER_IMAGE) {
+    constructor(
+        id,
+        parent,
+        nodeType,
+        content,
+        imageSrc = IMAGES.DEFAULT.MAP_LOADER_IMAGE
+    ) {
         super(id, parent, nodeType, content);
         this.imageSrc = imageSrc;
     }
@@ -43,15 +49,17 @@ export default class MapLoaderComponent extends Component {
 
     _buildTemplate() {
         const $loader = getLoader('fa-7x');
+        const $title = $('<h3>Loading map data...</h3>');
 
-        this.$node.append($loader);
+        this.html().append($loader);
+        this.html().append($title);
 
         this.bind(this.parent);
 
         $loader.css(loaderCss);
         this.$node.css(loaderDivCss);
 
-        return this.$node;
+        return this.html();
     }
 
     startLoader(mls = 0) {

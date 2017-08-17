@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import { generateWebIcon } from '../modules/ui';
 import Component from './component';
 
@@ -55,11 +57,11 @@ export default class WidgetComponent extends Component {
     }
 
     startAnimation() {
-        super.startAnimation(); 
+        super.startAnimation();
     }
-    
+
     stopAnimation() {
-        super.stopAnimation(); 
+        super.stopAnimation();
     }
 
     doToggleAnimation() {

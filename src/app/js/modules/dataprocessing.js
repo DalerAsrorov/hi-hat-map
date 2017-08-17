@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import Chart from '../classes/chart';
 
 const chart = new Chart();
@@ -8,7 +10,9 @@ export function getSotedData(panelComponent, ascending = true, limit = 0) {
     if (ascending) {
         data = R.sortBy(R.prop(objectKey), this._data);
     } else {
-        const descComparator = R.comparator((a, b) => R.gt(R.prop(objectKey, a), R.prop(objectKey, b)));
+        const descComparator = R.comparator((a, b) =>
+            R.gt(R.prop(objectKey, a), R.prop(objectKey, b))
+        );
         data = R.sort(descComparator, this._data);
     }
 
@@ -29,7 +33,10 @@ export function formatData(panelComponent, fn) {
     fn(panelComponent._data);
 }
 
-export function createSentimentDataForChart(data, currentChartType = 'multiple') {
+export function createSentimentDataForChart(
+    data,
+    currentChartType = 'multiple'
+) {
     const sentiment = data.sentiment;
     let result;
 

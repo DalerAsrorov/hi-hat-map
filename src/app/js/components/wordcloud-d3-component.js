@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import { FONTS } from '../modules/constants';
 import { convertFromJQueryToDOMElement } from '../modules/ui';
 import * as Converter from '../modules/converter';
@@ -34,10 +36,13 @@ export default class WordcloudD3Component extends WordcloudComponent {
         const cloudSVGNode = this.html().find('svg')[0];
         const svgString = Converter.getSVGString(cloudSVGNode);
 
-        Converter.svgString2Image(svgString, 2000, 1000, 'png', (file, fileSize) => {
-            console.log('Successful File:', file, fileSize);
-            saveAs(file); // FileSaver.js function
-        });
+        Converter.svgString2Image(
+            svgString,
+            2000,
+            1000,
+            'png',
+            (file, fileSize) => saveAs(file)
+        );
     }
 
     draw(params) {
@@ -67,7 +72,14 @@ export default class WordcloudD3Component extends WordcloudComponent {
                 .attr('width', layout.size()[0])
                 .attr('height', layout.size()[1])
                 .append('g')
-                .attr('transform', 'translate(' + layout.size()[0] / 2 + ',' + layout.size()[1] / 2 + ')')
+                .attr(
+                    'transform',
+                    'translate(' +
+                        layout.size()[0] / 2 +
+                        ',' +
+                        layout.size()[1] / 2 +
+                        ')'
+                )
                 .selectAll('text')
                 .data(words)
                 .enter()
@@ -76,7 +88,10 @@ export default class WordcloudD3Component extends WordcloudComponent {
                 .style('font-family', FONT)
                 .style('fill', (d, i) => d.color)
                 .attr('text-anchor', 'middle')
-                .attr('transform', d => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')')
+                .attr(
+                    'transform',
+                    d => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')'
+                )
                 .text(d => d.text);
         }
     }

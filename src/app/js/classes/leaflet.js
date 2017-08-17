@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 import LMap from '../modules/map';
 
 export default class Leaflet {

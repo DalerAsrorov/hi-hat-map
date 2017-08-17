@@ -36,7 +36,7 @@ export default class Twitter extends Mode {
         };
     }
 
-    processData(tweets, metadata) {
+    processData(tweets, metadata = null) {
         const hasGeo = tweet => !R.isNil(tweet.place);
         const getRequredData = tweet => {
             return {
@@ -50,7 +50,10 @@ export default class Twitter extends Mode {
             };
         };
 
-        const filteredTweetsList = R.pipe(R.filter(hasGeo), R.map(getRequredData))(tweets);
+        const filteredTweetsList = R.pipe(
+            R.filter(hasGeo),
+            R.map(getRequredData)
+        )(tweets);
 
         return filteredTweetsList;
     }

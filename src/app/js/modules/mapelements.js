@@ -1,3 +1,5 @@
+/*eslint no-undef: "off"*/
+
 export function createIcon(
     iconUrl,
     shadowUrl = '',
@@ -17,8 +19,6 @@ export function createIcon(
         shadowAnchor: shadowIcon, // the same for the shadow
         popupAnchor: popupAnchor // point from which the popup should open relative to the iconAnchor
     });
-
-    console.log('Icon Object: ', twitterIcon);
 
     return twitterIcon;
 }
