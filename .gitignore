@@ -5,8 +5,11 @@ src/app/bower_components/
 # install files
 src/.yarnclean
 
-#builds
+# build files and folders
 src/app/min/
+
+# environment vars
+src/.env
 
 # Config files
     # src/.babelrc

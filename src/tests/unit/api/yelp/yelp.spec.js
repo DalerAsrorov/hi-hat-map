@@ -1,8 +1,6 @@
 /*eslint no-undef: "off"*/
 'use strict';
 
-require('dotenv').config();
-
 const Yelp = require('../../../../api/yelp');
 const chaiAsPromised = require('chai-as-promised');
 const chai = require('chai');
