@@ -5,7 +5,7 @@ src/app/bower_components/
 # install files
 src/.yarnclean
 
-# build files and folders
+# build files and directories
 src/app/min/
 
 # environment vars
