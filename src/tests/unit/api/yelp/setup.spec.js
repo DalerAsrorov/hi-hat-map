@@ -9,7 +9,7 @@ chai.use(chaiAsPromised);
 
 let expect = chai.expect;
 
-describe('Testing setup in yelp api', () => {
+describe('Testing setup in Yelp API', () => {
     const { getAccessToken } = setup;
 
     it('getAccessToken returns a promise that is fulfilled', () => {
