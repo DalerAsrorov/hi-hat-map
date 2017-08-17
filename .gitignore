@@ -24,3 +24,4 @@ src/app/min/
 ehthumbs.db
 Thumbs.db
 *.log
+*.env
