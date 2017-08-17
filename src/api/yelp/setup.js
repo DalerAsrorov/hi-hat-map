@@ -12,8 +12,6 @@ const APP_PARAMS = {
     client_secret: process.env.YELP_CLIENT_SECRET
 };
 
-console.log(APP_PARAMS);
-
 const getAccessToken = () => {
     return new Promise((res, rej) => {
         _send({

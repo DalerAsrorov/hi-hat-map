@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
     twitterTokens: (function() {
         const consumer_key = process.env.TWITTER_CONSUMER;

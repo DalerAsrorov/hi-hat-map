@@ -1,11 +1,11 @@
 let Twit = require('twit');
-let twitterHelper = require('./helpers/twitter-helper');
+let setup = require('./setup');
 
 const twitConfig = {
-    consumer_key: twitterHelper.twitterTokens.getConsumerKey(),
-    consumer_secret: twitterHelper.twitterTokens.getConsumerSecret(),
-    access_token: twitterHelper.twitterTokens.getAccessTokenKey(),
-    access_token_secret: twitterHelper.twitterTokens.getAccessTokenSecret()
+    consumer_key: setup.twitterTokens.getConsumerKey(),
+    consumer_secret: setup.twitterTokens.getConsumerSecret(),
+    access_token: setup.twitterTokens.getAccessTokenKey(),
+    access_token_secret: setup.twitterTokens.getAccessTokenSecret()
 };
 
 const Twitter = new Twit(twitConfig);
