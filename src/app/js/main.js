@@ -1,7 +1,7 @@
 /*eslint no-undef: "off"*/
 
 import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
-import { generateMapViewScreenshot, addFreeDrawLayerToMap } from './modules/leaflet-ops';
+import { generateMapViewScreenshot, addFreeDrawLayerToMap, onFreeDrawMarkersPlaced } from './modules/leaflet-ops';
 import LMap from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';
@@ -558,4 +558,8 @@ $(window).load(function() {
     // }).then(data => console.log('after then tempYelpBusinessID', data));
 
     addFreeDrawLayerToMap();
+    onFreeDrawMarkersPlaced(event => {
+        console.log('event', event);
+        console.log('latLngs', event.latLngs);
+    });
 });

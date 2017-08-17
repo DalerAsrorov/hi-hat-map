@@ -2,6 +2,8 @@ import leafletImage from 'leaflet-image';
 import LMap from './map';
 import { getMapPanelHeightDiff } from './ui';
 
+const freeDraw = new FreeDraw({ mode: FreeDraw.ALL });
+
 /**
  * 
  * @param {*} imageID 
@@ -34,7 +36,6 @@ export function generateMapViewScreenshot(id, imageClasses) {
 
 export function addFreeDrawLayerToMap() {
     // Attaches draw layer to the map
-    const freeDraw = new FreeDraw({ mode: FreeDraw.ALL });
     LMap.addLayer(freeDraw);
 
     // sets the height equal to map view for better UX
@@ -42,4 +43,8 @@ export function addFreeDrawLayerToMap() {
     const mapPanelHeightDiff = getMapPanelHeightDiff();
     const $freeDrawSvgTag = $(firstDrawClass).first();
     $freeDrawSvgTag.css('height', `${mapPanelHeightDiff}px`);
+}
+
+export function onFreeDrawMarkersPlaced(fn) {
+    freeDraw.on('markers', fn);
 }
