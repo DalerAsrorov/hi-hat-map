@@ -1,7 +1,7 @@
 /*eslint no-undef: "off"*/
 
 import { getParameter, buildWordPolarityMap } from './modules/sentiment-utils';
-import LMap, { navigateToUserLocation } from './modules/map';
+import LMap from './modules/map';
 import * as ui from './modules/ui';
 import * as Request from './modules/request';
 import * as Paths from './modules/paths';
