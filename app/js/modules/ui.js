@@ -258,11 +258,6 @@ export function appendRangeSlider(container, divClass, inputId, params) {
 
     appendTo(container, newRangeSlider);
     rangeInput.slider('refresh');
-
-    console.log(
-        `Range slider with divClass '${divClass}'' is appended to '${container}'`,
-        appendTo(`${container}`, newRangeSlider)
-    );
 }
 
 export function keypress(target, callback) {

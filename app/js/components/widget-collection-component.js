@@ -38,8 +38,7 @@ export default class WidgetCollectionComponent extends Component {
         const positionTop = $topElement.position().top;
         const bottomElementHeight = $bottomElement.outerHeight();
 
-        const topDiff =
-            topOffsetBottom - topOffsetUp - $bottomElement.outerHeight();
+        const topDiff = topOffsetBottom - topOffsetUp - $bottomElement.outerHeight();
         const top = topDiff - positionTop + bottomElementHeight;
 
         $topElement.css({
@@ -68,9 +67,7 @@ export default class WidgetCollectionComponent extends Component {
         this.$node.css(WC_NODE_CSS);
 
         let $widgetWrapper = $(`<div class=${WC_WRAPPER_CLASSES}></div>`);
-        let $toggleButton = $(
-            `<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`
-        );
+        let $toggleButton = $(`<button class='${WC_TOGGLE_BUTTON_CLASSES}'>${this.desc}</button>`);
 
         $toggleButton.click(ev => {
             $widgetWrapper.slideToggle(WC_TOGGLE_SPEED);
@@ -78,7 +75,6 @@ export default class WidgetCollectionComponent extends Component {
         });
 
         if (!isEmpty(this.widgets)) {
-            console.log('If else statement is here', this.widgets);
             this.widgets.map(widgetComp => {
                 $widgetWrapper.append(widgetComp.html());
             });

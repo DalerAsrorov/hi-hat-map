@@ -89,6 +89,4 @@ export const drawObject = curry((data, geolocation, iconType) => {
             return L.marker(latlng, markerOptions);
         }
     });
-
-    console.log('Feature', feature);
 });

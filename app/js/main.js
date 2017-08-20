@@ -221,7 +221,6 @@ $(window).load(function() {
     new L.Control.GPlaceAutocomplete({
         position: 'topright',
         callback: function(location) {
-            console.log('Location given:', location);
             const lat = location.geometry.location.lat();
             const lng = location.geometry.location.lng();
 
@@ -254,9 +253,16 @@ $(window).load(function() {
             const mlsTime = tweet.timestamp_ms;
             const data = twitter.processSingle(tweet);
 
+            console.log('Before processText: ', boundingBox);
+            console.log('..Before processText polygonCenter: ', polygonCenter);
+            console.log('...Before processText coordinates: ', coordinates);
             sentiment.processText({ text: text }).then(data => {
                 data.geo = coordinates;
                 data.tweet = tweet;
+
+                console.log('After processText: ', boundingBox);
+                console.log('..After processText polygonCenter: ', polygonCenter);
+                console.log('...After processText coordinates: ', coordinates);
 
                 const { sentiment } = data;
 
@@ -303,7 +309,6 @@ $(window).load(function() {
 
                 if (sentimentQueue.size() === 5) {
                     sentimentQueue.dequeue();
-                    console.log('P00P2 Queue item removed');
                 }
 
                 const renderObject = {
@@ -314,7 +319,8 @@ $(window).load(function() {
                 MapOps.renderObject(renderObject);
             });
         } else {
-            console.log('Passed tweet with no coordinates', tweet);
+            // console.log('Passed tweet with no coordinates', tweet);
+            return new Error('Passed tweet with no coordinates', tweet);
         }
     });
 
@@ -366,12 +372,10 @@ $(window).load(function() {
 
     WidgetChartsCollectionComp.init();
     const wordcloudWidget = WidgetChartsCollectionComp.getWidget('wordCloudWidget');
-    console.log('The widget 2', wordcloudWidget);
 
     // Testing area
     let testGeo = '-25.2744,-133.7751'; // Australia
     // console.log('Path:', Paths.getGeoTrends(testGeo));
-    console.log(Paths.getGeoTrends(testGeo));
     Request.getRequest(Paths.getGeoTrends(testGeo))
         .then(trends => {
             if (trends.data) {
@@ -441,7 +445,6 @@ $(window).load(function() {
             rightComponents.setName('Social Media');
             rightComponents.setId('socMedia');
 
-            console.log('panelComp object:', rightComponents);
             ui.appendDropDownToPanel('#panelCompRightWrapper', rightComponents);
         })
         .catch(err => {
@@ -503,8 +506,6 @@ $(window).load(function() {
                                             MapOps.renderObject(renderObject);
                                         });
                                 });
-
-                                console.log(filteredTweets);
                             })
                             .catch(err => console.log('getData() - ', err));
 
@@ -540,7 +541,6 @@ $(window).load(function() {
     });
 
     Emitter.on(Actions.MAP_LOADER_SHOW, data => {
-        console.log('show');
         MapLoaderComp.show();
     });
 

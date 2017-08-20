@@ -7,7 +7,8 @@ A map-based application that consists of rich bundle of tools to learn trends an
 This project is currently under development. Any weird UI tweaks are expected until the end of the first build.
 
 ## Demo
-https://hi-hat-map.herokuapp.com/
+- https://hi-hat-map.herokuapp.com/
+- New features will show up once fully tested.
 
 ## Setup & Run
 You can run the project by following steps:
