@@ -1,6 +1,9 @@
 {
     "name": "hihitmap",
     "version": "1.0.0",
+    "engines": {
+        "node": "6.11.0"
+    },
     "description": "Map of emotional changes and patterns.",
     "main": "index.js",
     "scripts": {
