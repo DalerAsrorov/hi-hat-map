@@ -6,7 +6,7 @@
     "scripts": {
         "setup": "npm install && bower install",
         "build": "./node_modules/.bin/rollup -c && node index.js",
-        "postinstall": "./node_modules/bower/bin/bower install",
+        "postinstall": "bower install",
         "dev": "rollup -c -w",
         "rollup": "./node_modules/.bin/rollup",
         "server": "node index.js",
