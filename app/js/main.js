@@ -557,9 +557,13 @@ $(window).load(function() {
     //     longitude: -122.431297
     // }).then(data => console.log('after then tempYelpBusinessID', data));
 
+    /**
+     * Map drawing features
+     * 
     addFreeDrawLayerToMap();
     onFreeDrawMarkersPlaced(event => {
         console.log('event', event);
         console.log('latLngs', event.latLngs);
     });
+    */
 });
