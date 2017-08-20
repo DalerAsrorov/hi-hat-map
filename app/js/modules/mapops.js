@@ -10,6 +10,8 @@ import * as MapElements from './mapelements.js';
 import Leaflet from '../classes/leaflet.js';
 import ShowboxTwitterComponent from '../components/showbox-twitter-component.js';
 
+const leaflet = new Leaflet();
+
 export function navigateToUserLocation() {
     getMyCoordinates().then(latLng => {
         LMap.flyTo(latLng, 12);
@@ -29,7 +31,6 @@ export const renderObject = function(renderObject) {
 };
 
 export const drawObject = curry((data, geolocation, iconType) => {
-    const leaflet = new Leaflet();
     const coordinates = [geolocation[0], geolocation[1]];
     const latlng = L.latLng(coordinates[1], coordinates[0]);
     const popupOptions = {
@@ -90,3 +91,30 @@ export const drawObject = curry((data, geolocation, iconType) => {
         }
     });
 });
+
+export function drawYelpIcon(long, lat) {
+    const coordinates = [long, lat];
+    const geojsonFeature = {
+        type: 'Feature',
+        properties: {
+            name: 'Yelp icon'
+        },
+        geometry: {
+            type: 'Point',
+            coordinates
+        }
+    };
+
+    const markerOptions = {
+        icon: MapElements.createIcon(IMAGES.SOC_MEDIA_ICONS.YELP),
+        title: 'Yelp',
+        alt: 'Yelp icon marker.',
+        riseOnHover: true
+    };
+
+    leaflet.geoJSON(geojsonFeature, {
+        pointToLayer(feature, latlng) {
+            return L.marker(latlng, markerOptions);
+        }
+    });
+}
