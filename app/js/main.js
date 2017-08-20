@@ -345,7 +345,6 @@ $(window).load(function() {
 
     ui.onSubmit('#querySearchForm', function(e) {
         e.preventDefault();
-
         Emitter.emit(Actions.MAP_LOADER_SHOW);
 
         const query = ui.getInputValue('#querySearch');
@@ -356,7 +355,7 @@ $(window).load(function() {
             radius: MAP_PARAMS.TWITTER.RADIUS
         };
 
-        let lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
+        let lastLocation = utils.getDefaultBoundingBox(lat, lng);
 
         getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
     });

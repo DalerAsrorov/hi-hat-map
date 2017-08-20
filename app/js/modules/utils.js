@@ -4,6 +4,17 @@ export function getType(object) {
     return Object.prototype.toString.call(object);
 }
 
+export function getDefaultBoundingBox(lat, lng, diff = 0.08, outputType = 'string') {
+    const lngDiffM = lng - diff;
+    const lngDiffP = lng + diff;
+    const latDiffM = lat - diff;
+    const latDiffP = lat + diff;
+
+    const boundingBox = [lngDiffM, latDiffM, lngDiffP, latDiffP];
+
+    return outputType === 'string' ? boundingBox.join(',').split(' ') : boundingBox;
+}
+
 export function getMyCoordinates() {
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
