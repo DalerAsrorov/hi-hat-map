@@ -52,7 +52,7 @@ $(window).load(function() {
     const { TWITTER_MODES, TWITTER_MODES_INDEX, MODAL_HEADERS } = constants.MAIN;
 
     // connecting to socket
-    let socket = io.connect('http://localhost:8000/');
+    let socket = io.connect(Paths.getBase());
 
     // other variables used throughout the code
     let cpOpen;

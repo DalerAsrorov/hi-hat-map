@@ -1,5 +1,9 @@
 const origin = window.location.origin;
 
+export function getBase() {
+    return origin;
+}
+
 export function getTrendsPath(weid) {
     return `${origin}/api/twitter/trends/${weid}`;
 }
