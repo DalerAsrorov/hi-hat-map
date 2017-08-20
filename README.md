@@ -6,6 +6,9 @@ A map-based application that consists of rich bundle of tools to learn trends an
 ## Status
 This project is currently under development. Any weird UI tweaks are expected until the end of the first build.
 
+## Demo
+https://hi-hat-map.herokuapp.com/
+
 ## Setup & Run
 You can run the project by following steps:
 1. `git clone https://github.com/DalerAsrorov/hi-hat-map.git`
