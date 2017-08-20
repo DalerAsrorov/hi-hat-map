@@ -1,15 +1,15 @@
 # Config directories
-src/node_modules/
-src/app/bower_components/
+node_modules/
+app/bower_components/
 
 # install files
-src/.yarnclean
+.yarnclean
 
 # build files and directories
-src/app/min/
+app/min/
 
 # environment vars
-src/.env
+.env
 
 # Config files
     # src/.babelrc

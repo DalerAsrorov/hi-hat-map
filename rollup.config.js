@@ -16,17 +16,14 @@ export default {
             preferBuiltins: false
         }),
         eslint({
-            'exclude': [
-                'app/css/**'
-            ]
+            exclude: ['app/css/**']
         }),
         babel({
-            exclude: "node_modules/**",
+            exclude: 'node_modules/**',
             runtimeHelpers: false
         }),
         commonjs({
             include: 'node_modules/**'
         })
     ]
-
 };

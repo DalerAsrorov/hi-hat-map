@@ -9,7 +9,7 @@ This project is currently under development. Any weird UI tweaks are expected un
 ## Setup & Run
 You can run the project by following steps:
 1. `git clone https://github.com/DalerAsrorov/hi-hat-map.git`
-2. `cd ./hi-hat-map/src`
+2. `cd ./hi-hat-map`
 3. `npm run setup`
     * For some terminals this command might not install either node or bower dependencies. In this case, just install them manually by running:
         1. `npm install`
@@ -20,8 +20,7 @@ You can run the project by following steps:
 5. Launch your favorite browser and navigate to `localhost:8000`
 
 ## Tests
-1. `cd ./src`
-2. `npm run test`  
+`npm run test`  
 
 ## Tech Stack
 * JavaScript (ES6)
