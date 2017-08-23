@@ -228,8 +228,6 @@ app.post('/api/sentiment/evaluatestring', (req, res) => {
 });
 
 app.post('/api/twitter/stream/stop', (req, res) => {
-    const data = req.body;
-
     if (!baseStream) {
         return res.status(500).send({ error: 'There is no stream to stop.' });
     }
@@ -246,8 +244,6 @@ io.on('connection', function(socket) {
     socket.on('topic', info => {
         const topic = info.topic.toString().trim().toLowerCase();
         const location = info.location;
-
-        console.log('location', topic, location);
 
         baseStream = Twitter.module.stream('statuses/filter', { locations: location, track: topic });
 
