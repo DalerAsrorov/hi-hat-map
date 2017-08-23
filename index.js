@@ -242,10 +242,12 @@ app.post('/api/twitter/stream/stop', (req, res) => {
 **/
 io.on('connection', function(socket) {
     socket.on('topic', info => {
-        const topic = info.topic.toString().trim().toLowerCase();
-        const location = info.location;
+        const track = info.topic.toString().trim().toLowerCase();
+        const { location } = info;
 
-        baseStream = Twitter.module.stream('statuses/filter', { locations: location, track: topic });
+        baseStream = location
+            ? Twitter.module.stream('statuses/filter', { locations: location })
+            : Twitter.module.stream('statuses/filter', { track });
 
         baseStream.on('tweet', tweet => {
             socket.emit('tweet', tweet);
