@@ -243,9 +243,9 @@ app.post('/api/twitter/stream/stop', (req, res) => {
 io.on('connection', function(socket) {
     socket.on('topic', info => {
         const track = info.topic.toString().trim().toLowerCase();
-        const { location } = info;
+        const { locations } = info;
 
-        baseStream = location
+        baseStream = locations
             ? Twitter.module.stream('statuses/filter', { locations })
             : Twitter.module.stream('statuses/filter', { track });
 
