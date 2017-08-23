@@ -246,7 +246,7 @@ io.on('connection', function(socket) {
         const { location } = info;
 
         baseStream = location
-            ? Twitter.module.stream('statuses/filter', { locations: location })
+            ? Twitter.module.stream('statuses/filter', { locations })
             : Twitter.module.stream('statuses/filter', { track });
 
         baseStream.on('tweet', tweet => {

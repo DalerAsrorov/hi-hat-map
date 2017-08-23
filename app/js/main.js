@@ -117,6 +117,19 @@ $(window).load(function() {
     // WordcloudModalComp.show();
 
     // Leaflet components
+    let GPlaceAutoCompleteCompL = new L.Control.GPlaceAutocomplete({
+        position: 'topright',
+        callback: function(location) {
+            const lat = location.geometry.location.lat();
+            const lng = location.geometry.location.lng();
+
+            // const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
+            const lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
+
+            LMap.setView([lat, lng], 8, { animate: true, duration: 2.0 });
+        }
+    }).addTo(LMap);
+
     let StopButtonL = L.easyButton({
         states: [
             {
@@ -218,19 +231,6 @@ $(window).load(function() {
 
     ui.addEventListenerTo('toggleSliderBtn', 'click', event => ui.slideToggleCp('controlPanelWrapper', LMap));
 
-    new L.Control.GPlaceAutocomplete({
-        position: 'topright',
-        callback: function(location) {
-            const lat = location.geometry.location.lat();
-            const lng = location.geometry.location.lng();
-
-            // const sanFrancisco = [ '-122.75, 36.8, -121.75, 37.8' ];
-            const lastLocation = [`${lng}, ${lat}, ${lng + 1}, ${lat + 1}`];
-
-            LMap.setView([lat, lng], 8, { animate: true, duration: 2.0 });
-        }
-    }).addTo(LMap);
-
     socket.on('tweet', tweet => {
         Emitter.emit(Actions.MAP_LOADER_HIDE);
 
@@ -324,12 +324,12 @@ $(window).load(function() {
         }
     });
 
-    function getInfoBasedOnChosenMode(mode, query, lastLocation, twitData) {
+    function getInfoBasedOnChosenMode(mode, query, locations, twitData) {
         switch (mode) {
             case 'real_time':
                 twitter.socketEmit(socket, 'topic', {
                     topic: query,
-                    location: lastLocation
+                    locations
                 });
                 break;
             case 'specified_time':
@@ -347,15 +347,23 @@ $(window).load(function() {
         e.preventDefault();
         Emitter.emit(Actions.MAP_LOADER_SHOW);
 
+        const { searchBox } = GPlaceAutoCompleteCompL;
         const query = ui.getInputValue('#querySearch');
-        const { lat, lng } = LMap.getCenter();
-        const twitData = {
-            q: query,
-            geocode: [lat, lng],
-            radius: MAP_PARAMS.TWITTER.RADIUS
-        };
 
-        let lastLocation = utils.getDefaultBoundingBox(lat, lng);
+        let lastLocation, twitData;
+
+        if (!R.isEmpty(searchBox.value)) {
+            const { lat, lng } = LMap.getCenter();
+            const twitData = {
+                q: query,
+                geocode: [lat, lng],
+                radius: MAP_PARAMS.TWITTER.RADIUS
+            };
+
+            lastLocation = utils.getDefaultBoundingBox(lat, lng);
+        }
+
+        console.log('lastLocation', lastLocation);
 
         getInfoBasedOnChosenMode('real_time', query, lastLocation, twitData);
     });
