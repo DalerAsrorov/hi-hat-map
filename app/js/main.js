@@ -243,6 +243,7 @@ $(window).load(function() {
         }
 
         if (coordinates) {
+            console.log('tweet with coordinates', tweet, coordinates);
             const boundingBox = tweet.place.bounding_box;
             const polygonCenter = leaflet.computePolygonCenter(L, boundingBox);
             const coordinates = leaflet.transformLatLngToArray(polygonCenter);

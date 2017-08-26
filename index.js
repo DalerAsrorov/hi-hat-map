@@ -21,6 +21,7 @@ let port = process.env.PORT || 8000;
 
 // reference to Twitter stream object
 let baseStream;
+let tweetStreamInterval;
 
 // create application/json parser
 var jsonParser = bodyParser.json();
@@ -233,6 +234,7 @@ app.post('/api/twitter/stream/stop', (req, res) => {
     }
 
     baseStream.stop();
+    clearInterval(tweetStreamInterval);
     return res.send({ status: true });
 });
 
@@ -241,6 +243,7 @@ app.post('/api/twitter/stream/stop', (req, res) => {
 *
 **/
 io.on('connection', function(socket) {
+    let tweetsContainer = [];
     socket.on('topic', info => {
         const track = info.topic.toString().trim().toLowerCase();
         const { locations } = info;
@@ -250,8 +253,17 @@ io.on('connection', function(socket) {
             : Twitter.module.stream('statuses/filter', { track });
 
         baseStream.on('tweet', tweet => {
-            socket.emit('tweet', tweet);
+            tweetsContainer.push(tweet);
+            // socket.emit('tweet', tweet);
         });
+
+        tweetStreamInterval = setInterval(() => {
+            let nextTweet = tweetsContainer.shift();
+            console.log('nextTweet', nextTweet);
+            if (nextTweet) {
+                socket.emit('tweet', nextTweet);
+            }
+        }, 1000);
     });
 });
 
